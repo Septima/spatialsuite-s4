@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<presentation xmlns:fo="http://www.w3.org/1999/XSL/Format">
+	<text name="overskrift" value="Skole" plural="Skoler"/>
+	<columns>
+        
+		<column format="heading">
+			<label>''+skolensnav</label>
+			<value>skolensnav</value>
+		</column>
+
+		<column format="searchstring">
+			<label></label>
+			<value>leder + ' ' + adresse + ' ' + hyperlink</value>
+		</column>
+		
+		<column name="2">
+			<label>'Leder:'</label>
+			<value>leder</value>
+		</column>
+		
+		<column format="description">
+			<label>'Adresse:'</label>
+			<value>adresse</value>
+		</column>
+				
+		<column name="4" format="hyperlink">
+			<label>'Se skolens website'</label>
+			<value>hyperlink</value>
+		</column>
+		
+		<column name='shape_wkt'>
+			<label>'shape_wkt'</label>
+			<value>shape_wkt</value>
+		</column>
+	</columns>
+
+</presentation>

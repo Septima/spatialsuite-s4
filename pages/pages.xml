@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page name="s4getkmsticket" contenttype="text/xml">  
+        <data handler="expression" operation="evaluate">
+            <url-parameters>
+                <url-parameter name="expression">'getKmsTicket("[module.kms.login]","[module.kms.password]", true)'</url-parameter>
+            </url-parameters>
+        </data>
+    </page>
+</pages>

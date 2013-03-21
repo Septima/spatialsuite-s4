@@ -1,0 +1,21 @@
+.inputcontainer {
+	width: 400px;
+    position:absolute;
+    right:5px;
+    top:35px;
+    z-index:500;
+    background-color: transparent;
+}
+
+.inputcontainer.active {
+    background-color: #fff;
+}
+
+.better-autocomplete > .result > p > a{
+	font-size: 11px;
+	line-height: 1.3;
+	color: #6f6f6f;
+	padding: 0;
+	margin: 0;
+	padding-left: 5px;
+}

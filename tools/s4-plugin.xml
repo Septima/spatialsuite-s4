@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+		<file type="css"    name="/modules/s4/septimasearch/css/better-autocomplete.css" />
+		<file type="css"    name="/modules/s4/septimasearch/css/septimasearch.css" />
+		<file type="css"    name="/modules/s4/css/s4.css" />
+		
+		<file type="script" name="/modules/s4/septimasearch/septimasearch-0.1.min.js"/>
+		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
+
+		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
+		<file type="script" name="/modules/s4/js/s4Searcher.js"/>
+
+    </requires>
+    <src><![CDATA[
+          if (s4Params == undefined){
+            var s4Params =
+            {municipality: '*',
+            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
+            adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
+            cvrsearcher:{enabled: true, info: true},
+            plansearcher:{enabled: true, info: true},
+            indexsearcher:{enabled: true, info: true, datasources: "*"},
+            clientsearcher:{enabled: true}};
+	        s4_init (s4Params);
+    	}else{
+            throw "Only one (1) s4-plugin tool may be defined in a profile";
+    	}
+    ]]></src>
+    <jssrc/>
+</tool>

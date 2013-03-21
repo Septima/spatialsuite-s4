@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="s4" default="makeZip" basedir=".">
+	<property name="src.dir" location="${basedir}" />
+	<property name="distribution-zipped.file" location="${basedir}/dk.septima.spatialsuite.search.zip" />
+
+	<target name="makeZip" depends="" description="create the distribution for the application">
+
+		<delete file="${distribution-zipped.file}"/>
+		<echo>Creating .zip file</echo>
+		<zip destfile="${distribution-zipped.file}" excludes="/.project, /build.xml">
+			<zipfileset dir="${src.dir}" prefix="s4"/>
+		</zip>
+				
+	</target>
+
+</project>
