@@ -1,6 +1,6 @@
 INSTALLATION
 
-NOTE: Never change content of s4 module. Instead, create a custom module with changes only. See later in this document
+NOTE: Never change content of s4 module. Instead, create a custom module with changes only. See later in this document.
 	__________________
 	Copy the module to:
 	
