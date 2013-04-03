@@ -109,7 +109,7 @@ CONFIGURATION and CUSTOMIZATION
 		  <copyfile fromfile="[module:s4.dir]/septimasearch/0.1/css/images/search.png" tofile="[cbinfo.wwwroot.dir]/modules/mys4/septimasearch/css/images/search.png"/>
 		</deploy>
 		
-		Finally,  add your custom css file in custom tool:
+		Finally,  add your custom css file in custom tool s4-plugin-public :
 		 
 		 <file type="css"    name="/modules/s4-custom/css/s4.css" />
 		 
