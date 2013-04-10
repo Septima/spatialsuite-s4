@@ -52,10 +52,11 @@ div.searchheader {
     padding: 7px;
 }
 
+/*
 div.searchheader.active {
     padding: 7px 7px 27px;
 }
-
+*/
 div.searchbackground {
     background-color: #FFFFFF;
     background-image: url("images/search.png");
@@ -78,7 +79,7 @@ input.search {
     color: #444;
     font-size: 13px;
     padding: 7px 20px 7px 7px;
-    width: 359px;
+    /*width: 359px;*/
     -moz-user-select: text;
 }
 
@@ -177,20 +178,23 @@ a.menubutton {
 
 
 .button {
-    background-color: #eee;
+    background-color: cornflowerblue;
+    color: white;
     height: 16px;
     line-height: 16px;
     border: 1px solid #bbb;
     -moz-box-shadow: 0px 0px 2px #eee;
     -webkit-box-shadow: 0px 0px 2px #eee;
     box-shadow: 0px 0px 2px #eee;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
     text-align: center;
     font-size: 11px;
     cursor: pointer;
     padding: 4px 4px 3px;
+	border-radius: 6px 6px 6px 6px;
+ 	-webkit-border-radius: 6px 6px 6px 6px;
+ 	-moz-border-radius: 6px 6px 6px 6px;
+ 	-ms-border-radius: 6px 6px 6px 6px;
+ 	-o-border-radius: 6px 6px 6px 6px;
 }
 .button a {
     -moz-user-select: none;
@@ -253,7 +257,8 @@ ul.buttongroup li ul.sub li a.selected {
 div.searchmenu span, li.result span {
     -moz-user-select: none;
     -webkit-user-select: none;
-    background-color: #eee;
+    background-color: cornflowerblue;
+    color: white;
     height: 10px;
     line-height: 10px;
     padding: 2px 4px;
@@ -261,9 +266,6 @@ div.searchmenu span, li.result span {
     -moz-box-shadow: 0px 0px 2px #eee;
     -webkit-box-shadow: 0px 0px 2px #eee;
     box-shadow: 0px 0px 2px #eee;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
     text-align: center;
     font-size: 10px;
     cursor: pointer;
@@ -347,11 +349,13 @@ li.result.highlight span.button:HOVER {
 .better-autocomplete > .result.highlight > h4, .better-autocomplete > .result.highlight > p {
     color: inherit;
 }
+
+/*
 div.suggestions {
     display: inline;
     float: left;
 }
-
+*/
 .olTileImage {
     max-width: none;
 }
@@ -376,4 +380,51 @@ div.suggestions {
 	float: right;
 	margin: 5px;
 	cursor: pointer;
+}
+
+.inputcontainer .targetlabel{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    
+    background-color: cornflowerblue;
+    color: white;
+    height: 10px;
+    line-height: 10px;
+    padding: 2px 4px;
+    border: 1px solid #bbb;
+    text-align: center;
+    font-size: 10px;
+    
+	border-radius: 6px 0px 0px 8px;
+  	-webkit-border-radius: 6px 0px 0px 8px;
+  	-moz-border-radius: 6px 0px 0px 8px;
+  	-ms-border-radius: 6px 0px 0px 8px;
+  	-o-border-radius: 6px 0px 0px 8px;}
+
+.inputcontainer .targetclosebutton{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    
+    background-color: lightBlue;
+    color: red;
+	height: 10px;
+    line-height: 10px;
+    padding: 2px 4px;
+    border: 1px solid #bbb;
+	border-left: none;
+
+    text-align: center;
+    font-size: 10px;
+    cursor: pointer;
+
+	border-radius: 0px 6px 6px 0px;
+ 	-webkit-border-radius: 0px 6px 6px 0px;
+ 	-moz-border-radius: 0px 6px 6px 0px;
+ 	-ms-border-radius: 0px 6px 6px 0px;
+ 	-o-border-radius: 0px 6px 6px 0px;
+}
+.inputcontainer .targetbit{
+	padding: 7px;
+	padding-right: 0px;
+	
 }

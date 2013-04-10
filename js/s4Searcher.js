@@ -103,8 +103,13 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     				var themes = groupsWithMatchingThemes[i].themes;
     				for (var j=0;j<themes.length;j++){
     					theme = themes[j];
-    					var result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
-                        result1.image = theme.theme.img;
+    					if (query.hasTarget){
+        					var result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+                            result1.image = theme.theme.img;
+    					}else{
+        					var result1 = queryResult.addResult(theme.theme.displayname + " (Tema)", theme.description, " ", theme);
+                            result1.image = theme.theme.img;
+    					}
     				}
     			}
     		}else if (query.type == "list"){
@@ -115,8 +120,15 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     					//TODO: list all themes
     					for (var j=0;j<group.themes.length;j++){
         					theme = group.themes[j];
-                            var result2 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
-                            result2.image = theme.theme.img;
+        					if (query.hasTarget){
+            					var result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+                                result1.image = theme.theme.img;
+        					}else{
+            					var result1 = queryResult.addResult(theme.theme.displayname + " (Tema)", theme.description, " ", theme);
+                                result1.image = theme.theme.img;
+        					}
+//                            var result2 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+//                            result2.image = theme.theme.img;
     					}
     					freeSlots -= group.themes.length;
     				}else{
