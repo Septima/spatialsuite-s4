@@ -7,10 +7,10 @@ Septima Search for Spatial Suite
 
 # License
 
-1.
+1. Installation
     *
     *
-2.
 
+2.
 
 
