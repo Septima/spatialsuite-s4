@@ -9,8 +9,9 @@ Septima Search for Spatial Suite
 
 1. Installation
 
-    *
-    *
+    * gør dit
+    * gør dat
+
 
 
 2.
