@@ -90,6 +90,7 @@ input.search:focus{
 div.searchmenu {
     margin-top: 4px;
     display: none;
+    padding-left: 8px;
 }
 
 /* div.right { */
@@ -178,7 +179,7 @@ a.menubutton {
 
 
 .button {
-    background-color: cornflowerblue;
+    background-color: #D1DFED;
     color: white;
     height: 16px;
     line-height: 16px;
@@ -257,7 +258,7 @@ ul.buttongroup li ul.sub li a.selected {
 div.searchmenu span, li.result span {
     -moz-user-select: none;
     -webkit-user-select: none;
-    background-color: cornflowerblue;
+    background-color: #D1DFED;
     color: white;
     height: 10px;
     line-height: 10px;
@@ -287,6 +288,7 @@ div.searchresult {
 ul.better-autocomplete {
     margin-top: 0; 
     margin-bottom: 0;
+    max-height: 400px;
 }
 ul.better-autocomplete li {
     margin-top: 0; 
@@ -300,11 +302,11 @@ ul.better-autocomplete li {
 }
 
 .better-autocomplete > .result.highlight {
-  background: lightBlue;
+    background-color: #D1DFED;
 }
 
 .better-autocomplete > .result.selected {
-  background: lightBlue;
+    background-color: #D1DFED;
 }
 
 .better-autocomplete > .result {
@@ -346,9 +348,40 @@ li.result.highlight .custombutton {
 li.result.highlight span.button:HOVER {
     color: black;
 }
+.better-autocomplete > .result > h4 {
+	color: #333;
+	font-size: 11px;
+    font-weight: bold;
+    padding: 5px 10px 0;
+}
+.better-autocomplete > .result.highlight > h4, .better-autocomplete > .result.highlight > p {
+    color: #666;
+}
+.better-autocomplete > .result > p {
+	padding-left: 10px;
+}
 .better-autocomplete > .result.highlight > h4, .better-autocomplete > .result.highlight > p {
     color: inherit;
 }
+.better-autocomplete > .result > p {
+    vertical-align: top;
+}
+.better-autocomplete > .result > p > div.resultimage {
+    float: left;
+    margin-right: 3px;
+    min-height: 20px;
+}
+.better-autocomplete > .result > p > div.resultimage img {
+    height: 20px;
+}
+.better-autocomplete > .result > p > div.resultdescription {
+    display: inline;
+    padding-left: 0px;
+}
+.better-autocomplete > .result > p.minheight {
+    min-height: 20px;
+}
+
 
 /*
 div.suggestions {
@@ -382,46 +415,53 @@ div.suggestions {
 	cursor: pointer;
 }
 
+div.searchmenu span, li.result span,
 .inputcontainer .targetlabel{
+    font-family: verdana, Arial, sans-serif;
+	
     -moz-user-select: none;
     -webkit-user-select: none;
-    
-    background-color: cornflowerblue;
-    color: white;
-    height: 10px;
-    line-height: 10px;
-    padding: 2px 4px;
-    border: 1px solid #bbb;
-    text-align: center;
+
+    background-color: #D1DFED;
+    border-radius: 3px 0px 0px 3px;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    -ms-border-radius: 3px 0px 0px 3px;
+    -o-border-radius: 3px 0px 0px 3px;
+    color: #666666;
     font-size: 10px;
-    
-	border-radius: 6px 0px 0px 8px;
-  	-webkit-border-radius: 6px 0px 0px 8px;
-  	-moz-border-radius: 6px 0px 0px 8px;
-  	-ms-border-radius: 6px 0px 0px 8px;
-  	-o-border-radius: 6px 0px 0px 8px;}
+    height: 13px;
+    line-height: 13px;
+    padding: 2px 4px;
+}
+
+div.searchmenu span, li.result span {
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border: none;
+}
 
 .inputcontainer .targetclosebutton{
     -moz-user-select: none;
     -webkit-user-select: none;
-    
-    background-color: lightBlue;
-    color: red;
-	height: 10px;
-    line-height: 10px;
-    padding: 2px 4px;
-    border: 1px solid #bbb;
-	border-left: none;
 
-    text-align: center;
-    font-size: 10px;
+    background-color: #D1DFED;
+    color: #666;
     cursor: pointer;
+    font-size: 10px;
+    height: 13px;
+    line-height: 13px;
+    padding: 2px 4px;
 
-	border-radius: 0px 6px 6px 0px;
- 	-webkit-border-radius: 0px 6px 6px 0px;
- 	-moz-border-radius: 0px 6px 6px 0px;
- 	-ms-border-radius: 0px 6px 6px 0px;
- 	-o-border-radius: 0px 6px 6px 0px;
+	border-radius: 0px 3px 3px 0px;
+ 	-webkit-border-radius: 0px 3px 3px 0px;
+ 	-moz-border-radius: 0px 3px 3px 0px;
+ 	-ms-border-radius: 0px 3px 3px 0px;
+ 	-o-border-radius: 0px 3px 3px 0px;
+    font-family: verdana, Arial, sans-serif;
 }
 .inputcontainer .targetbit{
 	padding: 7px;

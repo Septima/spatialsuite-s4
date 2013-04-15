@@ -19,3 +19,7 @@
 	margin: 0;
 	padding-left: 5px;
 }
+
+ul.better-autocomplete {
+    max-height: 600px;
+}
