@@ -5,9 +5,8 @@
 
 	<!-- List the datasources to index. Each datasource must have a presentation in the config\presentations folder -->
 	<datasources>
-		<!-- datasource id="ds_skoler" presentation="s4-pres-skoler"/>
-		<datasource id="ds_daginstitutioner" presentation="s4-pres-daginstitutioner"/-->
-		<datasource id="ds_stednavn_flade" presentation="s4-pres-stednavn_flade"/>
+		<datasource id="ds_skoler" presentation="s4-pres-skoler"/>
+		<datasource id="ds_daginstitutioner" presentation="s4-pres-daginstitutioner"/>
 	</datasources>
 
 </config>
