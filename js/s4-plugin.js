@@ -26,7 +26,11 @@ function s4_init (params){
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
 
         	//Set up search input box
-            jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
+        	if (jQuery("#panel-brand div.right").length == 1){
+                jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
+        	}else{
+                jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer v263"/>');
+        	}
 
         	var searchers = [];
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};

@@ -7,6 +7,11 @@
     background-color: transparent;
 }
 
+.inputcontainer.v263 {
+	right: 0px;
+	top: 70px;
+}
+
 .inputcontainer.active {
     background-color: #fff;
 }

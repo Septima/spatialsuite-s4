@@ -167,7 +167,7 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     		var term = queryTerms[i].toLowerCase();
         	for (var j=0;j<this.groups.length;j++){
         		var group = this.groups[j];
-        		if (groupName == "*" || group.group.displayname.toLowerCase() == groupName){
+        		if (groupName == "*" || group.group.displayname.toLowerCase() == groupName.toLowerCase()){
             		var themes = [];
             		for (var k=0;k<group.themes.length;k++){
             			var theme = group.themes[k]; 
