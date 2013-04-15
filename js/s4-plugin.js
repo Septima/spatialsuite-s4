@@ -5,7 +5,7 @@ var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7
 function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
-		view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
+		view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
         adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
@@ -104,5 +104,5 @@ function s4Hit(result){
 function s4DoInfo(result){
 	var wkt = result.geometry;
 	s4Hit(result);
-    spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilepuery, false, _s4Params.view.dynamiclayer, result.title, false);
+    spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilequery, false, _s4Params.view.dynamiclayer, result.title, false);
 }
