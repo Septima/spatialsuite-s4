@@ -20,7 +20,7 @@
             adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
-            indexsearcher:{enabled: false, info: true, datasources: "*"},
+            indexsearcher:{enabled: true, info: true, datasources: "*"},
             clientsearcher:{enabled: true}};
 	        s4_init (s4Params);
     	}else{
