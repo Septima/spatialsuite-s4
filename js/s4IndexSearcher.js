@@ -34,11 +34,11 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
     getDatasources: function(postCall){
     	jQuery.ajax({
             url: this.indexProtocol + '//' + this.indexHost + ':' + this.indexPort + '/jsp/modules/s4/getDatasources.jsp',
-	        dataType: 'json',
+	        dataType: 'jsonp',
             cache : false,
             timeout : 2000,
             crossDomain : true,
-            //async:true,
+            async:true,
             success:  Septima.bind(function(postCall, data, textStatus,  jqXHR){
             	this.indexedDatasources = [];
             	for (var i=0;i<data.results.length;i++){
