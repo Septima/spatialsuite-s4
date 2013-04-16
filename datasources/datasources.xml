@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <datasources>
  <!-- {{if: '[module.s4.index.externdb.type]' != 'postgis' }} -->
+<<<<<<< HEAD
+=======
+    [if: NotDefined("module.s4.index.externdb") ]
+>>>>>>> refs/heads/development
 	<endpoint name="s4index" endpointtype="embedded">
 		<srs>25832</srs>
 		<config version="1" requires="1">
