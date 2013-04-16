@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <datasources>
+ <!-- {{if: '[module.s4.index.externdb.type]' != 'postgis' }} -->
 	<endpoint name="s4index" endpointtype="embedded">
 		<srs>25832</srs>
 		<config version="1" requires="1">
@@ -10,13 +11,16 @@
 			CREATE INDEX ft_term_idx ON featureterm (term);
 		</config>
 	</endpoint>
+      <!-- {{endif}} -->
 
 	<!-- Use this kind of endpoint if you have placed your index in an external database -->
 
-<!--     <endpoint name="s4index" endpointtype="postgis" displayname="s4FeatureIndexDB"> -->
-<!--         <connect>localhost:5432/s4</connect> -->
-<!--         <user>s4</user> -->
-<!--         <pwd>s4</pwd> -->
-<!--         <srid>25832</srid> -->
-<!--     </endpoint> -->
+ <!-- {{if: '[module.s4.index.externdb.type]' = 'postgis' }} -->
+    <endpoint name="s4index" endpointtype="[module.s4.index.externdb.type]" displayname="s4FeatureIndexDB">
+        <connect>[module.s4.index.externdb.connect]</connect>
+        <user>[module.s4.index.externdb.user]</user>
+        <pwd>[module.s4.index.externdb.pwd]</pwd>
+        <srid>[module.s4.index.externdb.srid]</srid>
+    </endpoint>
+      <!-- {{endif}} -->
 </datasources>

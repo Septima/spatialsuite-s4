@@ -113,6 +113,18 @@ CONFIGURATION and CUSTOMIZATION
 		Finally,  add your custom css file in custom tool s4-plugin-public :
 		 
 		 <file type="css"    name="/modules/s4-custom/css/s4.css" />
-		 
+
+	_____________________________
+	
+	Use external database instead of embedded (mandatory prior to SpatialSuite v 2.9)		 
+	
+		<!-- =================================== -->
+		<!-- S4 Index parametres               -->
+		<!-- =================================== -->
+		 		 
+		<param name="module.s4.index.externdb.type">postgis</param>
+		<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
+		<param name="module.s4.index.externdb.user">s4</param>
+		<param name="module.s4.index.externdb.pwd">s4</param>
+		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 		
-				    
