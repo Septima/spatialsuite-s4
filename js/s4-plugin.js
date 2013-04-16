@@ -91,7 +91,17 @@ function s4_init (params){
         	var controllerOptions = {};
         	var controller = new Septima.Search.Controller(searchers, _s4View, controllerOptions);
         	controller.go ();
-        }
+        	
+        	if (_s4View.top() !=null){
+        		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top());
+        	}
+        	
+        	jQuery(window).resize(function() {
+        		if (_s4View != null && _s4View.top() !=null){
+        			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top());
+        		}
+        	});
+    }
 }
 
 function s4Hit(result){
