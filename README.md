@@ -29,7 +29,7 @@ add here some text
 
 ### 3.b 	Update modules.xml by adding:
 ```xml
-<module name="s4" dir="custom/s4" permissionlevel="public"/>
+<module name="s4" dir="septima/s4" permissionlevel="public"/>
 ```
 ### 3.c Comment out other modules conflicting with this module e.g.:
 ```xml
@@ -200,3 +200,18 @@ Finally, add the customized tool to your profile:
 
 
 Finished, now try out your profile
+
+	_____________________________
+	
+	1: create database (postgres script is included in the /db folder)
+	2: Use external database instead of embedded (mandatory prior to SpatialSuite v 2.9)		 
+	
+		<!-- =================================== -->
+		<!-- S4 Index parametres               -->
+		<!-- =================================== -->
+		 		 
+		<param name="module.s4.index.externdb.type">postgis</param>
+		<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
+		<param name="module.s4.index.externdb.user">s4</param>
+		<param name="module.s4.index.externdb.pwd">s4</param>
+		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>

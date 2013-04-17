@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not customize this tool. Make copy of module and create your own tool -->
 <tool type="plugin">
     <requires>
 		<file type="script"    name="//common.cdn.septima.dk/latest/js/septima.js" />
@@ -19,7 +20,7 @@
             var s4Params =
             {municipality: '*',
             view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
-            adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
+            adresssearcher:{enabled: true, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
