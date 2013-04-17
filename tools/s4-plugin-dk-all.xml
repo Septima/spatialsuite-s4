@@ -19,7 +19,7 @@
           if (s4Params == undefined){
             var s4Params =
             {municipality: '*',
-            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
+            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
             adresssearcher:{enabled: true, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
