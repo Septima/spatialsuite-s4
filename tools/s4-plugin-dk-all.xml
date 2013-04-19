@@ -3,6 +3,8 @@
 <tool type="plugin">
     <requires>
 		<file type="script"    name="//common.cdn.septima.dk/latest/js/septima.js" />
+		<file type="script"    name="//common.cdn.septima.dk/latest/js/json2.js" />
+
 		<file type="css"    name="//search.cdn.septima.dk/0.1/css/better-autocomplete.css" />
 		<file type="css"    name="//search.cdn.septima.dk/0.1/css/septimasearch.css" />
 		<file type="script" name="//search.cdn.septima.dk/0.1/septimasearch-0.1.min.js"/>
