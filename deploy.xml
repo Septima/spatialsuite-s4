@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.7.1</version>
+   <version>1.0</version>
    <stoponerror>true</stoponerror>
   
    <!-- Everything necessary for indexing and querying local data -->
@@ -19,4 +19,16 @@
   <copyfile fromfile="[module:s4.dir]/js/s4IndexSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4IndexSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4Searcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4Searcher.js"/>
 
+	<!-- Production version of septima search -->
+	<!--    <param name="s4.search.css">//search.cdn.septima.dk/1.0/css/defaultView.css</param> -->
+	<!-- Only use ONE of these (debug or min) -->
+	<!--    <param name="s4.search.script">//search.cdn.septima.dk/1.0/septimasearch.debug.js</param> -->
+	<!--    <param name="s4.search.script">//search.cdn.septima.dk/1.0/septimasearch.min.js</param> -->
+	<!-- /Production versions of septima search -->
+
+	<!-- Development versions of septima search -->
+   <param name="s4.search.script">//search.cdn.septima.dk/develop/septimasearch.debug.js</param>
+<!--    <param name="s4.search.script">//search.cdn.septima.dk/develop/septimasearch.min.js</param> -->
+   <param name="s4.search.css">//search.cdn.septima.dk/develop/css/defaultView.css</param>
+	<!-- Development versions of septima search -->
 </deploy>

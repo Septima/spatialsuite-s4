@@ -2,6 +2,7 @@
  pageEncoding="UTF-8"
  import="dk.septima.spatialsuite.search.IndexQuerier"
  import="dk.septima.spatialsuite.search.QueryResults"
+ import="com.carlbro.cbinfo.global.GlobalRessources"
  %>
  
  <%
@@ -9,7 +10,12 @@
  	String query = request.getParameter("query");
  	String queryToUse = "";
  	if (query != null){
- 		queryToUse = utf8Convert(query);
+ 		String utf8behaviour = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("module.s4.index.utf8behaviour");
+ 		if (utf8behaviour != null && utf8behaviour.equalsIgnoreCase("noconvert")){
+ 	 		queryToUse = query;
+ 		}else{
+ 	 		queryToUse = utf8Convert(query);
+ 		}
  	}
  	String limit = request.getParameter("limit");
  	int limitToUse = 10;

@@ -86,7 +86,7 @@ function s4_init (params){
 	          	searchers.push({"title": "Temaer", "searcher" : clientSearcher});
             }
         	
-        	_s4View = new Septima.Search.DefaultView(this.controller, {input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
+        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
         	
         	var controllerOptions = {};
         	var controller = new Septima.Search.Controller(searchers, _s4View, controllerOptions);

@@ -37,7 +37,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
 	        dataType: 'json',
             cache : false,
             timeout : 2000,
-            crossDomain : true,
+            //crossDomain : true,
             //async:true,
             success:  Septima.bind(function(postCall, data, textStatus,  jqXHR){
             	this.indexedDatasources = [];
@@ -97,6 +97,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
             data: {query:query.queryString, limit: query.limit, datasources: datasources},
 	        dataType: 'jsonp',
             cache : false,
+            //contentType: "application/x-www-form-urlencoded;charset=utf-8",
             timeout : 10000,
             crossDomain : true,
             async:true,
