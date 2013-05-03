@@ -23,7 +23,7 @@ add here some text
 
 
 ### 3.a Get latest version of the s4 module here:
-    https://github.com/Septima/spatialsuite-s4/archive/markdown.zip
+    https://github.com/Septima/spatialsuite-s4/archive/master.zip
 
 ### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/septima/s4
 
