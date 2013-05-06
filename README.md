@@ -1,4 +1,4 @@
-#s4 - SeptimaSearch for SpatialSuite
+#S4 - Septima Search for SpatialSuite
 ===
 ## Content
 
@@ -10,20 +10,40 @@
 #### 6. Customization of module
 
 ## 1. Description
-Septima Search for Spatial Suite is an implementation of SeptimaSearch for SpatialSuite
+Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
+offered by Septima, the tool will also search local data and themes in the current profile.  
+
+The module includes a local data index. For Spatial Map versions 2.7+ the embedded database
+will be used to host the index. For previous versions of Spatial Map a script is included
+which will create a postgres database.
 
 
 ## 2. License
+ Name:        S4 - Septima Search for SpatialSuite  
+ Purpose:     Septima Search based module for Spatial Map
 
-add here some text
+ Author:      klavs(AT)septima.dk
+  
+ Created:     03-05-2013  
+ Copyright:   (c) Septima P/S 2013  
+ Licence:     Commercially licensed product. Please contact Septima to obtain
+              a valid license.
+              You are granted the right to download and install this module for
+              evaluation purposes free of charge.  
+              
+ Contact:     Septima P/S  
+              Larsbjørnsstræde 3  
+              1454 København K  
+              www.septima.dk  
+              kontakt@septima.dk  
 
 ## 3. Installation
 
-###NOTE: Never change content of s4 module. Instead, create a custom module with changes only. See later in this document
+###NOTE: Never change the s4 module. Instead, create a custom module with changes only. See later in this document
 
 
 ### 3.a Get latest version of the s4 module here:
-    https://github.com/Septima/spatialsuite-s4/archive/markdown.zip
+    https://github.com/Septima/spatialsuite-s4/archive/master.zip
 
 ### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/septima/s4
 
@@ -39,8 +59,11 @@ add here some text
 
 ### 3.d Include tool in profile(s):
 ```xml
-<tool module="s4" name="s4-plugin" />
-```
+<tool module="s4" name="s4-plugin-dk-all" />
+```  
+The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
+You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)   
+  
 ### 3.e Comment out other tools conflicting with this tool e.g.:
 
 ```xml
@@ -53,9 +76,88 @@ COPY \lib\dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 
 REMOVE old versions of the library
 
-## 4. Configure your search index
 
-### 4.a Create configuration folders
+## 4. Customization of module
+
+In most cases it is desired to make a custom version of the module to handle CSS specific design/layouts on your site and configure SeptimaSearch to search in municipal specific adresses and local municipal plans (PlansystemDK)
+
+In this case, create a custom module containing only what is different from the standard s4 module. This custom module will override settings from the standard s4 module
+
+### 4.a Create a custom __mys4__ module with following content (copy files from s4 module):
+
+
+    [cbinfo.config.dir]/modules/custom/mys4
+    [cbinfo.config.dir]/modules/custom/mys4/css/s4.css
+    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml
+
+In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and only add what you need to override:
+
+```css
+.inputcontainer {
+    top:5px;
+}
+```
+### 4.b customize plugin
+Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml to something else:
+
+
+    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
+
+Now, you have to edit this file to add customized CSS, enable/disable external search services and configure municipal code
+
+Add path to the cusotm CSS file after the standard css file :
+
+		<file type="css"    name="/modules/s4/css/s4.css" />
+        <file type="css"    name="/modules/mys4/css/s4.css" />
+
+Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
+```javascript
+          if (s4Params == undefined){
+            var s4Params =
+            {municipality: '101',
+            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
+            adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
+            cvrsearcher:{enabled: true, info: true},
+            plansearcher:{enabled: true, info: true},
+            indexsearcher:{enabled: true, info: true, datasources: "*"},
+            clientsearcher:{enabled: true}};
+	        s4_init (s4Params);
+    	}else{
+            throw "Only one (1) s4-plugin tool may be defined in a profile";
+    	}
+```
+
+
+
+### 4.c Include the new customized module and tool
+
+In your custom module [cbinfo.config.dir]/modules/custom/mys4, create a new deploy.xml file which deploys your customized CSS
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+		<deploy>
+		   <version>2.7.1</version>
+		   <stoponerror>true</stoponerror>
+		  <makedir dir="[cbinfo.wwwroot.dir]/modules/mys4/css"/>
+		  <copyfile fromfile="[module:mys4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/mys4/css/s4.css"/>
+		</deploy>
+```
+
+
+Finally, add the customized tool to your profile:
+```xml
+        <!-- Comment out the original tool-->
+        <!--tool module="s4" name="s4-plugin"/-->
+        <tool module="myS4" name="s4-pluginmycustomplugin" />
+```
+
+
+Finished, now try out your profile
+
+## 5. Configure your search index  
+
+The next thing you want to is to make your local data searchable.
+
+### 5.a Create configuration folders
 
 
     WEB-INF/config/misc/custom/s4
@@ -65,7 +167,7 @@ Or copy the examples
 
     Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
 
-### 4.b Configure datasources to be searchable
+### 5.b Configure datasources to be searchable
 
 Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you want to index:
 
@@ -112,11 +214,11 @@ Each presentation MAY have the following columns
 </presentation>
 ```
 
-## 5. Build the search index
+## 6. Build the search index
 When datasources and presentations are configured the search index has to bo built
-### 5.a start site or reload configuration:
+### 6.a start site or reload configuration:
     http://localhost:8080/admin?command=reloadconfig
-### 5.b Build the search index:
+### 6.b Build the search index:
     http://localhost:8080/jsp/modules/s4/buildIndex.jsp
 This URL may be called according to your desired workflow and integrated into:
 
@@ -125,86 +227,13 @@ This URL may be called according to your desired workflow and integrated into:
     your start up script, or
     Regular intervals, eg. wget "http://localhost:8080/admin?command=reloadconfig" in task/cron scheduler
 
-## 6. Customization of module
-
-In most cases it is desired to make a custom version of the module to handle CSS specific design/layouts on your site and configure SeptimaSearch to search in municipal specific adresses and local municipal plans (PlansystemDK)
-
-In this case, create a custom module containing only what is different from the standard s4 module. This custom module will override settings from the standard s4 module
-
-### 6.a Create a custom __mys4__ module with following content (copy files from s4 module):
-
-
-    [cbinfo.config.dir]/modules/custom/mys4
-    [cbinfo.config.dir]/modules/custom/mys4/css/s4.css
-    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin.xml
-
-In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and only add what you need to override:
-
-```css
-.inputcontainer {
-    top:5px;
-}
-```
-### 6.b customize plugin
-Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin.xml to something else:
-
-
-    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
-
-Now, you have to edit this file to add customized CSS, enable/disable external search services and configure municipal code
-
-Add path to the cusotm CSS file after the standard css file :
-
-		<file type="css"    name="/modules/s4/css/s4.css" />
-        <file type="css"    name="/modules/mys4/css/s4.css" />
-
-Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
-```javascript
-          if (s4Params == undefined){
-            var s4Params =
-            {municipality: '101',
-            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
-            adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
-            cvrsearcher:{enabled: true, info: true},
-            plansearcher:{enabled: true, info: true},
-            indexsearcher:{enabled: true, info: true, datasources: "*"},
-            clientsearcher:{enabled: true}};
-	        s4_init (s4Params);
-    	}else{
-            throw "Only one (1) s4-plugin tool may be defined in a profile";
-    	}
-```
-
-
-
-### 6.c Include the new customized module and tool
-
-In your custom module [cbinfo.config.dir]/modules/custom/mys4, create a new deploy.xml file which deploys your customized CSS
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-		<deploy>
-		   <version>2.7.1</version>
-		   <stoponerror>true</stoponerror>
-		  <makedir dir="[cbinfo.wwwroot.dir]/modules/mys4/css"/>
-		  <copyfile fromfile="[module:mys4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/mys4/css/s4.css"/>
-		</deploy>
-```
-
-
-Finally, add the customized tool to your profile:
-```xml
-        <tool module="s4" name="s4-plugin"/>
-        <tool module="myS4" name="s4-pluginmycustomplugin" />
-```
-
-
-
-Finished, now try out your profile
-
-	_____________________________
+## 7. Using an external postgres database instead of the embedded database  
+  
+  Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
 	1: create database (postgres script is included in the /db folder)
-	2: Use external database instead of embedded (mandatory prior to SpatialSuite v 2.9)		 
+	2: Use external database instead of embedded   
+	Include the following parameters in cbinfo.xml:  
 	
 		<!-- =================================== -->
 		<!-- S4 Index parametres               -->
@@ -216,7 +245,7 @@ Finished, now try out your profile
 		<param name="module.s4.index.externdb.pwd">s4</param>
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 		
-Encoding problems
+## 8. Encoding problems  
 
 	if you experience encoding problems (seen in Sptial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
 	   <param name="module.s4.index.utf8behaviour">noconvert</param>
