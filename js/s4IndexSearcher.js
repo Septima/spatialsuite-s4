@@ -36,7 +36,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
             url: this.indexProtocol + '//' + this.indexHost + ':' + this.indexPort + '/jsp/modules/s4/getDatasources.jsp',
 	        dataType: 'json',
             cache : false,
-            timeout : 2000,
+            timeout : 4000,
             //crossDomain : true,
             //async:true,
             success:  Septima.bind(function(postCall, data, textStatus,  jqXHR){
