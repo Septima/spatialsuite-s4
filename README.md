@@ -42,8 +42,15 @@ which will create a postgres database.
 ###NOTE: Never change the s4 module. Instead, create a custom module with changes only. See later in this document
 
 
-### 3.a Get latest version of the s4 module here:
-    https://github.com/Septima/spatialsuite-s4/archive/master.zip
+### 3.a Get s4 module:
+Latest version is always located at:  
+      https://github.com/Septima/spatialsuite-s4/archive/master.zip  
+      
+Released versions:  
+      1.0: https://github.com/Septima/spatialsuite-s4/archive/1.0.zip  
+      
+Development version (at your own risk) can be downloaded from:  
+      https://github.com/Septima/spatialsuite-s4/archive/develop.zip  
 
 ### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/septima/s4
 
