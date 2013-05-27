@@ -13,7 +13,7 @@
 		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
 
 		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
-		<file type="script" name="/modules/s4/js/s4Searcher.js"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
 
     </requires>
     <src><![CDATA[

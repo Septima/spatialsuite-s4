@@ -1,4 +1,4 @@
-Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
+Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
 	themeFOlderUri: null,
 	themeOffUri: null,
@@ -191,6 +191,6 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
         }
 	},
 
-    CLASS_NAME: 'Septima.Search.ClientSearcher'
+    CLASS_NAME: 'Septima.Search.ThemeSearcher'
 
 });

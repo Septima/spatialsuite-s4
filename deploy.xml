@@ -17,7 +17,7 @@
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4IndexSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4IndexSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4Searcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4Searcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>
 
 	<!-- Production version of septima search -->
 	   <param name="s4.search.css">//search.cdn.septima.dk/1.0/css/defaultView.css</param>

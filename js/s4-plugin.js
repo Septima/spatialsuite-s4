@@ -82,8 +82,8 @@ function s4_init (params){
             }
         	
             if (_s4Params.clientsearcher.enabled){
-	            var clientSearcher = new Septima.Search.ClientSearcher({});
-	          	searchers.push({"title": "Temaer", "searcher" : clientSearcher});
+	            var themeSearcher = new Septima.Search.ThemeSearcher({});
+	          	searchers.push({"title": "Temaer", "searcher" : themeSearcher});
             }
         	
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
