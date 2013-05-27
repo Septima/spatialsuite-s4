@@ -7,9 +7,6 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
 	offCustomButtonDef: null,
 
 	groups: [],
-	//{"group": group, themes: []}
-		//themes: [],
-		//{group:, theme:, displaynameterms:[], groupnameterms:[]}
     initialize: function (options) {
 		this.Searcher(options);
 		this.themeFolderUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH3QMSBwki3imsvQAAA8VJREFUOMuVlV1oXEUUx393P7v5MmwkTVpjEiUb4/oQxEKV1mhDRFBLiBWqWFoVi6JIxScfFBXsk4oPUg0WWvCLvkTEh4IYFQ0pwTTVJKIJoQm0iekmu/m42XzcO3PGh3v3bpe2FAfunbl3zvzmf87MmbGMMYabFNu2mZ6eJp/P4zgOryd7qQ5X0LqtidfqDtJWdkeJvXUz6OjoKLlcjkwmg23biAhH7+0lTIgKEtSYKh6u2sXJ1NvBmMiNYMYYhoaGWFhYYH5+Pvgfi8WoDleyrG1WyLNi5VlZ/pk/z08w0H6KeDhG6EbQsbGxEmBTUxMAPT09XGj7CgS6qx8CIBu2mXIv8eLEewDXh9q2TS6XC4AdHR10dXXhui6VlZU0xXdAxuHbOz/g1G2e28vRdc4uDjCy+vf1ocPDw2QymUBhKpUCYG1trWikvKU4sn0/3ZG9Xn9sk3dnekuhA58e4tdPniYUsrBtG4CWlhYA+vv7Ay9m1ucAOHbpQwAO1z4BG8JWRDOxcrEIHfzsCHte/oIHX/0GsBCRkliOj49TVlZGX18f7b8dgIjF6ez3AHTX74N1jbEMs+sZb/XPff48D7x0GlHvY7QgsueakFiWRSwWw3EcVpIOEMPCKhpseCK0EU+pMQajjmNEMFrQWhEKeU7MzXmuptPpIiDkPYdrHgfgl8Xf/U0P26NJHyqCMYLRBu0oXNcmkUgAMDIyAkBnZydtbW3BPj1W+wwfN7wBwDsTJyAewtqE1luavYwaOPEsu19oJTu1ysXBRUQJRhRaNKJdxFVo7aC1QlwHrVxEu2jXRYmLcRWXt8V5c1+Yc/d/6cW04Pbc+CrtTx0nUV3P/ynfvbUXd+oyu8xu7qtO+1AjGNHks5skqk7irrqgNUYrjChQCtEC2kGUAq0wWoNWhCxDdmaSHGmeW9pfzP2CUmdDYbYURjSIDuKMP6kRARGMGN9GiCTCxCMOKlJHY31DESpGs7XmUF4TQTkCUgAJGIXRAqJAdDBBwSY7m2c9eis6mqT59p1XKdWaf/9aZsfdVZ5qX6kXAsH4tfetsYwgvtLJP2a5Er2LUEUt9XW1xQNFRHNl0qautQqMN8joq+CFcBTc1543xgjTo/MsxlI0NjdSUVFeVLqZfoW5C2coP/MPSxsgrotohVaOX7tIYRsphYjCaJc4GwwuNbIWUnx09FDpId2wsw5Ld/P1j/1oJQTZ518Kwdu/Iwxg4SlNddzDo490Bhl4zXVy9oefmJic8nvwc9sqtoNU9xrhSJSDTz5GTTJZsm//AyrrR/+UUq08AAAAAElFTkSuQmCC";
@@ -24,15 +21,16 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     		for (var j=0;j<group.elements.length;j++){
     			var theme = group.elements[j];
     			if (theme.selectable=="true"){
-    				var terms = theme.displayname.split(" ");
-    				var termsToIndex = [];
+    				var themeDescription = this.getThemeDescription(theme);
+    				var terms = (theme.displayname + " " + themeDescription).split(" ");
+    				var termsToSearch = [];
     				for (var k=0;k<terms.length;k++){
     					term = terms[k];
-    					if (term.length > 2){
-    						termsToIndex.push(term.toLowerCase());
+    					if (term.length > 1){
+    						termsToSearch.push(term.toLowerCase());
     					}
     				}
-        			themes.push({"group": group, "theme": theme, "displaynameterms": termsToIndex, "description": this.getThemeDescription(theme), "image": this.getThemeImage(theme)});
+        			themes.push({"group": group, "theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme)});
     			}
     		}
     		this.groups.push({"group": group, "themes": themes});
@@ -91,13 +89,11 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     	var nameMatchingThemes = [];
     	var queryTerms = query.queryString.split(" ");
     	if (queryTerms.length>0){
-    		//groupsWithMatchingNames = this.getGroupsWithMatchingNames(queryTerms[0]);
     		groupsWithMatchingThemes = this.getGroupsWithMatchingThemes(queryTerms, groupName);
     		var totalThemeCount = 0;
     		for (var i=0;i<groupsWithMatchingThemes.length;i++){
     			totalThemeCount += groupsWithMatchingThemes[i].themes.length;
     		}
-    		//nameMatchingThemes = this.getNameMatchingThemes(queryTerms);
     		if (query.type == "list.force" || totalThemeCount<query.limit){
     			for (var i=0;i<groupsWithMatchingThemes.length;i++){
     				var themes = groupsWithMatchingThemes[i].themes;
@@ -127,15 +123,12 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
             					var result1 = queryResult.addResult(theme.theme.displayname + " (Tema)", theme.description, " ", theme);
                                 result1.image = theme.theme.img;
         					}
-//                            var result2 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
-//                            result2.image = theme.theme.img;
     					}
     					freeSlots -= group.themes.length;
     				}else{
     					var count = group.themes.length;
     					var groupDescription = "";
     					for (var k=0;k<count;k++){
-    						//.theme .state.on
     						groupDescription += group.themes[k].theme.displayname + ", ";
     					}
     					var result3 = queryResult.addNewQuery(group.group.group.displayname + " (" + count +" temaer)", groupDescription, group.group.group.displayname + ": " + query.queryString, null, null, null)
@@ -148,20 +141,8 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
     
-    getGroupsWithMatchingNames: function(term){
-    	var groupsWithMatchingNames = [];
-    	for (var i=0;i<this.groups.length;i++){
-    		var group = this.groups[i];
-    		if (group.group.displayname.toLowerCase().indexOf(term.toLowerCase())==0){
-    			groupsWithMatchingNames.push(group);
-    		}
-    	}
-    	return groupsWithMatchingNames;
-    },
-
     getGroupsWithMatchingThemes: function (queryTerms, groupName){
-    	
-    	//TODO: groupName
+
     	var groupsWithMatchingThemes = [];
     	for (var i=0;i<queryTerms.length;i++){
     		var term = queryTerms[i].toLowerCase();
@@ -174,7 +155,7 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
             			if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
             				themes.push(theme);
             			}else{
-            				if (this.match(term, theme.displaynameterms)){
+            				if (this.match(term, theme.termsToSearch)){
             					themes.push(theme);
             				}
             			}
@@ -188,24 +169,6 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     	return groupsWithMatchingThemes;
     },
     
-    getNameMatchingThemes: function(terms){
-    	var nameMatchingThemes = [];
-    	for (var i=0;i<terms.length;i++){
-    		var term = terms[i].toLowerCase();
-        	for (var j=0;j<this.groups.length;j++){
-        		var group = this.groups[j];
-        		var themes = [];
-        		for (var k=0;k<group.themes.length;k++){
-        			theme = group.themes[k]; 
-        			if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
-        				nameMatchingThemes.push(theme);
-        			}
-        		}
-        	}
-    	}
-    	return nameMatchingThemes;
-    },
-    
     match: function(testTerm, terms){
     	for (var i=0;i<terms.length;i++){
     		if (terms[i].indexOf(testTerm)==0){
@@ -215,15 +178,6 @@ Septima.Search.ClientSearcher = Septima.Class (Septima.Search.Searcher, {
     	return false;
     },
 	
-    exactMatch: function(testTerm, terms){
-    	for (var i=0;i<terms.length;i++){
-    		if (terms[i]==testTerm){
-    			return true;
-    		}
-    	}
-    	return false;
-    },
-
 	getCustomButtonDefs: function(result){
         if (!result.newquery){
         	if (result.data.theme.visible){
