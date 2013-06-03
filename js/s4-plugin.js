@@ -6,7 +6,8 @@ function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
 		view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-        adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
+        adresssearcher:{enabled: false, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
+        geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']},
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
@@ -48,6 +49,25 @@ function s4_init (params){
                 }
             }
             
+            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+            	var kmsTicket = s4_getKMSTicket();
+            	if (kmsTicket != null){
+                	var geoSearchOptions = {
+                			targets: _s4Params.geosearcher.targets,
+                			authParams: {ticket: kmsTicket},
+                		    onSelect: s4Hit
+                	    };
+                	if (_s4Params.municipality != "*"){
+                		geoSearchOptions.area = "muncode0" + _s4Params.municipality;
+                	}
+                	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
+                	searchers.push({"title": "", "searcher" : geoSearcher});
+                    if (_s4Params.geosearcher.info){
+                    	geoSearcher.addCustomButtonDef(infoButtonDef);
+                    }
+            	}
+            }
+            
             if (_s4Params.cvrsearcher.enabled){
             	var cvr_enhedSearchOptions = {onSelect: s4Hit};
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
@@ -82,8 +102,8 @@ function s4_init (params){
             }
         	
             if (_s4Params.clientsearcher.enabled){
-	            var clientSearcher = new Septima.Search.ClientSearcher({});
-	          	searchers.push({"title": "Temaer", "searcher" : clientSearcher});
+	            var themeSearcher = new Septima.Search.ThemeSearcher({});
+	          	searchers.push({"title": "Temaer", "searcher" : themeSearcher});
             }
         	
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
@@ -115,4 +135,19 @@ function s4DoInfo(result){
 	var wkt = result.geometry;
 	s4Hit(result);
     spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilequery, false, _s4Params.view.dynamiclayer, result.title, false);
+}
+
+function s4_getKMSTicket(){
+	var ticket = null;
+	var cbHttp = new CBhttp ();    	
+ 	try{  
+	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket', false);
+	   	 var col = pcomp.get(0);
+	   	 if(col != null){
+	   		 ticket = col.getValue();
+	   	 }
+   }catch(e){
+ 		return ticket;
+ 	}
+	return ticket;
 }

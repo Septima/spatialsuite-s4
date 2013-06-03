@@ -13,15 +13,16 @@
 		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
 
 		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
-		<file type="script" name="/modules/s4/js/s4Searcher.js"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
 
     </requires>
     <src><![CDATA[
           if (s4Params == undefined){
             var s4Params =
-            {municipality: '*',
+            {municipality: '101',
             view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-            adresssearcher:{enabled: true, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
+            adresssearcher:{enabled: false, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
+            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']},
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
