@@ -2,7 +2,11 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
 
     indexedDatasources: null,
     datasourcesToSearch: "*", 
-    
+
+    hasTargets: function (){
+		return true;
+	},
+	
     hasTarget: function (target) {
     	for (var i=0;i<this.indexedDatasources.length;i++){
     		if (target.toLowerCase() == this.indexedDatasources[i].featuretypesingle.toLowerCase() || target.toLowerCase() == this.indexedDatasources[i].featuretypeplural.toLowerCase()){
@@ -152,7 +156,8 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
         	        }
         		}
         	}else if (result.type == 'DatasourceWithMatchingFeatures'){
-        		queryResult.addNewQuery(datasource.featuretypeplural +  " (" + datasource.featurecount + ")",  "Der er fundet " + datasource.featurecount + " " + datasource.featuretypeplural + " , der matcher <em>" + query.queryString + "</em>", datasource.featuretypesingle + ": " + query.queryString, null, null, null)
+        		var result = queryResult.addNewQuery(datasource.featuretypeplural +  " (" + datasource.featurecount + ")",  "Der er fundet " + datasource.featurecount + " " + datasource.featuretypeplural + " , der matcher <em>" + query.queryString + "</em>", datasource.featuretypesingle + ": " + query.queryString, null, null, null)
+        		result.image = this.folderIconURI;
         	}
         }
         

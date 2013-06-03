@@ -56,6 +56,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	return false;
     },
     
+	hasTargets: function (){
+		return true;
+	},
+	
     getThemeDescription: function(theme){
     	for (var i=0;i<theme.copyright.length;i++){
     		if (theme.copyright[i].name == "metadata.text"){
