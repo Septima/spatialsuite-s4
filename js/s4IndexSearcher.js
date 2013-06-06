@@ -96,7 +96,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
     		}
     	}
     	
-    	this.request = jQuery.ajax({
+    	var xhr = jQuery.ajax({
             url: this.indexProtocol + '//' + this.indexHost + ':' + this.indexPort + '/jsp/modules/s4/queryIndex.jsp',
             data: {query:query.queryString, limit: query.limit, datasources: datasources},
 	        dataType: 'jsonp',
@@ -110,9 +110,18 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
 	        	this.success (caller, data, textStatus,  jqXHR);
 	        },this, caller, query),
 	        error : Septima.bind(function (caller, jqXHR, textStatus, errorThrown) {
-	        	this.error (caller, jqXHR, textStatus, errorThrown);
+	        	if (textStatus.toLowerCase() != 'abort' ){
+		        	this.error (caller, jqXHR, textStatus, errorThrown);
+	        	}
 	        },this, caller)     
           });
+		
+	    caller.registerOnCancelHandler ( Septima.bind(function (xhr) {
+	    	if (xhr && xhr.readystate != 4){
+	    		xhr.abort();
+	    	}
+	    },this,xhr));
+		
     },
     
 
