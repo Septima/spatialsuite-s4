@@ -17,10 +17,12 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	this.groups = [];
     	for (var i=0;i<cbKort.themeContainer.elements.length;i++){
     		var group = cbKort.themeContainer.elements[i];
+    		var groupHasThemes = false;
     		var themes = [];
     		for (var j=0;j<group.elements.length;j++){
     			var theme = group.elements[j];
     			if (theme.selectable=="true"){
+    				groupHasThemes = true;
     				var themeDescription = this.getThemeDescription(theme);
     				var terms = (theme.displayname + " " + themeDescription).split(" ");
     				var termsToSearch = [];
@@ -33,8 +35,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         			themes.push({"group": group, "theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme)});
     			}
     		}
-    		this.groups.push({"group": group, "themes": themes});
-			this.registerTarget(group.displayname)
+    		if (groupHasThemes){
+        		this.groups.push({"group": group, "themes": themes});
+    			this.registerTarget(group.displayname)
+    		}
     	}
     },
     

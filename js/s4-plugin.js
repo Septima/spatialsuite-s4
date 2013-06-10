@@ -113,12 +113,12 @@ function s4_init (params){
         	controller.go ();
         	
         	if (_s4View.top() !=null){
-        		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top());
+        		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - 100);
         	}
         	
         	jQuery(window).resize(function() {
         		if (_s4View != null && _s4View.top() !=null){
-        			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top());
+        			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - 100);
         		}
         	});
     }
