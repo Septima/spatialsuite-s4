@@ -34,6 +34,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			}
     		}
     		this.groups.push({"group": group, "themes": themes});
+			this.registerTarget(group.displayname)
     	}
     },
     
@@ -47,19 +48,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	}
     },
     
-    hasTarget: function (target) {
-    	for (var i=0;i<this.groups.length;i++){
-    		if (target.toLowerCase() == this.groups[i].group.displayname.toLowerCase()){
-    			return true;
-    		}
-    	}
-    	return false;
-    },
-    
-	hasTargets: function (){
-		return true;
-	},
-	
     getThemeDescription: function(theme){
     	for (var i=0;i<theme.copyright.length;i++){
     		if (theme.copyright[i].name == "metadata.text"){

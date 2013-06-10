@@ -3,19 +3,6 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
     indexedDatasources: null,
     datasourcesToSearch: "*", 
 
-    hasTargets: function (){
-		return true;
-	},
-	
-    hasTarget: function (target) {
-    	for (var i=0;i<this.indexedDatasources.length;i++){
-    		if (target.toLowerCase() == this.indexedDatasources[i].featuretypesingle.toLowerCase() || target.toLowerCase() == this.indexedDatasources[i].featuretypeplural.toLowerCase()){
-    			return true;
-    		}
-    	}
-    	return false;
-    },
-    
     initialize: function (options) {
 		this.Searcher(options);
 		if (options == undefined){
@@ -49,6 +36,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
             		var datasource = data.results[i].datasource;
             		if (datasource.featurecount > 0 && this.inDatasourcesToSearch(datasource.id)){
                 		this.indexedDatasources.push(datasource);
+    					this.registerTarget(datasource.featuretypesingle);
             		}
             	}
             	if (postCall !== null){
@@ -74,7 +62,7 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
     
     getDatasourceIdFromTarget: function(target){
     	for (var i=0;i<this.indexedDatasources.length;i++){
-    		if (target.toLowerCase() == this.indexedDatasources[i].featuretypesingle.toLowerCase() || target.toLowerCase() == this.indexedDatasources[i].featuretypeplural.toLowerCase()){
+    		if (target.toLowerCase() == this.indexedDatasources[i].featuretypesingle.toLowerCase()){
     			return this.indexedDatasources[i].id;
     		}
     	}
@@ -101,7 +89,6 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
             data: {query:query.queryString, limit: query.limit, datasources: datasources},
 	        dataType: 'jsonp',
             cache : false,
-            //contentType: "application/x-www-form-urlencoded;charset=utf-8",
             timeout : 10000,
             crossDomain : true,
             async:true,
@@ -172,12 +159,6 @@ Septima.Search.S4IndexSearcher = Septima.Class (Septima.Search.Searcher, {
         
         return queryResult;
     },
-    
-	onSelect: function(result){
-        if (!result.newquery){
-            this._onSelectCallback(result);
-        }
-	},
 	
 	getFeatureLinksAsHtml: function(feature){
     	var html = "";
