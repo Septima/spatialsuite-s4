@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool>
+    <requires>
+    
+		<file type="script"    name="//common.cdn.septima.dk/latest/js/septima.js" />
+		<file type="script"    name="//common.cdn.septima.dk/latest/js/json2.js" />
+
+		<file type="css"    name="[s4.search.css]" />
+		<file type="script" name="[s4.search.script]"/>
+		
+		<file type="css"    name="/modules/s4/css/s4.css" />
+		<file type="script" name="/modules/s4/js/s4-control.js"/>
+
+		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+
+    </requires>
+    <displayname>S4 Control Test</displayname>
+    <tooltip>S4 Control Test</tooltip>
+    <onclick>_s4COntrolTest();</onclick>
+    <img/>
+    <jssrc><![CDATA[
+        var _s4Dialogtest = null;
+		var _s4TestControl = null;
+		        
+        function _s4COntrolTest() {
+            if (_s4Dialogtest == null) {
+               _s4Dialogtest = new Dialog('S4 Control Test');
+		        _s4Dialogtest.setDialogWidth('420px');     
+		        _s4Dialogtest.addContentHTML('<div id="Septima_Dialog_TEST" style="width:420px; height:50px"><div id="s4TestDiv" name="s4TestDiv" class="inputcontainer"/><div id="s4TestLog"/></div>');
+		        
+		        var s4TestControlOptions ={div:'s4TestDiv',
+		        placeHolder:'Søg',
+		        onSelect: _s4TestOnSelect,
+		        municipality: '101',
+		        view:{limit: 20},
+		        adresssearcher:{enabled: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+		        geosearcher:{enabled: false, targets: ['*']},
+		        // Full set of geosearcher targets is targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+		        cvrsearcher:{enabled: false},
+		        plansearcher:{enabled: false},
+		        indexsearcher:{enabled: false, datasources: "*"}};
+		        _s4TestControl = new Septima.Search.S4Control(s4TestControlOptions);
+        	}
+	        _s4Dialogtest.showDialog();
+        }
+        
+        function _s4TestOnSelect(result){
+        	//Her kan man vælge at gøre forskellige ting:
+	        	//Show something as text fixed text (title or presentation string)
+	        	//_s4TestControl.showFixedText(result.title, _s4TestOnDeSelect);
+	        //Gemme det valgte og bruge det til noget andet:
+	        	jQuery("#s4TestLog").html("Valgt: " + result.title);
+	        //Slette indholdet af kontrollen
+	        	_s4TestControl.clear();
+        }
+        
+        function _s4TestOnDeSelect(){}
+    ]]></jssrc>
+</tool>

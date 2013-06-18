@@ -21,7 +21,7 @@
             var s4Params =
             {municipality: '101',
             view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-            adresssearcher:{enabled: false, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
+            adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
             geosearcher:{enabled: true, info: true, targets: ['*']},
             // Full set of geosearcher targets is targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
             cvrsearcher:{enabled: true, info: true},

@@ -16,6 +16,7 @@
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/s4-control.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-control.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4IndexSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4IndexSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>
 
