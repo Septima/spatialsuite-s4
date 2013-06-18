@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    
+		<file type="script"    name="//common.cdn.septima.dk/latest/js/septima.js" />
+		<file type="script"    name="//common.cdn.septima.dk/latest/js/json2.js" />
+
+		<file type="css"    name="[s4.search.css]" />
+		<file type="script" name="[s4.search.script]"/>
+		
+		<file type="css"    name="/modules/s4/css/s4.css" />
+		<file type="script" name="/modules/s4/js/s4-control.js"/>
+
+		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+
+    </requires>
+    <src/>
+    <jssrc/>
+</tool>
