@@ -82,7 +82,17 @@ You need to create a custom tool searching your municipality using your license 
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### 3.f include java library:
+
+### 3.f Update cbinfo.xml  
+
+		<!-- =================================== -->
+		<!-- S4 geosearcher parametres               -->
+		<!-- =================================== -->
+
+		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
+
+
+### 3.g include java library:
 
 COPY \lib\dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 
@@ -139,18 +149,8 @@ Configure __municipality__ code and __enable/disable__ and other __options__  in
     	}
 ```
 
+
 ### 4.c Include the new customized module and tool
-
-Update cbinfo.xml  
-		<!-- =================================== -->
-		<!-- S4 geosearcher parametres               -->
-		<!-- =================================== -->
-
-		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
-
-
-
-### 4.d Include the new customized module and tool
 
 In your custom module [cbinfo.config.dir]/modules/custom/mys4, create a new deploy.xml file which deploys your customized CSS
 ```xml
