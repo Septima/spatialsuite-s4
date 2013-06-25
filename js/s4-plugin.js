@@ -6,7 +6,7 @@ function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
 		view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-        adresssearcher:{enabled: false, info: true, apiKey: "1E718C7E-70D7-4E3A-AB40-AF6671FDCB57"},
+        adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
         geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']},
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
@@ -37,7 +37,7 @@ function s4_init (params){
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
             
             //Set up adress searcher
-            if (_s4Params.adresssearcher.enabled){
+            if (_s4Params.adresssearcher && _s4Params.adresssearcher.enabled){
             	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4Hit};
             	if (_s4Params.municipality != "*"){
             		adressSearchOptions.area = "muncode0" + _s4Params.municipality;
@@ -68,7 +68,7 @@ function s4_init (params){
             	}
             }
             
-            if (_s4Params.cvrsearcher.enabled){
+            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
             	var cvr_enhedSearchOptions = {onSelect: s4Hit};
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
             	if (_s4Params.municipality != "*"){
@@ -80,7 +80,7 @@ function s4_init (params){
                 }
             }
 
-            if (_s4Params.plansearcher.enabled){
+            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
             	var planSearchOptions = {onSelect: s4Hit};
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	if (_s4Params.municipality != "*"){
@@ -92,7 +92,7 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.indexsearcher.enabled){
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {indexProtocol: location.protocol, indexHost: location.hostname, indexPort: location.port, onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
@@ -101,7 +101,7 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.clientsearcher.enabled){
+            if (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
 	          	searchers.push({"title": "Temaer", "searcher" : themeSearcher});
             }

@@ -102,7 +102,7 @@ In this case, create a custom module containing only what is different from the 
     [cbinfo.config.dir]/modules/custom/mys4/css/s4.css
     [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml
 
-In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and only add what you need to override:
+In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and only add what you need to override, eg:
 
 ```css
 .inputcontainer {
@@ -117,7 +117,7 @@ Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk
 
 Now, you have to edit this file to add customized CSS, enable/disable external search services and configure municipal code
 
-Add path to the cusotm CSS file after the standard css file :
+Add path to the custom CSS file after the standard css file :
 
 		<file type="css"    name="/modules/s4/css/s4.css" />
         <file type="css"    name="/modules/mys4/css/s4.css" />
@@ -139,9 +139,18 @@ Configure __municipality__ code and __enable/disable__ and other __options__  in
     	}
 ```
 
-
-
 ### 4.c Include the new customized module and tool
+
+Update cbinfo.xml  
+		<!-- =================================== -->
+		<!-- S4 geosearcher parametres               -->
+		<!-- =================================== -->
+
+		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
+
+
+
+### 4.d Include the new customized module and tool
 
 In your custom module [cbinfo.config.dir]/modules/custom/mys4, create a new deploy.xml file which deploys your customized CSS
 ```xml
@@ -259,6 +268,6 @@ This URL may be called according to your desired workflow and integrated into:
 		
 ## 8. Encoding problems  
 
-	if you experience encoding problems (seen in Sptial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
+	if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
 	   <param name="module.s4.index.utf8behaviour">noconvert</param>
 	

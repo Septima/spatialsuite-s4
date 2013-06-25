@@ -18,7 +18,7 @@ Septima.Search.S4Control = Septima.Class ({
     	var searchers = [];
         
         //Set up adress searcher
-        if (this.options.adresssearcher.enabled){
+        if (this.options.adresssearcher && this.options.adresssearcher.enabled){
         	var adressSearchOptions = {apiKey: this.options.adresssearcher.apiKey, onSelect: this.options.onSelect};
         	if (this.options.municipality != "*"){
         		adressSearchOptions.area = "muncode0" + this.options.municipality;
@@ -43,7 +43,7 @@ Septima.Search.S4Control = Septima.Class ({
         	}
         }
         
-        if (this.options.cvrsearcher.enabled){
+        if (this.options.cvrsearcher && this.options.cvrsearcher.enabled){
         	var cvr_enhedSearchOptions = {onSelect: this.options.onSelect};
         	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
         	if (this.options.municipality != "*"){
@@ -52,7 +52,7 @@ Septima.Search.S4Control = Septima.Class ({
         	searchers.push({"title": "Virksomheder", "searcher" : se});
         }
 
-        if (this.options.plansearcher.enabled){
+        if (this.options.plansearcher && this.options.plansearcher.enabled){
         	var planSearchOptions = {onSelect: this.options.onSelect};
         	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
         	if (this.options.municipality != "*"){
@@ -61,7 +61,7 @@ Septima.Search.S4Control = Septima.Class ({
         	searchers.push({"title": "Lokalplaner", "searcher" : planSearcher});
         }
     	
-        if (this.options.indexsearcher.enabled){
+        if (this.options.indexsearcher && this.options.indexsearcher.enabled){
         	var s4IndexSearcherOptions = {indexProtocol: location.protocol, indexHost: location.hostname, indexPort: location.port, onSelect: this.options.onSelect, datasources: this.options.indexsearcher.datasources};
         	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
         	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
