@@ -134,7 +134,9 @@ function s4Hit(result){
 function s4DoInfo(result){
 	var wkt = result.geometry;
 	s4Hit(result);
-    spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilequery, false, _s4Params.view.dynamiclayer, result.title, false);
+    //spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilequery, false, _s4Params.view.dynamiclayer, result.title, false);
+    searchlast2.showDialog(result.title);
+    //searchlast.init();
 }
 
 function s4_getKMSTicket(){
@@ -151,3 +153,85 @@ function s4_getKMSTicket(){
  	}
 	return ticket;
 }
+
+function Searchlast2()
+{
+    this.dialog;
+    this.resultpage = 'spatialquery-getresult-html';
+    this.defaultText = null;
+    this.searchText = null;
+}
+Searchlast2.prototype.createDialog = function()
+{
+    if(!this.dialog)
+    {
+    	this.defaultText = cbInfo.getString('spatialquery.lastdisplayed.hint');
+        this.dialog = new Dialog(cbInfo.getString('spatialquery.lastdisplayed.dialogtitle'));
+        var h = '<table class="divtable" style="width:100%">' +
+                '    <tr align="left">' +
+                '        <td colspan="2" id="Searchlast2_searchtext">'+this.defaultText+'</td>' +
+                '    </tr>' +
+                '    <tr> ' +
+                '      <td colspan="2"><span id="Searchlast2_options"></td>' +
+                '    </tr>' +
+                '    <tr style="height:5px"><td></td></tr>' +
+                '    <tr align="right">' +
+                '        <td colspan="2">' +
+                '            <button class="menubutton" onclick="searchlast2.search();">'+cbInfo.getString('standard.button.ok')+'</button>' +
+                '        </td>' +
+                '    </tr>' +
+                '</table>';
+        this.dialog.addContentHTML(h);
+    }
+    getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
+}
+Searchlast2.prototype.showDialog = function(searchtext)
+{
+    this.createDialog();
+    
+	if (searchtext) {
+		this.searchText = searchtext;
+	    getElement('Searchlast2_searchtext').innerHTML = cbInfo.getString('spatialquery.show_info_about')+' '+this.searchText;
+	} else {
+		this.searchText = null;
+	    getElement('Searchlast2_searchtext').innerHTML = this.defaultText;
+	}
+        
+    this.dialog.showDialog();
+}
+Searchlast2.prototype.closeDialog = function()
+{
+    if (this.dialog) {
+        this.dialog.hideDialog();
+    }
+}
+Searchlast2.prototype.search = function()
+{
+    showWaitingBox(cbInfo.getString('standard.message.getting_data'));
+    
+    this.closeDialog();
+    
+    var params = {
+	    page: this.resultpage,
+	    profilequery: 'userdatasource',
+	    currentscale:cbKort.getCurrentScale(),
+	    layers: cbKort.getLayers()
+    };
+    params = spatialqueryoptions.getOptionParams(params);
+    
+    for(var i=0;i < spatialquery_paramHandlers.length;i++)
+    {
+        var p = spatialquery_paramHandlers[i]();
+        params[p.name] = p.value;
+    }
+    var url = cbKort.getUrl (params);
+    
+    var searchtext = (this.searchText || cbInfo.getString('spatialquery.lastdisplayed.searchtext'));
+    spatialquery_doQuery("userdatasource", url, searchtext, null);
+    
+    hideWaitingBox();
+}
+var searchlast2 = new Searchlast2();
+
+
+ 

@@ -21,15 +21,15 @@
   <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>
 
 	<!-- Production version of septima search -->
-	   <param name="s4.search.css">//search.cdn.septima.dk/1.4/css/defaultView.css</param>
+	   <param name="s4.search.css">//search.cdn.septima.dk/1.5/css/defaultView.css</param>
 	<!-- Only use ONE of these (debug or min) -->
 	<!--    <param name="s4.search.script">//search.cdn.septima.dk/1.4/septimasearch.debug.js</param> -->
-	   <param name="s4.search.script">//search.cdn.septima.dk/1.4/septimasearch.min.js</param>
+	   <param name="s4.search.script">//search.cdn.septima.dk/1.5/septimasearch.min.js</param>
 
 
 	<!-- Development versions of septima search -->
-<!--     <param name="s4.search.script">//search.cdn.septima.dk/develop/septimasearch.debug.js</param> -->
-<!--    <param name="s4.search.script">//search.cdn.septima.dk/develop/septimasearch.min.js?</param> -->
-<!--    <param name="s4.search.css">//search.cdn.septima.dk/develop/css/defaultView.css</param> -->
+<!--     <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param> -->
+<!--    <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.min.js</param> -->
+<!--    <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
 
 </deploy>

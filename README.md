@@ -47,6 +47,8 @@ Latest version is always located at:
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Released versions:  
+      1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
+      1.6: https://github.com/Septima/spatialsuite-s4/archive/1.6.zip  
       1.5: https://github.com/Septima/spatialsuite-s4/archive/1.5.zip  
       1.4: https://github.com/Septima/spatialsuite-s4/archive/1.4.zip  
       1.3: https://github.com/Septima/spatialsuite-s4/archive/1.3.zip  
@@ -265,7 +267,9 @@ This URL may be called according to your desired workflow and integrated into:
 		<param name="module.s4.index.externdb.user">s4</param>
 		<param name="module.s4.index.externdb.pwd">s4</param>
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
-		
+		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
+
+
 ## 8. Encoding problems  
 
 	if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
