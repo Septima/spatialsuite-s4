@@ -47,6 +47,7 @@ Latest version is always located at:
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Released versions:  
+      1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
       1.6: https://github.com/Septima/spatialsuite-s4/archive/1.6.zip  
       1.5: https://github.com/Septima/spatialsuite-s4/archive/1.5.zip  
       1.4: https://github.com/Septima/spatialsuite-s4/archive/1.4.zip  
