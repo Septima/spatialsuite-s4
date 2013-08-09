@@ -93,9 +93,9 @@ function s4_init (params){
             }
         	
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {indexProtocol: location.protocol, indexHost: location.hostname, indexPort: location.port, onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources};
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
+            	searchers.push({title: "", searcher: s4IndexSearcher});
                 if (_s4Params.indexsearcher.info){
                 	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
                 }

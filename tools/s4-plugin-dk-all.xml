@@ -12,7 +12,6 @@
 		<file type="css"    name="/modules/s4/css/s4.css" />
 		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
 
-		<file type="script" name="/modules/s4/js/s4IndexSearcher.js"/>
 		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
 
     </requires>
