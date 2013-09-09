@@ -27,8 +27,8 @@
 
 
 	<!-- Development versions of septima search -->
-    <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param>
-<!--    <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.min.js</param> -->
-   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param>
+    <!-->param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param-->
+    <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.min.js</param>
+    <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param>
 
 </deploy>

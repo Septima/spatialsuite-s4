@@ -25,6 +25,7 @@ function s4_init (params){
         	//Get localized strings
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
+        	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
 
         	//Set up search input box
         	if (jQuery("#panel-brand div.right").length == 1){
@@ -38,7 +39,7 @@ function s4_init (params){
             
             //Set up adress searcher
             if (_s4Params.adresssearcher && _s4Params.adresssearcher.enabled){
-            	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4Hit};
+            	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4Hit, matchesPhrase: matchPhrase};
             	if (_s4Params.municipality != "*"){
             		adressSearchOptions.area = "muncode0" + _s4Params.municipality;
             	}
@@ -55,7 +56,7 @@ function s4_init (params){
                 	var geoSearchOptions = {
                 			targets: _s4Params.geosearcher.targets,
                 			authParams: {ticket: kmsTicket},
-                		    onSelect: s4Hit
+                		    onSelect: s4Hit, matchesPhrase: matchPhrase
                 	    };
                 	if (_s4Params.municipality != "*"){
                 		geoSearchOptions.area = "muncode0" + _s4Params.municipality;
@@ -69,7 +70,7 @@ function s4_init (params){
             }
             
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-            	var cvr_enhedSearchOptions = {onSelect: s4Hit};
+            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
             	if (_s4Params.municipality != "*"){
                 	se.filter = { 'kom_id_officiel' : _s4Params.municipality };
@@ -81,7 +82,7 @@ function s4_init (params){
             }
 
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
-            	var planSearchOptions = {onSelect: s4Hit};
+            	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	if (_s4Params.municipality != "*"){
             		planSearcher.filter = { 'komnr' : _s4Params.municipality };
@@ -93,7 +94,7 @@ function s4_init (params){
             }
         	
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources};
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	searchers.push({title: "", searcher: s4IndexSearcher});
                 if (_s4Params.indexsearcher.info){
