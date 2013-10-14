@@ -254,7 +254,7 @@ This URL may be called according to your desired workflow and integrated into:
   
   Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
-	1: create database (postgres script is included in the /db folder)
+	1: create schema in your database (postgres script is included in the /db/create-schema.sql)
 	2: Use external database instead of embedded   
 	Include the following parameters in cbinfo.xml:  
 	
