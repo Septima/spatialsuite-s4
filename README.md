@@ -43,10 +43,9 @@ which will create a postgres database.
 
 
 ### 3.a Get s4 module:
-Latest version is always located at:  
-      https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Released versions:  
+      1.8: https://github.com/Septima/spatialsuite-s4/archive/1.8.zip  
       1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
       1.6: https://github.com/Septima/spatialsuite-s4/archive/1.6.zip  
       1.5: https://github.com/Septima/spatialsuite-s4/archive/1.5.zip  
@@ -56,14 +55,17 @@ Released versions:
       1.1: https://github.com/Septima/spatialsuite-s4/archive/1.1.zip  
       1.0: https://github.com/Septima/spatialsuite-s4/archive/1.0.zip  
       
+Latest version is always located at:  
+      https://github.com/Septima/spatialsuite-s4/archive/master.zip  
+      
 Development version (at your own risk) can be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/develop.zip  
 
-### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/septima/s4
+### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
 ### 3.b 	Update modules.xml by adding:
 ```xml
-<module name="s4" dir="septima/s4" permissionlevel="public"/>
+<module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
 ### 3.c Comment out other modules conflicting with this module e.g.:
 ```xml
@@ -84,19 +86,17 @@ You need to create a custom tool searching your municipality using your license 
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-
 ### 3.f Update cbinfo.xml  
 
 		<!-- =================================== -->
-		<!-- S4 geosearcher parametres               -->
+		<!-- S4 geosearcher parameters               -->
 		<!-- =================================== -->
 
 		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
 
-
 ### 3.g include java library:
 
-COPY \lib\dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
+COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 
 REMOVE old versions of the library
 
@@ -254,7 +254,7 @@ This URL may be called according to your desired workflow and integrated into:
   
   Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
-	1: create database (postgres script is included in the /db folder)
+	1: create schema in your database (postgres script is included in the /db/create-schema.sql)
 	2: Use external database instead of embedded   
 	Include the following parameters in cbinfo.xml:  
 	
@@ -267,7 +267,6 @@ This URL may be called according to your desired workflow and integrated into:
 		<param name="module.s4.index.externdb.user">s4</param>
 		<param name="module.s4.index.externdb.pwd">s4</param>
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
-		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
 
 
 ## 8. Encoding problems  
