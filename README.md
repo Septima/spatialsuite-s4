@@ -187,7 +187,7 @@ The next thing you want to is to make your local data searchable.
 The index builder needs a parameter pointing to a folder with index configuration.  
 
 For each site you need to create a configuration folder eg.:  
-    WEB-INF/config/misc/custom/s4
+    WEB-INF/config/misc/custom/s4  
     WEB-INF/config/misc/custom/s4/presentations
 
 You may copy the attached examples to have something to start with  
