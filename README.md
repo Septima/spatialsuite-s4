@@ -176,7 +176,6 @@ Finally, add the customized tool to your profile:
         <tool module="myS4" name="s4-pluginmycustomplugin" />
 ```
 
-
 Finished, now try out your profile
 
 ## 5. Configure your search index  
@@ -272,7 +271,7 @@ This URL may be called according to your desired workflow and integrated into:
 	Include the following parameters in cbinfo.xml:  
 	
 		<!-- =================================== -->
-		<!-- S4 Index parametres               -->
+		<!-- S4 Index parametres                 -->
 		<!-- =================================== -->
 		 		 
 		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
