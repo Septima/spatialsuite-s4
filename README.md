@@ -11,8 +11,10 @@
 
 ## 1. Description
 Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
-offered by Septima, the tool will also search local data and themes in the current profile.  
+offered by Septima, the tool will also search local data as well as themes in the current profile.  
 
+See a demo here: http://sps-demo.septima.dk  
+  
 The module includes a local data index. For Spatial Map versions 2.7+ the embedded database
 will be used to host the index. For previous versions of Spatial Map a script is included
 which will create a postgres database.
@@ -45,6 +47,7 @@ which will create a postgres database.
 ### 3.a Get s4 module:
       
 Released versions:  
+      1.8.1: https://github.com/Septima/spatialsuite-s4/archive/1.8.1.zip  
       1.8: https://github.com/Septima/spatialsuite-s4/archive/1.8.zip  
       1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
       1.6: https://github.com/Septima/spatialsuite-s4/archive/1.6.zip  
@@ -180,15 +183,25 @@ Finished, now try out your profile
 
 The next thing you want to is to make your local data searchable.
 
-### 5.a Create configuration folders
+### 5.a Create configuration folders and parameter  
 
+The index builder needs a parameter pointing to a folder with index configuration.  
 
+For each site you need to create a configuration folder eg.:  
     WEB-INF/config/misc/custom/s4
     WEB-INF/config/misc/custom/s4/presentations
 
-Or copy the examples
+You may copy the attached examples to have something to start with  
 
     Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
+    
+   <!-- In cbinfo.xml create a param pointing to the configuration folder -->  
+
+		<!-- =================================== -->
+		<!-- S4 Index parametres                 -->
+		<!-- =================================== -->  
+				
+		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 
 ### 5.b Configure datasources to be searchable
 
@@ -262,6 +275,7 @@ This URL may be called according to your desired workflow and integrated into:
 		<!-- S4 Index parametres               -->
 		<!-- =================================== -->
 		 		 
+		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 		<param name="module.s4.index.externdb.type">postgis</param>
 		<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
 		<param name="module.s4.index.externdb.user">s4</param>
