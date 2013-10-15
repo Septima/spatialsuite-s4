@@ -1,35 +1,32 @@
-Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.Searcher, {
-
-	workspacePhrase: null,
-	workspacesPhrase: null,
-	workspaceData: null,
-	jsonSearcher: null,
+Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
 
     initialize: function (options) {
-		this.Searcher(options);
-    	this.workspacePhrase = cbInfo.getString('Arbejdsomr\u00E5de');
-    	this.workspacesPhrase = cbInfo.getString('workspace.workspace_list.showdivbox1');
+    	this.workspaceRowList = {row: []};
+		options.searchableData =  new Septima.Search.SearchableRowList({
+    		data: Septima.bind(function(){return this.workspaceRowList;}, this),
+    		singular: options.singular,
+    		plural: options.plural,
+    		searchProperties: ['owner','name'],
+    		getDisplayname: function (row){return row.name +' ('+ row.owner +')';}
+    	});
+    	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+
+    	jQuery.ajax({
+    		url: options.host + '/cbkort?page=workspace.getlist&outputformat=json',
+            jsonp: 'json.callback',
+	        dataType: 'jsonp',
+            crossDomain : true,
+            async:true,
+            cache : false,
+            timeout : 4000,
+            success:  Septima.bind(function(data, textStatus,  jqXHR){
+            	this.workspaceRowList = data.row[0];
+          }, this)
+          });
     },
     
     showWorkspace: function(id){
     	
-    },
-    
-    fetchData: function (query, caller) {
-    	if (this.jsonSearcher == null){
-    		this.jsonSearcher = this.createJsonSearcher();
-    	}
-    	var meAsCaller = {fetchSuccess: Septima.bind(this.fetchSuccess, this, query, caller),
-                          fetchError: Septima.bind(this.fetchError, this, caller)}
-    	this.jsonSearcher.fetchData(query, meAsCaller);
-    },
-    
-    fetchSuccess: function (queryResult, query, caller){
-    	caller.fetchSuccess(this.createQueryResult(queryResult, query))
-    },
-    
-    fetchError: function(searcher, errorThrown, caller){
-    	caller.fetchError (this, errorThrown);
     },
     
     CLASS_NAME: 'Septima.Search.workspaceSearcher'

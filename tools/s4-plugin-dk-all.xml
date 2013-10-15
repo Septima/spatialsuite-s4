@@ -13,6 +13,7 @@
 		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
 
 		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+		<file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
 
     </requires>
     <src><![CDATA[
@@ -26,7 +27,8 @@
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
-            clientsearcher:{enabled: true}};
+            clientsearcher:{enabled: true},
+            workspacesearcher:{enabled: true}};
 	        s4_init (s4Params);
     	}else{
             throw "Only one (1) s4-plugin tool may be defined in a profile";

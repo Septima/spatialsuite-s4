@@ -11,7 +11,8 @@ function s4_getDefaultParams(){
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
-        clientsearcher:{enabled: true}};
+        clientsearcher:{enabled: true},
+        workspacesearcher:{enabled: true}};
 }
 
 function s4_init (params){
@@ -104,9 +105,19 @@ function s4_init (params){
         	
             if (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
-	          	searchers.push({"title": "Temaer", "searcher" : themeSearcher});
+	          	searchers.push({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
             }
-        	
+
+            if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
+        		searchers.push({title: cbInfo.getString('workspace.workspace_list.showdivbox1'), searcher: new Septima.Search.workspaceSearcher({
+        			host: "",
+        			onSelect: workspaceHit,
+            		singular: cbInfo.getString('workspace.workspace'),
+            		plural: cbInfo.getString('workspace.workspace_list.showdivbox1')
+        		})});
+
+            }
+
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
         	
         	var controllerOptions = {};
@@ -130,6 +141,33 @@ function s4Hit(result){
     cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
     cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
     _s4View.blur();
+}
+
+function workspaceHit(hit){
+	//alert(hit.title);
+    _s4View.blur();
+	var workspaceId = hit.data.wrkspcid;
+	if (typeof workspace_container !== 'undefined' ){
+		if (workspace_container === null) {
+            require([cbInfo.getParam('cbkort.module.workspace.js'),'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+                workspace_container = new Workspace ({name:'standard'});
+                s4ShowWorkSpace(workspaceId);
+            }, this, workspaceId));
+        }else{
+            s4ShowWorkSpace(workspaceId);
+        }
+	}
+}
+
+function s4ShowWorkSpace(workspaceId){
+	//workspace_container.closeWorkspace ();
+    var options = {id: workspaceId};
+    if (jQuery.isFunction( workspace_init )){
+    	options.hideDialog = false;
+    }else{
+    	options.hideDialog = true;
+    }
+    workspace_container.start (options);
 }
 
 function s4DoInfo(result){
