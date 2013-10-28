@@ -62,7 +62,7 @@ Septima.Search.S4Control = Septima.Class ({
         }
     	
         if (this.options.indexsearcher && this.options.indexsearcher.enabled){
-        	var s4IndexSearcherOptions = {indexProtocol: location.protocol, indexHost: location.hostname, indexPort: location.port, onSelect: this.options.onSelect, datasources: this.options.indexsearcher.datasources};
+        	var s4IndexSearcherOptions = onSelect: this.options.onSelect, datasources: this.options.indexsearcher.datasources};
         	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
         	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
         }
