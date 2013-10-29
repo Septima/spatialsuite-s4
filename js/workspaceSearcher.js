@@ -14,6 +14,7 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     	jQuery.ajax({
     		url: options.host + '/cbkort?page=workspace.getlist&outputformat=json',
             jsonp: 'json.callback',
+            data:{sessionId: options.sessionId},
 	        dataType: 'jsonp',
             crossDomain : true,
             async:true,
@@ -23,10 +24,6 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
             	this.workspaceRowList = data.row[0];
           }, this)
           });
-    },
-    
-    showWorkspace: function(id){
-    	
     },
     
     CLASS_NAME: 'Septima.Search.workspaceSearcher'

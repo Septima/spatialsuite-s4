@@ -14,6 +14,8 @@
 
 		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
 		<file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
+		<file type="script" name="/modules/s4/js/profileSearcher.js"/>
+		<file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
 
     </requires>
     <src><![CDATA[
@@ -28,6 +30,8 @@
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
             clientsearcher:{enabled: true},
+            profilesearcher:{enabled: true},
+            favoritesearcher:{enabled: true},
             workspacesearcher:{enabled: true}};
 	        s4_init (s4Params);
     	}else{

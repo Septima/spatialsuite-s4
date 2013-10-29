@@ -12,6 +12,8 @@ function s4_getDefaultParams(){
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
         clientsearcher:{enabled: true},
+        profilesearcher:{enabled: true},
+        favoritesearcher:{enabled: true},
         workspacesearcher:{enabled: true}};
 }
 
@@ -27,6 +29,7 @@ function s4_init (params){
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+        	var sessionId = cbKort.sessionId;
 
         	//Set up search input box
         	if (jQuery("#panel-brand div.right").length == 1){
@@ -109,15 +112,35 @@ function s4_init (params){
             }
 
             if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
-        		searchers.push({title: cbInfo.getString('workspace.workspace_list.showdivbox1'), searcher: new Septima.Search.workspaceSearcher({
+        		searchers.push({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: new Septima.Search.workspaceSearcher({
         			host: "",
         			onSelect: workspaceHit,
-            		singular: cbInfo.getString('workspace.workspace'),
-            		plural: cbInfo.getString('workspace.workspace_list.showdivbox1')
+            		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
+            		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
+            		sessionId: sessionId
         		})});
-
             }
 
+            if (_s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
+        		searchers.push({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
+        			host: "",
+        			onSelect: profileHit,
+            		singular: cbInfo.getString('s4.profilesearcher.profile'),
+            		plural: cbInfo.getString('s4.profilesearcher.profiles'),
+            		sessionId: sessionId
+        		})});
+            }
+            
+            if (_s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
+        		searchers.push({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
+        			host: "",
+        			onSelect: favoriteHit,
+            		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
+            		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
+            		sessionId: sessionId
+        		})});
+            }
+            
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
         	
         	var controllerOptions = {};
@@ -141,6 +164,19 @@ function s4Hit(result){
     cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
     cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
     _s4View.blur();
+}
+
+
+function favoriteHit(hit){
+	if (Favorites){
+		Favorites.load(hit.data);
+	}
+}
+
+function profileHit(hit){
+	if (ProfileSelector){
+		ProfileSelector.setProfile(hit.data);
+	}
 }
 
 function workspaceHit(hit){
