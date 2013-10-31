@@ -122,7 +122,7 @@ function s4_init (params){
         		})});
             }
 
-            if (_s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
+            if (typeof(ProfileSelector) != 'undefined' && _s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
         		searchers.push({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
         			host: "",
         			onSelect: profileHit,
@@ -132,7 +132,7 @@ function s4_init (params){
         		})});
             }
             
-            if (_s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
+            if (typeof(Favorites) != 'undefined' && _s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
         		searchers.push({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
         			host: "",
         			onSelect: favoriteHit,
