@@ -15,8 +15,13 @@
   <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4-control.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-control.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/workspaceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/workspaceSearcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/profileSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/profileSearcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
 
-  <param name="s4.search.css">//search.cdn.septima.dk/1.6/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/1.6/septimasearch.min.js</param>
+<!--   <param name="s4.search.css">//search.cdn.septima.dk/1.6/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/1.6/septimasearch.min.js</param> -->
    
+  <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.min.js</param>
 </deploy>

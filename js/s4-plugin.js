@@ -1,6 +1,7 @@
 var _s4View = null;
 var _s4Params = null;
-var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RUU1QTJEM0ZENEE1MTFFMTlCQThDRkE0RUFCRDJCNjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RUU1QTJENDBENEE1MTFFMTlCQThDRkE0RUFCRDJCNjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFRTVBMkQzREQ0QTUxMUUxOUJBOENGQTRFQUJEMkI2OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFRTVBMkQzRUQ0QTUxMUUxOUJBOENGQTRFQUJEMkI2OSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkcb7MAAAAC1SURBVHja7JOxDcMgEEUhSgU1S8AQULMAMzCWSwvX9CzBEq5NezFRgmQJMKTOb7g70NPxOTAAoJaO4wBKKUY3wi3IsizgvX/H1lqklGrCHq2NLyArhJAXmIZorUsspfztOln7vgMhBJ2+lPPDEOfcpcgY63ryrBW3bbvkQogMgVYnVU/WdcWc85L3rtw1dkZ/yCAkxggppZLn+KzNTawxBhpPX53aKiR3UoN8ZgdP/Z1RvQQYAMW3TIu2nixeAAAAAElFTkSuQmCC";
+//var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RUU1QTJEM0ZENEE1MTFFMTlCQThDRkE0RUFCRDJCNjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RUU1QTJENDBENEE1MTFFMTlCQThDRkE0RUFCRDJCNjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFRTVBMkQzREQ0QTUxMUUxOUJBOENGQTRFQUJEMkI2OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFRTVBMkQzRUQ0QTUxMUUxOUJBOENGQTRFQUJEMkI2OSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkcb7MAAAAC1SURBVHja7JOxDcMgEEUhSgU1S8AQULMAMzCWSwvX9CzBEq5NezFRgmQJMKTOb7g70NPxOTAAoJaO4wBKKUY3wi3IsizgvX/H1lqklGrCHq2NLyArhJAXmIZorUsspfztOln7vgMhBJ2+lPPDEOfcpcgY63ryrBW3bbvkQogMgVYnVU/WdcWc85L3rtw1dkZ/yCAkxggppZLn+KzNTawxBhpPX53aKiR3UoN8ZgdP/Z1RvQQYAMW3TIu2nixeAAAAAElFTkSuQmCC";
+var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
 
 function s4_getDefaultParams(){
 	return {
@@ -11,7 +12,10 @@ function s4_getDefaultParams(){
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
-        clientsearcher:{enabled: true}};
+        clientsearcher:{enabled: true},
+        profilesearcher:{enabled: true},
+        favoritesearcher:{enabled: true},
+        workspacesearcher:{enabled: true}};
 }
 
 function s4_init (params){
@@ -26,6 +30,7 @@ function s4_init (params){
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+        	var sessionId = cbKort.sessionId;
 
         	//Set up search input box
         	if (jQuery("#panel-brand div.right").length == 1){
@@ -104,9 +109,39 @@ function s4_init (params){
         	
             if (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
-	          	searchers.push({"title": "Temaer", "searcher" : themeSearcher});
+	          	searchers.push({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
             }
-        	
+
+            if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
+        		searchers.push({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: new Septima.Search.workspaceSearcher({
+        			host: "",
+        			onSelect: workspaceHit,
+            		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
+            		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
+            		sessionId: sessionId
+        		})});
+            }
+
+            if (_s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
+        		searchers.push({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
+        			host: "",
+        			onSelect: profileHit,
+            		singular: cbInfo.getString('s4.profilesearcher.profile'),
+            		plural: cbInfo.getString('s4.profilesearcher.profiles'),
+            		sessionId: sessionId
+        		})});
+            }
+            
+            if (_s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
+        		searchers.push({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
+        			host: "",
+        			onSelect: favoriteHit,
+            		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
+            		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
+            		sessionId: sessionId
+        		})});
+            }
+            
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
         	
         	var controllerOptions = {};
@@ -130,6 +165,46 @@ function s4Hit(result){
     cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
     cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
     _s4View.blur();
+}
+
+
+function favoriteHit(hit){
+	if (Favorites){
+		Favorites.load(hit.data);
+	}
+}
+
+function profileHit(hit){
+	if (ProfileSelector){
+		ProfileSelector.setProfile(hit.data);
+	}
+}
+
+function workspaceHit(hit){
+	//alert(hit.title);
+    _s4View.blur();
+	var workspaceId = hit.data.wrkspcid;
+	if (typeof workspace_container !== 'undefined' ){
+		if (workspace_container === null) {
+            require([cbInfo.getParam('cbkort.module.workspace.js'),'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+                workspace_container = new Workspace ({name:'standard'});
+                s4ShowWorkSpace(workspaceId);
+            }, this, workspaceId));
+        }else{
+            s4ShowWorkSpace(workspaceId);
+        }
+	}
+}
+
+function s4ShowWorkSpace(workspaceId){
+	//workspace_container.closeWorkspace ();
+    var options = {id: workspaceId};
+    if (jQuery.isFunction( workspace_init )){
+    	options.hideDialog = false;
+    }else{
+    	options.hideDialog = true;
+    }
+    workspace_container.start (options);
 }
 
 function s4DoInfo(result){
