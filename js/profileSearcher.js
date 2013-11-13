@@ -23,7 +23,12 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
             cache : false,
             timeout : 4000,
             success:  Septima.bind(function(data, textStatus,  jqXHR){
-            	this.profileRowList = data.row[0];
+            	var profileRowList = data.row[0];
+            	for (var i=0;i<profileRowList.row.length;i++){
+            		if (profileRowList.row[i].hidden == 'false'){
+            			this.profileRowList.row.push(profileRowList.row[i]);
+            		}
+            	}
           }, this)
           });
     },

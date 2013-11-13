@@ -12,12 +12,37 @@ Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		displaynameProperty: 'displayname',
     		descriptionProperty: 'description'
     	});
+		this.updateInterval = null;
+		
     	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+    	this.readFavoritesAndSchedule(options.host, options.sessionId);
 
+        cbKort.events.addListener ('FAVORITE_SAVED', Septima.bind(function(event, favorite){
+        	this.readFavoritesAndSchedule(options.host, options.sessionId);
+        }, this));
+        
+        cbKort.events.addListener ('FAVORITE_DELETED', Septima.bind(function(event, favorite){
+        	this.readFavoritesAndSchedule(options.host, options.sessionId);
+        }, this));
+        
+    },
+    
+    readFavoritesAndSchedule: function(host, sessionId){
+    	if (this.updateInterval != null){
+			window.clearInterval(this.updateInterval);
+			this.updateInterval = null;
+		}
+    	this.readFavorites(host, sessionId);
+        this.updateInterval = window.setInterval(Septima.bind(function(){
+        	this.readFavorites(host, sessionId);
+        }, this), 61 * 1000);
+    },
+    
+    readFavorites: function(host, sessionId){
     	jQuery.ajax({
-    		url: options.host + '/cbkort?page=favorite.read.list&outputformat=json',
+    		url: host + '/cbkort?page=favorite.read.list&outputformat=json',
             jsonp: 'json.callback',
-            data:{sessionId: options.sessionId},
+            data:{sessionId: sessionId},
 	        dataType: 'jsonp',
             crossDomain : true,
             async:true,
@@ -28,7 +53,6 @@ Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
           }, this)
           });
     },
-    
 
     CLASS_NAME: 'Septima.Search.FavoriteSearcher'
     

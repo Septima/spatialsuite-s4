@@ -34,7 +34,11 @@ function s4_init (params){
 
         	//Set up search input box
         	if (jQuery("#panel-brand div.right").length == 1){
-                jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
+        		if (jQuery("#panel-brand").is(":visible")){
+                    jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
+        		} else{
+                    jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer nopanel"/>');
+        		}
         	}else{
                 jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer v263"/>');
         	}

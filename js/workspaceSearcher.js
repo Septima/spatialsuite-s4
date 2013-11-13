@@ -11,12 +11,32 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		searchProperties: ['owner','name'],
     		getDisplayname: function (row){return row.name +' ('+ row.owner +')';}
     	});
+		this.updateInterval = null;
+		
     	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+    	this.readWorkspacesAndSchedule(options.host, options.sessionId);
 
+        cbKort.events.addListener ('WORKSPACE_CHANGED', Septima.bind(function(event, favorite){
+        	this.readWorkspacesAndSchedule(options.host, options.sessionId);
+        }, this));
+    },
+
+    readWorkspacesAndSchedule: function(host, sessionId){
+    	if (this.updateInterval != null){
+			window.clearInterval(this.updateInterval);
+			this.updateInterval = null;
+		}
+    	this.readWorkspaces(host, sessionId);
+        this.updateInterval = window.setInterval(Septima.bind(function(){
+        	this.readWorkspaces(host, sessionId);
+        }, this), 65 * 1000);
+    },
+    
+    readWorkspaces: function(host, sessionId){
     	jQuery.ajax({
-    		url: options.host + '/cbkort?page=workspace.getlist&outputformat=json',
+    		url: host + '/cbkort?page=workspace.getlist&outputformat=json',
             jsonp: 'json.callback',
-            data:{sessionId: options.sessionId},
+            data:{sessionId: sessionId},
 	        dataType: 'jsonp',
             crossDomain : true,
             async:true,
@@ -27,7 +47,7 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
           }, this)
           });
     },
-    
+
     CLASS_NAME: 'Septima.Search.workspaceSearcher'
 
 });
