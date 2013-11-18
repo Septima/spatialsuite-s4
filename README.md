@@ -12,6 +12,8 @@
 ## 1. Description
 Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
 offered by Septima, the tool will also search local data as well as themes in the current profile.  
+  
+S4 product page: http://www.septima.dk/p_s4/  
 
 See a demo here: http://sps-demo.septima.dk  
   
@@ -47,6 +49,8 @@ which will create a postgres database.
 ### 3.a Get s4 module:
       
 Released versions:  
+      1.9.1: https://github.com/Septima/spatialsuite-s4/archive/1.9.1.zip  
+      1.9: https://github.com/Septima/spatialsuite-s4/archive/1.9.zip  
       1.8.1: https://github.com/Septima/spatialsuite-s4/archive/1.8.1.zip  
       1.8: https://github.com/Septima/spatialsuite-s4/archive/1.8.zip  
       1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
