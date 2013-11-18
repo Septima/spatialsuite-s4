@@ -18,6 +18,7 @@
   <copyfile fromfile="[module:s4.dir]/js/workspaceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/workspaceSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/profileSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/profileSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
 
   <param name="s4.search.css">//search.cdn.septima.dk/1.7R2/css/defaultView.css</param>
   <param name="s4.search.script">//search.cdn.septima.dk/1.7R2/septimasearch.min.js</param>

@@ -6,5 +6,5 @@
  <%
 	 IndexBuilder ib = new IndexBuilder();
 	 ib.build();
- 
+	 out.println ("Index has been built");
  %>

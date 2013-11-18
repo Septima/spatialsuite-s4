@@ -70,13 +70,8 @@ Development version (at your own risk) can be downloaded from:
 ```xml
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
-### 3.c Comment out other modules conflicting with this module e.g.:
-```xml
-<!--     <module name="afstand" dir="standard/dk/afstand" permissionlevel="public"/> -->
-<!--     <module name="spatialaddress" dir="standard/dk/spatialaddress" permissionlevel="public"/>    -->
-```
 
-### 3.d Include tool in profile(s):
+### 3.c Include tool in profile(s):
 ```xml
 <tool module="s4" name="s4-plugin-dk-all" />
 ```  
