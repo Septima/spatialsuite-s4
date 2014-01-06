@@ -43,7 +43,7 @@ which will create a postgres database.
 
 ## 3. Installation
 
-###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module][#cust]
+###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module](#4-customization-of-module)
 
 
 ### 3.a Get s4 module:
@@ -115,7 +115,7 @@ In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and onl
     top:5px;
 }
 ```
-### 4.b customize plugin [cust]
+### 4.b customize plugin  
 Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml to something else:
 
 
