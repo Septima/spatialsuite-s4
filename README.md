@@ -11,7 +11,7 @@
 #### 7. Using an external database
 #### 8. Customization of module
 
-## 1. Description [description]
+## 1. Description <a id="description"></a>
 Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
 offered by Septima, the tool will also search local data as well as themes in the current profile.  
   
