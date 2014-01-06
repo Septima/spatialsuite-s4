@@ -95,7 +95,7 @@ COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 REMOVE old versions of the library
 
 
-## 4. Customization of module
+## 4. Customization of module [cust]
 
 In most cases it is desired to make a custom version of the module to handle CSS specific design/layouts on your site and configure SeptimaSearch to search in municipal specific adresses and local municipal plans (PlansystemDK)
 
