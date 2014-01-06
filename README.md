@@ -2,14 +2,16 @@
 ===
 ## Content
 
-#### 1. Description
+#### 1. [Description](#description)
 #### 2. License
 #### 3. Installation
-#### 4. Configure your search index
-#### 5. Build the search index
-#### 6. Customization of module
+#### 4. Customization
+#### 5. Search Spatial Suite data
+#### 6. Build the search index
+#### 7. Using an external database
+#### 8. Customization of module
 
-## 1. Description
+## 1. Description [description]
 Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
 offered by Septima, the tool will also search local data as well as themes in the current profile.  
   
@@ -169,7 +171,7 @@ Finally, add the customized tool to your profile:
 
 Finished, now try out your profile
 
-## 5. Configure your search index  
+## 5. Search Spatial Suite data  
 
 The next thing you want to is to make your local data searchable.
 
@@ -253,7 +255,7 @@ This URL may be called according to your desired workflow and integrated into:
     your start up script, or
     Regular intervals, eg. wget "http://localhost:8080/admin?command=reloadconfig" in task/cron scheduler
 
-## 7. Using an external postgres database instead of the embedded database  
+## 7. Using an external database instead of the embedded database  
   
   Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
