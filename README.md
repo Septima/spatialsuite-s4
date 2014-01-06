@@ -43,7 +43,7 @@ which will create a postgres database.
 
 ## 3. Installation
 
-###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module](#cust)
+###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module][#cust]
 
 
 ### 3.a Get s4 module:
