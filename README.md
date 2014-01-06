@@ -43,7 +43,7 @@ which will create a postgres database.
 
 ## 3. Installation
 
-###NOTE: Never change the s4 module. Instead, create a custom module with changes only. See later in this document
+###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module](#cust)
 
 
 ### 3.a Get s4 module:
@@ -88,15 +88,7 @@ You need to create a custom tool searching your municipality using your license 
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### 3.f Update cbinfo.xml  
-
-		<!-- =================================== -->
-		<!-- S4 geosearcher parameters               -->
-		<!-- =================================== -->
-
-		<param name="module.s4.kmsticket" expression="true">getKmsTicket("[module.kms.login]","[module.kms.password]", true)</param>
-
-### 3.g include java library:
+### 3.f include java library:
 
 COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 
@@ -123,7 +115,7 @@ In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and onl
     top:5px;
 }
 ```
-### 4.b customize plugin
+### 4.b customize plugin [cust]
 Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml to something else:
 
 
