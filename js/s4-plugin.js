@@ -20,6 +20,7 @@ function s4_getDefaultParams(){
 
 function s4_init (params){
     if (_s4View == null) {
+        
 	        	if (params == undefined){
 	        		_s4Params = s4_getDefaultParams();
 	        	}else{
@@ -32,16 +33,41 @@ function s4_init (params){
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
         	var sessionId = cbKort.sessionId;
 
-        	//Set up search input box
-        	if (jQuery("#panel-brand div.right").length == 1){
-        		if (jQuery("#panel-brand").is(":visible")){
-                    jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
-        		} else{
-                    jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer nopanel"/>');
-        		}
-        	}else{
-                jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer v263"/>');
-        	}
+            //Set up search input box
+            var button = null;
+            if (Gui) {
+                button = Gui.getButton('s4');
+            }
+            
+            if (button === null) {
+                if (jQuery("#panel-brand div.right").length == 1){
+                    if (jQuery("#panel-brand").is(":visible")){
+                        jQuery("#panel-brand div.right").append('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
+                    } else{
+                        jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer nopanel"/>');
+                        
+                        if (cbKort.themeSelector.panels) {
+                            var panel = cbKort.themeSelector.panels["panel-themes-headerleft"];
+                            if (panel) {
+                                var button = panel.getButton('theme_store_setting');
+                                button.element.click(function () {
+                                    if (cbKort.themeSelector.editMode) {
+                                        jQuery('#s4box').hide();
+                                    } else {
+                                        jQuery('#s4box').show();
+                                    }
+                                });
+                            }
+                        }                        
+                    }
+                }else{
+                    jQuery("body").append('<div type="text" id="s4box" name="s4box" class="inputcontainer v263"/>');
+                }
+            } else {
+                button.element.empty();
+                button.element.removeClass('toolbar').addClass('toolspacer-notxt');
+                button.element.append('<div type="text" id="s4box" name="s4box" class="inputcontainer s4-static"/>');
+            }
 
         	var searchers = [];
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};

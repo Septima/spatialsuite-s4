@@ -33,3 +33,10 @@
 ul.better-autocomplete {
     max-height: 600px;
 }
+
+
+.inputcontainer.s4-static {
+    position: relative;
+    right: auto;
+    top: -3px;
+}
