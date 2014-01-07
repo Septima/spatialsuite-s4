@@ -3,28 +3,25 @@
 ## Content
 
 #### 1. [Description](#description)
-#### 2. License
-#### 3. Installation
-#### 4. Customization
-#### 5. Search Spatial Suite data
-#### 6. Build the search index
-#### 7. Using an external database
-#### 8. Customization of module
+#### 2. [License](#license)
+#### 3. [Installation](#installation)
+#### 4. [Customization](#customization)
+#### 5. [Search Spatial Suite data](#local)
+#### 6. [Build the search index](#build)
+#### 7. [Using an external database](#externaldb)
+#### 8. [FAQ](#faq)
 
 ## <a name="description"></a> 1. Description
-Septima Search for Spatial Suite is a search tool. In addition to smartAddress and services
-offered by Septima, the tool will also search local data as well as themes in the current profile.  
+Septima Search for Spatial Suite is a search tool. In addition to [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and services
+offered by Septima.
+
+The tool will also search local Spatial Suite data as well as themes, workspaces and favorites.  
   
 S4 product page: http://www.septima.dk/p_s4/  
 
 See a demo here: http://sps-demo.septima.dk  
   
-The module includes a local data index. For Spatial Map versions 2.7+ the embedded database
-will be used to host the index. For previous versions of Spatial Map a script is included
-which will create a postgres database.
-
-
-## 2. License
+## <a name="license"></a> 2. License
  Name:        S4 - Septima Search for SpatialSuite  
  Purpose:     Septima Search based module for Spatial Map
 
@@ -43,7 +40,7 @@ which will create a postgres database.
               www.septima.dk  
               kontakt@septima.dk  
 
-## 3. Installation
+## <a name="installation"></a> 3. Installation
 
 ###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module](#4-customization-of-module)
 
@@ -97,7 +94,7 @@ COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 REMOVE old versions of the library
 
 
-## 4. Customization of module  
+## <a name="customization"></a> 4. Customization of module  
 
 In most cases it is desired to make a custom version of the module to handle CSS specific design/layouts on your site and configure SeptimaSearch to search in municipal specific adresses and local municipal plans (PlansystemDK)
 
@@ -171,9 +168,11 @@ Finally, add the customized tool to your profile:
 
 Finished, now try out your profile
 
-## 5. Search Spatial Suite data  
+## <a name="local"></a> 5. Search Spatial Suite data  
 
-The next thing you want to is to make your local data searchable.
+Searching local data requires that an index of these data is configured and rebuilt every time data is updated.
+
+For Spatial Map versions 2.7+ the embedded database will be used to host the index. For previous versions of Spatial Map please see [Using an external database](#externaldb)
 
 ### 5.a Create configuration folders and parameter  
 
@@ -183,7 +182,7 @@ For each site you need to create a configuration folder eg.:
     WEB-INF/config/misc/custom/s4  
     WEB-INF/config/misc/custom/s4/presentations
 
-You may copy the attached examples to have something to start with  
+You may copy the attached examples  
 
     Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
     
@@ -205,7 +204,7 @@ Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you wan
 <config>
 	<endpoint>s4index</endpoint>
 	<datasources>
-		<datasource id="ds_akoler" presentation="s4-pres-skoler"/-->
+		<datasource id="ds_skoler" presentation="s4-pres-skoler"/-->
 	</datasources>
 </config>
 ```
@@ -215,10 +214,11 @@ A corresponding presentation MUST exist in Edit WEB-INF/config/misc/custom/s4/pr
 Each presentation MUST have the following columns
 
     <column format="heading"> : The title when presented as a search result
+    
 Each presentation MAY have the following columns
 
-    <column format="searchstring"> : The text which is indexed and free text queried
 	<column format="description"> : The description when presented as a search result
+    <column format="searchstring"> : The text which is indexed and free text queried
 	<column format="hyperlink"> : A link which will be presented directly in the search result
 
 ###Example presentation file
@@ -242,8 +242,8 @@ Each presentation MAY have the following columns
 </presentation>
 ```
 
-## 6. Build the search index
-When datasources and presentations are configured the search index has to bo built
+## <a name="build"></a> 6. Build the search index
+When datasources and presentations are configured the search index has to be built
 ### 6.a start site or reload configuration:
     http://localhost:8080/admin?command=reloadconfig
 ### 6.b Build the search index:
@@ -255,7 +255,7 @@ This URL may be called according to your desired workflow and integrated into:
     your start up script, or
     Regular intervals, eg. wget "http://localhost:8080/admin?command=reloadconfig" in task/cron scheduler
 
-## 7. Using an external database instead of the embedded database  
+## <a name="externaldb"></a> 7. Using an external database instead of the embedded database  
   
   Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
@@ -275,8 +275,14 @@ This URL may be called according to your desired workflow and integrated into:
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 
 
-## 8. Encoding problems  
-
+## <a name="faq"></a>8. FAQ  
+### Encoding  
 	if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
 	   <param name="module.s4.index.utf8behaviour">noconvert</param>
+	
+### Can't search local data
+	Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
+	
+### Profile specific search configuration
+	
 	
