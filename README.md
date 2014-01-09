@@ -76,7 +76,7 @@ Development version (at your own risk) can be downloaded from:
 
 ### 3.c Include tool in profile(s):
 ```xml
-<tool module="s4" name="s4-plugin-dk-all" />
+<tool module="s4" name="s4-plugin-dk-all"/>
 ```  
 The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
 You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)   
@@ -94,40 +94,21 @@ COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 REMOVE old versions of the library
 
 
-## <a name="customization"></a> 4. Customization of module  
+## <a name="customization"></a> 4. Customization of s4 plug-in
 
-In most cases it is desired to make a custom version of the module to handle CSS specific design/layouts on your site and configure SeptimaSearch to search in municipal specific adresses and local municipal plans (PlansystemDK)
+### 4.a customize plugin
+A typical use case is to have different s4 plug-in's for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.    
 
-In this case, create a custom module containing only what is different from the standard s4 module. This custom module will override settings from the standard s4 module
-
-### 4.a Create a custom __mys4__ module with following content (copy files from s4 module):
-
-
-    [cbinfo.config.dir]/modules/custom/mys4
-    [cbinfo.config.dir]/modules/custom/mys4/css/s4.css
-    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml
-
-In [cbinfo.config.dir]/modules/custom/mys4/css/s4.css delete all content and only add what you need to override, eg:
-
-```css
-.inputcontainer {
-    top:5px;
-}
-```
-### 4.b customize plugin  
-Next, rename the tool [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-dk-all.xml to something else:
+Copy the tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
 
-    [cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
+    [cbinfo.config.dir]/tools/custom/s4-plugin-dk-all.xml
 
-Now, you have to edit this file to add customized CSS, enable/disable external search services and configure municipal code
+Rename to something sensible like s4_general.xml or s4_schools.xml
 
-Add path to the custom CSS file after the standard css file :
 
-		<file type="css"    name="/modules/s4/css/s4.css" />
-        <file type="css"    name="/modules/mys4/css/s4.css" />
+Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of [cbinfo.config.dir]/tools/custom/s4_schools.xml
 
-Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of cbinfo.config.dir]/modules/custom/mys4/tools/s4-plugin-mycustomplugin.xml
 ```javascript
           if (s4Params == undefined){
             var s4Params =
@@ -145,28 +126,16 @@ Configure __municipality__ code and __enable/disable__ and other __options__  in
 ```
 
 
-### 4.c Include the new customized module and tool
-
-In your custom module [cbinfo.config.dir]/modules/custom/mys4, create a new deploy.xml file which deploys your customized CSS
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-		<deploy>
-		   <version>2.7.1</version>
-		   <stoponerror>true</stoponerror>
-		  <makedir dir="[cbinfo.wwwroot.dir]/modules/mys4/css"/>
-		  <copyfile fromfile="[module:mys4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/mys4/css/s4.css"/>
-		</deploy>
-```
-
+### 4.b Include the new customized tool
 
 Finally, add the customized tool to your profile:
 ```xml
         <!-- Comment out the original tool-->
         <!--tool module="s4" name="s4-plugin"/-->
-        <tool module="myS4" name="s4-pluginmycustomplugin" />
+        <tool dir="custom" name="s4_schools.xml" />
 ```
 
-Finished, now try out your profile
+Finished, now try out your profile and the customized search plugin
 
 ## <a name="local"></a> 5. Search Spatial Suite data  
 
