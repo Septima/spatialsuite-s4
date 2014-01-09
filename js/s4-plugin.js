@@ -191,7 +191,9 @@ function s4_init (params){
 }
 
 function s4Hit(result){
-	var wkt = result.geometry;
+	var geojson = new OpenLayers.Format.GeoJSON();
+    var olGeom = geojson.read(result.geometry, 'Geometry');
+	var wkt = olGeom.toString();
     cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
     cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
     _s4View.blur();
