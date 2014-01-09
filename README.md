@@ -94,17 +94,17 @@ COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
 REMOVE old versions of the library
 
 
-## <a name="customization"></a> 4. Customization of s4 plug-in
+## <a name="customization"></a> 4. Customization of s4 tool
 
-### 4.a customize plugin
-A typical use case is to have different s4 plug-in's for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.    
+### 4.a customize tool
+A typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.    
 
 Copy the tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-dk-all.xml
 
-Rename to something sensible like s4_general.xml or s4_schools.xml
+Rename to something meaningful like s4_general.xml or s4_schools.xml
 
 
 Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of [cbinfo.config.dir]/tools/custom/s4_schools.xml
@@ -135,7 +135,7 @@ Finally, add the customized tool to your profile:
         <tool dir="custom" name="s4_schools.xml" />
 ```
 
-Finished, now try out your profile and the customized search plugin
+Finished, now try out your profile and the customized search tool
 
 ## <a name="local"></a> 5. Search Spatial Suite data  
 
