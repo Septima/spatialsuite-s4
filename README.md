@@ -4,7 +4,7 @@
 
 #### 1. [Description](#description)
 #### 2. [License](#license)
-#### 3. [Installation](#installation)
+#### 3. [Basic installation and test](#installation)
 #### 4. [Customization](#customization)
 #### 5. [Search Spatial Suite data](#local)
 #### 6. [Build the search index](#build)
@@ -40,9 +40,7 @@ See a demo here: http://sps-demo.septima.dk
               www.septima.dk  
               kontakt@septima.dk  
 
-## <a name="installation"></a> 3. Installation
-
-###NOTE: Never change the s4 module. Instead, create a custom module with changes only. [See Customization of module](#4-customization-of-module)
+## <a name="installation"></a> 3. Basic installation and test
 
 
 ### 3.a Get s4 module:
@@ -87,27 +85,40 @@ You need to create a custom tool searching your municipality using your license 
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### 3.f include java library:
+### 3.d Test
 
-COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
+Now you are ready to test s4 module and tool(s4-plugin-dk-all).
 
-REMOVE old versions of the library
+Open a browser and navigate to Spatial Map and the profile where the tool is included. 
 
+A search input field should be visible in top right corner og the profile
+
+The s4-plugin-dk-all tool is configured with Geosearcher enabled which enable search for addresses in all DK municipalities.
+
+Start typing adresses in the search input field. When results show up in the search field click result and the map should zoom in top selected search result.
+
+Basic installation and test is now finished
 
 ## <a name="customization"></a> 4. Customization of s4 tool
 
-### 4.a customize tool
-A typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.    
+A typical customization is to restict adress/cvr searchers to search only in data with a specific municipality code. 
 
+Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.   
+
+
+### 4.a Search by municipality code
+ 
 Copy the tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-dk-all.xml
 
-Rename to something meaningful like s4_general.xml or s4_schools.xml
+Rename to s4-plugin-[municipality-code]-all.xml
+
+Replace [municipality-code] with your own muncipal code 
 
 
-Configure __municipality__ code and __enable/disable__ and other __options__  in the javascript part of [cbinfo.config.dir]/tools/custom/s4_schools.xml
+Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmll
 
 ```javascript
           if (s4Params == undefined){
@@ -125,14 +136,27 @@ Configure __municipality__ code and __enable/disable__ and other __options__  in
     	}
 ```
 
+### 4.b Customize other options
 
-### 4.b Include the new customized tool
+ A typical use case is to fine tune the search tool to match information in the profile
+
+
+     [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xml
+
+Rename to s4-plugin-[municipality-code]-[profile].xml
+
+Replace [profile] with the name of the profile where the customized tool is intended to be applied.
+
+
+Configure __municipality__ code iand __enable/disable__ and other __options__ in the javascript part of s4-plugin-[municipality-code]-[profile].xml
+
+### 4.c Include the new customized tool
 
 Finally, add the customized tool to your profile:
 ```xml
         <!-- Comment out the original tool-->
         <!--tool module="s4" name="s4-plugin"/-->
-        <tool dir="custom" name="s4_schools.xml" />
+        <tool dir="custom" name="s4-plugin-[municipality-code]-[profile].xml" />
 ```
 
 Finished, now try out your profile and the customized search tool
@@ -143,7 +167,19 @@ Searching local data requires that an index of these data is configured and rebu
 
 For Spatial Map versions 2.7+ the embedded database will be used to host the index. For previous versions of Spatial Map please see [Using an external database](#externaldb)
 
-### 5.a Create configuration folders and parameter  
+
+### 5.a include the s4 java library:
+
+Searching in local data requires a new jar file which is shipped with the s4 module.
+
+Copy jar file to your Spatial Map site:
+
+
+COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
+REMOVE old versions of the library
+
+
+### 5.b Create configuration folders and parameter  
 
 The index builder needs a parameter pointing to a folder with index configuration.  
 
@@ -163,7 +199,7 @@ You may copy the attached examples
 				
 		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 
-### 5.b Configure datasources to be searchable
+### 5.c Configure datasources to be searchable
 
 Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you want to index:
 
