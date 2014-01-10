@@ -9,7 +9,7 @@
 #### 5. [Search Spatial Suite data](#local)
 #### 6. [Build the search index](#build)
 #### 7. [Using an external database](#externaldb)
-#### 8. [FAQ](#faq)
+#### 8. [Problems](#problems)
 
 ## <a name="description"></a> 1. Description
 Septima Search for Spatial Suite is a search tool. In addition to [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and services
@@ -121,19 +121,19 @@ Replace [municipality-code] with your own muncipal code
 Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmll
 
 ```javascript
-          if (s4Params == undefined){
-            var s4Params =
-            {municipality: '101',
-            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilepuery: 'userdatasource'},
-            adresssearcher:{enabled: true, info: true, apiKey: "3F2504E0-4F89-11D3-9A0C-0305E82C3301"},
+            {municipality: '*',
+            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+            // Full set of geosearcher targets is targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
-            clientsearcher:{enabled: true}};
-	        s4_init (s4Params);
-    	}else{
-            throw "Only one (1) s4-plugin tool may be defined in a profile";
-    	}
+            //datasources: "*" for all, or space separated names of datasources
+            clientsearcher:{enabled: true},
+            profilesearcher:{enabled: true},
+            favoritesearcher:{enabled: true},
+            workspacesearcher:{enabled: true}};
 ```
 
 ### 4.b Customize other options
@@ -252,13 +252,13 @@ When datasources and presentations are configured the search index has to be bui
 ### 6.a start site or reload configuration:
     http://localhost:8080/admin?command=reloadconfig
 ### 6.b Build the search index:
-    http://localhost:8080/jsp/modules/s4/buildIndex.jsp
+    [YOURSITE]/jsp/modules/s4/buildIndex.jsp
 This URL may be called according to your desired workflow and integrated into:
 
 
     your data load script
     your start up script, or
-    Regular intervals, eg. wget "http://localhost:8080/admin?command=reloadconfig" in task/cron scheduler
+    Regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
 
 ## <a name="externaldb"></a> 7. Using an external database instead of the embedded database  
   
@@ -280,14 +280,13 @@ This URL may be called according to your desired workflow and integrated into:
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 
 
-## <a name="faq"></a>8. FAQ  
+## <a name="problems"></a>8. Problems  
 ### Encoding  
-	if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
-	   <param name="module.s4.index.utf8behaviour">noconvert</param>
+  if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
+	<param name="module.s4.index.utf8behaviour">noconvert</param>
 	
 ### Can't search local data
-	Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
+  Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
 	
-### Profile specific search configuration
 	
 	

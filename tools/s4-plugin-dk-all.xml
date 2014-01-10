@@ -22,7 +22,7 @@
     <src><![CDATA[
           if (s4Params == undefined){
             var s4Params =
-            {municipality: '101',
+            {municipality: '*',
             view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
             adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
             geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
@@ -30,6 +30,7 @@
             cvrsearcher:{enabled: true, info: true},
             plansearcher:{enabled: true, info: true},
             indexsearcher:{enabled: true, info: true, datasources: "*"},
+            //datasources: "*" for all, or space separated names of datasources
             clientsearcher:{enabled: true},
             profilesearcher:{enabled: true},
             favoritesearcher:{enabled: true},

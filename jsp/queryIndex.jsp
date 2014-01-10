@@ -22,13 +22,18 @@
  	if (limit != null){
  		limitToUse = Integer.parseInt(limit);
  	}
+ 	String limitType = request.getParameter("limitType");
+ 	if (limitType == null){
+ 		limitType = "collapse";
+ 	}
+
  	String datasources = request.getParameter("datasources");
  	String datasourcesToUse = "*";
  	if (datasources != null && !datasources.trim().equals("")){
  		datasourcesToUse = datasources;
  	}
 	IndexQuerier iq = new IndexQuerier();
- 	QueryResults qr = iq.query(queryToUse, limitToUse, datasourcesToUse); 
+ 	QueryResults qr = iq.query(queryToUse, limitToUse, datasourcesToUse, limitType); 
  	String callback = request.getParameter("callback");
  	if (callback != null){
  	 	response.setContentType("application/javascript; charset=UTF-8");

@@ -2,19 +2,18 @@
 	width: 350px;
     position:absolute;
     right:5px;
-    top:35px;
+    top:10px;
     z-index:500;
     background-color: transparent;
+}
+
+.inputcontainer.nopanel {
+    right:10px;
 }
 
 .inputcontainer.v263 {
 	right: 0px;
 	top: 70px;
-}
-
-.inputcontainer.nopanel {
-    right:10px;
-    top:41px;
 }
 
 .inputcontainer.active {
