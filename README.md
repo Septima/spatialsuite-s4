@@ -308,7 +308,8 @@ This URL may be called according to your desired workflow and integrated into:
 ```
   4: Create and deploy.xml file in the s4-custom module:
 
-    In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
+In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
       <deploy>
