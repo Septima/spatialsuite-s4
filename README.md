@@ -319,7 +319,7 @@ In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, 
         <copyfile fromfile="[module:s4-custom.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css/s4.css"/>
       </deploy>
 ```
-  5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmlto include the css from s4-custom module after the standard s4 css:
+  5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xml to include the css from s4-custom module after the standard s4 css:
 ```xml
         <file type="css"    name="/modules/s4/css/s4.css" />
         <file type="css"    name="/modules/thirdparty/septima/s4-custom/css/s4.css" />
