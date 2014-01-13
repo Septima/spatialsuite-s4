@@ -190,7 +190,7 @@ For each site you need to create a configuration folder eg.:
 You may copy the attached examples  
 
     Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
-    
+```xml    
    <!-- In cbinfo.xml create a param pointing to the configuration folder -->  
 
 		<!-- =================================== -->
@@ -198,7 +198,7 @@ You may copy the attached examples
 		<!-- =================================== -->  
 				
 		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
-
+```
 ### 5.c Configure datasources to be searchable
 
 Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you want to index:
@@ -221,11 +221,11 @@ Each presentation MUST have the following columns
     <column format="heading"> : The title when presented as a search result
     
 Each presentation MAY have the following columns
-
+```xml
 	<column format="description"> : The description when presented as a search result
     <column format="searchstring"> : The text which is indexed and free text queried
 	<column format="hyperlink"> : A link which will be presented directly in the search result
-
+```
 ###Example presentation file
 ```xml
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -267,7 +267,7 @@ This URL may be called according to your desired workflow and integrated into:
 	1: create schema in your database (postgres script is included in the /db/create-schema.sql)
 	2: Use external database instead of embedded   
 	Include the following parameters in cbinfo.xml:  
-	
+```xml	
 		<!-- =================================== -->
 		<!-- S4 Index parametres                 -->
 		<!-- =================================== -->
@@ -278,7 +278,7 @@ This URL may be called according to your desired workflow and integrated into:
 		<param name="module.s4.index.externdb.user">s4</param>
 		<param name="module.s4.index.externdb.pwd">s4</param>
 		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
-
+```
 
 ## <a name="faq"></a>8. FAQ  
 ### Encoding  
