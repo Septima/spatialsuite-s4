@@ -289,4 +289,29 @@ This URL may be called according to your desired workflow and integrated into:
   Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
 	
 	
-	
+### Custom CSS moving Search box to an undesired position
+  If for some reason your profile or site contains some custom CSS which causes Septima Search box to be positioned in a bad or undesired position in the profile, a new custom s4 module has to be created:
+  1: Create new empty module eg. s4-custom: [cbinfo.config.dir]/modules/custom/s4-custom/
+  2: Create a css folder and empty css file in: [cbinfo.config.dir]/modules/custom/s4-custom/css/s4.css
+  3: Add the custom CSS rules to the css file:
+    ```css
+  .inputcontainer {
+      top:5px;
+  }
+  ```
+  4: Create and deploy.xml file in the s4-custom module:
+
+    In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+      <deploy>
+         <version>2.7.1</version>
+         <stoponerror>true</stoponerror>
+        <makedir dir="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css"/>
+        <copyfile fromfile="[module:s4-custom.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css/s4.css"/>
+      </deploy>
+  ```
+  5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmlto include the css from s4-custom module after the standard s4 css:
+        <file type="css"    name="/modules/s4/css/s4.css" />
+        <file type="css"    name="/modules/s4-custom/css/s4.css" />
+
