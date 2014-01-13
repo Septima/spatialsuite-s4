@@ -321,5 +321,5 @@ This URL may be called according to your desired workflow and integrated into:
   5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmlto include the css from s4-custom module after the standard s4 css:
 ```xml
         <file type="css"    name="/modules/s4/css/s4.css" />
-        <file type="css"    name="/modules/s4-custom/css/s4.css" />
+        <file type="css"    name="/modules/thirdparty/septima/s4-custom/css/s4.css" />
 ```
