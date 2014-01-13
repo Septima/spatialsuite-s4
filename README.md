@@ -293,9 +293,12 @@ This URL may be called according to your desired workflow and integrated into:
 	
 	
 ### Custom CSS moving Search box to an undesired position
-  If for some reason your profile or site contains some custom CSS which causes Septima Search box to be positioned in a bad or undesired position in the profile, a new custom s4 module has to be created:
+  If for some reason your profile or site contains some custom CSS which causes Septima Search box to be positioned in a bad or undesired position in the profile, a new custom s4 module has to be created
+  
 1: Create new empty module eg. s4-custom: [cbinfo.config.dir]/modules/custom/s4-custom/
+
 2: Create a css folder and empty css file in: [cbinfo.config.dir]/modules/custom/s4-custom/css/s4.css
+
 3: Add the custom CSS rules to the css file:
 
 ```css
