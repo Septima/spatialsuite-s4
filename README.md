@@ -283,8 +283,9 @@ This URL may be called according to your desired workflow and integrated into:
 ## <a name="faq"></a>8. FAQ  
 ### Encoding  
 	if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
+```xml
 	   <param name="module.s4.index.utf8behaviour">noconvert</param>
-	
+```	
 ### Can't search local data
 	Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
 	
