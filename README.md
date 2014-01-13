@@ -303,9 +303,8 @@ This URL may be called according to your desired workflow and integrated into:
     ```
   4: Create and deploy.xml file in the s4-custom module:
 
-    In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
+  In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
 
-  
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
       <deploy>
@@ -315,6 +314,7 @@ This URL may be called according to your desired workflow and integrated into:
         <copyfile fromfile="[module:s4-custom.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css/s4.css"/>
       </deploy>
     ```
+
   5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmlto include the css from s4-custom module after the standard s4 css:
         <file type="css"    name="/modules/s4/css/s4.css" />
         <file type="css"    name="/modules/s4-custom/css/s4.css" />
