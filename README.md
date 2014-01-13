@@ -299,16 +299,16 @@ This URL may be called according to your desired workflow and integrated into:
 
   3: Add the custom CSS rules to the css file:
 
-    ```css
+```css
     .inputcontainer {
       top:5px;
     }
-    ```
+```
   4: Create and deploy.xml file in the s4-custom module:
 
   In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
 
-    ```xml
+```xml
     <?xml version="1.0" encoding="UTF-8"?>
       <deploy>
          <version>2.7.1</version>
@@ -316,9 +316,11 @@ This URL may be called according to your desired workflow and integrated into:
         <makedir dir="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css"/>
         <copyfile fromfile="[module:s4-custom.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css/s4.css"/>
       </deploy>
-    ```
+```
 
   5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmlto include the css from s4-custom module after the standard s4 css:
-        <file type="css"    name="/modules/s4/css/s4.css" />
-        <file type="css"    name="/modules/s4-custom/css/s4.css" />
 
+```xml
+<file type="css"    name="/modules/s4/css/s4.css" />
+<file type="css"    name="/modules/s4-custom/css/s4.css" />
+```
