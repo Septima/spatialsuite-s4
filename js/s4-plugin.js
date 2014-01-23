@@ -34,7 +34,7 @@ function s4_init (params){
 
             //Set up search input box
             var button = null;
-            if (Gui) {
+            if (typeof Gui !== 'undefined') {
                 button = Gui.getButton('s4');
             }
             
