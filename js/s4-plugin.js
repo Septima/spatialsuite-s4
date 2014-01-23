@@ -11,7 +11,7 @@ function s4_getDefaultParams(){
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
-        clientsearcher:{enabled: true},
+        themesearcher:{enabled: true},
         profilesearcher:{enabled: true},
         favoritesearcher:{enabled: true},
         workspacesearcher:{enabled: true}};
@@ -135,7 +135,7 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+            if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	searchers.push({title: "", searcher: s4IndexSearcher});
