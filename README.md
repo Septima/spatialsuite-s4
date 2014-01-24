@@ -103,7 +103,7 @@ Basic installation and test is now finished
 
 A typical customization is to restict adress/cvr searchers to search only in data with a specific municipality code. 
 
-Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste site - in a profile related to schools and insitutions.   
+Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste sites - in a profile related to schools and institutions.   
 
 
 ### 4.a Search by municipality code
@@ -138,7 +138,7 @@ Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/to
 
 ### 4.b Customize other options
 
- A typical use case is to fine tune the search tool to match information in the profile
+ A typical use case is to fine tune the search tool to match context in the profile
 
 
      [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xml
@@ -148,7 +148,23 @@ Rename to s4-plugin-[municipality-code]-[profile].xml
 Replace [profile] with the name of the profile where the customized tool is intended to be applied.
 
 
-Configure __municipality__ code iand __enable/disable__ and other __options__ in the javascript part of s4-plugin-[municipality-code]-[profile].xml
+Configure __municipality__ code and __enable/disable__ and other __options__ in the javascript part of s4-plugin-[municipality-code]-[profile].xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
+
+            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
+
+Another useful option is to choose which local datasources the tool will search in. This es controlled in the datasources key in the indexsearcher:
+
+
+For all local datasources:
+
+
+	indexsearcher:{enabled: true, info: true, datasources: "*"}
+
+For specific datasources:
+
+
+	indexsearcher:{enabled: true, info: true, datasources: "ds_skoler ds_boligforeninger"}
+
 
 ### 4.c Include the new customized tool
 
@@ -165,7 +181,9 @@ Finished, now try out your profile and the customized search tool
 
 Searching local data requires that an index of these data is configured and rebuilt every time data is updated.
 
-For Spatial Map versions 2.7+ the embedded database will be used to host the index. For previous versions of Spatial Map please see [Using an external database](#externaldb)
+For Spatial Map versions 2.7+ the embedded database will be used to host the index as default. With a very large index it is sometimes beneficial to use the [Using an external database](#externaldb) option.
+
+For previous versions of Spatial Map (without embedded database) please see [Using an external database](#externaldb)
 
 
 ### 5.a include the s4 java library:
