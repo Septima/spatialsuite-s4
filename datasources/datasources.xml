@@ -21,6 +21,7 @@
         <user>[module.s4.index.externdb.user]</user>
         <pwd>[module.s4.index.externdb.pwd]</pwd>
         <srid>[module.s4.index.externdb.srid]</srid>
+	    <sharedconnection>false</sharedconnection>
     </endpoint>
       <!-- {{endif}} -->
 </datasources>

@@ -29,7 +29,7 @@ See a demo here: http://sps-demo.septima.dk
   
  Created:     03-05-2013  
  Copyright:   (c) Septima P/S 2013  
- Licence:     Commercially licensed product. Please contact Septima to obtain
+ License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
               evaluation purposes free of charge.  
