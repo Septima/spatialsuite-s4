@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.0.1</version>
+   <version>2.0.2</version>
    <stoponerror>true</stoponerror>
   
    <makedir dir="[cbinfo.wwwroot.dir]/jsp/modules/s4"/>
@@ -20,10 +20,9 @@
   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
 
-  <param name="s4.search.css">//search.cdn.septima.dk/1.8/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/1.8/septimasearch.min.js</param>
+  <param name="s4.search.css">//search.cdn.septima.dk/1.9/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/1.9/septimasearch.min.js</param>
    
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
 <!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.min.js</param> -->
-<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.deb.js</param> -->
 </deploy>
