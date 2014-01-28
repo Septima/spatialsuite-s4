@@ -46,6 +46,7 @@ See a demo here: http://sps-demo.septima.dk
 ### 3.a Get s4 module:
       
 Released versions:  
+      2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
       2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
       2.0.1: https://github.com/Septima/spatialsuite-s4/archive/2.0.1.zip  
       1.9.1: https://github.com/Septima/spatialsuite-s4/archive/1.9.1.zip  
@@ -135,6 +136,7 @@ Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/to
             
             //Septima CVR-index
             cvrsearcher:{enabled: true, info: true},
+            
             //Septima lokalplan-index
             plansearcher:{enabled: true, info: true},
             
