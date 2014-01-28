@@ -135,7 +135,7 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	searchers.push({title: "", searcher: s4IndexSearcher});
@@ -144,7 +144,7 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled){
+            if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
 	          	searchers.push({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
             }

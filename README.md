@@ -125,16 +125,33 @@ Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/to
 ```javascript
             {municipality: '*',
             view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            
+            //Smart-adress
             adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+            
+            //Geodatastyrelsen-geosearch
+            // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
             geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
-            // Full set of geosearcher targets is targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+            
+            //Septima CVR-index
             cvrsearcher:{enabled: true, info: true},
+            //Septima lokalplan-index
             plansearcher:{enabled: true, info: true},
-            indexsearcher:{enabled: true, info: true, datasources: "*"},
+            
+            //Local SpatialSuite-datasources
             //datasources: "*" for all, or space separated names of datasources
-            clientsearcher:{enabled: true},
+            indexsearcher:{enabled: true, info: true, datasources: "*"},
+            
+            //Themes in profile
+            themesearcher:{enabled: false},
+            
+            //Profiles
             profilesearcher:{enabled: true},
+            
+            //Favorites
             favoritesearcher:{enabled: true},
+            
+            //Workspaces
             workspacesearcher:{enabled: true}};
 ```
 
