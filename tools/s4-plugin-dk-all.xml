@@ -15,10 +15,11 @@
             
             //Geodatastyrelsen-geosearch
             // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+            geosearcher:{enabled: true, info: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
             
             //Septima CVR-index
             cvrsearcher:{enabled: true, info: true},
+            
             //Septima lokalplan-index
             plansearcher:{enabled: true, info: true},
             
@@ -27,7 +28,7 @@
             indexsearcher:{enabled: true, info: true, datasources: "*"},
             
             //Themes in profile
-            themesearcher:{enabled: true},
+            themesearcher:{enabled: false},
             
             //Profiles
             profilesearcher:{enabled: true},
