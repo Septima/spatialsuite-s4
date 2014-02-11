@@ -13,25 +13,11 @@
 			<value>leder + ' ' + adresse + ' ' + insttype</value>
 		</column>
 						
-		<column name="2">
-			<label>'Leder:'</label>
-			<value>leder</value>
-		</column>
-
 		<column format="description">
 			<label>'Adresse:'</label>
 			<value>adresse</value>
 		</column>
 		
-		<column name="4">
-			<label>'Institutionstype:'</label>
-			<value>insttype</value>
-		</column>
-
-		<column name='shape_wkt'>
-			<label></label>
-			<value>shape_wkt</value>
-		</column>
 	</columns>
 
 </presentation>

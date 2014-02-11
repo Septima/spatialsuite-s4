@@ -13,11 +13,6 @@
 			<value>leder + ' ' + adresse + ' ' + hyperlink</value>
 		</column>
 		
-		<column name="2">
-			<label>'Leder:'</label>
-			<value>leder</value>
-		</column>
-		
 		<column format="description">
 			<label>'Adresse:'</label>
 			<value>adresse</value>
@@ -26,11 +21,6 @@
 		<column name="4" format="hyperlink">
 			<label>'Se skolens website'</label>
 			<value>hyperlink</value>
-		</column>
-		
-		<column name='shape_wkt'>
-			<label>'shape_wkt'</label>
-			<value>shape_wkt</value>
 		</column>
 	</columns>
 

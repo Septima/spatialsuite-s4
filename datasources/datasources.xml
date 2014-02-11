@@ -10,6 +10,11 @@
 			CREATE INDEX f_id_ds_idx ON feature (featureid, datasource);
 			CREATE INDEX ft_term_idx ON featureterm (term);
 		</config>
+		<config version="2" requires="1">
+			CREATE INDEX ft_fid_term_idx ON featureterm (featureid, term);
+			CREATE INDEX f_feature_idx ON feature (featureid);
+			CREATE INDEX f_dat_feature_idx ON feature (datasource, featureid);
+		</config>
 	</endpoint>
       <!-- {{endif}} -->
 

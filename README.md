@@ -46,6 +46,7 @@ See a demo here: http://sps-demo.septima.dk
 ### 3.a Get s4 module:
       
 Released versions:  
+      2.0.4: https://github.com/Septima/spatialsuite-s4/archive/2.0.4.zip  
       2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
       2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
       2.0.1: https://github.com/Septima/spatialsuite-s4/archive/2.0.1.zip  
@@ -68,14 +69,14 @@ Latest version is always located at:
 Development version (at your own risk) can be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/develop.zip  
 
-### 3.a Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
+### 3.b Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
-### 3.b 	Update modules.xml by adding:
+### 3.c 	Update modules.xml by adding:
 ```xml
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
 
-### 3.c Include tool in profile(s):
+### 3.d Include tool in profile(s):
 ```xml
 <tool module="s4" name="s4-plugin-dk-all"/>
 ```  
@@ -88,7 +89,7 @@ You need to create a custom tool searching your municipality using your license 
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### 3.d Test
+### 3.f Test
 
 Now you are ready to test s4 module and tool(s4-plugin-dk-all).
 
