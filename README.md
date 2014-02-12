@@ -46,7 +46,7 @@ See a demo here: http://sps-demo.septima.dk
 ### 3.a Get s4 module:
       
 Released versions:  
-      2.0.4: https://github.com/Septima/spatialsuite-s4/archive/2.0.4.zip  
+      2.0.5: https://github.com/Septima/spatialsuite-s4/archive/2.0.5.zip  
       2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
       2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
       2.0.1: https://github.com/Septima/spatialsuite-s4/archive/2.0.1.zip  
