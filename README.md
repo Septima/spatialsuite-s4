@@ -237,7 +237,7 @@ In cbinfo.xml create a param pointing to the configuration folder
 ```
 ### 5.c Configure datasources to be searchable
 
-Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you want to index:
+Edit [s4.config.dir]/config.xml to include the datasources you want to index:
 
 #### config.xml example
 ```xml
