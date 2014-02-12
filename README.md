@@ -105,7 +105,7 @@ Basic installation and test is now finished
 
 ## <a name="customization"></a> 4. Customization of s4 tool
 
-A typical customization is to restict adress/cvr searchers to search only in data with a specific municipality code. 
+A typical customization is to restrict adress, cvr, and plan searchers to search only in data with a specific municipality code. 
 
 Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste sites - in a profile related to schools and institutions.   
 
@@ -125,37 +125,37 @@ Replace [municipality-code] with your own muncipal code
 Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmll
 
 ```javascript
-            {municipality: '*',
-            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-            
-            //Smart-adress
-            adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
-            
-            //Geodatastyrelsen-geosearch
-            // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
-            
-            //Septima CVR-index
-            cvrsearcher:{enabled: true, info: true},
-            
-            //Septima lokalplan-index
-            plansearcher:{enabled: true, info: true},
-            
-            //Local SpatialSuite-datasources
-            //datasources: "*" for all, or space separated names of datasources
-            indexsearcher:{enabled: true, info: true, datasources: "*"},
-            
-            //Themes in profile
-            themesearcher:{enabled: false},
-            
-            //Profiles
-            profilesearcher:{enabled: true},
-            
-            //Favorites
-            favoritesearcher:{enabled: true},
-            
-            //Workspaces
-            workspacesearcher:{enabled: true}};
+    {municipality: '*',
+    view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+    
+    //Smart-adress
+    adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+    
+    //Geodatastyrelsen-geosearch
+    // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+    geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+    
+    //Septima CVR-index
+    cvrsearcher:{enabled: true, info: true},
+    
+    //Septima lokalplan-index
+    plansearcher:{enabled: true, info: true},
+    
+    //Local SpatialSuite-datasources
+    //datasources: "*" for all, or space separated names of datasources
+    indexsearcher:{enabled: true, info: true, datasources: "*"},
+    
+    //Themes in profile
+    themesearcher:{enabled: false},
+    
+    //Profiles
+    profilesearcher:{enabled: true},
+    
+    //Favorites
+    favoritesearcher:{enabled: true},
+    
+    //Workspaces
+    workspacesearcher:{enabled: true}};
 ```
 
 ### 4.b Customize other options
@@ -172,18 +172,16 @@ Replace [profile] with the name of the profile where the customized tool is inte
 
 Configure __municipality__ code and __enable/disable__ and other __options__ in the javascript part of s4-plugin-[municipality-code]-[profile].xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
 
-            geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
+	geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
 
-Another useful option is to choose which local datasources the tool will search in. This es controlled in the datasources key in the indexsearcher:
+Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
 
 
-For all local datasources:
-
+To search all local datasources:
 
 	indexsearcher:{enabled: true, info: true, datasources: "*"}
 
-For specific datasources:
-
+To search specific datasources:
 
 	indexsearcher:{enabled: true, info: true, datasources: "ds_skoler ds_boligforeninger"}
 
@@ -192,9 +190,9 @@ For specific datasources:
 
 Finally, add the customized tool to your profile:
 ```xml
-        <!-- Comment out the original tool-->
-        <!--tool module="s4" name="s4-plugin"/-->
-        <tool dir="custom" name="s4-plugin-[municipality-code]-[profile].xml" />
+<!-- Comment out the original tool-->
+<!--tool module="s4" name="s4-plugin-dk-all"/-->
+<tool dir="custom" name="s4-plugin-[municipality-code]-[profile].xml" />
 ```
 
 Finished, now try out your profile and the customized search tool
@@ -210,13 +208,11 @@ For previous versions of Spatial Map (without embedded database) please see [Usi
 
 ### 5.a include the s4 java library:
 
-Searching in local data requires a new jar file which is shipped with the s4 module.
+Searching in local data requires a jar file which is shipped with the s4 module.
 
-Copy jar file to your Spatial Map site:
-
-
-COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib
-REMOVE old versions of the library
+Copy jar file to your Spatial Map site:  
+	COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib  
+	REMOVE old versions of the library
 
 
 ### 5.b Create configuration folders and parameter  
@@ -228,63 +224,82 @@ For each site you need to create a configuration folder eg.:
     WEB-INF/config/misc/custom/s4/presentations
 
 You may copy the attached examples 
-```xml
 
-    Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
+		Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
     
-   <!-- In cbinfo.xml create a param pointing to the configuration folder -->  
-
-		<!-- =================================== -->
-		<!-- S4 Index parametres                 -->
-		<!-- =================================== -->  
-				
-		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
-
+In cbinfo.xml create a param pointing to the configuration folder  
+```xml
+<!-- =================================== -->
+<!-- S4 Index parameters                 -->
+<!-- =================================== -->  
+		
+<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 ```
 ### 5.c Configure datasources to be searchable
 
 Edit WEB-INF/config/misc/custom/s4/config.xml to include the datasources you want to index:
 
-###Example config file
+#### config.xml example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<endpoint>s4index</endpoint>
 	<datasources>
-		<datasource id="ds_skoler" presentation="s4-pres-skoler"/-->
+		<datasource id="ds_skoler" presentation="s4-pres-skoler"/>
+		<datasource id="ds_...." presentation="s4-pres-...."/>
+		<datasource id="ds_...." presentation="s4-pres-...."/>
 	</datasources>
 </config>
 ```
 
-A corresponding presentation MUST exist in Edit WEB-INF/config/misc/custom/s4/presentations/
+The corresponding presentation MUST exist in [s4.config.dir]/presentations/
 
 Each presentation MUST have the following columns
-
-    <column format="heading"> : The title when presented as a search result
-    
-Each presentation MAY have the following columns
 ```xml
-	<column format="description"> : The description when presented as a search result
-        <column format="searchstring"> : The text which is indexed and free text queried
-	<column format="hyperlink"> : A link which will be presented directly in the search result
+<column format="heading"> : The title when presented as a search result
 ```
-###Example presentation file
+
+The text tag MUST have both a value and a plural  
+
+#### Minimal presentation file
 ```xml
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <presentation xmlns:fo="http://www.w3.org/1999/XSL/Format">
 	<text name="overskrift" value="Skole" plural="Skoler"/>
 	<columns>
 		<column format="heading">
-			<label>''+skolensnav</label>
+			<label></label>
+			<value>skolensnavn</value>
+		</column>
+</presentation>
+```
+Each presentation MAY have the following columns
+```xml
+<column format="description"> : The description when presented as a search result
+<column format="searchstring"> : Text which is indexed and free text queried. This text is not visible to the end user
+<column format="hyperlink"> : A link which will be presented directly in the search result
+```
+#### Extended presentation file
+```xml
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<presentation xmlns:fo="http://www.w3.org/1999/XSL/Format">
+	<text name="overskrift" value="Skole" plural="Skoler"/>
+	<columns>
+		<column format="heading">
+			<label></label>
 			<value>skolensnav</value>
+		</column>
+		<column format="description">
+			<label></label>
+			<value>adresse</value>
 		</column>
 		<column format="searchstring">
 			<label></label>
 			<value>leder + ' ' + adresse + ' ' + hyperlink</value>
 		</column>
-		<column format="description">
-			<label>'Adresse:'</label>
-			<value>adresse</value>
+		<column format="hyperlink">
+			<label>'Se skolens hjemmeside'</label>
+			<value>hyperlink</value>
 		</column>
 </presentation>
 ```
@@ -292,35 +307,34 @@ Each presentation MAY have the following columns
 ## <a name="build"></a> 6. Build the search index
 When datasources and presentations are configured the search index has to be built
 ### 6.a start site or reload configuration:
-    http://localhost:8080/admin?command=reloadconfig
+    [YOURSITE]/admin?command=reloadconfig
 ### 6.b Build the search index:
     [YOURSITE]/jsp/modules/s4/buildIndex.jsp
 This URL may be called according to your desired workflow and integrated into:
 
-
     your data load script
     your start up script, or
-    Regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
+    at regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
 
 ## <a name="externaldb"></a> 7. Using an external database instead of the embedded database  
   
-  Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
+Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
-	1: create schema in your database (postgres script is included in the /db/create-schema.sql)
-	2: Use external database instead of embedded   
-	Include the following parameters in cbinfo.xml:  
-```xml	
-		<!-- =================================== -->
-		<!-- S4 Index parametres                 -->
-		<!-- =================================== -->
-		 		 
-		<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
-		<param name="module.s4.index.externdb.type">postgis</param>
-		<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
-		<param name="module.s4.index.externdb.user">s4</param>
-		<param name="module.s4.index.externdb.pwd">s4</param>
-		<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
+1: create schema in your database (postgres script is included in the /db/create-schema.sql)  
+2: Use external database instead of embedded   
 
+Include the following parameters in cbinfo.xml:  
+```xml	
+<!-- =================================== -->
+<!-- S4 Index parameters                 -->
+<!-- =================================== -->
+ 		 
+<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
+<param name="module.s4.index.externdb.type">postgis</param>
+<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
+<param name="module.s4.index.externdb.user">s4</param>
+<param name="module.s4.index.externdb.pwd">s4</param>
+<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 ```
 ## <a name="problems"></a>8. Problems  
 ### Encoding  
