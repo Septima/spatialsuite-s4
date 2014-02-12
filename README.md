@@ -12,10 +12,10 @@
 #### 8. [Problems](#problems)
 
 ## <a name="description"></a> 1. Description
-Septima Search for Spatial Suite is a search tool. In addition to [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and services
+Septima Search for Spatial Suite (s4) is a search tool. The user can search [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
 offered by Septima.
 
-The tool will also search local Spatial Suite data as well as themes, workspaces and favorites.  
+S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
   
 S4 product page: http://www.septima.dk/p_s4/  
 
