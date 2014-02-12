@@ -43,7 +43,7 @@ See a demo here: http://sps-demo.septima.dk
 ## <a name="installation"></a> 3. Basic installation and test
 
 
-### 3.a Get s4 module:
+### 3.a Download s4 module:
       
 Released versions:  
       2.0.5: https://github.com/Septima/spatialsuite-s4/archive/2.0.5.zip  
