@@ -3,7 +3,8 @@
 <tool type="plugin">
     <requires>
     	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-		<file type="css" name="/css/custom/s4.css" />
+    	<!-- Include custom css if you need to customize styles -->
+		<!-- <file type="css" name="/css/custom/s4.css" /> -->
    </requires>
     <src><![CDATA[
           if (s4Params == undefined){

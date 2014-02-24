@@ -49,9 +49,13 @@ Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
             cache : false,
             timeout : 4000,
             success:  Septima.bind(function(success, data, textStatus,  jqXHR){
-            	var favoriteRowList = data.row[0];
-        		this.favoriteRowList = favoriteRowList;
-        		this.lastUpdated = Date.now();
+            	if (data.row[0]._class == 'rowlist'){
+                	var favoriteRowList = data.row[0];
+            		this.favoriteRowList = favoriteRowList;
+            		this.lastUpdated = Date.now();
+            	}else{
+            		this.favoriteRowList = {row: []};
+            	}
             	if (typeof success !== 'undefined' && success != null && jQuery.isFunction(success)){
             		success();
             	}

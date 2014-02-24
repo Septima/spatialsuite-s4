@@ -2,7 +2,7 @@
 	width: 350px;
     position:absolute;
     right:5px;
-    top:10px;
+    top:0px;
     z-index:500;
     background-color: transparent;
 }

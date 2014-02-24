@@ -43,9 +43,13 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
             cache : false,
             timeout : 4000,
             success:  Septima.bind(function(success, data, textStatus,  jqXHR){
-            	var workspaceRowList = data.row[0];
-        		this.workspaceRowList = workspaceRowList;
-        		this.lastUpdated = Date.now();
+            	if (data.row[0]._class == 'rowlist'){
+                	var workspaceRowList = data.row[0];
+            		this.workspaceRowList = workspaceRowList;
+            		this.lastUpdated = Date.now();
+            	}else{
+            		this.workspaceRowList = {row: []};
+            	}
             	if (typeof success !== 'undefined' && success != null && jQuery.isFunction(success)){
             		success();
             	}
