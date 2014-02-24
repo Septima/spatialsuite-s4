@@ -337,44 +337,33 @@ Include the following parameters in cbinfo.xml:
 <param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 ```
 ## <a name="problems"></a>8. Problems  
-### Encoding  
+### <a name="problems.encoding"></a>Encoding  
   if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
 ```xml
 	<param name="module.s4.index.utf8behaviour">noconvert</param>
 ```	
-### Can't search local data
+### <a name="problems.localdata"></a>Can't index local data
   Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
 	
 	
-### Custom CSS moving Search box to an undesired position
-  If for some reason your profile or site contains some custom CSS which causes Septima Search box to be positioned in a bad or undesired position in the profile, a new custom s4 module has to be created
+### <a name="problems.css"></a>Custom CSS moving Search box to an undesired position
+  If for some reason the Septima Search box is positioned in a bad or undesired position, a custom s4.css file must be created
   
-1: Create new empty module eg. s4-custom: [cbinfo.config.dir]/modules/custom/s4-custom/
+1: Create appbase/spatialmap/css/custom/s4.css
 
-2: Create a css folder and empty css file in: [cbinfo.config.dir]/modules/custom/s4-custom/css/s4.css
-
-3: Add the custom CSS rules to the css file:
-
+2: Edit the new css file to reflect your changes. Most often it's the top of the search box you want to change
 ```css
   .inputcontainer {
       top:5px;
   }
 ```
-  4: Create and deploy.xml file in the s4-custom module:
 
-In your custom module [cbinfo.config.dir]/modules/thirdparty/septima/s4-custom, create a new deploy.xml file which deploys your customized CSS
-
+3: Update your custom tool to include your custom s4.css
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-      <deploy>
-         <version>2.7.1</version>
-         <stoponerror>true</stoponerror>
-        <makedir dir="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css"/>
-        <copyfile fromfile="[module:s4-custom.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/thirdparty/septima/s4-custom/css/s4.css"/>
-      </deploy>
+<tool type="plugin">
+	<requires>
+		<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		<file type="css" name="/css/custom/s4.css" />
+	</requires>
 ```
-  5: Finally, edit the tool [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xml to include the css from s4-custom module after the standard s4 css:
-```xml
-        <file type="css"    name="/modules/s4/css/s4.css" />
-        <file type="css"    name="/modules/thirdparty/septima/s4-custom/css/s4.css" />
-```
+	

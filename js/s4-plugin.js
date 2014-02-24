@@ -49,7 +49,7 @@ function s4_init (params){
                         jQuery("body").append(inputContainer);
                         inputContainer.addClass("nopanel");
                         var menuBar = jQuery("#panel-middle");
-                        inputContainer.css("top", "" + menuBar.offset().top + "px");
+                        inputContainer.css("top", "+=" + menuBar.offset().top + "px");
                         
                         
                         if (cbKort.themeSelector && cbKort.themeSelector.panels) {
