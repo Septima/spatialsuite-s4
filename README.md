@@ -46,6 +46,7 @@ See a demo here: http://sps-demo.septima.dk
 ### 3.a Download s4 module:
       
 Released versions:  
+      2.0.6R1: https://github.com/Septima/spatialsuite-s4/archive/2.0.6R1.zip  
       2.0.5: https://github.com/Septima/spatialsuite-s4/archive/2.0.5.zip  
       2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
       2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
@@ -252,14 +253,22 @@ Edit [s4.config.dir]/config.xml to include the datasources you want to index:
 </config>
 ```
 
-The corresponding presentation MUST exist in [s4.config.dir]/presentations/
+#### <a name="local.datasource"></a>Datasources    
 
-Each presentation MUST have the following columns
+You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
+  Sorting: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
+  Index performance: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
+
+#### Presentations    
+
+The corresponding presentations MUST exist in [s4.config.dir]/presentations/  
+
+The text tag MUST have both a value and a plural  
+
+Each presentation MUST have the following columns  
 ```xml
 <column format="heading"> : The title when presented as a search result
 ```
-
-The text tag MUST have both a value and a plural  
 
 #### Minimal presentation file
 ```xml
@@ -343,15 +352,16 @@ Include the following parameters in cbinfo.xml:
 	<param name="module.s4.index.utf8behaviour">noconvert</param>
 ```	
 ### <a name="problems.localdata"></a>Can't index local data
-  Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)
+  Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)  
+  If you're indexing a large data set you minght want to create a datasource specifically for indexing. Please see [datasources](#local.datasource)
 	
 	
 ### <a name="problems.css"></a>Custom CSS moving Search box to an undesired position
   If for some reason the Septima Search box is positioned in a bad or undesired position, a custom s4.css file must be created
   
-1: Create appbase/spatialmap/css/custom/s4.css
+1: Create a file named appbase/spatialmap/css/custom/s4.css (You may want to copy the standard s4.css which you will find in modules/thirdparty/septima/s4/css/s4.css)
 
-2: Edit the new css file to reflect your changes. Most often it's the top of the search box you want to change
+2: Edit the custom s4.css file to reflect your changes. Most often it's the top of the search box you want to change
 ```css
   .inputcontainer {
       top:5px;

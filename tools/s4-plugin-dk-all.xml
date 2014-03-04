@@ -30,7 +30,7 @@
             indexsearcher:{enabled: true, info: true, datasources: "*"},
             
             //Themes in profile
-            themesearcher:{enabled: false},
+            themesearcher:{enabled: true},
             
             //Profiles
             profilesearcher:{enabled: true},
