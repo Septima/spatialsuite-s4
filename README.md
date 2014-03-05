@@ -2,17 +2,17 @@
 ===
 ## Content
 
-#### 1. [Description](#description)
-#### 2. [License](#license)
-#### 3. [Basic installation and test](#installation)
-#### 4. [Customization](#customization)
-#### 5. [Search Spatial Suite data](#local)
-#### 6. [Build the search index](#build)
-#### 7. [Using an external database](#externaldb)
-#### 8. [Problems](#problems)
-##### *  [Encoding](#problems.encoding)  
-##### *  [Can't index local data](#problems.localdata)
-##### *  [Move search box from an undesired position](#problems.css)
+####[Description](#description)
+####[License](#license)
+####[Basic installation and test](#installation)
+####[Customization](#customization)
+####[Search Spatial Suite data](#local)
+####[Build the search index](#build)
+####[Using an external database](#externaldb)
+####[Problems](#problems)
+ *  [Encoding](#problems.encoding)  
+ *  [Can't index local data](#problems.localdata)
+ *  [Move search box from an undesired position](#problems.css)
 
 
 ## <a name="description"></a> 1. Description
