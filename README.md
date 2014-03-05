@@ -7,7 +7,7 @@
 ####[Search Spatial Suite data](#local)
  *  [Build the search index](#build)
  *  [Separate indexes for separate sites](#build.site)
- *  [Using an external database](#externaldb)
+ *  [Using an external database](#externaldb)  
 ####[Problems](#problems)
  *  [Encoding](#problems.encoding)  
  *  [Can't index local data](#problems.localdata)
@@ -122,7 +122,7 @@ Add the customized tool to your profile:
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all.xml" />
 ```
 
-### Restrict searches to yout municipality
+### Restrict searches to your municipality
 
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
 
@@ -186,7 +186,7 @@ Replace [*profile*] with the name of the profile in which the customized tool is
 
 Add the customized tool to your profile:
 ```xml
-<tool dir="custom" name="s4-plugin-[*your-municipality-code*]-[profile].xml" />
+<tool dir="custom" name="s4-plugin-[your-municipality-code]-[profile].xml" />
 ```
 
 Finished, now try out your profile and the customized search tool
@@ -316,7 +316,8 @@ This URL may be called according to your desired workflow and integrated into:
 In some situations you might want to index differently in different sites. (E.g. internal site vs external site). The simplest way of doing this is to maintain two different configuration folders:  
 * WEB-INF/config/misc/custom/s4-intern  
 * WEB-INF/config/misc/custom/s4-extern  
-Now, in cbinfo-**intern**.xml you will write:
+
+In cbinfo-**intern**.xml you will write:
 ```xml
 <!-- =================================== -->
 <!-- S4 Index parameters                 -->
@@ -347,7 +348,9 @@ Spatial Map versions prior to 2.7 don't include an embedded database. You must c
 <param name="module.s4.index.externdb.user">s4</param>
 <param name="module.s4.index.externdb.pwd">s4</param>
 <param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
-```
+```  
+3: Restart your site  
+
 ## <a name="problems"></a> Problems  
 ### <a name="problems.encoding"></a>Encoding  
   if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
