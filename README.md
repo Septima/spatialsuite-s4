@@ -1,21 +1,20 @@
 #S4 - Septima Search for SpatialSuite
 ===
-## Content
-
 ####[Description](#description)
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#customization)
 ####[Search Spatial Suite data](#local)
-####[Build the search index](#build)
-####[Using an external database](#externaldb)
+ *  [Build the search index](#build)
+ *  [Separate indexes for separate sites](#build.site)
+ *  [Using an external database](#externaldb)
 ####[Problems](#problems)
  *  [Encoding](#problems.encoding)  
  *  [Can't index local data](#problems.localdata)
  *  [Move search box from an undesired position](#problems.css)
 
 
-## <a name="description"></a> 1. Description
+## <a name="description"></a>Description
 Septima Search for Spatial Suite (s4) is a search tool. The user can search [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
 offered by Septima.
 
@@ -25,7 +24,7 @@ S4 product page: http://www.septima.dk/p_s4/
 
 See a demo here: http://sps-demo.septima.dk  
   
-## <a name="license"></a> 2. License
+## <a name="license"></a>License
  Name:        S4 - Septima Search for SpatialSuite  
  Purpose:     Septima Search based module for Spatial Map
 
@@ -44,10 +43,9 @@ See a demo here: http://sps-demo.septima.dk
               www.septima.dk  
               kontakt@septima.dk  
 
-## <a name="installation"></a> 3. Basic installation and test
+## <a name="installation"></a>Basic installation and test
 
-
-### 3.a Download s4 module:
+### Download s4 module:
       
 Released versions:  
       2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
@@ -71,30 +69,29 @@ Released versions:
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
-Development version (at your own risk) can be downloaded from:  
+Development version (at your own risk) may be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/develop.zip  
 
-### 3.b Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
+### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
-### 3.c 	Update modules.xml by adding:
+### Update modules.xml:
 ```xml
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
 
-### 3.d Include tool in profile(s):
+### Include tool in profile(s):
 ```xml
 <tool module="s4" name="s4-plugin-dk-all"/>
 ```  
 The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
 You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)   
   
-### 3.e Comment out other tools conflicting with this tool e.g.:
-
+### Comment out other tools conflicting with this tool e.g.:
 ```xml
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### 3.f Test
+### Test
 
 Now you are ready to test s4 module and tool(s4-plugin-dk-all).
 
@@ -106,32 +103,31 @@ The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes
 
 * Basic installation and test is now finished
 
-## <a name="customization"></a> 4. Customization of s4 tool
+## <a name="customization"></a> Customization of s4 tool
 
 A typical customization is to restrict address, cvr, and plan searchers to search only within a specific municipality code. 
 
 Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and addresses - not industrial waste sites - in a profile related to schools and institutions.   
 
-
-### 4.a Copy the standard tool
+### Copy the standard tool
  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
+    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml  
     
 Add the customized tool to your profile:
 ```xml
 <!-- Comment out the original tool-->
 <!--tool module="s4" name="s4-plugin-dk-all"/-->
-<tool dir="custom" name="s4-plugin-[*your-municipality-code*]-all.xml" />
+<tool dir="custom" name="s4-plugin-[your-municipality-code]-all.xml" />
 ```
 
-### 4.b Search by municipality code
+### Restrict searches to yout municipality
 
-Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
+Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
 
 ```javascript
-{municipality: '*',
+{municipality: '[your-municipality-code]',
 view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
 
 //Smart-adress
@@ -164,7 +160,7 @@ favoritesearcher:{enabled: true},
 workspacesearcher:{enabled: true}};
 ```
 
-### 4.c Customize other options
+### Customize other options
 
  A typical use case is to fine tune the search tool to match context in the profile
 
@@ -182,13 +178,11 @@ To search specific datasources:
 
 	indexsearcher:{enabled: true, info: true, datasources: "ds_skoler ds_boligforeninger"}
 
+### Create profile specific search tools
 
+You can create as many tools as you need. To tailor a tool to a specific profile make a copy of your tool and call it s4-plugin-[*your-municipality-code*]-[*profile*].xml.  
 
-### 4.d Create profile specific search tools
-
-You can create as many tools as you need. To tailor a tool to a specific profile make a copy of your tool and call it s4-plugin-[*your-municipality-code*]-[profile].xml.  
-
-Replace [profile] with the name of the profile where the customized tool is intended to be applied.  
+Replace [*profile*] with the name of the profile in which the customized tool is included.  
 
 Add the customized tool to your profile:
 ```xml
@@ -197,25 +191,23 @@ Add the customized tool to your profile:
 
 Finished, now try out your profile and the customized search tool
 
-## <a name="local"></a> 5. Search Spatial Suite data  
+## <a name="local"></a> Search Spatial Suite data  
 
-Searching local data requires that an index of these data is configured and rebuilt every time data is updated.
+Searching local data requires that an index is configured and rebuilt every time data is updated.
 
 For Spatial Map versions 2.7+ the embedded database will be used to host the index as default. With a very large index it may be beneficial to use the [Using an external database](#externaldb) option.
 
 For previous versions of Spatial Map (without embedded database) please see [Using an external database](#externaldb)
 
-
-### 5.a include the s4 java library:
+### Include the s4 java library:
 
 Searching in local data requires a jar file which is shipped with the s4 module.
 
-Copy jar file to your Spatial Map site:  
-	COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib  
-	REMOVE old versions of the library
+Copy the jar file to your Spatial Map site:  
+* COPY \lib\custom-dk.septima.spatialsuite.index-xx.jar TO \WEB-INF\lib  
+* REMOVE old versions of the library
 
-
-### 5.b Create configuration folders and parameter  
+### Create configuration folders and parameter  
 
 The index builder needs a parameter pointing to a folder with index configuration.  
 
@@ -225,21 +217,20 @@ For each site you need to create a configuration folder eg.:
 
 You may copy the attached examples 
 
-		Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
+	Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
     
 In cbinfo.xml create a param pointing to the configuration folder  
 ```xml
 <!-- =================================== -->
 <!-- S4 Index parameters                 -->
 <!-- =================================== -->  
-		
 <param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 ```
-### 5.c Configure datasources to be searchable
+### Configure datasources to be searchable
 
-Edit [s4.config.dir]/config.xml to include the datasources you want to index:
+Edit [*s4.config.dir*]/config.xml to include the datasources you want to index:
 
-#### config.xml example
+#### <a name="local.datasource"></a>config.xml example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
@@ -252,15 +243,13 @@ Edit [s4.config.dir]/config.xml to include the datasources you want to index:
 </config>
 ```
 
-#### <a name="local.datasource"></a>Datasources    
-
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
 * *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
 * *Index performance*: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
 
 #### Presentations    
 
-* The corresponding presentations MUST exist in [s4.config.dir]/presentations/  
+* The corresponding presentations MUST exist in [*s4.config.dir*]/presentations/  
 * The text tag MUST have both a value and a plural  
 * Each presentation MUST have the following columns  
 ```xml
@@ -279,7 +268,7 @@ You may use any existing datasource, but there are good reasons to create specif
 		</column>
 </presentation>
 ```
-Each presentation MAY have the following columns
+Each presentation *MAY* have the following columns
 ```xml
 <column format="description"> : The description when presented as a search result
 <column format="searchstring"> : Text which is indexed and free text queried. This text is not visible to the end user
@@ -310,31 +299,48 @@ Each presentation MAY have the following columns
 </presentation>
 ```
 
-## <a name="build"></a> 6. Build the search index
+## <a name="build"></a> Build the search index
 When datasources and presentations are configured the search index has to be built
-### 6.a start site or reload configuration:
+### Start site or reload configuration:
     [YOURSITE]/admin?command=reloadconfig
-### 6.b Build the search index:
+### Build the search index:
     [YOURSITE]/jsp/modules/s4/buildIndex.jsp
 This URL may be called according to your desired workflow and integrated into:
 
-    your data load script
-    your start up script, or
-    at regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
+* your data load script
+* your start up script, or
+* at regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
 
-## <a name="externaldb"></a> 7. Using an external database instead of the embedded database  
+## <a name="build.site"></a> Separate indexes for separate sites  
+
+In some situations you might want to index differently in different sites. (E.g. internal site vs external site). The simplest way of doing this is to maintain two different configuration folders:  
+* WEB-INF/config/misc/custom/s4-intern  
+* WEB-INF/config/misc/custom/s4-extern  
+Now, in cbinfo-**intern**.xml you will write:
+```xml
+<!-- =================================== -->
+<!-- S4 Index parameters                 -->
+<!-- =================================== -->  
+<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4-intern</param>
+```  
+and in cbinfo-**extern**.xml you will write:  
+```xml
+<!-- =================================== -->
+<!-- S4 Index parameters                 -->
+<!-- =================================== -->  
+<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4-extern</param>
+```
+
+## <a name="externaldb"></a> Using an external database instead of the embedded database  
   
 Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
 	
-1: create schema in your database (postgres script is included in the /db/create-schema.sql)  
-2: Use external database instead of embedded   
-
-Include the following parameters in cbinfo.xml:  
+1: Create a s4 schema in your database (postgres script is included in /db/create-schema.sql)  
+2: Update cbinfo.xml. Assuming that your database is located at localhost and that username/password is *s4* include the following parameters in cbinfo.xml:  
 ```xml	
 <!-- =================================== -->
 <!-- S4 Index parameters                 -->
 <!-- =================================== -->
- 		 
 <param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
 <param name="module.s4.index.externdb.type">postgis</param>
 <param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
@@ -342,7 +348,7 @@ Include the following parameters in cbinfo.xml:
 <param name="module.s4.index.externdb.pwd">s4</param>
 <param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
 ```
-## <a name="problems"></a>8. Problems  
+## <a name="problems"></a> Problems  
 ### <a name="problems.encoding"></a>Encoding  
   if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
 ```xml
