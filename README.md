@@ -10,9 +10,9 @@
 #### 6. [Build the search index](#build)
 #### 7. [Using an external database](#externaldb)
 #### 8. [Problems](#problems)
-#####  Encoding(#problems.encoding)  
-#####  Can't index local data(#problems.localdata)
-#####  Search box from an undesired position(#problems.css)
+##### *  [Encoding](#problems.encoding)  
+##### *  [Can't index local data](#problems.localdata)
+##### *  [Move search box from an undesired position](#problems.css)
 
 
 ## <a name="description"></a> 1. Description
@@ -50,7 +50,7 @@ See a demo here: http://sps-demo.septima.dk
 ### 3.a Download s4 module:
       
 Released versions:  
-      2.0.6R1: https://github.com/Septima/spatialsuite-s4/archive/2.0.6R1.zip  
+      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
       2.0.5: https://github.com/Septima/spatialsuite-s4/archive/2.0.5.zip  
       2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
       2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
