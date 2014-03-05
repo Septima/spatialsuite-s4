@@ -10,6 +10,10 @@
 #### 6. [Build the search index](#build)
 #### 7. [Using an external database](#externaldb)
 #### 8. [Problems](#problems)
+#####  Encoding(#problems.encoding)  
+#####  Can't index local data(#problems.localdata)
+#####  Search box from an undesired position(#problems.css)
+
 
 ## <a name="description"></a> 1. Description
 Septima Search for Spatial Suite (s4) is a search tool. The user can search [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
@@ -28,7 +32,7 @@ See a demo here: http://sps-demo.septima.dk
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013  
+ Copyright:   (c) Septima P/S 2013-2014  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
@@ -94,89 +98,81 @@ You need to create a custom tool searching your municipality using your license 
 
 Now you are ready to test s4 module and tool(s4-plugin-dk-all).
 
-Open a browser and navigate to Spatial Map and the profile where the tool is included. 
+The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.
 
-A search input field should be visible in top right corner og the profile
+* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile
 
-The s4-plugin-dk-all tool is configured with Geosearcher enabled which enable search for addresses in all DK municipalities.
+* Start typing an address in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.
 
-Start typing adresses in the search input field. When results show up in the search field click result and the map should zoom in top selected search result.
-
-Basic installation and test is now finished
+* Basic installation and test is now finished
 
 ## <a name="customization"></a> 4. Customization of s4 tool
 
-A typical customization is to restrict adress, cvr, and plan searchers to search only in data with a specific municipality code. 
+A typical customization is to restrict address, cvr, and plan searchers to search only within a specific municipality code. 
 
-Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and adresses - not industrial waste sites - in a profile related to schools and institutions.   
+Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and addresses - not industrial waste sites - in a profile related to schools and institutions.   
 
 
-### 4.a Search by municipality code
+### 4.a Copy the standard tool
  
-Copy the tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
+Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
-
-    [cbinfo.config.dir]/tools/custom/s4-plugin-dk-all.xml
-
-Rename to s4-plugin-[municipality-code]-all.xml
-
-Replace [municipality-code] with your own muncipal code 
-
-
-Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xmll
-
-```javascript
-    {municipality: '*',
-    view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+    [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
     
-    //Smart-adress
-    adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
-    
-    //Geodatastyrelsen-geosearch
-    // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-    geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
-    
-    //Septima CVR-index
-    cvrsearcher:{enabled: true, info: true},
-    
-    //Septima lokalplan-index
-    plansearcher:{enabled: true, info: true},
-    
-    //Local SpatialSuite-datasources
-    //datasources: "*" for all, or space separated names of datasources
-    indexsearcher:{enabled: true, info: true, datasources: "*"},
-    
-    //Themes in profile
-    themesearcher:{enabled: false},
-    
-    //Profiles
-    profilesearcher:{enabled: true},
-    
-    //Favorites
-    favoritesearcher:{enabled: true},
-    
-    //Workspaces
-    workspacesearcher:{enabled: true}};
+Add the customized tool to your profile:
+```xml
+<!-- Comment out the original tool-->
+<!--tool module="s4" name="s4-plugin-dk-all"/-->
+<tool dir="custom" name="s4-plugin-[*your-municipality-code*]-all.xml" />
 ```
 
-### 4.b Customize other options
+### 4.b Search by municipality code
+
+Configure __municipality__ code in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
+
+```javascript
+{municipality: '*',
+view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+
+//Smart-adress
+adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+
+//Geodatastyrelsen-geosearch
+// Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+
+//Septima CVR-index
+cvrsearcher:{enabled: true, info: true},
+
+//Septima lokalplan-index
+plansearcher:{enabled: true, info: true},
+
+//Local SpatialSuite-datasources
+//datasources: "*" for all, or space separated names of datasources
+indexsearcher:{enabled: false, info: true, datasources: "*"},
+
+//Themes in profile
+themesearcher:{enabled: true},
+
+//Profiles
+profilesearcher:{enabled: true},
+
+//Favorites
+favoritesearcher:{enabled: true},
+
+//Workspaces
+workspacesearcher:{enabled: true}};
+```
+
+### 4.c Customize other options
 
  A typical use case is to fine tune the search tool to match context in the profile
 
-
-     [cbinfo.config.dir]/tools/custom/s4-plugin-[municipality-code]-all.xml
-
-Rename to s4-plugin-[municipality-code]-[profile].xml
-
-Replace [profile] with the name of the profile where the customized tool is intended to be applied.
-
-
-Configure __municipality__ code and __enable/disable__ and other __options__ in the javascript part of s4-plugin-[municipality-code]-[profile].xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
+__Enable/disable__ searchers and set other __options__ in s4-plugin-[*your-municipality-code*]-all.xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
 
 	geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
 
 Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
-
 
 To search all local datasources:
 
@@ -187,13 +183,16 @@ To search specific datasources:
 	indexsearcher:{enabled: true, info: true, datasources: "ds_skoler ds_boligforeninger"}
 
 
-### 4.c Include the new customized tool
 
-Finally, add the customized tool to your profile:
+### 4.d Create profile specific search tools
+
+You can create as many tools as you need. To tailor a tool to a specific profile make a copy of your tool and call it s4-plugin-[*your-municipality-code*]-[profile].xml.  
+
+Replace [profile] with the name of the profile where the customized tool is intended to be applied.  
+
+Add the customized tool to your profile:
 ```xml
-<!-- Comment out the original tool-->
-<!--tool module="s4" name="s4-plugin-dk-all"/-->
-<tool dir="custom" name="s4-plugin-[municipality-code]-[profile].xml" />
+<tool dir="custom" name="s4-plugin-[*your-municipality-code*]-[profile].xml" />
 ```
 
 Finished, now try out your profile and the customized search tool
@@ -202,7 +201,7 @@ Finished, now try out your profile and the customized search tool
 
 Searching local data requires that an index of these data is configured and rebuilt every time data is updated.
 
-For Spatial Map versions 2.7+ the embedded database will be used to host the index as default. With a very large index it is sometimes beneficial to use the [Using an external database](#externaldb) option.
+For Spatial Map versions 2.7+ the embedded database will be used to host the index as default. With a very large index it may be beneficial to use the [Using an external database](#externaldb) option.
 
 For previous versions of Spatial Map (without embedded database) please see [Using an external database](#externaldb)
 
@@ -256,16 +255,14 @@ Edit [s4.config.dir]/config.xml to include the datasources you want to index:
 #### <a name="local.datasource"></a>Datasources    
 
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
-  Sorting: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
-  Index performance: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
+* *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
+* *Index performance*: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
 
 #### Presentations    
 
-The corresponding presentations MUST exist in [s4.config.dir]/presentations/  
-
-The text tag MUST have both a value and a plural  
-
-Each presentation MUST have the following columns  
+* The corresponding presentations MUST exist in [s4.config.dir]/presentations/  
+* The text tag MUST have both a value and a plural  
+* Each presentation MUST have the following columns  
 ```xml
 <column format="heading"> : The title when presented as a search result
 ```
@@ -356,7 +353,7 @@ Include the following parameters in cbinfo.xml:
   If you're indexing a large data set you minght want to create a datasource specifically for indexing. Please see [datasources](#local.datasource)
 	
 	
-### <a name="problems.css"></a>Custom CSS moving Search box to an undesired position
+### <a name="problems.css"></a>Custom CSS moving Search box from an undesired position
   If for some reason the Septima Search box is positioned in a bad or undesired position, a custom s4.css file must be created
   
 1: Create a file named appbase/spatialmap/css/custom/s4.css (You may want to copy the standard s4.css which you will find in modules/thirdparty/septima/s4/css/s4.css)
@@ -376,4 +373,5 @@ Include the following parameters in cbinfo.xml:
 		<file type="css" name="/css/custom/s4.css" />
 	</requires>
 ```
+
 	
