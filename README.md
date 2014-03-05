@@ -8,6 +8,7 @@
  *  [Build the search index](#build)
  *  [Separate indexes for separate sites](#build.site)
  *  [Using an external database](#externaldb)  
+ 
 ####[Problems](#problems)
  *  [Encoding](#problems.encoding)  
  *  [Can't index local data](#problems.localdata)
@@ -358,9 +359,8 @@ Spatial Map versions prior to 2.7 don't include an embedded database. You must c
 	<param name="module.s4.index.utf8behaviour">noconvert</param>
 ```	
 ### <a name="problems.localdata"></a>Can't index local data
-  Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)  
-  If you're indexing a large data set you minght want to create a datasource specifically for indexing. Please see [datasources](#local.datasource)
-	
+* Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)  
+* If you're indexing a large data set you might want to create a datasource specifically for indexing. Please see [datasources](#local.datasource)
 	
 ### <a name="problems.css"></a>Custom CSS moving Search box from an undesired position
   If for some reason the Septima Search box is positioned in a bad or undesired position, a custom s4.css file must be created
