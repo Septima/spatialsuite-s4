@@ -24,6 +24,10 @@ S4 will also search local Spatial Suite data as well as themes, workspaces and f
 S4 product page: http://www.septima.dk/p_s4/  
 
 See a demo here: http://sps-demo.septima.dk  
+
+Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
+
+Issues: https://github.com/Septima/spatialsuite-s4/issues  
   
 ## <a name="license"></a>License
  Name:        S4 - Septima Search for SpatialSuite  
@@ -314,24 +318,7 @@ This URL may be called according to your desired workflow and integrated into:
 
 ## <a name="build.site"></a> Separate indexes for separate sites  
 
-In some situations you might want to index differently in different sites. (E.g. internal site vs external site). The simplest way of doing this is to maintain two different configuration folders:  
-* WEB-INF/config/misc/custom/s4-intern  
-* WEB-INF/config/misc/custom/s4-extern  
-
-In cbinfo-**intern**.xml you will write:
-```xml
-<!-- =================================== -->
-<!-- S4 Index parameters                 -->
-<!-- =================================== -->  
-<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4-intern</param>
-```  
-and in cbinfo-**extern**.xml you will write:  
-```xml
-<!-- =================================== -->
-<!-- S4 Index parameters                 -->
-<!-- =================================== -->  
-<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4-extern</param>
-```
+In some situations you might want to index differently in internal sitea vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites
 
 ## <a name="externaldb"></a> Using an external database instead of the embedded database  
   
