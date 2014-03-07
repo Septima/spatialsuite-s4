@@ -312,11 +312,11 @@ This URL may be called according to your desired workflow and integrated into:
 * your start up script, or
 * at regular intervals, eg. wget "[YOURSITE]/jsp/modules/s4/buildIndex.jsp" in task/cron scheduler
 
-## <a name="build.site"></a> Separate indexes for separate sites  
+### <a name="build.site"></a> Separate indexes for separate sites  
 
-In some situations you might want to index differently in internal sitea vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites
+In some situations you might want to index differently in internal sites vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites
 
-## <a name="externaldb"></a> Using an external database instead of the embedded database  
+### <a name="externaldb"></a> Using an external database instead of the embedded database  
   
 Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.   Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database  
 
