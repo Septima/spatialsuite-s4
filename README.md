@@ -9,11 +9,7 @@
  *  [Separate indexes for separate sites](#build.site)
  *  [Using an external database](#externaldb)  
  
-####[Problems](#problems)
- *  [Encoding](#problems.encoding)  
- *  [Can't index local data](#problems.localdata)
- *  [Move search box from an undesired position](#problems.css)
-
+####[FAQ and Issues](#problems)
 
 ## <a name="description"></a>Description
 Septima Search for Spatial Suite (s4) is a search tool. The user can search [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
@@ -322,52 +318,12 @@ In some situations you might want to index differently in internal sitea vs exte
 
 ## <a name="externaldb"></a> Using an external database instead of the embedded database  
   
-Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.
-	
-1: Create a s4 schema in your database (postgres script is included in /db/create-schema.sql)  
-2: Update cbinfo.xml. Assuming that your database is located at localhost and that username/password is *s4* include the following parameters in cbinfo.xml:  
-```xml	
-<!-- =================================== -->
-<!-- S4 Index parameters                 -->
-<!-- =================================== -->
-<param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
-<param name="module.s4.index.externdb.type">postgis</param>
-<param name="module.s4.index.externdb.connect">localhost:5432/s4</param>
-<param name="module.s4.index.externdb.user">s4</param>
-<param name="module.s4.index.externdb.pwd">s4</param>
-<param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
-```  
-3: Restart your site  
+Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.   Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database  
 
-## <a name="problems"></a> Problems  
-### <a name="problems.encoding"></a>Encoding  
-  if you experience encoding problems (seen in Spatial Map prior to 2.9) please try to insert the following parameter into cbinfo.xml
-```xml
-	<param name="module.s4.index.utf8behaviour">noconvert</param>
-```	
-### <a name="problems.localdata"></a>Can't index local data
-* Please verify that everything is set up according to [Search Spatial Suite data](#local) and that you have [built your index](#build)  
-* If you're indexing a large data set you might want to create a datasource specifically for indexing. Please see [datasources](#local.datasource)
-	
-### <a name="problems.css"></a>Custom CSS moving Search box from an undesired position
-  If for some reason the Septima Search box is positioned in a bad or undesired position, a custom s4.css file must be created
-  
-1: Create a file named appbase/spatialmap/css/custom/s4.css (You may want to copy the standard s4.css which you will find in modules/thirdparty/septima/s4/css/s4.css)
+## <a name="problems"></a> FAQ and Issues  
+<a name="problems.encoding"><a name="problems.localdata"></a><a name="problems.css"></a>
+If you have any questions please consult the s4 wiki at https://github.com/Septima/spatialsuite-s4/wiki  
 
-2: Edit the custom s4.css file to reflect your changes. Most often it's the top of the search box you want to change
-```css
-  .inputcontainer {
-      top:5px;
-  }
-```
-
-3: Update your custom tool to include your custom s4.css
-```xml
-<tool type="plugin">
-	<requires>
-		<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-		<file type="css" name="/css/custom/s4.css" />
-	</requires>
-```
+To report an issue, please go to https://github.com/Septima/spatialsuite-s4/issues  
 
 	
