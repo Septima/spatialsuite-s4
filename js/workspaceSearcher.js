@@ -23,7 +23,8 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     },
 
     fetchData: function (query, caller) {
-    	if (this.lastUpdated == null || (Date.now() - this.lastUpdated) > 60 * 1000){
+        var now = new Date().getTime();
+    	if (this.lastUpdated == null || (now - this.lastUpdated) > 60 * 1000){
         	this.readWorkspaces(Septima.bind(function(query, caller){
         		Septima.Search.DataSearcher.prototype.fetchData.apply(this, [query, caller]);
         	}, this, query, caller));
@@ -46,7 +47,8 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
             	if (data.row[0]._class == 'rowlist'){
                 	var workspaceRowList = data.row[0];
             		this.workspaceRowList = workspaceRowList;
-            		this.lastUpdated = Date.now();
+                    var now = new Date().getTime();
+            		this.lastUpdated = now;
             	}else{
             		this.workspaceRowList = {row: []};
             	}
