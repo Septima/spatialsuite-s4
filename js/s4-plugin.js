@@ -1,6 +1,5 @@
 var _s4View = null;
 var _s4Params = null;
-var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
 
 function s4_getDefaultParams(){
 	return {
@@ -19,7 +18,7 @@ function s4_getDefaultParams(){
 
 function s4_init (params){
     if (_s4View == null) {
-        
+    			
 	        	if (params == undefined){
 	        		_s4Params = s4_getDefaultParams();
 	        	}else{
@@ -76,7 +75,12 @@ function s4_init (params){
                 button.element.append('<div type="text" id="s4box" name="s4box" class="inputcontainer s4-static"/>');
             }
 
-        	var searchers = [];
+        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
+        	
+        	var controllerOptions = {};
+        	var controller = new Septima.Search.Controller([], _s4View, controllerOptions);
+        	
+        	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
             
             //Set up adress searcher
@@ -86,7 +90,7 @@ function s4_init (params){
             		adressSearchOptions.area = "muncode0" + _s4Params.municipality;
             	}
             	var adressSearcher = new Septima.Search.AddressSearcher(adressSearchOptions);
-            	searchers.push({"title": "Adresser", "searcher" : adressSearcher});
+            	controller.addSearcher({"title": "Adresser", "searcher" : adressSearcher});
                 if (_s4Params.adresssearcher.info){
                 	adressSearcher.addCustomButtonDef(infoButtonDef);
                 }
@@ -104,7 +108,7 @@ function s4_init (params){
                 		geoSearchOptions.area = "muncode0" + _s4Params.municipality;
                 	}
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-                	searchers.push({"title": "", "searcher" : geoSearcher});
+                	controller.addSearcher({"title": "", "searcher" : geoSearcher});
                     if (_s4Params.geosearcher.info){
                     	geoSearcher.addCustomButtonDef(infoButtonDef);
                     }
@@ -117,7 +121,7 @@ function s4_init (params){
             	if (_s4Params.municipality != "*"){
                 	se.filter = { 'kom_id_officiel' : _s4Params.municipality };
             	}
-            	searchers.push({"title": "Virksomheder", "searcher" : se});
+            	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
                 if (_s4Params.cvrsearcher.info){
                 	se.addCustomButtonDef(infoButtonDef);
                 }
@@ -129,7 +133,7 @@ function s4_init (params){
             	if (_s4Params.municipality != "*"){
             		planSearcher.filter = { 'komnr' : _s4Params.municipality };
             	}
-            	searchers.push({"title": "Lokalplaner", "searcher" : planSearcher});
+            	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
                 if (_s4Params.plansearcher.info){
                 	planSearcher.addCustomButtonDef(infoButtonDef);
                 }
@@ -138,7 +142,7 @@ function s4_init (params){
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	searchers.push({title: "", searcher: s4IndexSearcher});
+            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
                 if (_s4Params.indexsearcher.info){
                 	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
                 }
@@ -146,11 +150,11 @@ function s4_init (params){
         	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
-	          	searchers.push({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
+	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
             }
 
             if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
-        		searchers.push({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: new Septima.Search.workspaceSearcher({
+            	controller.addSearcher({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: new Septima.Search.workspaceSearcher({
         			host: "",
         			onSelect: workspaceHit,
             		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
@@ -160,7 +164,7 @@ function s4_init (params){
             }
 
             if (typeof(ProfileSelector) != 'undefined' && _s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
-        		searchers.push({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
+            	controller.addSearcher({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
         			host: "",
         			onSelect: profileHit,
             		singular: cbInfo.getString('s4.profilesearcher.profile'),
@@ -170,7 +174,7 @@ function s4_init (params){
             }
             
             if (typeof(Favorites) != 'undefined' && _s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
-        		searchers.push({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
+        		controller.addSearcher({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
         			host: "",
         			onSelect: favoriteHit,
             		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
@@ -179,10 +183,18 @@ function s4_init (params){
         		})});
             }
             
-        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
-        	
-        	var controllerOptions = {};
-        	var controller = new Septima.Search.Controller(searchers, _s4View, controllerOptions);
+			var _s4Searchers = window["_s4Searchers"] || [];
+			
+			for (var i = 0;i<_s4Searchers.length;i++){
+				controller.addSearcher(_s4Searchers[i]);
+			}
+			window["_s4Searchers"] = {
+					controller: controller,
+					push: function (searcherReg) {
+						this.controller.addSearcher(searcherReg);
+					}
+			};
+			
         	controller.go ();
         	
         	if (_s4View.top() !=null){
@@ -220,7 +232,6 @@ function profileHit(hit){
 }
 
 function workspaceHit(hit){
-	//alert(hit.title);
     _s4View.blur();
 	var workspaceId = hit.data.wrkspcid;
 	if (typeof workspace_container !== 'undefined' ){
@@ -236,7 +247,6 @@ function workspaceHit(hit){
 }
 
 function s4ShowWorkSpace(workspaceId){
-	//workspace_container.closeWorkspace ();
     var options = {id: workspaceId};
     if (jQuery.isFunction( workspace_init )){
     	options.hideDialog = false;
@@ -247,11 +257,8 @@ function s4ShowWorkSpace(workspaceId){
 }
 
 function s4DoInfo(result){
-	var wkt = result.geometry;
 	s4Hit(result);
-    //spatialquery_markAndQuery (wkt, 2, _s4Params.view.infoprofilequery, false, _s4Params.view.dynamiclayer, result.title, false);
     searchlast2.showDialog(result.title);
-    //searchlast.init();
 }
 
 function s4_getKMSTicket(){

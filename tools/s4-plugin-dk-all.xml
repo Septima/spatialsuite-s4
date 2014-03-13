@@ -3,6 +3,11 @@
 <tool type="plugin">
     <requires>
     	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+		<file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
+		<file type="script" name="/modules/s4/js/profileSearcher.js"/>
+		<file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
+
     	<!-- Include custom css if you need to customize styles -->
 		<!-- <file type="css" name="/css/custom/s4.css" /> -->
    </requires>

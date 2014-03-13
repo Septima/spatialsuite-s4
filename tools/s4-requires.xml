@@ -11,12 +11,7 @@
 		<file type="css"    name="/modules/s4/css/s4.css" />
 		<file type="script" name="/modules/s4/js/s4-control.js"/>
  		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
-
-		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
 		<file type="script" name="/modules/s4/js/searchableRowList.js"/>
-		<file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
-		<file type="script" name="/modules/s4/js/profileSearcher.js"/>
-		<file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
 
     </requires>
     <src/>
