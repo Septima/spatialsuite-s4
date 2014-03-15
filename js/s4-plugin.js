@@ -183,9 +183,14 @@ function s4_init (params){
         		})});
             }
             
+            //Collect all searchers that have been pushed up until now
 			var _s4Searchers = window["_s4Searchers"] || [];
 			
 			for (var i = 0;i<_s4Searchers.length;i++){
+				var searcherReg = _s4Searchers[i];
+                if (searcherReg.info && searcherReg.info == true){
+                	searcherReg.searcher.addCustomButtonDef(infoButtonDef);
+                }
 				controller.addSearcher(_s4Searchers[i]);
 			}
 			window["_s4Searchers"] = {
@@ -194,6 +199,9 @@ function s4_init (params){
 						this.controller.addSearcher(searcherReg);
 					}
 			};
+			
+			//Array of "OnSelect" listeners
+			var _s4OnSelect = window["_s4OnSelect"] || [];
 			
         	controller.go ();
         	
@@ -210,22 +218,31 @@ function s4_init (params){
 }
 
 function s4Hit(result){
-	var geojson = new OpenLayers.Format.GeoJSON();
-    var olGeom = geojson.read(result.geometry, 'Geometry');
-	var wkt = olGeom.toString();
-    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
     _s4View.blur();
+	for (var i = 0; i < _s4OnSelect.length;i++){
+		if (!_s4OnSelect[i](result)){
+			return;
+		}
+	}
+	if (result.geometry){
+		var geojson = new OpenLayers.Format.GeoJSON();
+	    var olGeom = geojson.read(result.geometry, 'Geometry');
+		var wkt = olGeom.toString();
+	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
+	}
 }
 
 
 function favoriteHit(hit){
+    _s4View.blur();
 	if (Favorites){
 		Favorites.load(hit.data);
 	}
 }
 
 function profileHit(hit){
+    _s4View.blur();
 	if (ProfileSelector){
 		ProfileSelector.setProfile(hit.data);
 	}

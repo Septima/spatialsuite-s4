@@ -12,6 +12,7 @@
 		<file type="script" name="/modules/s4/js/s4-control.js"/>
  		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
 		<file type="script" name="/modules/s4/js/searchableRowList.js"/>
+		<file type="script" name="/modules/s4/js/datasourceSearcher.js"/>
 
     </requires>
     <src/>
