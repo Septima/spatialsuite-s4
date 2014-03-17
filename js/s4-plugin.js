@@ -5,8 +5,8 @@ function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
 		view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-        adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
-        geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']},
+        adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
+        geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse'], streetNameHit: false},
         cvrsearcher:{enabled: true, info: true},
         plansearcher:{enabled: true, info: true},
         indexsearcher:{enabled: true, info: true, datasources: "*"},
@@ -85,7 +85,7 @@ function s4_init (params){
             
             //Set up adress searcher
             if (_s4Params.adresssearcher && _s4Params.adresssearcher.enabled){
-            	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4Hit, matchesPhrase: matchPhrase};
+            	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4AdressHit, matchesPhrase: matchPhrase};
             	if (_s4Params.municipality != "*"){
             		adressSearchOptions.area = "muncode0" + _s4Params.municipality;
             	}
@@ -102,7 +102,7 @@ function s4_init (params){
                 	var geoSearchOptions = {
                 			targets: _s4Params.geosearcher.targets,
                 			authParams: {ticket: kmsTicket},
-                		    onSelect: s4Hit, matchesPhrase: matchPhrase
+                		    onSelect: s4GeoHit, matchesPhrase: matchPhrase
                 	    };
                 	if (_s4Params.municipality != "*"){
                 		geoSearchOptions.area = "muncode0" + _s4Params.municipality;
@@ -215,6 +215,18 @@ function s4_init (params){
         		}
         	});
     }
+}
+
+function s4AdressHit(result){
+	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.adresssearcher.streetNameHit)){
+		s4Hit(result);
+	}
+}
+
+function s4GeoHit(result){
+	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.geosearcher.streetNameHit)){
+		s4Hit(result);
+	}
 }
 
 function s4Hit(result){
