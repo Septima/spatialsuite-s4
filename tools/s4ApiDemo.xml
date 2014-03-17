@@ -28,14 +28,14 @@
            		}
        			return true;
            	});
-           	_s4OnSelect.push(function(result){
-           		if (result.data && result.data.type && result.data.type == 'streetNameType'){
-           			alert("streetName " + result.title + " valgt");
-	       			return false;
-           		}else{
-	       			return true;
-           		}
-           	});
+            	_s4OnSelect.push(function(result){
+            		if (result.data && result.data.type && result.data.type == 'streetNameType'){
+            			alert("streetName " + result.title + " valgt");
+ 	       			return false;
+            		}else{
+ 	       			return true;
+            		}
+            	});
 		[endif]
     ]]>
     </jssrc>

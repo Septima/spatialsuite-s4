@@ -201,7 +201,7 @@ function s4_init (params){
 			};
 			
 			//Array of "OnSelect" listeners
-			var _s4OnSelect = window["_s4OnSelect"] || [];
+			window["_s4OnSelect"] = window["_s4OnSelect"] || [];
 			
         	controller.go ();
         	
