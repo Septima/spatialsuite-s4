@@ -115,18 +115,32 @@ function s4_init (params){
             	}
             }
             
-            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
-            	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
-            	if (_s4Params.municipality != "*"){
-                	se.filter = { 'kom_id_officiel' : _s4Params.municipality };
-            	}
-            	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
-                if (_s4Params.cvrsearcher.info){
-                	se.addCustomButtonDef(infoButtonDef);
+            //Collect searchers that have been pushed until now
+			var _s4Searchers = window["_s4Searchers"] || [];
+			
+			for (var i = 0;i<_s4Searchers.length;i++){
+				var searcherReg = _s4Searchers[i];
+                if (searcherReg.info && searcherReg.info == true){
+                	searcherReg.searcher.addCustomButtonDef(infoButtonDef);
+                }
+				controller.addSearcher(_s4Searchers[i]);
+			}
+			window["_s4Searchers"] = {
+					controller: controller,
+					push: function (searcherReg) {
+						this.controller.addSearcher(searcherReg);
+					}
+			};
+            
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
+            	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
+            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
+                if (_s4Params.indexsearcher.info){
+                	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
                 }
             }
-
+        	
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
             	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
@@ -139,15 +153,18 @@ function s4_init (params){
                 }
             }
         	
-            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
-            	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
-                if (_s4Params.indexsearcher.info){
-                	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
+            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
+            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
+            	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
+            	if (_s4Params.municipality != "*"){
+                	se.filter = { 'kom_id_officiel' : _s4Params.municipality };
+            	}
+            	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
+                if (_s4Params.cvrsearcher.info){
+                	se.addCustomButtonDef(infoButtonDef);
                 }
             }
-        	
+
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({});
 	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
@@ -183,24 +200,7 @@ function s4_init (params){
         		})});
             }
             
-            //Collect all searchers that have been pushed up until now
-			var _s4Searchers = window["_s4Searchers"] || [];
-			
-			for (var i = 0;i<_s4Searchers.length;i++){
-				var searcherReg = _s4Searchers[i];
-                if (searcherReg.info && searcherReg.info == true){
-                	searcherReg.searcher.addCustomButtonDef(infoButtonDef);
-                }
-				controller.addSearcher(_s4Searchers[i]);
-			}
-			window["_s4Searchers"] = {
-					controller: controller,
-					push: function (searcherReg) {
-						this.controller.addSearcher(searcherReg);
-					}
-			};
-			
-			//Array of "OnSelect" listeners
+			//Ceate array of "OnSelect" listeners if not allready created
 			window["_s4OnSelect"] = window["_s4OnSelect"] || [];
 			
         	controller.go ();
