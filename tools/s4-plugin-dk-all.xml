@@ -15,7 +15,7 @@
           if (s4Params == undefined){
             var s4Params =
             {municipality: '*',
-            view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
             
             //Smart-adress
             adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},

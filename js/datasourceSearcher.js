@@ -11,7 +11,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		//Options
 	    this.datasource = options.datasource; //"ds_park_monumenter";
 	    this.hyperLinkLabel = options.hyperLinkLabel || "Se mere";
-	    this.iconUrl = options.iconUrl || null;
+	    this.iconURI = options.iconURI || null;
     },
     
     
@@ -76,7 +76,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
                     	description = description + " " + "<a href='" + thisHit['url'] + "' target='blank'>" + this.hyperLinkLabel + "</a>";
                     }
                     var result1 = queryResult.addResult(thisHit['heading'], description, resultGeometry, thisHit);
-                    result1.image = this.iconUrl;
+                    result1.image = this.iconURI;
 	            }
 	        } else {
 	        	var result2 = queryResult.addNewQuery(this.title, this.title + ", som " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>", query.queryString, null, null);
