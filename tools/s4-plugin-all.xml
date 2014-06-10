@@ -15,11 +15,13 @@
           if (s4Params == undefined){
             var s4Params =
             {
-            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            //Result presentation
+            //printconfig: standard, full_freetext, rotatet, rotatet_contact or html
+            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
             
-            //Local SpatialSuite-datasources
+            //Local SpatialSuite datasources
             //datasources: "*" for all, or space separated names of datasources
-            indexsearcher:{enabled: false, info: true, datasources: "*"},
+            indexsearcher:{enabled: false, info: true, print: true, datasources: "*"},
             
             //Themes in profile
             themesearcher:{enabled: true},

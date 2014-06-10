@@ -15,24 +15,27 @@
           if (s4Params == undefined){
             var s4Params =
             {municipality: '*',
-            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            
+            //Result presentation
+            //printconfig: standard, full_freetext, rotatet, rotatet_contact or html
+            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
             
             //Smart-adress
-            adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
+            adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
             
             //Geodatastyrelsen-geosearch
             // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-            geosearcher:{enabled: true, info: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
+            geosearcher:{enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
             
             //Septima CVR-index
-            cvrsearcher:{enabled: true, info: true},
+            cvrsearcher:{enabled: true, info: true, print: true},
             
             //Septima lokalplan-index
-            plansearcher:{enabled: true, info: true},
+            plansearcher:{enabled: true, info: true, print: true},
             
             //Local SpatialSuite-datasources
             //datasources: "*" for all, or space separated names of datasources
-            indexsearcher:{enabled: false, info: true, datasources: "*"},
+            indexsearcher:{enabled: false, info: true, print: true, datasources: "*"},
             
             //Themes in profile
             themesearcher:{enabled: true},

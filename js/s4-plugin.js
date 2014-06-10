@@ -4,12 +4,12 @@ var _s4Params = null;
 function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
-		view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
-        adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
-        geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse'], streetNameHit: false},
-        cvrsearcher:{enabled: true, info: true},
-        plansearcher:{enabled: true, info: true},
-        indexsearcher:{enabled: true, info: true, datasources: "*"},
+		view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet_contact'},
+        adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
+        geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse'], streetNameHit: false},
+        cvrsearcher:{enabled: true, info: true, print: true},
+        plansearcher:{enabled: true, info: true, print: true},
+        indexsearcher:{enabled: true, info: true, print: true, datasources: "*"},
         themesearcher:{enabled: true},
         profilesearcher:{enabled: true},
         favoritesearcher:{enabled: true},
@@ -27,8 +27,11 @@ function s4_init (params){
         	
         	//Get localized strings
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+        	var printButtonCaption = "Print";
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+        	
+        	
         	var sessionId = cbKort.sessionId;
 
             //Set up search input box
@@ -87,6 +90,12 @@ function s4_init (params){
         	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
             
+            if (_s4Params.view.printconfig){
+            	//http://dopiaza.org/tools/datauri/index.php
+            	var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
+                var printButtonDef = {"buttonText":printButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};
+            }
+            
             //Set up adress searcher
             if (_s4Params.adresssearcher && _s4Params.adresssearcher.enabled){
             	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4AdressHit, matchesPhrase: matchPhrase};
@@ -97,6 +106,9 @@ function s4_init (params){
             	controller.addSearcher({"title": "Adresser", "searcher" : adressSearcher});
                 if (_s4Params.adresssearcher.info){
                 	adressSearcher.addCustomButtonDef(infoButtonDef);
+                }
+                if (_s4Params.view.printconfig && _s4Params.adresssearcher.print){
+                	adressSearcher.addCustomButtonDef(printButtonDef);
                 }
             }
             
@@ -115,6 +127,9 @@ function s4_init (params){
                 	controller.addSearcher({"title": "", "searcher" : geoSearcher});
                     if (_s4Params.geosearcher.info){
                     	geoSearcher.addCustomButtonDef(infoButtonDef);
+                    }
+                    if ((_s4Params.view.printconfig && _s4Params.geosearcher.print){
+                    	geoSearcher.addCustomButtonDef(printButtonDef);
                     }
             	}
             }
@@ -143,6 +158,9 @@ function s4_init (params){
                 if (_s4Params.indexsearcher.info){
                 	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
                 }
+                if ((_s4Params.view.printconfig && _s4Params.indexsearcher.print){
+                	s4IndexSearcher.addCustomButtonDef(printButtonDef);
+                }
             }
         	
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
@@ -155,6 +173,9 @@ function s4_init (params){
                 if (_s4Params.plansearcher.info){
                 	planSearcher.addCustomButtonDef(infoButtonDef);
                 }
+                if ((_s4Params.view.printconfig && _s4Params.plansearcher.print){
+                	planSearcher.addCustomButtonDef(printButtonDef);
+                }
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
@@ -166,6 +187,9 @@ function s4_init (params){
             	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
                 if (_s4Params.cvrsearcher.info){
                 	se.addCustomButtonDef(infoButtonDef);
+                }
+                if ((_s4Params.view.printconfig && _s4Params.cvrsearcher.print){
+                	se.addCustomButtonDef(printButtonDef);
                 }
             }
 
@@ -292,6 +316,20 @@ function s4ShowWorkSpace(workspaceId){
 function s4DoInfo(result){
 	s4Hit(result);
     searchlast2.showDialog(result.title);
+}
+
+function s4DoPrint(result){
+	s4Hit(result);
+	if(typeof printObject !== 'undefined'){
+		printObject.closeHandler();
+	}
+	print_getConfig(_s4Params.view.printconfig);
+	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
+	if (freetext_print_input.length == 1){
+		freetext_print_input.val(result.title);
+	}else{
+		setTimeout(function(){jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input').val(result.title);}, 500);
+	}
 }
 
 function s4_getKMSTicket(){
