@@ -17,10 +17,14 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
     
     fetchData: function (query, caller) {
     	var limit = query.limit + 1;
+    	var queryString = jQuery.trim(query.queryString);
+    	if (queryString == ''){
+    		queryString = '%';
+    	}
     	var xhr = jQuery.ajax({
     		url: '/cbkort?page=s4SearchDatasource&outputformat=json',
             jsonp: 'json.callback',
-            data:{sessionId: cbKort.sessionId, query: jQuery.trim(query.queryString), limit: limit, datasource: this.datasource},
+            data:{sessionId: cbKort.sessionId, query: queryString, limit: limit, datasource: this.datasource},
 	        dataType: 'jsonp',
             crossDomain : true,
             async:true,
@@ -76,11 +80,22 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
                     	description = description + " " + "<a href='" + thisHit['url'] + "' target='blank'>" + this.hyperLinkLabel + "</a>";
                     }
                     var result1 = queryResult.addResult(thisHit['heading'], description, resultGeometry, thisHit);
-                    result1.image = this.iconURI;
+                    if (query.type == 'list') {
+                        result1.image = this.iconURI;
+                    }
 	            }
 	        } else {
-	        	var result2 = queryResult.addNewQuery(this.title, this.title + ", som " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>", query.queryString, null, null);
-	        	 result2.image = this.folderIconURI;
+				var description = null;
+				if (query.queryString.length > 0){
+					description = this.title + ", som " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
+				}
+	        	
+	        	var result2 = queryResult.addNewQuery(this.title, description, query.queryString, null, null);
+				if (query.queryString.length > 0 || this.iconURI == null){
+		            result2.image = this.folderIconURI;
+				}else{
+		            result2.image = this.iconURI;
+				}
 	        }
 		}
 	    return queryResult;

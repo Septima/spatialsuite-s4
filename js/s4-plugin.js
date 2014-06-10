@@ -128,7 +128,7 @@ function s4_init (params){
                     if (_s4Params.geosearcher.info){
                     	geoSearcher.addCustomButtonDef(infoButtonDef);
                     }
-                    if ((_s4Params.view.printconfig && _s4Params.geosearcher.print){
+                    if (_s4Params.view.printconfig && _s4Params.geosearcher.print){
                     	geoSearcher.addCustomButtonDef(printButtonDef);
                     }
             	}
@@ -142,7 +142,10 @@ function s4_init (params){
                 if (searcherReg.info && searcherReg.info == true){
                 	searcherReg.searcher.addCustomButtonDef(infoButtonDef);
                 }
-				controller.addSearcher(_s4Searchers[i]);
+                if (_s4Params.view.printconfig && searcherReg.print && searcherReg.print == true){
+                	searcherReg.searcher.addCustomButtonDef(printButtonDef);
+                }
+				controller.addSearcher(searcherReg);
 			}
 			window["_s4Searchers"] = {
 					controller: controller,
@@ -158,7 +161,7 @@ function s4_init (params){
                 if (_s4Params.indexsearcher.info){
                 	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
                 }
-                if ((_s4Params.view.printconfig && _s4Params.indexsearcher.print){
+                if (_s4Params.view.printconfig && _s4Params.indexsearcher.print){
                 	s4IndexSearcher.addCustomButtonDef(printButtonDef);
                 }
             }
@@ -173,7 +176,7 @@ function s4_init (params){
                 if (_s4Params.plansearcher.info){
                 	planSearcher.addCustomButtonDef(infoButtonDef);
                 }
-                if ((_s4Params.view.printconfig && _s4Params.plansearcher.print){
+                if (_s4Params.view.printconfig && _s4Params.plansearcher.print){
                 	planSearcher.addCustomButtonDef(printButtonDef);
                 }
             }
@@ -188,7 +191,7 @@ function s4_init (params){
                 if (_s4Params.cvrsearcher.info){
                 	se.addCustomButtonDef(infoButtonDef);
                 }
-                if ((_s4Params.view.printconfig && _s4Params.cvrsearcher.print){
+                if (_s4Params.view.printconfig && _s4Params.cvrsearcher.print){
                 	se.addCustomButtonDef(printButtonDef);
                 }
             }
