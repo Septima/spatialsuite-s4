@@ -83,55 +83,47 @@ Development version (at your own risk) may be downloaded from:
 ```
 
 ### Include tool in profile(s):
-In Denmark:  
-```xml
-<tool module="s4" name="s4-plugin-dk-all"/>
-```
-The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
-You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)  
-  
-elsewhere:
-```xml
-<tool module="s4" name="s4-plugin-all"/>
-```
-  
-### Comment out other tools conflicting with this tool e.g.:
+
+#### Comment out other tools conflicting with this tool e.g.:
 ```xml
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```
 
-### Test
-
-Now you are ready to test s4 module and tool(s4-plugin-dk-all).
-
-The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.
-
-* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile
-
-* Start typing an address in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.
-
-* Basic installation and test is now finished
-
-## <a name="customization"></a> Customization of s4 tool
-
-A typical customization is to restrict address, cvr, and plan searchers to search only within a specific municipality code. 
-
-Another typical use case is to have different s4 tools for different Spatial Map profiles eg. search for schools and addresses - not industrial waste sites - in a profile related to schools and institutions.   
-
-### Copy the standard tool
- 
+#### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml  
     
 Add the customized tool to your profile:
 ```xml
-<!-- Comment out the original tool-->
-<!--tool module="s4" name="s4-plugin-dk-all"/-->
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all.xml" />
 ```
+The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
+You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)  
+  
+#### elsewhere:  
+Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
 
-### Restrict searches to your municipality
+    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml  
+    
+Add the customized tool to your profile:
+```xml
+<tool dir="custom" name="s4-plugin-all"/>
+```
+  
+
+### Test
+
+Now you are ready to test s4 module and tool(s4-plugin-dk-all).
+
+The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.  
+* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile  
+* Start typing an address in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.  
+* Basic installation and test is now finished  
+
+## <a name="customization"></a> Customization of s4 tool
+
+### Restrict searches for address, cvr, and plan to your municipality
 
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
 
@@ -171,8 +163,6 @@ workspacesearcher:{enabled: true}};
 
 ### Customize other options
 
- A typical use case is to fine tune the search tool to match context in the profile
-
 __Enable/disable__ searchers and set other __options__ in s4-plugin-[*your-municipality-code*]-all.xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
 
 	geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
@@ -201,12 +191,6 @@ Add the customized tool to your profile:
 Finished, now try out your profile and the customized search tool
 
 ## <a name="local"></a> Search Spatial Suite data  
-
-Searching local data requires that an index is configured and rebuilt every time data is updated.
-
-For Spatial Map versions 2.7+ the embedded database will be used to host the index as default. With a very large index it may be beneficial to use the [Using an external database](#externaldb) option.
-
-For previous versions of Spatial Map (without embedded database) please see [Using an external database](#externaldb)
 
 ### Include the s4 java library:
 
