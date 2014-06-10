@@ -83,11 +83,17 @@ Development version (at your own risk) may be downloaded from:
 ```
 
 ### Include tool in profile(s):
+In Denmark:  
 ```xml
 <tool module="s4" name="s4-plugin-dk-all"/>
-```  
+```
 The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
-You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)   
+You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)  
+  
+elsewhere:
+```xml
+<tool module="s4" name="s4-plugin-all"/>
+```
   
 ### Comment out other tools conflicting with this tool e.g.:
 ```xml

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not customize this tool. Make copy of module and create your own tool -->
+<tool type="plugin">
+    <requires>
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		<file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+		<file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
+		<file type="script" name="/modules/s4/js/profileSearcher.js"/>
+		<file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
+
+    	<!-- Include custom css if you need to customize styles -->
+		<!-- <file type="css" name="/css/custom/s4.css" /> -->
+   </requires>
+    <src><![CDATA[
+          if (s4Params == undefined){
+            var s4Params =
+            {
+            view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+            
+            //Local SpatialSuite-datasources
+            //datasources: "*" for all, or space separated names of datasources
+            indexsearcher:{enabled: false, info: true, datasources: "*"},
+            
+            //Themes in profile
+            themesearcher:{enabled: true},
+            
+            //Profiles
+            profilesearcher:{enabled: true},
+            
+            //Favorites
+            favoritesearcher:{enabled: true},
+            
+            //Workspaces
+            workspacesearcher:{enabled: true}};
+	        s4_init (s4Params);
+    	}else{
+            throw "Only one (1) s4-plugin tool may be defined in a profile";
+    	}
+    ]]></src>
+    <jssrc/>
+</tool>

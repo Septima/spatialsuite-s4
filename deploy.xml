@@ -26,4 +26,10 @@
    
   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param>
   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param>
+  
+  <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
+  <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>
+
+  <param name="s4.gst.login" ignore="Not IsDefined(module.kms.login)">[module.kms.login]</param>
+  <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
 </deploy>
