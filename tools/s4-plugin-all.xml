@@ -14,8 +14,6 @@
     <src><![CDATA[
             s4_init ({
             
-                panel: 'panel-middle',
-            
 	            //Result presentation
 	            //printconfig: standard, full_freetext, rotatet, rotatet_contact or html
 	            view: {limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
