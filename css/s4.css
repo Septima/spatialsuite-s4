@@ -6,9 +6,20 @@
     z-index:500;
     background-color: transparent;
 }
+.inpucontainer-spacer {
+    width: 350px;
+    height: 30px;
+    margin-top: -4px;
+}
+#panel-middle .inpucontainer-spacer {
+    display: inline-block;
+}
+#panel-brand .inpucontainer-spacer {
+}
 
-.inputcontainer.nopanel {
-    right:10px;
+.inputcontainer.in-panel-brand {
+}
+.inputcontainer.in-panel-middle {
 }
 
 .inputcontainer.v263 {

@@ -19,12 +19,12 @@ function s4_getDefaultParams(){
 function s4_init (params){
     if (_s4View == null) {
     			
-	        	if (params == undefined){
-	        		_s4Params = s4_getDefaultParams();
-	        	}else{
-	        		_s4Params = params;
-	        	}
-        	
+        	if (params == undefined){
+        		_s4Params = s4_getDefaultParams();
+        	}else{
+        		_s4Params = params;
+        	}
+    	
         	//Get localized strings
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
         	var printButtonCaption = "Print";
@@ -42,17 +42,29 @@ function s4_init (params){
             
             var inputContainer = jQuery('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
             if (button === null) {
-                if (jQuery("#panel-brand div.right").length == 1){
-                    if (jQuery("#panel-brand").is(":visible")){
-                        jQuery("#panel-brand div.right").append(inputContainer);
-                        var brandPanel = jQuery("#panel-brand");
-                        inputContainer.css("top", "+=" + brandPanel.offset().top + "px");
+                if (jQuery("#panel-brand div.right").length > 0){
+                    
+                    var panel = 'panel-brand';
+                    if (jQuery("#panel-brand").is(":visible") === false) {
+                        panel = 'panel-middle';
+                    }
+                    if (typeof params.panel !== 'undefined') {
+                        panel = params.panel;
+                    }
+
+                    //Append the inputcontainer to <body>
+                    jQuery("body").append(inputContainer);
+                    inputContainer.addClass('in-'+panel);
+                    jQuery(window).resize(function () {
+                        jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
+                    });
+                    
+                    if (panel === 'panel-brand'){
+                        //Add spacer
+                        jQuery("#panel-brand div.right").append('<div class="inpucontainer-spacer"></div>');
                     } else{
-                        jQuery("body").append(inputContainer);
-                        inputContainer.addClass("nopanel");
-                        var menuBar = jQuery("#panel-middle");
-                        inputContainer.css("top", "+=" + menuBar.offset().top + "px");
-                        
+                        //Add spacer
+                        jQuery('#panel-middle > .inner.right > .midnav').append('<li class="inpucontainer-spacer"></li>');
                         
                         if (cbKort.themeSelector && cbKort.themeSelector.panels) {
                             var panel = cbKort.themeSelector.panels["panel-themes-headerleft"];
@@ -68,6 +80,14 @@ function s4_init (params){
                             }
                         }                        
                     }
+                    
+                    //Place inputcontainer according to the spacer
+                    inputContainer.offset(jQuery('.inpucontainer-spacer').offset());
+                    //Compensate for a delay in Chrome
+                    setTimeout(function () {
+                        jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
+                    },500);
+                    
                 }else{
                     jQuery("body").append(inputContainer);
                     inputContainer.addClass("v263");
