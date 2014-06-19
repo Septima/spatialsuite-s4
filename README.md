@@ -129,11 +129,9 @@ S4 will now search themes, profiles, and workspaces. In order to search your loc
 ##### Restrict searches for address, cvr, and plan to your municipality  
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
 
-##### Select default print dialog  
-Set the __printconfig__ parameter. The default is *rotatet*  
-
-##### Set the blankbehavior  
-Set the __blankbehavior__. Default is *search* which searches even when the user hasn't entered a query string  
+##### Other options  
+* Set the __printconfig__ parameter. The default is *rotatet*  
+* Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
 
 ```javascript
 {municipality: '[your-municipality-code]',
@@ -175,7 +173,7 @@ workspacesearcher:{enabled: true}};
 ### Customize other options
 
 For each searcher a number of parameters may be set:  
-* __Enable/disable__ searchers by setting enabled: *true* or *false*  
+* __Enable/disable__ a searcher by setting enabled: *true* or *false*  
 * __Info__ determines whether the user can do a spatial query with a selected feature; info: *true* or *false*  
 * __print__ determines whether it should be possible to open the print dialog; print: *true* or *false*    
 
