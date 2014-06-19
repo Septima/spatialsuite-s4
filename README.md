@@ -175,9 +175,9 @@ workspacesearcher:{enabled: true}};
 ### Customize other options
 
 For each searcher a number of parameters may be set:  
-__Enable/disable__ searchers by setting enabled: *true* or *false*  
-__Info__ determines whether the user can do a spatial query with a selected feature; info: *true* or *false*  
-__print__ determines whether it should be possible to open the print dialog; print: *true* or *false*    
+* __Enable/disable__ searchers by setting enabled: *true* or *false*  
+* __Info__ determines whether the user can do a spatial query with a selected feature; info: *true* or *false*  
+* __print__ determines whether it should be possible to open the print dialog; print: *true* or *false*    
 
 The targets in the geosearcher are changed by editing the *targets* property.
 
@@ -187,11 +187,11 @@ Another useful option is to choose which local datasources the tool will search 
 
 To search all local datasources:
 
-	indexsearcher:{enabled: true, info: true, datasources: "*"}
+	indexsearcher:{enabled: true, info: true, print: true, datasources: "*"}
 
 To search specific datasources:
 
-	indexsearcher:{enabled: true, info: true, datasources: "ds_skoler ds_boligforeninger"}
+	indexsearcher:{enabled: true, info: true, print: true, datasources: "ds_skoler ds_boligforeninger"}
 
 ### Create profile specific search tools
 
