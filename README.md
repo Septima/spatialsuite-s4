@@ -3,7 +3,7 @@
 ####[Description](#description)
 ####[License](#license)
 ####[Basic installation and test](#installation)
-####[Customization](#customization)
+####[Customization](#s4customization)
 ####[Search Spatial Suite data](#local)
  *  [Build the search index](#build)
  *  [Separate indexes for separate sites](#build.site)
@@ -124,7 +124,7 @@ Add the customized tool to your profile:
 S4 will now search themes, profiles, and workspaces. In order to search your local data please See [Search Spatial Suite data](#local)    
 
 
-## <a name="customization"></a> Customization of s4 tool
+## <a name="s4customization"></a>Customization of s4 tool
 
 ##### Restrict searches for address, cvr, and plan to your municipality  
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
