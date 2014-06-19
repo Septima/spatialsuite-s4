@@ -217,7 +217,7 @@ function s4_init (params){
             }
 
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
-	            var themeSearcher = new Septima.Search.ThemeSearcher({});
+	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit, matchesPhrase: matchPhrase});
 	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
             }
 
@@ -227,7 +227,8 @@ function s4_init (params){
         			onSelect: workspaceHit,
             		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
             		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
-            		sessionId: sessionId
+            		sessionId: sessionId,
+            		matchesPhrase: matchPhrase
         		})});
             }
 
@@ -237,7 +238,8 @@ function s4_init (params){
         			onSelect: profileHit,
             		singular: cbInfo.getString('s4.profilesearcher.profile'),
             		plural: cbInfo.getString('s4.profilesearcher.profiles'),
-            		sessionId: sessionId
+            		sessionId: sessionId,
+            		matchesPhrase: matchPhrase
         		})});
             }
             
@@ -247,7 +249,8 @@ function s4_init (params){
         			onSelect: favoriteHit,
             		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
             		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
-            		sessionId: sessionId
+            		sessionId: sessionId,
+            		matchesPhrase: matchPhrase
         		})});
             }
             
@@ -296,6 +299,14 @@ function s4Hit(result){
 	}
 }
 
+function themeHit(hit){
+    _s4View.blur();
+	if (hit.data.theme.visible){
+		cbKort.setThemeVisibility(hit.data.theme.name, false, true);
+	}else{
+		cbKort.setThemeVisibility(hit.data.theme.name, true, true);
+	}
+}
 
 function favoriteHit(hit){
     _s4View.blur();
@@ -316,7 +327,11 @@ function workspaceHit(hit){
 	var workspaceId = hit.data.wrkspcid;
 	if (typeof workspace_container !== 'undefined' ){
 		if (workspace_container === null) {
-            require([cbInfo.getParam('cbkort.module.workspace.js'),'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+			var workspacejs = cbInfo.getParam('cbkort.module.workspace.js');
+			if (workspacejs === ""){
+				workspacejs = cbInfo.getParam('module.workspace.js');
+			}
+            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
                 workspace_container = new Workspace ({name:'standard'});
                 s4ShowWorkSpace(workspaceId);
             }, this, workspaceId));
