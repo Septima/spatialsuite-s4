@@ -14,7 +14,7 @@
 		</column>
 						
 		<column format="description">
-			<label>'Adresse:'</label>
+			<label></label>
 			<value>adresse</value>
 		</column>
 		

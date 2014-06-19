@@ -4,7 +4,7 @@
 	<columns>
         
 		<column format="heading">
-			<label>''+skolensnav</label>
+			<label></label>
 			<value>skolensnav</value>
 		</column>
 
@@ -14,7 +14,7 @@
 		</column>
 		
 		<column format="description">
-			<label>'Adresse:'</label>
+			<label></label>
 			<value>adresse</value>
 		</column>
 				

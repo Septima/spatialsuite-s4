@@ -84,12 +84,7 @@ Development version (at your own risk) may be downloaded from:
 ```
 
 ### Include tool in profile(s):
-
-#### Comment out other tools conflicting with this tool e.g.:
-```xml
-<!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
-```
-
+  
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
@@ -99,10 +94,24 @@ Add the customized tool to your profile:
 ```xml
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all.xml" />
 ```
-The tool s4-plugin-dk-all searches all of Denmark and includes a demo license key for smartAddress.  
-You need to create a custom tool searching your municipality using your license key for smartAddress. (See below)  
+The tool s4-plugin-dk-all searches all of Denmark. You will need to customize your tool (See below)  
+
+Comment out other tools conflicting with this tool e.g.:
+```xml
+<!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
+```  
+
+##### Test
+
+Now you are ready to test s4 module and tool(s4-plugin-dk-all).
+
+The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.  
+* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile  
+* Start typing in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.  
+* Basic installation and test is now finished  
   
-#### elsewhere:  
+  
+#### Outside Denmark:    
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml  
@@ -112,42 +121,46 @@ Add the customized tool to your profile:
 <tool dir="custom" name="s4-plugin-all"/>
 ```
   
+S4 will now search themes, profiles, and workspaces. In order to search your local data please See [Search Spatial Suite data](#local)    
 
-### Test
-
-Now you are ready to test s4 module and tool(s4-plugin-dk-all).
-
-The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.  
-* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile  
-* Start typing an address in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.  
-* Basic installation and test is now finished  
 
 ## <a name="customization"></a> Customization of s4 tool
 
-### Restrict searches for address, cvr, and plan to your municipality
+#### Restrict searches for address, cvr, and plan to your municipality
 
-Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml
+Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
+
+#### Select default print dialog  
+
+Set the __printconfig__ parameter. The default is *rotatet*  
+
+#### Set the blankbehavior  
+
+Set the __blankbehavior__. Default is *search* which searches even when the user hasn't entered a query string  
 
 ```javascript
 {municipality: '[your-municipality-code]',
-view:{limit: 20, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource'},
+//Result presentation
+//  printconfig: standard, full_freetext, rotatet, rotatet_contact or html  
+//  blankbehavior: search or none  
+view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
 
 //Smart-adress
-adresssearcher:{enabled: false, info: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD"},
+adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
 
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
 
 //Septima CVR-index
-cvrsearcher:{enabled: true, info: true},
+cvrsearcher:{enabled: true, info: true, print: true},
 
 //Septima lokalplan-index
-plansearcher:{enabled: true, info: true},
+plansearcher:{enabled: true, info: true, print: true},
 
 //Local SpatialSuite-datasources
 //datasources: "*" for all, or space separated names of datasources
-indexsearcher:{enabled: false, info: true, datasources: "*"},
+indexsearcher:{enabled: false, info: true, print: true, datasources: "*"},
 
 //Themes in profile
 themesearcher:{enabled: true},
@@ -164,9 +177,14 @@ workspacesearcher:{enabled: true}};
 
 ### Customize other options
 
-__Enable/disable__ searchers and set other __options__ in s4-plugin-[*your-municipality-code*]-all.xml. Typically, the targets in the geosearcher are changed eg. removing "opstillingskredse" and/or other targets.
+For each searcher a number of parameters may be set:  
+__Enable/disable__ searchers by setting enabled: *true* or *false*  
+__Info__ determines whether the user can do a spatial query with a selected feature; info: *true* or *false*  
+__print__ determines whether it should be possible to open the print dialog; print: *true* or *false*    
 
-	geosearcher:{enabled: true, info: true, targets: ['adresser','stednavne', 'matrikelnumre'},
+The targets in the geosearcher are changed by editing the *targets* property.
+
+	geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre'], streetNameHit: false},
 
 Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
 
@@ -308,10 +326,6 @@ This URL may be called according to your desired workflow and integrated into:
 ### <a name="build.site"></a> Separate indexes for separate sites  
 
 In some situations you might want to index differently in internal sites vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites
-
-### <a name="externaldb"></a> Using an external database instead of the embedded database  
-  
-Spatial Map versions prior to 2.7 don't include an embedded database. You must create a database in postgres.   Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database  
 
 ## <a name="problems"></a> FAQ and Issues  
 <a name="problems.encoding"><a name="problems.localdata"></a><a name="problems.css"></a>
