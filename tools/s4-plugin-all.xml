@@ -2,6 +2,7 @@
 <!-- Do not customize this tool. Make copy of module and create your own tool -->
 <tool type="plugin">
     <requires>
+		<include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
         <file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
         <file type="script" name="/modules/s4/js/workspaceSearcher.js"/>

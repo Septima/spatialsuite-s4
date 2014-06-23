@@ -268,6 +268,9 @@ function s4_init (params){
         			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - 100);
         		}
         	});
+			cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
+				_s4View.blur();
+			}, true);
     }
 }
 
