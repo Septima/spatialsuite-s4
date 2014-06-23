@@ -34,7 +34,6 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
           }, this)
           });
     },
-    
 
     CLASS_NAME: 'Septima.Search.ProfileSearcher'
     
