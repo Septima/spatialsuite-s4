@@ -50,8 +50,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			themes.sort(function(t1, t2){
     				return (t1.displayname.localeCompare(t2.displayname));
     			});
-        		this.groups.push({"group": group, "themes": themes, "displayname": group.displayname});
-    			this.registerTarget(group.displayname)
+        		this.groups.push({"group": group, "themes": themes, "displayname": group.displayname + " (" + this.themesPhrase +")"});
+    			this.registerTarget(group.displayname + " (" + this.themesPhrase +")")
     		}
     	}
     	//Sort groups
@@ -184,7 +184,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     		var term = queryTerms[i].toLowerCase();
         	for (var j=0;j<this.groups.length;j++){
         		var group = this.groups[j];
-        		if (groupName == "*" || group.group.displayname.toLowerCase() == groupName.toLowerCase()){
+        		if (groupName == "*" || group.displayname.toLowerCase() == groupName.toLowerCase()){
             		var themes = [];
             		for (var k=0;k<group.themes.length;k++){
             			var theme = group.themes[k]; 
