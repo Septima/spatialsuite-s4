@@ -14,8 +14,16 @@
     </requires>
     <src><![CDATA[
             s4_init({
-            
+
                 municipality: '*',
+                
+                //Positioning of s4. Choose between
+                //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
+                //  'panel-brand': Force s4 to panel-brand 
+                //  'panel-top': Force s4 to top menu
+                //  'panel-middle': Force s4 to menu linie (right justified)
+                //  '#panel-middle > .inner.left > .midnav': As the last menu in the menu line
+                panel: 'panel-top',
 
 	            //Result presentation
 	            //printconfig: standard, full_freetext, rotatet, rotatet_contact or html

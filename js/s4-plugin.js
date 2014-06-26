@@ -45,10 +45,10 @@ function s4_init (params){
                 if (jQuery("#panel-brand div.right").length > 0){
                     
                     var panel = 'panel-brand';
-                    if (jQuery("#panel-brand").is(":visible") === false) {
+                    if (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30) {
                         panel = 'panel-middle';
                     }
-                    if (typeof params.panel !== 'undefined') {
+                    if (typeof params.panel !== 'undefined' && params.panel !== 'default') {
                         panel = params.panel;
                     }
 
@@ -62,7 +62,7 @@ function s4_init (params){
                     if (panel === 'panel-brand'){
                         //Add spacer
                         jQuery("#panel-brand div.right").append('<div class="inpucontainer-spacer"></div>');
-                    } else{
+                    } else if (panel === 'panel-middle'){
                         //Add spacer
                         jQuery('#panel-middle > .inner.right > .midnav').append('<li class="inpucontainer-spacer"></li>');
                         
@@ -79,6 +79,14 @@ function s4_init (params){
                                 });
                             }
                         }                        
+                    } else if (panel === 'panel-top'){
+                        jQuery('#panel-top > .inner.right > .topnav').append('<li class="inpucontainer-spacer"></li>');
+                    } else{
+                    	if (panel.indexOf('panel-middle') > -1){
+                            jQuery(panel).append('<li class="inpucontainer-spacer"></li>');
+                    	}else{
+                            jQuery(panel).append('<div class="inpucontainer-spacer"></div>');
+                    	}
                     }
                     
                     //Place inputcontainer according to the spacer
