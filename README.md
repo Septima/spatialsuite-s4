@@ -133,9 +133,19 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 ##### Other options  
 * Set the __printconfig__ parameter. The default is *rotatet*  
 * Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
+* set the __panel__ parameter.
 
 ```javascript
 {municipality: '[your-municipality-code]',
+
+//Positioning of s4. Choose between
+//  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
+//  'panel-brand': Force s4 to panel-brand 
+//  'panel-top': Force s4 to top menu
+//  'panel-middle': Force s4 to menu linie (right justified)
+//  'menu': As the last menu in the menu line
+panel: 'default',
+
 //Result presentation
 //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html  
 //  blankbehavior: search or none  
