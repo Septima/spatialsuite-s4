@@ -75,7 +75,7 @@ Latest version is always located at:
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Development version (at your own risk) may be downloaded from:  
-      https://github.com/Septima/spatialsuite-s4/archive/develop.zip  
+      https://github.com/Septima/spatialsuite-s4/archive/development.zip  
 
 ### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
