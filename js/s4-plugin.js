@@ -31,7 +31,6 @@ function s4_init (params){
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
         	
-        	
         	var sessionId = cbKort.sessionId;
 
             //Set up search input box
@@ -81,7 +80,9 @@ function s4_init (params){
                         }                        
                     } else if (panel === 'panel-top'){
                         jQuery('#panel-top > .inner.right > .topnav').append('<li class="inpucontainer-spacer"></li>');
-                    } else{
+                    } else if (panel === 'menu'){
+                        jQuery('#panel-middle > .inner.left > .midnav').append('<li class="inpucontainer-spacer"></li>');
+                    }else {
                     	if (panel.indexOf('panel-middle') > -1){
                             jQuery(panel).append('<li class="inpucontainer-spacer"></li>');
                     	}else{

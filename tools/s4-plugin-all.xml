@@ -20,8 +20,8 @@
                 //  'panel-brand': Force s4 to panel-brand 
                 //  'panel-top': Force s4 to top menu
                 //  'panel-middle': Force s4 to menu linie (right justified)
-                //  '#panel-middle > .inner.left > .midnav': As the last menu in the menu line
-                panel: 'panel-top',
+                //  'menu': As the last menu in the menu line
+                panel: 'default',
 
 	            //Result presentation
 	            //printconfig: standard, full_freetext, rotatet, rotatet_contact or html
