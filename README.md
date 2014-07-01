@@ -142,7 +142,7 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
 //  'panel-brand': Force s4 to panel-brand 
 //  'panel-top': Force s4 to top menu
-//  'panel-middle': Force s4 to menu linie (right justified)
+//  'panel-middle': Force s4 to menu line (right justified)
 //  'menu': As the last menu in the menu line
 panel: 'default',
 
