@@ -94,7 +94,7 @@ Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4
     
 Add the customized tool to your profile:
 ```xml
-<tool dir="custom" name="s4-plugin-[your-municipality-code]-all.xml" />
+<tool dir="custom" name="s4-plugin-[your-municipality-code]-all" />
 ```
 The tool s4-plugin-dk-all searches all of Denmark. You will need to customize your tool (See below)  
 
