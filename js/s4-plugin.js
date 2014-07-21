@@ -306,12 +306,16 @@ function s4GeoHit(result){
 }
 
 function s4Hit(result){
-    _s4View.blur();
-	for (var i = 0; i < _s4OnSelect.length;i++){
+	console.log('s4Hit: ' + result.title);
+    for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
 			return;
 		}
 	}
+    showResultInMap(result);
+}
+
+function showResultInMap(result){
 	if (result.geometry){
 		var geojson = new OpenLayers.Format.GeoJSON();
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
@@ -319,6 +323,7 @@ function s4Hit(result){
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
 	}
+    _s4View.blur();
 }
 
 function themeHit(hit){
@@ -374,15 +379,19 @@ function s4ShowWorkSpace(workspaceId){
 }
 
 function s4DoInfo(result){
-	s4Hit(result);
+	console.log('s4DoInfo: ' + result.title);
+    showResultInMap(result);
     searchlast2.showDialog(result.title);
 }
 
 function s4DoPrint(result){
-	s4Hit(result);
+	console.log('s4DoPrint: ' + result.title);
 	if(typeof printObject !== 'undefined'){
 		printObject.closeHandler();
 	}
+	
+    showResultInMap(result);
+	
 	print_getConfig(_s4Params.view.printconfig);
 	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
 	if (freetext_print_input.length == 1){
