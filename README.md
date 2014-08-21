@@ -39,8 +39,8 @@ Issues: https://github.com/Septima/spatialsuite-s4/issues
               evaluation purposes free of charge.  
               
  Contact:     Septima P/S  
-              Larsbjørnsstræde 3  
-              1454 København K  
+              Frederiksberggade 28, 2. tv.  
+              1459 København K  
               www.septima.dk  
               kontakt@septima.dk  
 
