@@ -119,19 +119,27 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			totalThemeCount += groupsWithMatchingThemes[i].themes.length;
     		}
     		if (query.type == "list.force" || totalThemeCount<query.limit){
+    			var themesToShow = [];
     			for (var i=0;i<groupsWithMatchingThemes.length;i++){
-    				var themes = groupsWithMatchingThemes[i].themes;
-    				for (var j=0;j<themes.length;j++){
-    					theme = themes[j];
-    					var result1;
-    					if (query.hasTarget){
-        					result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
-    					}else{
-        					result1 = queryResult.addResult(theme.theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
-    					}
-                        result1.image = theme.image;
-    				}
+    				themesToShow = themesToShow.concat(groupsWithMatchingThemes[i].themes);
     			}
+    			themesToShow.sort(function(a, b){
+					if (a.score == b.score){
+						return a.theme.displayname.localeCompare(b.theme.displayname)
+					}else{
+    					return b.score - a.score;
+					}
+				});
+				for (var j=0;j<themesToShow.length;j++){
+					theme = themesToShow[j];
+					var result1;
+					if (query.hasTarget){
+    					result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+					}else{
+    					result1 = queryResult.addResult(theme.theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
+					}
+                    result1.image = theme.image;
+				}
     		}else if (query.type == "list"){
         		var freeSlots = query.limit - groupsWithMatchingThemes.length;
         		if (groupsWithMatchingThemes.length > freeSlots && !query.hasTarget){
@@ -181,28 +189,38 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     getGroupsWithMatchingThemes: function (queryTerms, groupName){
 
     	var groupsWithMatchingThemes = [];
-    	for (var i=0;i<queryTerms.length;i++){
-    		var term = queryTerms[i].toLowerCase();
         	for (var j=0;j<this.groups.length;j++){
         		var group = this.groups[j];
         		if (groupName == "*" || group.displayname.toLowerCase() == groupName.toLowerCase()){
             		var themes = [];
             		for (var k=0;k<group.themes.length;k++){
-            			var theme = group.themes[k]; 
-            			if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
-            				themes.push(theme);
-            			}else{
-            				if (this.match(term, theme.termsToSearch)){
-            					themes.push(theme);
-            				}
+            			var theme = group.themes[k];
+            			theme.score = 0;
+            	       	for (var i=0;i<queryTerms.length;i++){
+            	    		var term = queryTerms[i].toLowerCase();
+                			if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
+                				theme.score += 2;
+                			}else if (this.match(term, theme.termsToSearch)){
+                				theme.score += 1;
+                			}
+            	    	}
+            			if (theme.score > 0){
+        					themes.push(theme);
             			}
             		}
             		if (themes.length>0){
+            			themes.sort(function(a, b){
+        					if (a.score == b.score){
+        						return a.theme.displayname.localeCompare(b.theme.displayname)
+        					}else{
+            					return b.score - a.score;
+        					}
+        				});
                 		groupsWithMatchingThemes.push({"group": group, "themes": themes});
             		}
         		}
         	}
-    	}
+        	
     	return groupsWithMatchingThemes;
     },
     
