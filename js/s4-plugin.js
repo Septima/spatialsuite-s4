@@ -356,23 +356,38 @@ function workspaceHit(hit){
     _s4View.blur();
 	var workspaceId = hit.data.wrkspcid;
 	if (typeof workspace_container !== 'undefined' ){
-		if (workspace_container === null) {
-			var workspacejs = cbInfo.getParam('cbkort.module.workspace.js');
-			if (workspacejs === ""){
-				workspacejs = cbInfo.getParam('module.workspace.js');
-			}
-            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
-                workspace_container = new Workspace ({name:'standard'});
-                s4ShowWorkSpace(workspaceId);
-            }, this, workspaceId));
-        }else{
-            s4ShowWorkSpace(workspaceId);
-        }
+		if (typeof workspace_controls == 'undefined' ){
+			//Workspace version2
+			if (workspace_container === null) {
+				var workspacejs = cbInfo.getParam('cbkort.module.workspace.js');
+				if (workspacejs === ""){
+					workspacejs = cbInfo.getParam('module.workspace.js');
+				}
+	            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+	                workspace_container = new Workspace ({name:'standard'});
+	                s4ShowWorkSpace2(workspaceId);
+	            }, this, workspaceId));
+	        }else{
+	            s4ShowWorkSpace2(workspaceId);
+	        }
+		}else{
+			//Workspace version3
+            if (workspace_container === null) {
+				var workspacejs = cbInfo.getParam('module.workspace.js');
+				var spatialmapVersion = cbInfo.getParam('spatialmap.version');
+	            require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
+	                workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
+		            s4ShowWorkSpace3(workspaceId);
+	            }, this, workspaceId));
+	        } else {
+	            s4ShowWorkSpace3(workspaceId);
+	        }
+		}
 		cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: hit.data});
 	}
 }
 
-function s4ShowWorkSpace(workspaceId){
+function s4ShowWorkSpace2(workspaceId){
     var options = {id: workspaceId};
     if (jQuery.isFunction( workspace_init )){
     	options.hideDialog = false;
@@ -380,6 +395,16 @@ function s4ShowWorkSpace(workspaceId){
     	options.hideDialog = true;
     }
     workspace_container.start (options);
+}
+
+function s4ShowWorkSpace3(workspaceId){
+    var options = {id: workspaceId};
+    if (jQuery.isFunction( workspace_init )){
+    	options.hideDialog = false;
+    }else{
+    	options.hideDialog = true;
+    }
+    workspace_container.startDrawing (options);
 }
 
 function s4DoInfo(result){
