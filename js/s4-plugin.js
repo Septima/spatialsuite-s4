@@ -160,7 +160,11 @@ function s4_init (params){
                 		    onSelect: s4GeoHit, matchesPhrase: matchPhrase
                 	    };
                 	if (_s4Params.municipality != "*"){
-                		geoSearchOptions.area = "muncode0" + _s4Params.municipality;
+                		var municipalities = _s4Params.municipality.split(' ');
+                		for (var i=0;i<municipalities.length;i++){
+                			municipalities[i] = "muncode0" + municipalities[i]; 
+                		}
+                		geoSearchOptions.area = municipalities.join();
                 	}
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
                 	controller.addSearcher({"title": "", "searcher" : geoSearcher});
@@ -209,7 +213,8 @@ function s4_init (params){
             	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	if (_s4Params.municipality != "*"){
-            		planSearcher.filter = { 'komnr' : _s4Params.municipality };
+            		var municipalities = _s4Params.municipality.split(' ');
+            		planSearcher.filter = { 'komnr' : municipalities };
             	}
             	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
                 if (_s4Params.plansearcher.info){
@@ -224,7 +229,8 @@ function s4_init (params){
             	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
             	if (_s4Params.municipality != "*"){
-                	se.filter = { 'kom_id_officiel' : _s4Params.municipality };
+            		var municipalities = _s4Params.municipality.split(' ');
+                	se.filter = { 'kom_id_officiel' : municipalities };
             	}
             	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
                 if (_s4Params.cvrsearcher.info){
