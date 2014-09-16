@@ -4,7 +4,7 @@ var _s4Params = null;
 function s4_getDefaultParams(){
 	return {
 		municipality: '*', 
-		view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet_contact'},
+		view:{limit: 20, blankbehavior: "search", autofocus: true, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet_contact'},
         adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
         geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse'], streetNameHit: false},
         cvrsearcher:{enabled: true, info: true, print: true},
@@ -101,7 +101,6 @@ function s4_init (params){
 
                     //onResize: Place inputcontainer according to the spacer
                     jQuery(window).resize(function () {
-                        //jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
                         setTimeout(function () {
                             jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
                         },100);
@@ -296,6 +295,12 @@ function s4_init (params){
 			cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
 				_s4View.blur();
 			}, true);
+			
+        	if (_s4Params.view.autofocus){
+                setTimeout(Septima.bind(function (_s4View) {
+            	_s4View.focus();
+                }, this, _s4View),500);
+        	}
     }
 }
 

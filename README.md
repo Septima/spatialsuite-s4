@@ -135,6 +135,7 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 ##### Other options  
 * Set the __printconfig__ parameter. The default is *rotatet*  
 * Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
+* Set the __autofocus__ parameter. If set, the search input field will get focus immediately meaning the user may start searching right away. Default is *false*  
 * set the __panel__ parameter.
 
 ```javascript
@@ -151,7 +152,8 @@ panel: 'default',
 //Result presentation
 //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html  
 //  blankbehavior: search or none  
-view:{limit: 20, blankbehavior: "search", dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
+//  autofocus: true or false. Default is false 
+view:{limit: 20, blankbehavior: "search", autofocus: false, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
 
 //Smart-adress
 adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
