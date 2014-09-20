@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.2.2</version>
+   <version>2.2.3b1</version>
    <stoponerror>true</stoponerror>
   
    <makedir dir="[cbinfo.wwwroot.dir]/jsp/modules/s4"/>
@@ -21,11 +21,11 @@
   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
 
-<!--   <param name="s4.search.css">//search.cdn.septima.dk/2.6/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/2.6/septimasearch.min.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/2.7/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/2.7/septimasearch.min.js</param>
    
-  <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param>
+<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param> -->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>
