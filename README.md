@@ -49,6 +49,7 @@ Issues: https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Released versions:  
+      2.2.3:   https://github.com/Septima/spatialsuite-s4/archive/2.2.3.zip  
       2.2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.2.zip  
       2.2.1:   https://github.com/Septima/spatialsuite-s4/archive/2.2.1.zip  
       2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.zip  
@@ -56,22 +57,6 @@ Released versions:
       2.0.8: https://github.com/Septima/spatialsuite-s4/archive/2.0.8.zip  
       2.0.7: https://github.com/Septima/spatialsuite-s4/archive/2.0.7.zip  
       2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
-      2.0.5: https://github.com/Septima/spatialsuite-s4/archive/2.0.5.zip  
-      2.0.3: https://github.com/Septima/spatialsuite-s4/archive/2.0.3.zip  
-      2.0.2: https://github.com/Septima/spatialsuite-s4/archive/2.0.2.zip  
-      2.0.1: https://github.com/Septima/spatialsuite-s4/archive/2.0.1.zip  
-      1.9.1: https://github.com/Septima/spatialsuite-s4/archive/1.9.1.zip  
-      1.9: https://github.com/Septima/spatialsuite-s4/archive/1.9.zip  
-      1.8.1: https://github.com/Septima/spatialsuite-s4/archive/1.8.1.zip  
-      1.8: https://github.com/Septima/spatialsuite-s4/archive/1.8.zip  
-      1.7: https://github.com/Septima/spatialsuite-s4/archive/1.7.zip  
-      1.6: https://github.com/Septima/spatialsuite-s4/archive/1.6.zip  
-      1.5: https://github.com/Septima/spatialsuite-s4/archive/1.5.zip  
-      1.4: https://github.com/Septima/spatialsuite-s4/archive/1.4.zip  
-      1.3: https://github.com/Septima/spatialsuite-s4/archive/1.3.zip  
-      1.2: https://github.com/Septima/spatialsuite-s4/archive/1.2.zip  
-      1.1: https://github.com/Septima/spatialsuite-s4/archive/1.1.zip  
-      1.0: https://github.com/Septima/spatialsuite-s4/archive/1.0.zip  
       
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
