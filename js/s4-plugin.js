@@ -444,8 +444,9 @@ function s4DoPrint(result){
 function s4_getKMSTicket(){
 	var ticket = null;
 	var cbHttp = new CBhttp ();    	
+	cbHttp.setMethod('get');
  	try{  
-	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket', false);
+	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket&ts=' + Math.floor((Math.random() * 100) + 1) , false);
 	   	 var col = pcomp.get(0);
 	   	 if(col != null){
 	   		 ticket = col.getValue();
