@@ -151,11 +151,11 @@ function s4_init (params){
             }
             
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-            	var kmsTicket = s4_getKMSTicket();
-            	if (kmsTicket != null){
+            	var gstAuthParams= s4_getGstAuthParams();
+            	if (gstAuthParams != null){
                 	var geoSearchOptions = {
                 			targets: _s4Params.geosearcher.targets,
-                			authParams: {ticket: kmsTicket},
+                			authParams: gstAuthParams,
                 		    onSelect: s4GeoHit, matchesPhrase: matchPhrase
                 	    };
                 	if (_s4Params.municipality != "*"){
@@ -441,21 +441,27 @@ function s4DoPrint(result){
 	cbKort.events.fireEvent('S4', {type: 's4DoPrint', result: result});
 }
 
-function s4_getKMSTicket(){
-	var ticket = null;
-	var cbHttp = new CBhttp ();    	
-	cbHttp.setMethod('get');
- 	try{  
-	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket&ts=' + Math.floor((Math.random() * 100) + 1) , false);
-	   	 var col = pcomp.get(0);
-	   	 if(col != null){
-	   		 ticket = col.getValue();
-	   	 }
-   }catch(e){
- 		return ticket;
- 	}
-	return ticket;
+
+function s4_getGstAuthParams(){
+//	var ticket = null;
+//	var cbHttp = new CBhttp ();    	
+//	cbHttp.setMethod('get');
+// 	try{  
+//	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket&ts=' + Math.floor((Math.random() * 100) + 1) , false);
+//	   	 var col = pcomp.get(0);
+//	   	 if(col != null){
+//	   		 ticket = col.getValue();
+//	   	 }
+//   }catch(e){
+// 		return null;
+// 	}
+//	return {ticket: ticket};
+
+	var login = cbInfo.getParam('s4.gst.login');
+	var password = cbInfo.getParam('s4.gst.password');
+	return {login: login, password: password};
 }
+
 
 function Searchlast2()
 {

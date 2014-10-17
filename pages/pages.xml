@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-    <page name="s4getkmsticket" contenttype="text/xml">
-        <data handler="expression" operation="evaluate">
-            <url-parameters>
-                <url-parameter name="expression">'getKmsTicket("[s4.gst.login]","[s4.gst.password]", true)'</url-parameter>
-            </url-parameters>
-        </data>
-    </page>
     <page name="s4SearchDatasource">
     <!--  This page is called with three parameters; query, limit, datasource -->
     	<data handler="datasource"  operation="execute-command">
