@@ -6,14 +6,30 @@
     z-index:500;
     background-color: transparent;
 }
+
 .inpucontainer-spacer {
     width: 350px;
     height: 30px;
     margin-top: -4px;
 }
+
+.inputcontainer input.search{
+	color: #AAA;
+	}
+
+.inputcontainer.active input.search{
+	color: #444;
+}
 #panel-middle .inpucontainer-spacer {
     display: inline-block;
 }
+
+.better-autocomplete > .result > div.resultimage {
+	min-height: 20px;
+	min-width: 20px;
+}
+
+
 #panel-brand .inpucontainer-spacer {
 }
 
@@ -52,3 +68,9 @@ ul.better-autocomplete {
     right: auto;
     top: -3px;
 }
+
+
+.better-autocomplete > .result {
+  padding: 3px 7px;
+}
+

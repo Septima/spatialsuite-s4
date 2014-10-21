@@ -12,6 +12,8 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		displaynameProperty: 'displayname'
     	});
     	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+		this.profileOnUri = "data:image/gif;base64,R0lGODlhEQAOANUAAHSbbPb/9P78/v/5/2ujY/f89v70/5rElG6VaO3+7FuWVfn/+Pn5+fD/7X3Kdfz++3WmboO1fK/Kq+n+5YzHg4PJelSgS9bw0lJ2Tlx5W3u3coPReOb/4vT/8kx1SPX79fv7/PL78vj294zVgXK1a/L/8HnZbvf/94jOf4jYf5DNir/iup7bmGWVYG6vZWGoWO307KPInfj49ZPYiEmEQFOATVmFVFCSSj9+OM3tyP///fv/+v/9//7//f/+/////yH5BAAAAAAALAAAAAARAA4AAAbMwN/pJxDsFrsBz1cI7XaFxy+w+/U6gYXAMDg1DpJSwOrrHXc9n+H3jUBik99gAOr9eHNf4OCqUBASPwY8Oyc9RQJfBDMoBBgNRAsXORNPMAcaFSMKNQ1jPRcRESsNCRIuDiMWNBwddqEbGy8sKi4mKQoZQyA/Px0AGiMVJCQOGzc1CR+9dl4tfSgVDgoeCYYiOnY+JwktBNIWGWLLPtl3DAsTNgoKOE5SICA6Mj8gS14eGBy9Ij4+RT5+LFDD40SABD0Y/JinwwcPEUEAADs=";
+    	this.currentProfile = cbKort.getProfile();
 
     	jQuery.ajax({
     		url: options.host + '/cbkort?page=profileselector_get_profiles&outputformat=json',
@@ -33,6 +35,20 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
             	}
           }, this)
           });
+    },
+    
+    getCustomButtonDefs: function(result){
+        if (typeof result.newquery !== 'undefined'){
+            return [];
+        }else{
+        	if (result.data.name === this.currentProfile){
+        		//return [{"buttonText": this.showPhrase, "buttonImage": this.profileOnUri}];
+        		result.image = this.profileOnUri;
+                return [];
+        	}else{
+                return [];
+        	}
+        }
     },
 
     CLASS_NAME: 'Septima.Search.ProfileSearcher'
