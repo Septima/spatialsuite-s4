@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dette er et tool som understøtter s4 i søgning af veje uden husnumre (Understøttes ikke af gst), samt -->
+<!-- visning af vejgeometri når en vej er valgt i geosearch -->
+<!-- https://github.com/Septima/spatialsuite-s4/issues/45 -->
+
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		[endif]
+   </requires>
+    <src/>
+    <jssrc><![CDATA[
+	    [if: ModuleDefined("s4") ]
+	    	//Callback på select af vej
+           	var _s4OnSelect = _s4OnSelect || [];    // Brug eksisterende array eller skab en ny
+			_s4OnSelect.push(function(result){
+				if (result.data && result.data.type && result.data.type == 'streetNameType'){
+					var streetCode = trim(result.data.streetCodes);
+					var intCode = parseInt(streetCode);
+					var sessionId = cbKort.sessionId;
+					jQuery.ajax({
+						url: '/cbkort?page=dynamiclayer-read-datasource&datasource=ds_s4_vejmidte&command=read_geometry&outputformat=json',
+						jsonp: 'json.callback',
+						data:{sessionId: sessionId, vejkode: intCode},
+						dataType: 'jsonp',
+						crossDomain : true,
+						async:true,
+						cache : false,
+						timeout : 1000,
+						success:  Septima.bind(function(data, textStatus,  jqXHR){
+							if (data.row[0]._class == 'rowlist'){
+								var wkt = data.row[0].row[0].shape_wkt;
+								cbKort.dynamicLayers.addWKT ({name: 'userdatasource', wkt:wkt, clear:true});
+								cbKort.dynamicLayers.zoomTo ('userdatasource', '100');
+							}
+					  }, this)
+					  });
+					return false;
+				}else{
+					return true;
+				}
+			});
+			//Søg vejnavne
+			//https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher
+			var _s4Searchers = _s4Searchers || [];   // Brug eksisterende array eller skab en
+			var options = {
+				datasource: "ds_s4_vejmidte"
+			};
+           	_s4Searchers.push({
+           		title: "veje",
+           		searcher : new Septima.Search.DatasourceSearcher(options),
+           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+           	});
+		[endif]
+    ]]>
+    </jssrc>
+</tool>

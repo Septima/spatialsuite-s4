@@ -6,11 +6,17 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		}
 		
 		options.usesGeoFunctions = true;
-
+		if (options.matchesPhrase === undefined){
+			options.matchesPhrase = cbInfo.getString('s4.list.matchphrase');
+		}
+		
+		if (options.onSelect === undefined){
+			options.onSelect = s4Hit;
+		}
 		this.Searcher(options);
 		//Options
 	    this.datasource = options.datasource; //"ds_park_monumenter";
-	    this.hyperLinkLabel = options.hyperLinkLabel || "Se mere";
+	    this.hyperLinkLabel = options.hyperLinkLabel || cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
 	    this.iconURI = options.iconURI || null;
     },
     
