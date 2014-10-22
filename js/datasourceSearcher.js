@@ -15,7 +15,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		}
 		this.Searcher(options);
 		//Options
-	    this.datasource = options.datasource; //"ds_park_monumenter";
+	    this.datasource = options.datasource;
 	    this.hyperLinkLabel = options.hyperLinkLabel || cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
 	    this.iconURI = options.iconURI || null;
     },
