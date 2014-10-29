@@ -28,21 +28,21 @@ Forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med to comma
   
 Eksempel:  
 ```xml
-		<datasource endpoint="s4_vejmidte" name="ds_s4_vejmidte">
-			<!-- https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher -->
-		       <table geometrycolumn="geom" name="testdata.vejmidte_aggregeret" pkcolumn="gid"/>
-			<sql command="read_search">select vejnavn as heading, st_astext(geom) as shape_wkt
-				from	testdata.vejmidte_aggregeret
-				where	vejnavn ilike '[query]%'
-						and adresselos  is null
-				order	by vejnavn
-				limit [limit];
-			</sql>
-			<sql command="read_geometry">select	st_astext(geom) as shape_wkt
-				from	testdata.vejmidte_aggregeret
-				where	cprvejkode = [vejkode];
-			</sql>
-		</datasource>       
+<datasource endpoint="s4_vejmidte" name="ds_s4_vejmidte">
+	<!-- https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher -->
+       <table geometrycolumn="geom" name="testdata.vejmidte_aggregeret" pkcolumn="gid"/>
+	<sql command="read_search">select vejnavn as heading, st_astext(geom) as shape_wkt
+		from	testdata.vejmidte_aggregeret
+		where	vejnavn ilike '[query]%'
+				and adresselos  is null
+		order	by vejnavn
+		limit [limit];
+	</sql>
+	<sql command="read_geometry">select	st_astext(geom) as shape_wkt
+		from	testdata.vejmidte_aggregeret
+		where	cprvejkode = [vejkode];
+	</sql>
+</datasource>       
 ```  
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
