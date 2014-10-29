@@ -204,7 +204,7 @@ Finished, now try out your profile and the customized search tool
 
 ## <a name="tools"></a> Included tools  
 
-S4 comes a number of included tools. Please [the tools section](/tools)  
+S4 comes a number of included tools. Please [the tools section](./tools)  
 
 
 ## <a name="local"></a> Search Spatial Suite data  
