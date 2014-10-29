@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Dette er et tool som understøtter s4 i søgning af veje uden husnumre (Understøttes ikke af gst), samt -->
+<!-- Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch -->
 
 <!-- https://github.com/Septima/spatialsuite-s4/issues/39 -->
 

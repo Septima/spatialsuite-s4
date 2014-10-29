@@ -23,12 +23,12 @@
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
            	var _s4OnSelect = _s4OnSelect || [];    // Brug eksisterende array eller skab en ny
-<!--            	_s4OnSelect.push(function(result){ -->
-<!--            		if (result.searcher.title == "Monumenter"){ -->
-<!--            			alert("Monument " + result.title + " valgt"); -->
-<!--            		} -->
-<!--        			return true; -->
-<!--            	}); -->
+            	_s4OnSelect.push(function(result){ 
+            		if (result.searcher.title == "Monumenter"){ 
+            			alert("Monument " + result.title + " valgt"); 
+            		} 
+        			return true; 
+            	}); 
 		[endif]
     ]]>
     </jssrc>
