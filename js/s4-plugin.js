@@ -116,6 +116,7 @@ function s4_init (params){
                 button.element.append('<div type="text" id="s4box" name="s4box" class="inputcontainer s4-static"/>');
             }
 
+            //Create view and controller
         	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
         	
         	var blankBehavior = "search";
@@ -124,6 +125,14 @@ function s4_init (params){
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
         	var controller = new Septima.Search.Controller([], _s4View, controllerOptions);
+        	
+        	//Set up the API
+			//Create array of "OnSelect" listeners if not already created
+			window["_s4OnSelect"] = window["_s4OnSelect"] || [];
+			window["_s4Searchers"] = window["_s4Searchers"] || [];
+			//Example:
+			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
+			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
         	
         	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
             var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
@@ -148,6 +157,7 @@ function s4_init (params){
                 if (_s4Params.view.printconfig && _s4Params.adresssearcher.print){
                 	adressSearcher.addCustomButtonDef(printButtonDef);
                 }
+                _s4Params.adresssearcher.searcher = adressSearcher;
             }
             
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
@@ -173,12 +183,12 @@ function s4_init (params){
                     if (_s4Params.view.printconfig && _s4Params.geosearcher.print){
                     	geoSearcher.addCustomButtonDef(printButtonDef);
                     }
+                    _s4Params.geosearcher.searcher = geoSearcher;
             	}
             }
-            
+
             //Collect searchers that have been pushed until now
-			var _s4Searchers = window["_s4Searchers"] || [];
-			
+			var _s4Searchers = window["_s4Searchers"];
 			for (var i = 0;i<_s4Searchers.length;i++){
 				var searcherReg = _s4Searchers[i];
                 if (searcherReg.info && searcherReg.info == true){
@@ -189,6 +199,7 @@ function s4_init (params){
                 }
 				controller.addSearcher(searcherReg);
 			}
+			//Prepare for future pushes
 			window["_s4Searchers"] = {
 					controller: controller,
 					push: function (searcherReg) {
@@ -206,6 +217,7 @@ function s4_init (params){
                 if (_s4Params.view.printconfig && _s4Params.indexsearcher.print){
                 	s4IndexSearcher.addCustomButtonDef(printButtonDef);
                 }
+                _s4Params.indexsearcher.searcher = s4IndexSearcher;
             }
         	
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
@@ -222,6 +234,7 @@ function s4_init (params){
                 if (_s4Params.view.printconfig && _s4Params.plansearcher.print){
                 	planSearcher.addCustomButtonDef(printButtonDef);
                 }
+                _s4Params.plansearcher.searcher = planSearcher;
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
@@ -238,49 +251,71 @@ function s4_init (params){
                 if (_s4Params.view.printconfig && _s4Params.cvrsearcher.print){
                 	se.addCustomButtonDef(printButtonDef);
                 }
+                _s4Params.cvrsearcher.searcher = se;
             }
 
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit, matchesPhrase: matchPhrase});
 	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
+                _s4Params.themesearcher.searcher = themeSearcher;
             }
 
             if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
-            	controller.addSearcher({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: new Septima.Search.workspaceSearcher({
+            	var workspaceSearcher = new Septima.Search.workspaceSearcher({
         			host: "",
         			onSelect: workspaceHit,
             		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
             		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
             		sessionId: sessionId,
             		matchesPhrase: matchPhrase
-        		})});
+        		});
+            	controller.addSearcher({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: workspaceSearcher});
+                _s4Params.workspacesearcher.searcher = workspaceSearcher;
             }
 
             if (typeof(ProfileSelector) != 'undefined' && _s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
-            	controller.addSearcher({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: new Septima.Search.ProfileSearcher({
+            	var profileSearcher = new Septima.Search.ProfileSearcher({
         			host: "",
         			onSelect: profileHit,
             		singular: cbInfo.getString('s4.profilesearcher.profile'),
             		plural: cbInfo.getString('s4.profilesearcher.profiles'),
             		sessionId: sessionId,
             		matchesPhrase: matchPhrase
-        		})});
+        		});
+            	controller.addSearcher({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: profileSearcher});
+                _s4Params.profilesearcher.searcher = profileSearcher;
             }
             
             if (typeof(Favorites) != 'undefined' && _s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
-        		controller.addSearcher({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: new Septima.Search.FavoriteSearcher({
+            	var favoriteSearcher = new Septima.Search.FavoriteSearcher({
         			host: "",
         			onSelect: favoriteHit,
             		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
             		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
             		sessionId: sessionId,
             		matchesPhrase: matchPhrase
-        		})});
+        		});
+        		controller.addSearcher({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: favoriteSearcher});
+                _s4Params.favoritesearcher.searcher = favoriteSearcher;
             }
-            
-			//Ceate array of "OnSelect" listeners if not allready created
-			window["_s4OnSelect"] = window["_s4OnSelect"] || [];
-			
+
+            //Collect custom buttons that have been pushed until now
+			var _s4CustomButtons = window["_s4CustomButtons"];
+			for (var i = 0;i<_s4CustomButtons.length;i++){
+				var customButton = _s4CustomButtons[i];
+				if (customButton.searcher && _s4Params[customButton.searcher]){
+					_s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+				}
+			}
+			//Prepare for future pushes
+			window["_s4CustomButtons"] = {
+					push: function (customButton) {
+						if (customButton.searcher && _s4Params[customButton.searcher]){
+							_s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+						}
+					}
+			};
+
         	controller.go ();
         	
         	if (_s4View.top() !=null){
@@ -333,6 +368,7 @@ function showResultInMap(result){
 		var wkt = olGeom.toString();
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
+
 	}
     _s4View.blur();
 }
@@ -440,7 +476,6 @@ function s4DoPrint(result){
 	}
 	cbKort.events.fireEvent('S4', {type: 's4DoPrint', result: result});
 }
-
 
 function s4_getGstAuthParams(){
 //	var ticket = null;
