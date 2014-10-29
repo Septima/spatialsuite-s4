@@ -50,7 +50,6 @@ Issues: https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Released versions:  
-
       2.2.4b1:   https://github.com/Septima/spatialsuite-s4/archive/2.2.4b1.zip  
       2.2.31:   https://github.com/Septima/spatialsuite-s4/archive/2.2.31.zip  
       2.2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.2.zip  
