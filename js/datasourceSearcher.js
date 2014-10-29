@@ -7,7 +7,11 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		
 		options.usesGeoFunctions = true;
 		if (options.matchesPhrase === undefined){
-			options.matchesPhrase = cbInfo.getString('s4.list.matchphrase');
+			if (cbKort){
+				options.matchesPhrase = cbInfo.getString('s4.list.matchphrase');
+			}else{
+				options.matchesPhrase = 'matcher';
+			}
 		}
 		
 		if (options.onSelect === undefined){
@@ -16,7 +20,15 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		this.Searcher(options);
 		//Options
 	    this.datasource = options.datasource;
-	    this.hyperLinkLabel = options.hyperLinkLabel || cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
+		if (options.hyperLinkLabel === undefined){
+			if (cbKort){
+			    this.hyperLinkLabel = cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
+			}else{
+			    this.hyperLinkLabel = 'Se mere';
+			}
+		}else{
+		    this.hyperLinkLabel = options.hyperLinkLabel || cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
+		}
 	    this.iconURI = options.iconURI || null;
     },
     

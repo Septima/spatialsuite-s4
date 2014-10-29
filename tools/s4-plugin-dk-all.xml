@@ -31,9 +31,6 @@
 	            //  autofocus: true or false. Default is false 
 	            view: {limit: 20, blankbehavior: "search", autofocus: false, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
 	            
-	            //Smart-adress
-	            adresssearcher: {enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
-	            
 	            //Geodatastyrelsen-geosearch
 	            // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
 	            geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},

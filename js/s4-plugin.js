@@ -1,29 +1,10 @@
 var _s4View = null;
 var _s4Params = null;
 
-function s4_getDefaultParams(){
-	return {
-		municipality: '*', 
-		view:{limit: 20, blankbehavior: "search", autofocus: true, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet_contact'},
-        adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
-        geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse'], streetNameHit: false},
-        cvrsearcher:{enabled: true, info: true, print: true},
-        plansearcher:{enabled: true, info: true, print: true},
-        indexsearcher:{enabled: true, info: true, print: true, datasources: "*"},
-        themesearcher:{enabled: true},
-        profilesearcher:{enabled: true},
-        favoritesearcher:{enabled: true},
-        workspacesearcher:{enabled: true}};
-}
-
 function s4_init (params){
     if (_s4View == null) {
     			
-        	if (params == undefined){
-        		_s4Params = s4_getDefaultParams();
-        	}else{
-        		_s4Params = params;
-        	}
+       		_s4Params = params;
     	
         	//Get localized strings
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
@@ -51,8 +32,6 @@ function s4_init (params){
                         panel = params.panel;
                     }
 
-                    //Append the inputcontainer to <body>
-                    //jQuery("body").append(inputContainer);
                     inputContainer.addClass('in-'+panel);
                     
                     if (panel === 'panel-brand'){
@@ -141,23 +120,6 @@ function s4_init (params){
             	//http://dopiaza.org/tools/datauri/index.php
             	var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
                 var printButtonDef = {"buttonText":printButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};
-            }
-            
-            //Set up adress searcher
-            if (_s4Params.adresssearcher && _s4Params.adresssearcher.enabled){
-            	var adressSearchOptions = {apiKey: _s4Params.adresssearcher.apiKey, onSelect: s4AdressHit, matchesPhrase: matchPhrase};
-            	if (_s4Params.municipality != "*"){
-            		adressSearchOptions.area = "muncode0" + _s4Params.municipality;
-            	}
-            	var adressSearcher = new Septima.Search.AddressSearcher(adressSearchOptions);
-            	controller.addSearcher({"title": "Adresser", "searcher" : adressSearcher});
-                if (_s4Params.adresssearcher.info){
-                	adressSearcher.addCustomButtonDef(infoButtonDef);
-                }
-                if (_s4Params.view.printconfig && _s4Params.adresssearcher.print){
-                	adressSearcher.addCustomButtonDef(printButtonDef);
-                }
-                _s4Params.adresssearcher.searcher = adressSearcher;
             }
             
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){

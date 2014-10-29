@@ -4,6 +4,7 @@
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#s4customization)
+####[Included tools](#tools)
 ####[Search Spatial Suite data](#local)
  *  [Build the search index](#build)
  *  [Separate indexes for separate sites](#build.site)
@@ -12,7 +13,7 @@
 ####[FAQ and Issues](#problems)
 
 ## <a name="description"></a>Description
-Septima Search for Spatial Suite (s4) is a search tool. The user can search [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
+Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
 offered by Septima.
 
 S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
@@ -140,9 +141,6 @@ panel: 'default',
 //  autofocus: true or false. Default is false 
 view:{limit: 20, blankbehavior: "search", autofocus: false, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
 
-//Smart-adress
-adresssearcher:{enabled: false, info: true, print: true, apiKey: "FCF3FC50-C9F6-4D89-9D7E-6E3706C1A0BD", streetNameHit: false},
-
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
 geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
@@ -203,6 +201,11 @@ Add the customized tool to your profile:
 ```
 
 Finished, now try out your profile and the customized search tool
+
+## <a name="tools"></a> Included tools  
+
+S4 comes a number of included tools. Please [the tools section](/tools)  
+
 
 ## <a name="local"></a> Search Spatial Suite data  
 

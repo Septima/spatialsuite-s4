@@ -16,7 +16,8 @@
     <jssrc><![CDATA[
 	    [if: ModuleDefined("s4") ]
 	    	//Callback på select af vej
-           	var _s4OnSelect = _s4OnSelect || [];    // Brug eksisterende array eller skab en ny
+	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
+           	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
 			_s4OnSelect.push(function(result){
 				if (result.data && result.data.type && result.data.type == 'streetNameType'){
 					var streetCode = trim(result.data.streetCodes);
@@ -46,16 +47,17 @@
 			});
 			//Søg vejnavne
 			//https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher
-			var _s4Searchers = _s4Searchers || [];   // Brug eksisterende array eller skab en
-			var options = {
-				datasource: "ds_s4_vejmidte"
-			};
-           	_s4Searchers.push({
-           		title: "veje",
-           		searcher : new Septima.Search.DatasourceSearcher(options),
-           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
-           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
-           	});
+			window["_s4Searchers"] = window["_s4Searchers"] || [];
+ 			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
+ 			var options = { 
+ 				datasource: "ds_s4_vejmidte" 
+ 			}; 
+            	_s4Searchers.push({
+            		title: "veje",
+            		searcher : new Septima.Search.DatasourceSearcher(options), 
+            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet 
+            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+            	});
 		[endif]
     ]]>
     </jssrc>

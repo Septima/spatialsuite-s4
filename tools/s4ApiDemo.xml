@@ -8,7 +8,8 @@
     <src/>
     <jssrc><![CDATA[
 	    [if: ModuleDefined("s4") ]
-			var _s4Searchers = _s4Searchers || [];   // Brug eksisterende array eller skab en
+			window["_s4Searchers"] = window["_s4Searchers"] || [];
+ 			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
 			var options = {
 				datasource: "ds_park_monumenter",    // Obligatorisk
 				onSelect: s4Hit,                     // valgfri. Angiv egen funktion. Default er visning i kort
@@ -22,7 +23,8 @@
            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
-           	var _s4OnSelect = _s4OnSelect || [];    // Brug eksisterende array eller skab en ny
+	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
+           	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
             	_s4OnSelect.push(function(result){ 
             		if (result.searcher.title == "Monumenter"){ 
             			alert("Monument " + result.title + " valgt"); 
