@@ -15,7 +15,7 @@ The main tool. Include this to enable search in Spatial Map
 * s4-plugin-all is used used outside Denmark  
 [Configuration instructions](../../../#s4customization)  
 
-###<a name="s4-vejmidter-plugin">s4-vejmidter-plugin  
+###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
 Only relevant in Denmark  
 Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af gst), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
 Inkludér i profil:  
@@ -45,7 +45,7 @@ Eksempel:
 		</datasource>       
 ```  
   
-###<a name="s4-eknap-plugin ">s4-eknap-plugin  
+###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
 Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch  
 Inkludér i profil:  
@@ -58,10 +58,10 @@ Inkludér i profil:
 <tool dir="custom" name="s4-eknap-plugin" />
 ```  
 
-###<a name="apidemo">s4ApiDemo  
+###<a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
 
-###<a name="s4-requires">s4-requires  
+###<a name="s4-requires"></a>s4-requires  
 Internal tool. Used by the other tools  
 
 
