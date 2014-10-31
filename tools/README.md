@@ -47,15 +47,23 @@ Eksempel:
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
-Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch  
+Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-søgeren.  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-eknap-plugin" />
 ```  
-Hvis du ønsker E-Knap for andre typer søgeresultatere skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
+Hvis du ønsker E-Knap for andre typer søgeresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
 Inkludér i profil:  
 ```xml
 <tool dir="custom" name="s4-eknap-plugin" />
+```  
+For tilføje E-Knap for resultater fra dit lokale indeks skal du sætte target til _entalsformen_ af den presentation, der bruges i indekset. Eksempel:  
+```javascript
+_s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for skolen", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "indexsearcher", "target": "skole"});
+```  
+hvor ordet "skole" korresponderer med _text.value_ i presentation:  
+```xml
+<text name="overskrift" value="Skole" plural="Skoler"/>
 ```  
 
 ###<a name="apidemo"></a>s4ApiDemo  
