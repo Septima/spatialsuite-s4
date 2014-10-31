@@ -17,12 +17,18 @@ The main tool. Include this to enable search in Spatial Map
 
 ###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
 Only relevant in Denmark  
-Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af gst), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
+Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af geosearch), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-vejmidter-plugin" />
 ```  
-Forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med to commands:  
+Sæt _streetNameHit_ til true i geosearcher-opsætningen i s4:  
+```xml
+geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: true},
+```  
+Forbered en datasource:  
+  
+s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med to commands:  
 * read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnér max [limit] veje.  
 * read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
   
