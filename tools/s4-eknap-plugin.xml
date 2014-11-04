@@ -51,7 +51,7 @@
 			           y2: bounds.bottom
 			        };   
 					
-					cbKort.mapObj.zoomToExtent(extent, '100');
+					cbKort.mapObj.zoomToExtent(extent, 100);
 				}
 			    _s4View.blur();
 			}

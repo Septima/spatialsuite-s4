@@ -129,7 +129,10 @@ function s4_init (params){
                 			targets: _s4Params.geosearcher.targets,
                 			authParams: gstAuthParams,
                 		    onSelect: s4GeoHit, matchesPhrase: matchPhrase
-                	    };
+                	};
+                	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'centroid'){
+                		geoSearchOptions.returnCentroid = true;
+                	}
                 	if (_s4Params.municipality != "*"){
                 		var municipalities = _s4Params.municipality.split(' ');
                 		for (var i=0;i<municipalities.length;i++){
@@ -301,26 +304,57 @@ function s4_init (params){
     }
 }
 
-function s4AdressHit(result){
-	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.adresssearcher.streetNameHit)){
-		s4Hit(result);
-	}
-}
-
 function s4GeoHit(result){
 	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.geosearcher.streetNameHit)){
-		s4Hit(result);
+    	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'zoom' && (result.data.type == "kommune" || result.data.type == "opstillingskreds" || result.data.type == "politikreds" || result.data.type == "postdistrikt" || result.data.type == "region" || result.data.type == "retskreds" || result.data.type == "stednavn")){
+    		s4Hit(result, "zoom");
+    	}else{
+    		s4Hit(result);
+    	}
 	}
 }
 
-function s4Hit(result){
+function s4Hit(result, geometryBehavior){
+	//geometryBehavior: [null, 'zoom']
 	cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
     for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
 			return;
 		}
 	}
-    showResultInMap(result);
+	if (result.geometry){
+	    if (geometryBehavior !== 'undefined' && geometryBehavior == 'zoom'){
+	        zoomToResultInMap(result);
+	    }else{
+	        showResultInMap(result);
+	    }
+	}
+}
+
+function zoomToResultInMap(result){
+	if (result.geometry){
+		var geojson = new OpenLayers.Format.GeoJSON();
+	    var olGeom = geojson.read(result.geometry, 'Geometry');
+
+		//Draw in map
+//		var wkt = olGeom.toString();
+//	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+//	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
+	    cbKort.dynamicLayers.removeAll();
+	    
+//	    //Zoom to extent
+	    var bounds = olGeom.getBounds();
+	    var extent = 
+        {  x1: bounds.left,
+           y1: bounds.top,
+           x2: bounds.right,
+           y2: bounds.bottom
+        };   
+		
+        //extent = SpatialMap.Util.convertBuffer (100, extent);
+		cbKort.mapObj.zoomToExtent(extent, 100);
+	}
+    _s4View.blur();
 }
 
 function showResultInMap(result){
@@ -328,9 +362,9 @@ function showResultInMap(result){
 		var geojson = new OpenLayers.Format.GeoJSON();
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
 		var wkt = olGeom.toString();
+		//Draw in map
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
-
 	}
     _s4View.blur();
 }
@@ -426,7 +460,6 @@ function s4DoPrint(result){
 	if(typeof printObject !== 'undefined'){
 		printObject.closeHandler();
 	}
-	
     showResultInMap(result);
 	
 	print_getConfig(_s4Params.view.printconfig);
@@ -440,20 +473,6 @@ function s4DoPrint(result){
 }
 
 function s4_getGstAuthParams(){
-//	var ticket = null;
-//	var cbHttp = new CBhttp ();    	
-//	cbHttp.setMethod('get');
-// 	try{  
-//	     var pcomp = cbHttp.executeUrl ('/cbkort?page=s4getkmsticket&ts=' + Math.floor((Math.random() * 100) + 1) , false);
-//	   	 var col = pcomp.get(0);
-//	   	 if(col != null){
-//	   		 ticket = col.getValue();
-//	   	 }
-//   }catch(e){
-// 		return null;
-// 	}
-//	return {ticket: ticket};
-
 	var login = cbInfo.getParam('s4.gst.login');
 	var password = cbInfo.getParam('s4.gst.password');
 	return {login: login, password: password};

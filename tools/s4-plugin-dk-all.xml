@@ -33,7 +33,8 @@
 	            
 	            //Geodatastyrelsen-geosearch
 	            // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-	            geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
+	            // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
+	            geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
 	            
 	            //Septima CVR-index
 	            cvrsearcher: {enabled: true, info: true, print: true},
