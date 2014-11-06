@@ -33,6 +33,7 @@ s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_ve
 * read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
   
 Eksempel:  
+Dette er den datasource, bruges i Silkeborg.  
 ```xml
 <datasource endpoint="s4_vejmidte" name="ds_s4_vejmidte">
 	<!-- https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher -->
@@ -50,6 +51,11 @@ Eksempel:
 	</sql>
 </datasource>       
 ```  
+Jacob Nicolajsen skriver:  
+Vejmidtedata er genereret ud fra ”FOT Vejmidte brudt” hvor GST har lagt CPR-Vejkode på de fleste vejmidter (der er stumper af småveje der ikke er med).
+Jeg har lavet et script i databasen, der aggregerer geometrien på baggrund af vejkoden og sætter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kører en gang i døgnet, så rettelser i vejmidten og test mod adresserne altid er ajour.
+Scriptet deler jeg selvfølgeligt gerne, men det virker jo kun i SQL server.  
+
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
