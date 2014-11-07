@@ -1,40 +1,25 @@
---This script assumes a database with the name [s4Index]
---Creates login and user s4Index and gives permissions to acces the database
+--Create the s4 user manually OR Use this script
+-- This script assumes a database with the name [s4]
+-- Creates login and user s4 and gives permissions to acces the database
+
 --Login
 USE [master]
 GO
-CREATE LOGIN [s4Index] WITH PASSWORD=N's4Index', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+CREATE LOGIN [s4] WITH PASSWORD=N's4', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 GO
 
 --User
 USE [s4]
 GO
-CREATE USER [s4Index] FOR LOGIN [s4Index]
+CREATE USER [s4] FOR LOGIN [s4]
 GO
 
 --Permissions
-use [s4]
+USE [s4]
 GO
-GRANT DELETE TO [s4Index]
+ALTER ROLE [db_datareader] ADD MEMBER [s4]
 GO
-use [s4]
+USE [s4]
 GO
-GRANT EXECUTE TO [s4Index]
+ALTER ROLE [db_datawriter] ADD MEMBER [s4]
 GO
-use [s4]
-GO
-GRANT INSERT TO [s4Index]
-GO
-use [s4]
-GO
-GRANT REFERENCES TO [s4Index]
-GO
-use [s4]
-GO
-GRANT SELECT TO [s4Index]
-GO
-use [s4]
-GO
-GRANT UPDATE TO [s4Index]
-GO
-
