@@ -67,14 +67,13 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 //	},
     
     toggleTheme: function(result){
-    	return;
-//    	if (result.data.theme.visible){
-//    		cbKort.setThemeVisibility(result.data.theme.name, false, true);
-//        	return this.offCustomButtonDef[0];
-//    	}else{
-//    		cbKort.setThemeVisibility(result.data.theme.name, true, true);
-//        	return this.onCustomButtonDef[0];
-//    	}
+    	if (result.data.theme.visible){
+    		cbKort.setThemeVisibility(result.data.theme.name, false, true);
+        	return this.offCustomButtonDef[0];
+    	}else{
+    		cbKort.setThemeVisibility(result.data.theme.name, true, true);
+        	return this.onCustomButtonDef[0];
+    	}
     },
     
     getThemeDescription: function(theme){
@@ -242,7 +241,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         	}else{
         		return this.offCustomButtonDef;
         	}
-    		return this.onCustomButtonDef;
         }
 	},
 
