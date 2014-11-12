@@ -31,7 +31,7 @@
 	            
 	            //Local SpatialSuite datasources
 	            //datasources: "*" for all, or space separated names of datasources
-	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*"},
+	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankBehavior: "search"},
 	            
 	            //Themes in profile
 	            themesearcher: {enabled: true},

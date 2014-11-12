@@ -174,6 +174,9 @@ function s4_init (params){
             
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
+                if (_s4Params.indexsearcher.blankBehavior){
+                	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankBehavior;
+                }
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	controller.addSearcher({title: "", searcher: s4IndexSearcher});
                 if (_s4Params.indexsearcher.info){
@@ -336,10 +339,6 @@ function zoomToResultInMap(result){
 		var geojson = new OpenLayers.Format.GeoJSON();
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
 
-		//Draw in map
-//		var wkt = olGeom.toString();
-//	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-//	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
 	    cbKort.dynamicLayers.removeAll();
 	    
 //	    //Zoom to extent
@@ -351,7 +350,6 @@ function zoomToResultInMap(result){
            y2: bounds.bottom
         };   
 		
-        //extent = SpatialMap.Util.convertBuffer (100, extent);
 		cbKort.mapObj.zoomToExtent(extent, 100);
 	}
     _s4View.blur();
@@ -362,6 +360,7 @@ function showResultInMap(result){
 		var geojson = new OpenLayers.Format.GeoJSON();
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
 		var wkt = olGeom.toString();
+
 		//Draw in map
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
