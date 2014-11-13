@@ -43,8 +43,9 @@
 	            plansearcher: {enabled: true, info: true, print: true},
 	            
 	            //Local SpatialSuite-datasources
-	            //datasources: "*" for all, or space separated names of datasources
-	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankBehavior: "search"},
+	            //  datasources: "*" for all, or space separated names of datasources
+	            //  blankbehavior: search or none
+	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
 	            
 	            //Themes in profile
 	            themesearcher: {enabled: true},

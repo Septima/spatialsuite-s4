@@ -111,7 +111,7 @@ Add the customized tool to your profile:
 <tool dir="custom" name="s4-plugin-all"/>
 ```
   
-S4 will now search themes, profiles, and workspaces. In order to search your local data please See [Search Spatial Suite data](#local)    
+S4 will now search themes, profiles, and workspaces. In order to search your local data please see [Search Spatial Suite data](#local)    
 
 
 ## <a name="s4customization"></a>Customization of s4 tool
@@ -144,7 +144,8 @@ view:{limit: 20, blankbehavior: "search", autofocus: false, dynamiclayer: 'userd
 
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
+// geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
+geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, geometrybehavior: "bbox"},
 
 //Septima CVR-index
 cvrsearcher:{enabled: true, info: true, print: true},
@@ -153,8 +154,9 @@ cvrsearcher:{enabled: true, info: true, print: true},
 plansearcher:{enabled: true, info: true, print: true},
 
 //Local SpatialSuite-datasources
-//datasources: "*" for all, or space separated names of datasources
-indexsearcher:{enabled: false, info: true, print: true, datasources: "*"},
+//  datasources: "*" for all, or space separated names of datasources
+//  blankbehavior: search or none
+indexsearcher:{enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
 
 //Themes in profile
 themesearcher:{enabled: true},

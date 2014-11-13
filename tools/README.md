@@ -3,6 +3,7 @@
 Please read the [general installation instructions](../../../#installation) before reading this  
 Tools:
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
+* [s4-matrikel-plugin](#s4-matrikel-plugin)
 * [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
 * [s4ApiDemo](#apidemo)  
@@ -15,6 +16,14 @@ The main tool. Include this to enable search in Spatial Map
 * s4-plugin-all is used used outside Denmark  
 [Configuration instructions](../../../#s4customization)  
 
+###<a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
+Only relevant in Denmark  
+Viser ikoner med links til BBR og SKAT for matrikler  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-matrikel-plugin" />
+```  
+  
 ###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
 Only relevant in Denmark  
 Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af geosearch), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
