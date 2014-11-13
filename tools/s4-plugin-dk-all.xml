@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Do not customize this tool. Make copy of module and create your own tool -->
-<tool type="plugin">
+<tool>
     <requires>
 	<include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
@@ -12,6 +12,7 @@
         <!-- Include custom css if you need to customize styles -->
         <!-- <file type="css" name="/css/custom/s4.css" /> -->
     </requires>
+    <displayname>s4Plugin</displayname>
     <src><![CDATA[
             s4_init({
 
@@ -19,6 +20,7 @@
                 
                 //Positioning of s4. Choose between
                 //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
+                //  'tool': Use the panel as specified in the profile
                 //  'panel-brand': Force s4 to panel-brand 
                 //  'panel-top': Force s4 to top menu
                 //  'panel-middle': Force s4 to menu linie (right justified)

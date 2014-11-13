@@ -17,7 +17,7 @@ function s4_init (params){
             //Set up search input box
             var inputContainer = jQuery('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
                 if (jQuery("#panel-brand div.right").length > 0){
-                	if (jQuery("li[id^=s4-plugin]") && typeof params.panel === 'undefined' ){
+                	if (jQuery("li[id^=s4-plugin]") && typeof params.panel !== 'undefined' && params.panel === 'tool' ){
                     	var menuItem = jQuery("li[id^=s4-plugin]");
                     	menuItem.empty();
                     	menuItem.addClass("inpucontainer-spacer");

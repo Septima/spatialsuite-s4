@@ -82,7 +82,7 @@ Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4
     
 Add the customized tool to your profile:
 ```xml
-<tool dir="custom" name="s4-plugin-[your-municipality-code]-all" />
+<tool dir="custom" name="s4-plugin-[your-municipality-code]-all" [panel="xxx"]/>
 ```
 The tool s4-plugin-dk-all searches all of Denmark. You will need to customize your tool (See below)  
 
@@ -90,16 +90,6 @@ Comment out other tools conflicting with this tool e.g.:
 ```xml
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```  
-
-##### Test
-
-Now you are ready to test s4 module and tool(s4-plugin-dk-all).
-
-The s4-plugin-dk-all tool is configured with Geosearcher and the Septima indexes *cvr* and *lokalplan* enabled.  
-* Open a browser and navigate to Spatial Map and the profile where the tool is included. A search input field should be visible in top right corner og the profile  
-* Start typing in the search input field. When results show up in the search field click a result and the map should zoom to the selected search result.  
-* Basic installation and test is now finished  
-  
   
 #### Outside Denmark:    
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
@@ -108,7 +98,7 @@ Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4
     
 Add the customized tool to your profile:
 ```xml
-<tool dir="custom" name="s4-plugin-all"/>
+<tool dir="custom" name="s4-plugin-all" [panel="xxx"]/>
 ```
   
 S4 will now search themes, profiles, and workspaces. In order to search your local data please see [Search Spatial Suite data](#local)    
@@ -130,6 +120,7 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 
 //Positioning of s4. Choose between
 //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
+//  'tool': Use the panel as specified in the profile  
 //  'panel-brand': Force s4 to panel-brand 
 //  'panel-top': Force s4 to top menu
 //  'panel-middle': Force s4 to menu line (right justified)
