@@ -80,7 +80,7 @@ Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml  
     
-Add the customized tool to your profile:
+Add the customized tool to your profile (_panel_ is optional):  
 ```xml
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all" [panel="xxx"]/>
 ```
@@ -96,7 +96,7 @@ Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4
 
     [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml  
     
-Add the customized tool to your profile:
+Add the customized tool to your profile (_panel_ is optional):  
 ```xml
 <tool dir="custom" name="s4-plugin-all" [panel="xxx"]/>
 ```
