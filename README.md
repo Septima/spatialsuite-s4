@@ -1,6 +1,10 @@
-#S4 - Septima Search for SpatialSuite
+#S4 - Septima Search for SpatialSuite  
+  
+Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
+offered by Septima.
+
+S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
 ===
-####[Description](#description)
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#s4customization)
@@ -12,19 +16,12 @@
  
 ####[FAQ and Issues](#problems)
 
-## <a name="description"></a>Description
-Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
-offered by Septima.
-
-S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
+## Links  
   
-S4 product page: http://www.septima.dk/p_s4/  
-
-See a demo here: http://sps-demo.septima.dk  
-
-Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
-
-Issues: https://github.com/Septima/spatialsuite-s4/issues  
+* S4 product page: http://www.septima.dk/p_s4/  
+* See a demo here: http://sps-demo.septima.dk  
+* Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
+* Issues: https://github.com/Septima/spatialsuite-s4/issues  
   
 ## <a name="license"></a>License
  Name:        S4 - Septima Search for SpatialSuite  
@@ -45,7 +42,7 @@ Issues: https://github.com/Septima/spatialsuite-s4/issues
               www.septima.dk  
               kontakt@septima.dk  
 
-## <a name="installation"></a>Basic installation and test
+## <a name="installation"></a>Basic installation and test  
 
 ### Download s4 module:
       
@@ -79,23 +76,27 @@ Development version (at your own risk) may be downloaded from:
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml (It's important that the name starts with _s4-plugin_)  
+    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml   
+(It's important that the name starts with _s4-plugin_)  
     
 Add the customized tool to your profile (_panel_ is optional):  
 ```xml
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all" [panel="xxx"]/>
 ```
-The tool s4-plugin-dk-all searches all of Denmark. You will need to customize your tool (See below)  
 
 Comment out other tools conflicting with this tool e.g.:
 ```xml
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```  
   
+The tool will now search all of Denmark. You will need to set the _municipality_ parameter in your tool (See below)  
+  
+  
 #### Outside Denmark:    
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml (It's important that the name starts with _s4-plugin_)   
+    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml    
+(It's important that the name starts with _s4-plugin_)  
     
 Add the customized tool to your profile (_panel_ is optional):  
 ```xml
@@ -107,10 +108,10 @@ S4 will now search themes, profiles, and workspaces. In order to search your loc
 
 ## <a name="s4customization"></a>Customization of s4 tool
 
-##### Restrict searches for address, cvr, and plan to your municipality  
+##### Restrict searches to your municipality  
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
 
-##### Other options  
+##### General options  
 * Set the __printconfig__ parameter. The default is *rotatet*  
 * Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
 * Set the __autofocus__ parameter. If set, the search input field will get focus immediately meaning the user may start searching right away. Default is *false*  
@@ -163,7 +164,7 @@ favoritesearcher:{enabled: true},
 workspacesearcher:{enabled: true}};
 ```
 
-### Customize other options
+### Searcher options
 
 For each searcher a number of parameters may be set:  
 * __Enable/disable__ a searcher by setting enabled: *true* or *false*  
@@ -186,7 +187,7 @@ To search specific datasources:
 
 ### Create profile specific search tools
 
-You can create as many tools as you need. To tailor a tool to a specific profile make a copy of your tool and call it s4-plugin-[*your-municipality-code*]-[*profile*].xml.  
+You may create as many tools as you need. To tailor a tool to a specific profile make a copy of your tool and call it s4-plugin-[*your-municipality-code*]-[*profile*].xml.  
 
 Replace [*profile*] with the name of the profile in which the customized tool is included.  
 
