@@ -50,7 +50,7 @@ Issues: https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Released versions:  
-      2.2.51:   https://github.com/Septima/spatialsuite-s4/archive/2.2.51.zip  
+      2.2.52:   https://github.com/Septima/spatialsuite-s4/archive/2.2.52.zip  
       2.2.4:   https://github.com/Septima/spatialsuite-s4/archive/2.2.4.zip  
       2.2.31:   https://github.com/Septima/spatialsuite-s4/archive/2.2.31.zip  
       2.2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.2.zip  
@@ -59,7 +59,7 @@ Released versions:
       2.1:   https://github.com/Septima/spatialsuite-s4/archive/2.1.zip  
       2.0.8: https://github.com/Septima/spatialsuite-s4/archive/2.0.8.zip  
       2.0.7: https://github.com/Septima/spatialsuite-s4/archive/2.0.7.zip  
-      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
+      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  (Last version supporting SpatialMap 2.6)
       
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
@@ -79,7 +79,7 @@ Development version (at your own risk) may be downloaded from:
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml  
+    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml (It's important that the name starts with _s4-plugin_)  
     
 Add the customized tool to your profile (_panel_ is optional):  
 ```xml
@@ -95,7 +95,7 @@ Comment out other tools conflicting with this tool e.g.:
 #### Outside Denmark:    
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml  
+    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml (It's important that the name starts with _s4-plugin_)   
     
 Add the customized tool to your profile (_panel_ is optional):  
 ```xml
