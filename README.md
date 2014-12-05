@@ -8,7 +8,7 @@
 ####[Search Spatial Suite data](#local)
  *  [Build the search index](#build)
  *  [Separate indexes for separate sites](#build.site)
- *  [Using an external database](#externaldb)  
+ *  [Using an external database as local data index](#externaldb)  
  
 ####[FAQ and Issues](#problems)
 
@@ -318,8 +318,16 @@ This URL may be called according to your desired workflow and integrated into:
 
 ### <a name="build.site"></a> Separate indexes for separate sites  
 
-In some situations you might want to index differently in internal sites vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites
+In some situations you might want to index differently in internal sites vs external sites. Please see https://github.com/Septima/spatialsuite-s4/wiki/Separate-indexes-for-separate-sites  
 
+### <a name="externaldb"></a> Using an external database as local data index  
+  
+Why use an external database?  
+* Spatial Map versions prior to 2.7 don't include an embedded database. You must create an external database for the s4 index.  
+* Your index is too big for the embedded database. An external database will hold indices of any size  
+  
+In these situations you might want to index In an external database. You may use either postgres og sql server. Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database    
+  
 ## <a name="problems"></a> FAQ and Issues  
 <a name="problems.encoding"><a name="problems.localdata"></a><a name="problems.css"></a>
 If you have any questions please consult the s4 wiki at https://github.com/Septima/spatialsuite-s4/wiki  
