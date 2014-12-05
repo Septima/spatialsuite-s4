@@ -46,24 +46,18 @@ S4 will also search local Spatial Suite data as well as themes, workspaces and f
 
 ### Download s4 module:
       
-Released versions:  
+Current version:  
       2.2.52:   https://github.com/Septima/spatialsuite-s4/archive/2.2.52.zip  
-      2.2.4:   https://github.com/Septima/spatialsuite-s4/archive/2.2.4.zip  
-      2.2.31:   https://github.com/Septima/spatialsuite-s4/archive/2.2.31.zip  
-      2.2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.2.zip  
-      2.2.1:   https://github.com/Septima/spatialsuite-s4/archive/2.2.1.zip  
-      2.2:   https://github.com/Septima/spatialsuite-s4/archive/2.2.zip  
-      2.1:   https://github.com/Septima/spatialsuite-s4/archive/2.1.zip  
-      2.0.8: https://github.com/Septima/spatialsuite-s4/archive/2.0.8.zip  
-      2.0.7: https://github.com/Septima/spatialsuite-s4/archive/2.0.7.zip  
-      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  (Last version supporting SpatialMap 2.6)
-      
+
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Development version (at your own risk) may be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/development.zip  
 
+Last version supporting SpatialMap 2.6:  
+      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
+      
 ### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
 ### Update modules.xml:
