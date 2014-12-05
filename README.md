@@ -1,10 +1,10 @@
 #S4 - Septima Search for SpatialSuite  
   
 Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
-offered by Septima.
+offered by Septima.  
 
 S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
-===
+  
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#s4customization)
@@ -16,7 +16,7 @@ S4 will also search local Spatial Suite data as well as themes, workspaces and f
  
 ####[FAQ and Issues](#problems)
 
-## Links  
+### Links  
   
 * S4 product page: http://www.septima.dk/p_s4/  
 * See a demo here: http://sps-demo.septima.dk  
