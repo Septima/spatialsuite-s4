@@ -233,6 +233,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
 	
 	getCustomButtonDefs: function(result){
+		//var button = result.data.theme.actions[1].getGuiButton();
+		//append(button.element)
         if (typeof result.newquery !== 'undefined'){
         	return [];
         }else{
