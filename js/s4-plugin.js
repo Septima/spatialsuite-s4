@@ -368,14 +368,12 @@ function showResultInMap(result){
     _s4View.blur();
 }
 
-function themeHit(hit){
+function themeHit(result){
     _s4View.blur();
-	if (hit.data.theme.visible){
-		cbKort.setThemeVisibility(hit.data.theme.name, false, true);
-	}else{
-		cbKort.setThemeVisibility(hit.data.theme.name, true, true);
-	}
-	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: hit.data});
+    if (!result.data.theme.visible){
+        result.searcher.toggleTheme(result);
+    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+    }
 }
 
 function favoriteHit(hit){

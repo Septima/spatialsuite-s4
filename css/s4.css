@@ -74,3 +74,4 @@ ul.better-autocomplete {
   padding: 3px 7px;
 }
 
+#themeactions li{float:left; margin-right: 5px;cursor: pointer;}
