@@ -24,11 +24,6 @@
     display: inline-block;
 }
 
-.better-autocomplete > .result > div.resultimage {
-	min-height: 20px;
-	min-width: 20px;
-}
-
 
 #panel-brand .inpucontainer-spacer {
 }
@@ -74,4 +69,5 @@ ul.better-autocomplete {
   padding: 3px 7px;
 }
 
-#themeactions li{float:left; margin-right: 5px;cursor: pointer;}
+#themeactions li {float:left; margin-right: 5px;}
+#themeactions li a{cursor: pointer;}

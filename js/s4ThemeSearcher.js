@@ -12,6 +12,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 	groups: [],
     initialize: function (options) {
 		this.Searcher(options);
+		this.visibleThemesPhrase = cbInfo.getString('s4.themesearcher.visiblethemes');
     	this.themePhrase = cbInfo.getString('s4.themesearcher.theme');
     	this.themesPhrase = cbInfo.getString('s4.themesearcher.themes');
     	this.showPhrase = cbInfo.getString('s4.themesearcher.show');
@@ -61,10 +62,26 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			this.registerTarget(group.displayname + " (" + this.themesPhrase +")")
     		}
     	}
+		this.registerTarget(this.visibleThemesPhrase);
+    	
     	//Sort groups
     	this.groups.sort(function(g1, g2){
 			return (g1.displayname.localeCompare(g2.displayname));
 		});
+    },
+    
+    getVisibleThemes: function(){
+    	var visibleThemes = [];
+    	for (var i=0;i<this.groups.length;i++){
+    		var group = this.groups[i];
+    		for (var j=0;j<group.themes.length;j++){
+    			var theme = group.themes[j];
+    			if (theme.theme.visible){
+    				visibleThemes.push(theme);
+    			}
+    		}
+    	}
+    	return visibleThemes;
     },
     
 //	onSelect: function(result){
@@ -117,88 +134,103 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     fetchData: function (query, caller) {
     	var groupName = "*";
 
+        var queryResult = this.createQueryResult();
+        
     	if (query.hasTarget){
     		if (this.hasTarget(query.target)){
     			groupName = query.target;
-    		}
+    		}else{
+    			var result = queryResult.addNewQuery(this.visibleThemesPhrase, this.visibleThemesPhrase, this.visibleThemesPhrase + ":", null, null, null);
+	            result.image = this.folderIconURI;
+	        }
     	}
     	
-        var queryResult = this.createQueryResult();
-    	var groupsWithMatchingNames = [];
-    	var groupsWithMatchingThemes = [];
-    	var nameMatchingThemes = [];
-    	var queryTerms = query.queryString.split(" ");
-    	if (queryTerms.length>0){
-    		groupsWithMatchingThemes = this.getGroupsWithMatchingThemes(queryTerms, groupName);
-    		var totalThemeCount = 0;
-    		for (var i=0;i<groupsWithMatchingThemes.length;i++){
-    			totalThemeCount += groupsWithMatchingThemes[i].themes.length;
-    		}
-    		if (query.type == "list.force" || totalThemeCount<query.limit){
-    			var themesToShow = [];
-    			for (var i=0;i<groupsWithMatchingThemes.length;i++){
-    				themesToShow = themesToShow.concat(groupsWithMatchingThemes[i].themes);
-    			}
-    			themesToShow.sort(function(a, b){
-					if (a.score == b.score){
-						return a.theme.displayname.localeCompare(b.theme.displayname)
-					}else{
-    					return b.score - a.score;
-					}
-				});
-				for (var j=0;j<themesToShow.length;j++){
-					theme = themesToShow[j];
-					var result1;
-					if (query.hasTarget){
-    					result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
-					}else{
-    					result1 = queryResult.addResult(theme.theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
-					}
-                    result1.image = theme.image;
-				}
-    		}else if (query.type == "list"){
-        		var freeSlots = query.limit - groupsWithMatchingThemes.length;
-        		if (groupsWithMatchingThemes.length > freeSlots && !query.hasTarget){
-        			var description = null;
-        			if (query.queryString.length > 0){
-        				description = totalThemeCount + " " + this.themesPhrase + " " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
-        			}
-					var result3 = queryResult.addNewQuery(this.title, description, query.queryString, null, null, null)
-					if (query.queryString.length > 0){
-			            result3.image = this.folderIconURI;
-					}else{
-			            result3.image = this.iconURI;
-					}
-        		}else{
-        			for (var i=0;i<groupsWithMatchingThemes.length;i++){
-        				var group = groupsWithMatchingThemes[i];
-        				if (group.themes.length==1 || group.themes.length<freeSlots){
-        					//TODO: list all themes
-        					for (var j=0;j<group.themes.length;j++){
-            					theme = group.themes[j];
-            					var result1;
-            					if (query.hasTarget){
-                					result1 = queryResult.addResult(theme.displayname, theme.description, " ", theme);
-            					}else{
-                					result1 = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
-            					}
-                                result1.image = theme.image;
-        					}
-        					freeSlots -= group.themes.length;
-        				}else{
-        					var count = group.themes.length;
-        					var groupDescription = "";
-        					for (var k=0;k<count;k++){
-        						groupDescription += group.themes[k].displayname + ", ";
-        					}
-        					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, group.group.displayname + ": " + query.queryString, null, null, null)
-                            result3.image = this.folderIconURI;
-        				}
-        			}
+        if (groupName == this.visibleThemesPhrase){
+        	var visibleThemes = this.getVisibleThemes();
+        	for (var i=0;i<visibleThemes.length;i++){
+        		var theme = visibleThemes[i];
+        		var result = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+        		result.image = theme.image;
+        	}
+        }else{
+        	var groupsWithMatchingNames = [];
+        	var groupsWithMatchingThemes = [];
+        	var nameMatchingThemes = [];
+        	var queryTerms = query.queryString.split(" ");
+        	if (queryTerms.length>0){
+        		groupsWithMatchingThemes = this.getGroupsWithMatchingThemes(queryTerms, groupName);
+        		var totalThemeCount = 0;
+        		for (var i=0;i<groupsWithMatchingThemes.length;i++){
+        			totalThemeCount += groupsWithMatchingThemes[i].themes.length;
         		}
-    		}
+        		if (query.type == "list.force" || totalThemeCount<query.limit){
+        			var themesToShow = [];
+        			for (var i=0;i<groupsWithMatchingThemes.length;i++){
+        				themesToShow = themesToShow.concat(groupsWithMatchingThemes[i].themes);
+        			}
+        			themesToShow.sort(function(a, b){
+    					if (a.score == b.score){
+    						return a.theme.displayname.localeCompare(b.theme.displayname)
+    					}else{
+        					return b.score - a.score;
+    					}
+    				});
+    				for (var j=0;j<themesToShow.length;j++){
+    					theme = themesToShow[j];
+    					var result1;
+    					if (query.hasTarget){
+        					result1 = queryResult.addResult(theme.theme.displayname, theme.description, " ", theme);
+    					}else{
+        					result1 = queryResult.addResult(theme.theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
+    					}
+                        result1.image = theme.image;
+    				}
+        		}else if (query.type == "list"){
+            		var freeSlots = query.limit - groupsWithMatchingThemes.length;
+            		if (groupsWithMatchingThemes.length > freeSlots && !query.hasTarget){
+            			var description = null;
+            			if (query.queryString.length > 0){
+            				description = totalThemeCount + " " + this.themesPhrase + " " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
+            			}
+    					var result3 = queryResult.addNewQuery(this.title, description, query.queryString, null, null, null)
+    					if (query.queryString.length > 0){
+    			            result3.image = this.folderIconURI;
+    					}else{
+    			            result3.image = this.iconURI;
+    					}
+            		}else{
+            			for (var i=0;i<groupsWithMatchingThemes.length;i++){
+            				var group = groupsWithMatchingThemes[i];
+            				if (group.themes.length==1 || group.themes.length<freeSlots){
+            					//TODO: list all themes
+            					for (var j=0;j<group.themes.length;j++){
+                					theme = group.themes[j];
+                					var result1;
+                					if (query.hasTarget){
+                    					result1 = queryResult.addResult(theme.displayname, theme.description, " ", theme);
+                					}else{
+                    					result1 = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", theme);
+                					}
+                                    result1.image = theme.image;
+            					}
+            					freeSlots -= group.themes.length;
+            				}else{
+            					var count = group.themes.length;
+            					var groupDescription = "";
+            					for (var k=0;k<count;k++){
+            						groupDescription += group.themes[k].displayname + ", ";
+            					}
+            					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, group.group.displayname + ": " + query.queryString, null, null, null)
+                                result3.image = this.folderIconURI;
+            				}
+            			}
+            		}
+        		}
 
-    	}
+        	}
+             	
+        }
+   	
     	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
     
