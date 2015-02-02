@@ -82,6 +82,16 @@ Comment out other tools conflicting with this tool e.g.:
 ```xml
 <!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
 ```  
+
+##### Update cbinfo.xml (In Denmark):  
+In order to search the danish Plansystem and cvr data, please include the following parameter in your relevant cbinfo.xml:    
+```xml
+	<!-- =================================== -->
+	<!-- S4 Index parameters                 -->
+	<!-- =================================== -->  
+	<param name="s4.searchchindex.token">aaaaAAAA-00000000</param>
+```  
+where aaaaAAAA-00000000 is a special token provided to you by Septima.  
   
 The tool will now search all of Denmark. You will need to set the _municipality_ parameter in your tool (See below)  
   
