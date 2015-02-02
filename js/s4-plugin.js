@@ -11,6 +11,12 @@ function s4_init (params){
         	var printButtonCaption = "Print";
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+        	var searchIndexTokenParamName = 's4.searchchindex.token';
+        	var searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+        	if (searchIndexToken === searchIndexTokenParamName){
+        		//getParam returns paramName if param isn't defined
+        		searchIndexToken = null;
+        	}
         	
         	var sessionId = cbKort.sessionId;
 
@@ -188,13 +194,13 @@ function s4_init (params){
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
             }
         	
-            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
-            	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
-            	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
+            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
+            	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
-            		planSearcher.filter = { 'komnr' : municipalities };
+            		planSearchOptions.filter = { 'komnr' : municipalities };
             	}
+            	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
                 if (_s4Params.plansearcher.info){
                 	planSearcher.addCustomButtonDef(infoButtonDef);
