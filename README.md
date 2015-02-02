@@ -47,7 +47,7 @@ S4 will also search local Spatial Suite data as well as themes, workspaces and f
 ### Download s4 module:
       
 Current version:  
-      2.2.52:   https://github.com/Septima/spatialsuite-s4/archive/2.2.52.zip  
+      2.2.6:   https://github.com/Septima/spatialsuite-s4/archive/2.2.6.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
