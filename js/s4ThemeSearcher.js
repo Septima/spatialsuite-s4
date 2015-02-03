@@ -307,7 +307,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (typeof result.newquery !== 'undefined'){
             return false;
         }else{
-        	if (result.data.theme.actions.length == 0){
+        	if (result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
                 return false;
         	}else{
                 return true;
@@ -316,7 +316,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 	},
 
     getdetailHandlerDefs: function(result){
-        if (typeof result.newquery !== 'undefined' || result.data.theme.actions.length == 0){
+        if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
             return [];
         }else{
         	return ([{"buttonText":"Temaværktøjer", "buttonImage": this.toolsIconURI, "handler": function(result, deferred){
