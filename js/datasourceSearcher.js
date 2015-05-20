@@ -109,11 +109,6 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 				}
 	        	
 	        	var result2 = queryResult.addNewQuery(this.title, description, query.queryString, null, null);
-				if (query.queryString.length > 0 || this.iconURI == null){
-		            result2.image = this.folderIconURI;
-				}else{
-		            result2.image = this.iconURI;
-				}
 	        }
 		}
 	    return queryResult;
