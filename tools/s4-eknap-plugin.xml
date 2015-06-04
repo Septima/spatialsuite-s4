@@ -16,7 +16,7 @@
     <jssrc><![CDATA[
     [if: ModuleDefined("s4") ]
            
-		if (typeof eknap_infoHandler !== 'undefined'){
+		if (typeof eknap_infoHandler !== 'undefined' || typeof eknap_start !== 'undefined'){
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
 			var _s4CustomButtons = window["_s4CustomButtons"];
 		
@@ -40,7 +40,25 @@
 			    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 		
 			    //Call handler
-				eknap_infoHandler(pointOnSurfaceOlGeom);
+			    if (typeof eknap_infoHandler !== 'undefined'){
+			    	//3.9-
+					eknap_infoHandler(pointOnSurfaceOlGeom);
+			    } else {
+			    	//3.9+
+			    	if (eknapModule === null){
+			    		//Adapted from eknap.xml
+						require(["[module.emdb.eknap.js]"], Septima.bind(function (pointOnSurfaceOlGeom) {
+							if (!eknapModule) {
+								eknapModule = new Eknap();
+							} else {
+								eknapModule.initialize();
+							}
+					    	eknapModule.infoHandler(pointOnSurfaceOlGeom);
+							}, this, pointOnSurfaceOlGeom));
+			    	}else{
+				    	eknapModule.infoHandler(pointOnSurfaceOlGeom);
+			    	}
+			    }
 		
 				//Zoom to extent
 			    var bounds = olGeom.getBounds();
