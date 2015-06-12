@@ -312,9 +312,13 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             return [];
         }else{
         	return ([{"buttonText":"Temaværktøjer", "buttonImage": this.toolsIconURI, "handler": function(result, deferred){
-        		var buttons = jQuery("<ul id='themeactions'/>");
+        		var buttons = jQuery("<ul style='list-style: none'/>");
         		for (var i=0;i<result.data.theme.actions.length;i++){
         			var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
+        			button.element.css("float", "left");
+        			button.element.css("list-style", "none");
+        			button.element.css("padding", "4px");
+        			button.element.css("margin", "2px");
         			buttons.append(button.element);
         		}
         		var copyRightLink = result.searcher.getCopyRightLink(result);
@@ -343,6 +347,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     		var copyRightIconUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAvZJREFUeNq0lV9IU1Ecx6eog+7CLsUGZelSuEIbg1uyQNZLIOxBUUIEQVIDH0T26EuCPuxl81V8MqUJgVJqIQ6kIDaGirUcOthAvdpmc6PcpBasSev3jXPgMjSE6sBn5/zOn+859/x+v7OSQqGgKSqlxHXCTBiJq8RF4ivxiVCITSJG/CxeXFIkqCXuEPeYmIA5qnFMzjJRH/GOyJ0leJl4QDQS5ejY29sTYrGYwCeYTKaMKIo/mJknAsQL4kux4BXiEWGB4ff79R6P53YymbwE22AwZHhblmWlu7t7s6amJss0QsQT4jMXvED1Q8KGDpfLJQcCAQkL29raohaLJc1393q9VUtLS9Lh4aHY29u7arfb42zITzwlvmtIsJHwEM8mJyffNzc3F2ZnZ1dhg6Ojo+c+n+81at43PDy8i3kbGxte1udhOmU44WNSvoX7cjgcLXSqYE9PTzQUCokTExPy/v6+np+wsrIy29nZGcTJBgcHbYlEQpyenn7FhsPES4TIDVgzMzMSFkAsnU5XOJ3O+xCrrq5OYZOmpqYtzNvZ2RFR9/f3B4+PjwVcAxOEjqmMfnSwtre3DVarFeGgWVhYMOZyufL6+vq42+328xMODAxs4kvQhlOwGdsgznSMpTzO4EVyQBLtbDZbgbqhoeGgOHBV3tVIkpSKRqP8SqCjL9X8RaGNy09LswKPNXKEAW1BEH4H7/r6+jX1ZNwt/2SUeDwu4pSqLEpB8Busurq65NraGtJN09raqmi12nwkEqnq6upqGRsbM4+MjNzt6+trWVxcvMmzCE6rra3lcQodBYIfYXV0dEThtampKQnpNTo66oVT0Le8vGwKBoNGKkl+z+Pj4zK+ShXc0NmCl9/ifnHZCI/5+XlZp9Pl29vbd9UeVhecVlEUw9DQ0BvWdcJ0IhD8QKwg9RCD8DAFqzUcDutPS725uTlzJpNBEvhUYytM5+TMx4HSz6zOEl7O8zic+/my2WwplfYfn6//8sD+k7+AXwIMAMt2pRoJ8z/kAAAAAElFTkSuQmCC';
     		if (text !== null && url !== null){
     			link = jQuery("<a target='_blank' href='" + url + "' title='" + text + "'><img src='" + copyRightIconUri + "'/></a>");
+    			link.css("padding", "4px");
+    			link.css("margin", "2px");
+    			link.css("top", "4px");
+    			link.css("position", "relative");
     		}
     	}
     	return link;

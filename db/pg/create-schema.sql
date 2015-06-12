@@ -43,9 +43,6 @@ ALTER TABLE ONLY datasource
 ALTER TABLE ONLY feature
     ADD CONSTRAINT fid_idx PRIMARY KEY (featureid);
 
-ALTER TABLE ONLY featureterm
-    ADD CONSTRAINT ftid_idx PRIMARY KEY (featureid, term);
-
 ALTER TABLE ONLY feature
     ADD CONSTRAINT unique_featureid UNIQUE (featureid);
 
