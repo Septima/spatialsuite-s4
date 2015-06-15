@@ -30,7 +30,7 @@ S4 will also search local Spatial Suite data as well as profiles, themes, worksp
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013-2014  
+ Copyright:   (c) Septima P/S 2013-2015  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
@@ -47,7 +47,7 @@ S4 will also search local Spatial Suite data as well as profiles, themes, worksp
 ### Download s4 module:
       
 Current version:  
-      2.2.6:   https://github.com/Septima/spatialsuite-s4/archive/2.2.6.zip  
+      2.2.62:   https://github.com/Septima/spatialsuite-s4/archive/2.2.62.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  

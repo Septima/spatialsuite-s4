@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.2.6</version>
+   <version>2.2.62</version>
    <stoponerror>true</stoponerror>
   
    <makedir dir="[cbinfo.wwwroot.dir]/jsp/modules/s4"/>
