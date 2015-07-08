@@ -234,7 +234,7 @@ function s4_init (params){
                 _s4Params.themesearcher.searcher = themeSearcher;
             }
 
-            if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_container !== 'undefined'){
+            if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_init !== 'undefined'){
             	var workspaceSearcher = new Septima.Search.workspaceSearcher({
         			host: "",
         			onSelect: workspaceHit,
@@ -401,7 +401,7 @@ function profileHit(hit){
 function workspaceHit(hit){
     _s4View.blur();
 	var workspaceId = hit.data.wrkspcid;
-	if (typeof workspace_container !== 'undefined' ){
+	if (typeof workspace_init !== 'undefined' ){
 		if (typeof workspace_controls == 'undefined' ){
 			//Workspace version2
 			if (workspace_container === null) {
@@ -418,7 +418,7 @@ function workspaceHit(hit){
 	        }
 		}else{
 			//Workspace version3
-            if (workspace_container === null) {
+            if (typeof workspace_container === 'undefined' || workspace_container === null) {
 				var workspacejs = cbInfo.getParam('module.workspace.js');
 				var spatialmapVersion = cbInfo.getParam('spatialmap.version');
 	            require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {

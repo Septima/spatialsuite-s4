@@ -83,17 +83,14 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	return visibleThemes;
     },
     
-//	onSelect: function(result){
-//		if (typeof result.newquery === 'undefined') {
-//        	this.toggleTheme(result);
-//		}
-//	},
-    
     toggleTheme: function(result){
     	var scale = cbKort.getState().map.scale;
     	var theme = result.data.theme;
     	if (theme.visible){
     		cbKort.setThemeVisibility(theme.name, false, true);
+        	if (typeof cbKort.themeSelector.setSpatialMapState !== 'undefined'){
+            	cbKort.themeSelector.setSpatialMapState();
+        	}
         	if ((theme.maxscale != null && scale > theme.maxscale) || (theme.minscale != null && scale < theme.minscale)) {
             	return this.offLockCustomButtonDef[0];
         	}else{
@@ -101,6 +98,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         	}
     	}else{
     		cbKort.setThemeVisibility(theme.name, true, true);
+        	if (typeof cbKort.themeSelector.setSpatialMapState !== 'undefined'){
+            	cbKort.themeSelector.setSpatialMapState();
+        	}
         	if ((theme.maxscale != null && scale > theme.maxscale) || (theme.minscale != null && scale < theme.minscale)) {
         		return this.onLockCustomButtonDef[0];
         	}else{
@@ -311,7 +311,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
             return [];
         }else{
-        	return ([{"buttonText":"Temaværktøjer", "buttonImage": this.toolsIconURI, "handler": function(result, deferred){
+        	return ([{"buttonText":"Temavï¿½rktï¿½jer", "buttonImage": this.toolsIconURI, "handler": function(result, deferred){
         		var buttons = jQuery("<ul style='list-style: none'/>");
         		for (var i=0;i<result.data.theme.actions.length;i++){
         			var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
