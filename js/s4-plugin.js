@@ -398,59 +398,10 @@ function profileHit(hit){
 	cbKort.events.fireEvent('S4', {type: 'profileHit', profile: hit.data});
 }
 
-function workspaceHit(hit){
+function workspaceHit(result){
     _s4View.blur();
-	var workspaceId = hit.data.wrkspcid;
-	if (typeof workspace_init !== 'undefined' ){
-		if (typeof workspace_controls == 'undefined' ){
-			//Workspace version2
-			if (workspace_container === null) {
-				var workspacejs = cbInfo.getParam('cbkort.module.workspace.js');
-				if (workspacejs === ""){
-					workspacejs = cbInfo.getParam('module.workspace.js');
-				}
-	            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
-	                workspace_container = new Workspace ({name:'standard'});
-	                s4ShowWorkSpace2(workspaceId);
-	            }, this, workspaceId));
-	        }else{
-	            s4ShowWorkSpace2(workspaceId);
-	        }
-		}else{
-			//Workspace version3
-            if (typeof workspace_container === 'undefined' || workspace_container === null) {
-				var workspacejs = cbInfo.getParam('module.workspace.js');
-				var spatialmapVersion = cbInfo.getParam('spatialmap.version');
-	            require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
-	                workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
-		            s4ShowWorkSpace3(workspaceId);
-	            }, this, workspaceId));
-	        } else {
-	            s4ShowWorkSpace3(workspaceId);
-	        }
-		}
-		cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: hit.data});
-	}
-}
-
-function s4ShowWorkSpace2(workspaceId){
-    var options = {id: workspaceId};
-    if (jQuery.isFunction( workspace_init )){
-    	options.hideDialog = false;
-    }else{
-    	options.hideDialog = true;
-    }
-    workspace_container.start (options);
-}
-
-function s4ShowWorkSpace3(workspaceId){
-    var options = {id: workspaceId};
-    if (jQuery.isFunction( workspace_init )){
-    	options.hideDialog = false;
-    }else{
-    	options.hideDialog = true;
-    }
-    workspace_container.startDrawing (options);
+	result.searcher.showWorkSpace(result);
+	cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: result.data});
 }
 
 function s4DoInfo(result){
@@ -480,7 +431,6 @@ function s4_getGstAuthParams(){
 	var password = cbInfo.getParam('s4.gst.password');
 	return {login: login, password: password};
 }
-
 
 function Searchlast2()
 {
