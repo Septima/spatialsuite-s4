@@ -179,7 +179,7 @@ function s4_init (params){
 			};
             
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase};
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase, allowDetails:true};
                 if (_s4Params.indexsearcher.blankbehavior){
                 	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
                 }
