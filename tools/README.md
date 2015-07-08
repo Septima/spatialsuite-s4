@@ -1,18 +1,21 @@
 #S4 - Septima Search for SpatialSuite  
-##Tools included  
+##Tools included in s4  
 Please read the [general installation instructions](../../../#installation) before reading this  
-Tools:
+  
+Tools:  
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
-* [s4-matrikel-plugin](#s4-matrikel-plugin)
+* [s4-matrikel-plugin](#s4-matrikel-plugin)  
 * [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
+* [s4-planSystem-plugin](#s4-planSystem-plugin)  
 * [s4ApiDemo](#apidemo)  
 * [s4-requires](#s4-requires)  
 
   
 ###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
 The main tool. Include this to enable search in Spatial Map  
-* s4-plugin-dk-all includes some searchers only relevent in Denmark  
+Please include this plugin _before_ any other s4 tool  
+* s4-plugin-dk-all includes searchers only relevant in Denmark  
 * s4-plugin-all is used used outside Denmark  
 [Configuration instructions](../../../#s4customization)  
 
@@ -86,6 +89,15 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 ```xml
 <text name="overskrift" value="Skole" plural="Skoler"/>
 ```  
+
+###<a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
+Only relevant in Denmark  
+Viser ikon med link til plansystemets pdf for lokalplaner  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-planSystem-plugin" />
+```  
+  
 
 ###<a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
