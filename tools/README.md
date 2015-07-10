@@ -113,7 +113,7 @@ Sæt følgende parameter for at pluginnet virker:
 ```  
 , hvor _odeumClientName_ er den del af urlen som bruges i ODEUM til din kommune. For url'en _http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/horsens/lokalplaner.lpplandk2_join/xxx_ er det _horsens_.  
   
-  ###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
+###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
 Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr så hvis du klikker på en plan i en anden kommune så vises _din_ plan med det plannr.)  
 Inkludér i profil:  
