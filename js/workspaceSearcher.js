@@ -58,6 +58,59 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
           });
     },
 
+    showWorkSpace: function(result){
+    	var workspaceId = result.data.wrkspcid;
+    	if (typeof workspace_init !== 'undefined' ){
+    		if (typeof workspace_controls == 'undefined' ){
+    			//Workspace version2
+    			if (workspace_container === null) {
+    				var workspacejs = cbInfo.getParam('cbkort.module.workspace.js');
+    				if (workspacejs === ""){
+    					workspacejs = cbInfo.getParam('module.workspace.js');
+    				}
+    	            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+    	                workspace_container = new Workspace ({name:'standard'});
+    	                this.showWorkSpace2(workspaceId);
+    	            }, this, workspaceId));
+    	        }else{
+    	        	this.showWorkSpace2(workspaceId);
+    	        }
+    		}else{
+    			//Workspace version3
+                if (typeof workspace_container === 'undefined' || workspace_container === null) {
+    				var workspacejs = cbInfo.getParam('module.workspace.js');
+    				var spatialmapVersion = cbInfo.getParam('spatialmap.version');
+    	            require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
+    	                workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
+    	                this.showWorkSpace3(workspaceId);
+    	            }, this, workspaceId));
+    	        } else {
+    	        	this.showWorkSpace3(workspaceId);
+    	        }
+    		}
+    	}
+    },
+    
+    showWorkSpace2: function (workspaceId){
+        var options = {id: workspaceId};
+        if (jQuery.isFunction( workspace_init )){
+        	options.hideDialog = false;
+        }else{
+        	options.hideDialog = true;
+        }
+        workspace_container.start (options);
+    },
+
+    showWorkSpace3: function (workspaceId){
+        var options = {id: workspaceId};
+        if (jQuery.isFunction( workspace_init )){
+        	options.hideDialog = false;
+        }else{
+        	options.hideDialog = true;
+        }
+        workspace_container.startDrawing (options);
+    },
+
     CLASS_NAME: 'Septima.Search.workspaceSearcher'
 
 });

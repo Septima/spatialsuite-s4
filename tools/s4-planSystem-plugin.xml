@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Linker til plansystemets pdf for lokalplan -->
+
+
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+           
+       	window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+       	var _s4CustomButtons = window["_s4CustomButtons"];
+       	
+       	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
+	       	var planSearcher = _s4Params.plansearcher.searcher;
+			planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+       	}
+
+	[endif]
+    ]]>
+    </src>
+</tool>

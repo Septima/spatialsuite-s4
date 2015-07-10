@@ -47,16 +47,13 @@ S4 will also search local Spatial Suite data as well as profiles, themes, worksp
 ### Download s4 module:
       
 Current version:  
-      2.2.62:   https://github.com/Septima/spatialsuite-s4/archive/2.2.62.zip  
+      2.2.7:   https://github.com/Septima/spatialsuite-s4/archive/2.2.7.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
       
 Development version (at your own risk) may be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/development.zip  
-
-Last version supporting SpatialMap 2.6:  
-      2.0.6: https://github.com/Septima/spatialsuite-s4/archive/2.0.6.zip  
       
 ### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
@@ -264,7 +261,8 @@ You may use any existing datasource, but there are good reasons to create specif
 * Each presentation MUST have the following columns  
 ```xml
 <column format="heading"> : The title when presented as a search result
-```
+```  
+Maximum length of the title is 255 characters.  
 
 #### Minimal presentation file
 ```xml
@@ -274,10 +272,12 @@ You may use any existing datasource, but there are good reasons to create specif
 	<columns>
 		<column format="heading">
 			<label></label>
-			<value>skolensnavn</value>
+			<value>skolensnavn</value> <!-- Max 255 chars -->
 		</column>
 </presentation>
-```
+```  
+_value_ and _plural_ are mandatory.  
+
 Each presentation *MAY* have the following columns
 ```xml
 <column format="description"> : The description when presented as a search result
@@ -296,7 +296,7 @@ Each presentation *MAY* have the following columns
 		</column>
 		<column format="description">
 			<label></label>
-			<value>adresse</value>
+			<value>adresse</value> <!-- Max 255 chars -->
 		</column>
 		<column format="searchstring">
 			<label></label>
