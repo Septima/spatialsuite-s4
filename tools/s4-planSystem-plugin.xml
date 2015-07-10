@@ -18,8 +18,10 @@
        	window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
        	var _s4CustomButtons = window["_s4CustomButtons"];
        	
-       	var planSearcher = _s4Params.plansearcher.searcher;
-		planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+       	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
+	       	var planSearcher = _s4Params.plansearcher.searcher;
+			planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+       	}
 
 	[endif]
     ]]>
