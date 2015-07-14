@@ -213,6 +213,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             					for (var k=0;k<count;k++){
             						groupDescription += group.themes[k].displayname + ", ";
             					}
+            					//TODO: Encode group.group.displayname to avoid ":" in groupname (destroys target computation) &#58;
             					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, group.group.displayname + ": " + query.queryString, null, null, null)
             				}
             			}
