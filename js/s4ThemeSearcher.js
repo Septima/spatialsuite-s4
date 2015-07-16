@@ -57,8 +57,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			themes.sort(function(t1, t2){
     				return (t1.displayname.localeCompare(t2.displayname));
     			});
-        		this.groups.push({"group": group, "themes": themes, "displayname": group.displayname + " (" + this.themesPhrase +")"});
-    			this.registerTarget(group.displayname + " (" + this.themesPhrase +")")
+        		this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")"});
+    			this.registerTarget(group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")")
     		}
     	}
 		this.registerTarget(this.visibleThemesPhrase);
@@ -214,7 +214,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             						groupDescription += group.themes[k].displayname + ", ";
             					}
             					//TODO: Encode group.group.displayname to avoid ":" in groupname (destroys target computation) &#58;
-            					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, group.group.displayname + ": " + query.queryString, null, null, null)
+            					var target = group.group.displayname.replace(/:/g, "");
+            					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, target + ": " + query.queryString, null, null, null)
             				}
             			}
             		}
