@@ -19,8 +19,6 @@ function s4_init (params){
        		}
        		
         	//Get localized strings
-        	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
-        	var printButtonCaption = "Print";
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
         	var searchIndexTokenParamName = 's4.searchchindex.token';
@@ -131,15 +129,6 @@ function s4_init (params){
 			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
         	
-        	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
-            var infoButtonDef = {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
-            
-            if (_s4Params.view.printconfig){
-            	//http://dopiaza.org/tools/datauri/index.php
-            	var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
-                var printButtonDef = {"buttonText":printButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};
-            }
-            
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
             	var gstAuthParams= s4_getGstAuthParams();
             	if (gstAuthParams != null){
@@ -160,13 +149,8 @@ function s4_init (params){
                 	}
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
                 	controller.addSearcher({"title": "", "searcher" : geoSearcher});
-                    if (_s4Params.geosearcher.info){
-                    	geoSearcher.addCustomButtonDef(infoButtonDef);
-                    }
-                    if (_s4Params.view.printconfig && _s4Params.geosearcher.print){
-                    	geoSearcher.addCustomButtonDef(printButtonDef);
-                    }
                     _s4Params.geosearcher.searcher = geoSearcher;
+                    addS4CustomButtons(_s4Params.geosearcher);
             	}
             }
 
@@ -197,13 +181,8 @@ function s4_init (params){
                 }
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	controller.addSearcher({title: "", searcher: s4IndexSearcher});
-                if (_s4Params.indexsearcher.info){
-                	s4IndexSearcher.addCustomButtonDef(infoButtonDef);
-                }
-                if (_s4Params.view.printconfig && _s4Params.indexsearcher.print){
-                	s4IndexSearcher.addCustomButtonDef(printButtonDef);
-                }
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
+                addS4CustomButtons(_s4Params.indexsearcher);
             }
         	
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
@@ -214,30 +193,20 @@ function s4_init (params){
             	}
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
-                if (_s4Params.plansearcher.info){
-                	planSearcher.addCustomButtonDef(infoButtonDef);
-                }
-                if (_s4Params.view.printconfig && _s4Params.plansearcher.print){
-                	planSearcher.addCustomButtonDef(printButtonDef);
-                }
                 _s4Params.plansearcher.searcher = planSearcher;
+                addS4CustomButtons(_s4Params.plansearcher);
             }
         	
-            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
-            	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
+            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
+            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
-                	se.filter = { 'kom_id_officiel' : municipalities };
+            		cvr_enhedSearchOptions.filter = { 'beliggenhedsadresse_kommune_kode' : municipalities };
             	}
+            	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
             	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
-                if (_s4Params.cvrsearcher.info){
-                	se.addCustomButtonDef(infoButtonDef);
-                }
-                if (_s4Params.view.printconfig && _s4Params.cvrsearcher.print){
-                	se.addCustomButtonDef(printButtonDef);
-                }
                 _s4Params.cvrsearcher.searcher = se;
+                addS4CustomButtons(_s4Params.cvrsearcher);
             }
 
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
@@ -325,6 +294,21 @@ function s4_init (params){
     }
 }
 
+function addS4CustomButtons(paramEntry){
+    
+    if (paramEntry.info){
+    	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+    	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
+    	paramEntry.searcher.addCustomButtonDef({"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo});
+    }
+    if (_s4Params.view.printconfig && paramEntry.print){
+    	//http://dopiaza.org/tools/datauri/index.php
+    	var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
+    	var printButtonCaption = "Print";
+    	paramEntry.searcher.addCustomButtonDef({"buttonText":printButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint});
+    }
+}
+
 function s4GeoHit(result){
 	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.geosearcher.streetNameHit)){
     	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'zoom' && (result.data.type == "kommune" || result.data.type == "opstillingskreds" || result.data.type == "politikreds" || result.data.type == "postdistrikt" || result.data.type == "region" || result.data.type == "retskreds" || result.data.type == "stednavn")){
@@ -336,7 +320,7 @@ function s4GeoHit(result){
 }
 
 function s4Hit(result, geometryBehavior){
-	//geometryBehavior: [null, 'zoom']
+	//geometryBehavior: ['zoom']
 	cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
     for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
@@ -359,7 +343,6 @@ function zoomToResultInMap(result){
 
 	    cbKort.dynamicLayers.removeAll();
 	    
-//	    //Zoom to extent
 	    var bounds = olGeom.getBounds();
 	    var extent = 
         {  x1: bounds.left,
@@ -379,7 +362,6 @@ function showResultInMap(result){
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
 		var wkt = olGeom.toString();
 
-		//Draw in map
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
 	}
