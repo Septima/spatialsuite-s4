@@ -118,7 +118,7 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 * Set the __autofocus__ parameter. If set, the search input field will get focus immediately meaning the user may start searching right away. Default is *false*  
 * set the __panel__ parameter.
 
-```javascript
+```javascript  
 {municipality: '[your-municipality-code]',
 
 //Positioning of s4. Choose between
@@ -131,10 +131,23 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 panel: 'default',
 
 //Result presentation
-//  printconfig: standard, full_freetext, rotatet, rotatet_contact or html  
+//  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
 //  blankbehavior: search or none  
-//  autofocus: true or false. Default is false 
-view:{limit: 20, blankbehavior: "search", autofocus: false, dynamiclayer: 'userdatasource', infoprofilequery: 'userdatasource', printconfig: 'rotatet'},
+//  autofocus: true or false. Default is false
+//  forcedblurOnSelect: Force close of result list. Default is false
+//  zoomBuffer: Buffer when result is shown in map. Default is '100'
+//  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
+view: {
+  limit: 20,
+  blankbehavior: "search",
+  autofocus: false,
+  dynamiclayer: 'userdatasource',
+  infoprofilequery: 'userdatasource',
+  printconfig: 'rotatet',
+  forcedblurOnSelect: 'false',
+  zoomBuffer: '100',
+  marginToBottom: 100 
+},
 
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
