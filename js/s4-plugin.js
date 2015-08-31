@@ -5,7 +5,19 @@ function s4_init (params){
     if (_s4View == null) {
     			
        		_s4Params = params;
+       		//Fix some defaults
+       		if (typeof _s4Params.view.forcedblurOnSelect === 'undefined'){
+       			_s4Params.view.forcedblurOnSelect = false;
+       		}
     	
+       		if (typeof _s4Params.view.zoomBuffer === 'undefined'){
+       			_s4Params.view.zoomBuffer = '100';
+       		}
+       		
+       		if (typeof _s4Params.view.marginToBottom === 'undefined'){
+       			_s4Params.view.marginToBottom = 100;
+       		}
+       		
         	//Get localized strings
         	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
         	var printButtonCaption = "Print";
@@ -293,16 +305,16 @@ function s4_init (params){
         	controller.go ();
         	
         	if (_s4View.top() !=null){
-        		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - 100);
+        		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - _s4Params.view.marginToBottom);
         	}
         	
         	jQuery(window).resize(function() {
         		if (_s4View != null && _s4View.top() !=null){
-        			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - 100);
+        			_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - _s4Params.view.marginToBottom);
         		}
         	});
 			cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
-				_s4View.blur();
+				_s4View.blur(_s4Params.view.forcedblurOnSelect);
 			}, true);
 			
         	if (_s4Params.view.autofocus){
@@ -358,7 +370,7 @@ function zoomToResultInMap(result){
 		
 		cbKort.mapObj.zoomToExtent(extent, 100);
 	}
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 }
 
 function showResultInMap(result){
@@ -369,13 +381,13 @@ function showResultInMap(result){
 
 		//Draw in map
 	    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, '100');
+	    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
 	}
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 }
 
 function themeHit(result){
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
     if (!result.data.theme.visible){
         result.searcher.toggleTheme(result);
     	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
@@ -383,7 +395,7 @@ function themeHit(result){
 }
 
 function favoriteHit(hit){
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 	if (Favorites){
 		Favorites.load(hit.data);
 	}
@@ -391,7 +403,7 @@ function favoriteHit(hit){
 }
 
 function profileHit(hit){
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 	if (ProfileSelector){
 		ProfileSelector.setProfile(hit.data);
 	}
@@ -399,7 +411,7 @@ function profileHit(hit){
 }
 
 function workspaceHit(result){
-    _s4View.blur();
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 	result.searcher.showWorkSpace(result);
 	cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: result.data});
 }
