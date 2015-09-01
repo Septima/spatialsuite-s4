@@ -21,12 +21,19 @@ function s4_init (params){
         	//Get localized strings
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
-        	var searchIndexTokenParamName = 's4.searchchindex.token';
-        	var searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
-        	if (searchIndexToken === searchIndexTokenParamName){
-        		//getParam returns paramName if param isn't defined
-        		searchIndexToken = null;
+
+        	var searchIndexToken = null;
+        	
+        	
+        	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
+            	var searchIndexTokenParamName = 's4.searchchindex.token';
+            	searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+            	if (searchIndexToken === searchIndexTokenParamName){
+            		//getParam returns paramName if param isn't defined
+            		searchIndexToken = null;
+            	}
         	}
+
         	
         	var sessionId = cbKort.sessionId;
 
