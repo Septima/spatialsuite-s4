@@ -144,7 +144,7 @@ view: {
   dynamiclayer: 'userdatasource',
   infoprofilequery: 'userdatasource',
   printconfig: 'rotatet',
-  forcedblurOnSelect: 'false',
+  forcedblurOnSelect: false,
   zoomBuffer: '100',
   marginToBottom: 100 
 },
