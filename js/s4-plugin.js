@@ -24,7 +24,6 @@ function s4_init (params){
 
         	var searchIndexToken = null;
         	
-        	
         	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
             	var searchIndexTokenParamName = 's4.searchchindex.token';
             	searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
@@ -33,7 +32,6 @@ function s4_init (params){
             		searchIndexToken = null;
             	}
         	}
-
         	
         	var sessionId = cbKort.sessionId;
 
