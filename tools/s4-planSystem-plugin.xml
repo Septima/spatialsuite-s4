@@ -20,7 +20,9 @@
        	
        	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
 	       	var planSearcher = _s4Params.plansearcher.searcher;
-			planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+	       	if (planSearcher){
+				planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+	       	}
        	}
 
 	[endif]
