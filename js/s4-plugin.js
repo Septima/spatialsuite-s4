@@ -133,7 +133,23 @@ function s4_init (params){
 			//Example:
 			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-        	
+
+			
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+            	var dawaSearcherOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
+            	if (_s4Params.municipality != "*"){
+            		var municipalities = _s4Params.municipality.split(' ');
+            		dawaSearcherOptions.kommunekode = municipalities.join('|');
+            	}
+            	if (_s4Params.dawasearcher.minimumShowCount){
+            		dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
+            	}
+            	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
+            	controller.addSearcher({"title": "Adresser", "searcher" : dawaSearcher});
+                _s4Params.dawasearcher.searcher = dawaSearcher;
+                addS4CustomButtons(_s4Params.dawasearcher);
+            }
+			
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
             	var gstAuthParams= s4_getGstAuthParams();
             	if (gstAuthParams != null){
