@@ -291,6 +291,22 @@ function s4_init (params){
 						}
 					}
 			};
+			
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+    			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
+    				onSelect: function (result){
+    						alert("sqSelected: " + result.title);
+    					},
+    				onHover: function (result){
+    						//if (result) alert("sqHover: " + result.title);
+    					},
+    				searchers: [_s4Params.indexsearcher.searcher],
+    				limit: 3});
+    			dawaSearcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+    			geoSearcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+    			_s4Params.indexsearcher.searcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+            }
+
 
         	controller.go ();
         	
