@@ -8,4 +8,11 @@
             </url-parameters>
     	</data>
     </page>
+    <page name="s4GetLocalDatasources" contenttype="text/xml">
+    	<data handler="datasource" operation="get-datasources">
+	        <url-parameters>
+	            <url-parameter name="filter" value="(isreadable) and (true) and (endpointtype = 'postgis' or endpointtype = 'oracle' or endpointtype = 'shapefile' or endpointtype = 'mssql')"/>
+	        </url-parameters>
+    	</data>
+    </page>
 </pages>

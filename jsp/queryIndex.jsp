@@ -6,25 +6,12 @@
  %>
  
  <%
- 	//queryIndex.jsp?query=gyri joh gur kim&limit=10&datasources=ds_skoler ds_daginstitutioner
- 	String query = request.getParameter("query");
- 	String queryToUse = "";
- 	if (query != null){
- 		String utf8behaviour = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("module.s4.index.utf8behaviour");
- 		if (utf8behaviour != null && utf8behaviour.equalsIgnoreCase("noconvert")){
- 	 		queryToUse = query;
- 		}else{
- 	 		queryToUse = utf8Convert(query);
- 		}
- 	}
+ 	//queryIndex.jsp?wkt=xxxxxxx&query=gyri joh gur kim&limit=10&datasources=ds_skoler ds_daginstitutioner
+
  	String limit = request.getParameter("limit");
  	int limitToUse = 10;
  	if (limit != null){
  		limitToUse = Integer.parseInt(limit);
- 	}
- 	String limitType = request.getParameter("limitType");
- 	if (limitType == null){
- 		limitType = "collapse";
  	}
 
  	String datasources = request.getParameter("datasources");
@@ -32,8 +19,32 @@
  	if (datasources != null && !datasources.trim().equals("")){
  		datasourcesToUse = datasources;
  	}
+ 	
 	IndexQuerier iq = new IndexQuerier();
- 	QueryResults qr = iq.query(queryToUse, limitToUse, datasourcesToUse, limitType); 
+	QueryResults qr = null;
+	
+ 	String wkt = request.getParameter("wkt");
+ 	//If wkt is set perform a spatial query. Else perform text query. In a later version the two will be combined.
+	if (wkt != null){
+	 	qr = iq.spatialQuery(wkt, limitToUse, datasourcesToUse); 
+	}else{
+		String query = request.getParameter("query");
+	 	String queryToUse = "";
+	 	if (query != null){
+	 		String utf8behaviour = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("module.s4.index.utf8behaviour");
+	 		if (utf8behaviour != null && utf8behaviour.equalsIgnoreCase("noconvert")){
+	 	 		queryToUse = query;
+	 		}else{
+	 	 		queryToUse = utf8Convert(query);
+	 		}
+	 	}
+	 	String limitType = request.getParameter("limitType");
+	 	if (limitType == null){
+	 		limitType = "collapse";
+	 	}
+	 	qr = iq.query(queryToUse, limitToUse, datasourcesToUse, limitType); 
+	}
+
  	String callback = request.getParameter("callback");
  	if (callback != null){
  	 	response.setContentType("application/javascript; charset=UTF-8");

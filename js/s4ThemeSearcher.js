@@ -32,6 +32,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 		this.offLockCustomButtonDef= [{"buttonText": this.showLockedPhrase, "buttonImage": this.themeOffLockUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 
     	this.groups = [];
+    	this.datasources = {};
     	for (var i=0;i<cbKort.themeContainer.elements.length;i++){
     		var group = cbKort.themeContainer.elements[i];
     		var groupHasThemes = false;
@@ -39,6 +40,15 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     		for (var j=0;j<group.elements.length;j++){
     			var theme = group.elements[j];
     			if (theme.selectable=="true"){
+    				for (l=0;l<theme.layers.length;l++){
+    					var layer = theme.layers[l];
+    					if (layer.datasource){
+        					if (typeof this.datasources[layer.datasource] === 'undefined'){
+        						this.datasources[layer.datasource] = [];
+        					}
+        					this.datasources[layer.datasource].push(theme);
+    					}
+    				}
     				groupHasThemes = true;
     				var themeDescription = this.getThemeDescription(theme);
     				var terms = (theme.displayname + " " + themeDescription).split(" ");
@@ -67,6 +77,20 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	this.groups.sort(function(g1, g2){
 			return (g1.displayname.localeCompare(g2.displayname));
 		});
+    	
+    	//this.getLocalDatasources().done();
+    },
+    
+    getThemesForDatasource: function(datasourceId){
+        var queryResult = this.createQueryResult();
+		if (typeof this.datasources[datasourceId] !== 'undefined'){
+			for (var i=0;i<this.datasources[datasourceId].length;i++){
+				var theme = this.datasources[datasourceId][i];
+        		var result = queryResult.addResult(theme.displayname, theme.description, " ", theme);
+        		result.image = this.getThemeImage(theme);
+			}
+		}
+		return queryResult;
     },
     
     getVisibleThemes: function(){
@@ -356,6 +380,33 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     		}
     	}
     	return link;
+    },
+    
+    getLocalDatasources: function(){
+    	var deferred = jQuert.Deferred();
+    	jQuery.ajax({
+    		url: this.host + '/cbkort?page=s4GetLocalDatasources&outputformat=json',
+            jsonp: 'json.callback',
+            data:{sessionId: this.sessionId},
+	        dataType: 'jsonp',
+            crossDomain : true,
+            async:true,
+            cache : false,
+            timeout : 4000,
+            success:  Septima.bind(function(deferred, data, textStatus,  jqXHR){
+        		var localDatasources = [];
+            	if (data && data.row && data.row[0].row){
+            		for (var i=0;i<data.row[0].row.length;i++){
+            			localDatasources.push(row[0].row[i]._name);
+            		}
+            		localDatasources.sort(function(t1, t2){
+        				return (t1.localeCompare(t2));
+        			});
+            	}
+            	deferred.resolve(localDatasources);
+          }, this, deferred)
+          });
+    	return deferred.promise();
     },
 
     CLASS_NAME: 'Septima.Search.ThemeSearcher'
