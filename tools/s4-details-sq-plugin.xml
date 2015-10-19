@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+		var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
+		onSelect: function (result){
+				alert("sqSelected: " + result.title);
+			},
+		onHover: function (result){
+				//if (result) alert("sqHover: " + result.title);
+			},
+		searchers: [_s4Params.indexsearcher.searcher],
+		limit: 3});
+		sqDHB.imageUri = _s4Params.indexsearcher.searcher.iconsMapPointGrey;
+		sqDHB.buttonText = cbInfo.getString('s4.sq.caption');
+		
+		if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+			_s4Params.indexsearcher.searcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+		}
+		if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+			_s4Params.dawasearcher.searcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+		}
+		if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+			_s4Params.geosearcher.searcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
+		}
+		
+	[endif]
+    ]]>
+    </src>
+</tool>

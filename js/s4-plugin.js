@@ -292,43 +292,6 @@ function s4_init (params){
 					}
 			};
 			
-			//Skal ud i noget konfigurerbart tool
-			
-            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-    			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
-    				onSelect: function (result){
-    						alert("sqSelected: " + result.title);
-    					},
-    				onHover: function (result){
-    						//if (result) alert("sqHover: " + result.title);
-    					},
-    				searchers: [_s4Params.indexsearcher.searcher],
-    				limit: 3});
-    			dawaSearcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
-    			geoSearcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
-    			_s4Params.indexsearcher.searcher.addDetailHandlerDef(sqDHB.buildHandlerDef());
-            }
-
-			//Skal ud i noget konfigurerbart tool
-			
-            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled && _s4Params.themesearcher && _s4Params.themesearcher.enabled){
-            	//{"buttonText": text, "buttonImage": imageUri, "handler": function(result, cancellableDeferred, detailsContent)[, "target": target][, more: true|false]};
-            	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
-            		"buttonText": "Temaer",
-            		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADExLzA1LzA33bqJ2wAAAq1JREFUeJxlk09oVFcUxn/3vskkqZoJGRMXTgQpCga0qZkUChEtFjFg6giuVDAgbaQroV2WGgUXXQiudJlVyDJpKRVKwYR0YXVqtNrUP1SSOMYRJpjJjJn3Zubc08Uzk4n94HDh8N1zzvcdjlFV6rHn75P7oqbhkqc26WET4oTAlTOBq6QDV774oufmX/V8U1+ge/bUuGdsaiHI8kYKCAKAh2UzzcS1hYqrTix8cvPEhgLfZq41TRXuPctVlxNz5cVawVZvCwDLUqjl4rKFZolmtr9t23X78zHfAvy2cmes/nOq9RAAM12jzOwZBbeeW/IKFE0p8W9TdgyA5OyZ3v2zp5V0j5Lu0ZHcT6qqyvTHugZ+3quqqiPZH2u8rVMHte3WgV7ru/KVhSBb6zwYHwhnXaqsO1UNfRrc9gWpyAEAilGfipErttk0dr15p/Fs/BgAFx7+AMBceZG51VDWhRdXQ07HAJQcQUQwFe0yyUdnNO3/A4D2pEPzfvmU/CafWCwGr8vkq0Vi29tY7p4Mnf/1I4g3sDkXISJOeB8GAx945KUIbQDRMLeGkgNA1GGrTl56WAAmC3+GY3YeXyfbMNbkTebuvts/iJOX3qavdh4VdR8GVJgrLzIYH+Dotj7y/gqPK/M02UbOt5/kWuc3oZEz3zEvWaz1UHF/mN3p48mqyt3n5hUAFzu+ZLhz6H+yAIYfX+fSkxvQ3kAkr4iTXqOq7LjTP76Kn1rywm0ctN0Mdw5xaGtvbezhJ9eZyqWhJYLFoL5MuP4HJ4yqcnj6XNPTSOZZ0ZQSyw2rYbvAwYqEL0CjhRYPG4CuSkbnS7v066f+hmNq//2zcZymilGfICKo0ZphxgdbEAQ34fofbDymesSm+/YiellFk1p1CVGHIBkxLu2Mfu+O3H9Yz/8PLFlkbIqvT3MAAAAASUVORK5CYII=",
-            		"handler": Septima.bind(function(result, deferred, detailsContent){
-            			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
-    			    	var list = {type: "list", items: []};
-            			for (var i=0;i<themesResults.length;i++){
-            				var themeResult = themesResults[i];
-    						var icon = jQuery('<img src="' + themeResult.image + '" style="width: 20px;"/>');
-		    	    		var title = Septima.Search.ThemeResult(themeResult, [], [], {format: "compact"});
-    		    	    	list.items.push({type: "object", icon: icon, o1: title});
-            			}
-    			    	deferred.resolve(detailsContent.formatList(list));
-            		}, this)});
-            }
-
         	controller.go ();
         	
         	s4SetMaxHeight();

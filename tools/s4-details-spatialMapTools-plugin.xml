@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+    
+		var S4SpatialMapToolsHandler = function(paramEntry, result, deferred, detailsContent){
+    		var list = {type: "list", items: []};
+    		
+    		if (paramEntry.info){
+				var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+				var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
+	    		var infoClickFunction = Septima.bind(function(result){s4DoInfo(result);}, this, result);
+	    		
+				var infoIcon = jQuery('<img src="' + _s4InfoUri + '" style="width: 20px;"/>');
+				infoIcon.click(infoClickFunction);
+				infoIcon.css("cursor", "pointer");
+				
+	  	    	var infoTitle = jQuery('<span>' + infoButtonCaption + '</span>');
+	  	    	infoTitle.click(infoClickFunction);
+	  	    	infoTitle.css("cursor", "pointer");
+	  	    		
+	   	    	list.items.push({type: "object", icon: infoIcon, o1: infoTitle});
+    		}
+    		
+    		if (_s4Params.view.printconfig && paramEntry.print){
+				var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
+				var printButtonCaption = "Print";
+	    		var printClickFunction = Septima.bind(function(result){s4DoPrint(result);}, this, result);
+	
+	    		var printIcon = jQuery('<img src="' + _s4PrintUri + '" style="width: 20px;"/>');
+	    		printIcon.click(printClickFunction);
+	    		printIcon.css("cursor", "pointer");
+	    		
+	  	    	var printTitle = jQuery('<span>' + printButtonCaption + '</span>');
+	  	    	printTitle.click(printClickFunction);
+	  	    	printTitle.css("cursor", "pointer");
+	    		
+	   	    	list.items.push({type: "object", icon: printIcon, o1: printTitle});
+    		}
+   	    	
+    		deferred.resolve(detailsContent.formatList(list));
+  		};
+    
+		function addS4SpatialMapTools(paramEntry){
+		    if (paramEntry.enabled && (paramEntry.info || (_s4Params.view.printconfig && paramEntry.print)) ){
+		    	paramEntry.searcher.addDetailHandlerDef({
+		    		"buttonText":  cbInfo.getString('s4.details.tools'),
+		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAYAAAACCvahAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH3QgWADsuxxIEJAAAAAd0RVh0QXV0aG9yAKmuzEgAAAAMdEVYdERlc2NyaXB0aW9uABMJISMAAAAKdEVYdENvcHlyaWdodACsD8w6AAAADnRFWHRDcmVhdGlvbiB0aW1lADX3DwkAAAAJdEVYdFNvZnR3YXJlAF1w/zoAAAALdEVYdERpc2NsYWltZXIAt8C0jwAAAAh0RVh0V2FybmluZwDAG+aHAAAAB3RFWHRTb3VyY2UA9f+D6wAAAAh0RVh0Q29tbWVudAD2zJa/AAAABnRFWHRUaXRsZQCo7tInAAABA0lEQVQ4ja2SPaqDUBCFP3/AKp0WIQErmzT2bsDaLlmCXSDrcAdZhetwCaKlYBmIiJc7N4WPpNMQ32mHjzNnzlgiYvhR9q/gZtgFeD6f1HWNMQbLshYBESEIAo7H4wy3bUue5yilVmFjDOfzmdvtNsNaa0TkPVzTNE2ftQ+HA9frFRFZdVZKcTqdALC2VOUCNE1DURRM04TjOIvAOI6kacrlcpnhx+NBVVXv3GuKoujjvNvtiOMYpRS2vVz9OI6EYQj8R+a+7ynLEhFZdVZKEccxSZLMcNd13O93tNZfOWZZ9oEdx8F1XbTWq9fWWuN5HvCXeRgG2rb9+rd932e/32872AuC+IL3DaMGjAAAAABJRU5ErkJggg==",
+		    		"handler": Septima.bind(S4SpatialMapToolsHandler, this, paramEntry)
+		    	});
+		    }
+		}
+			
+		addS4SpatialMapTools(_s4Params.indexsearcher);
+	
+	[endif]
+    ]]>
+    </src>
+</tool>
