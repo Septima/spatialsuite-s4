@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+    	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+			var handlerDef = s4SetupNearest();
+			_s4Params.indexsearcher.searcher.addDetailHandlerDef(handlerDef);
+			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+				_s4Params.dawasearcher.searcher.addDetailHandlerDef(handlerDef);
+			}
+			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+				_s4Params.geosearcher.searcher.addDetailHandlerDef(handlerDef);
+			}
+			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
+				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
+			}
+		}
+    	
+    	var s4NearestHoverOLid = null;
+    	
+    	function s4SetupNearest(){
+			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
+			onSelect: function (result){
+				var geojson = new OpenLayers.Format.GeoJSON();
+			    var olGeom = geojson.read(result.geometry, 'Geometry');
+				var wkt = olGeom.toString();
+			    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+			    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+			},
+			onHover: function (result){
+				if (s4NearestHoverOLid !== null){
+					cbKort.mapObj.deleteFeature(s4NearestHoverOLid);
+				}
+				if (result !== null){
+					var geojson = new OpenLayers.Format.GeoJSON();
+				    var olGeom = geojson.read(result.geometry, 'Geometry');
+					var wkt = olGeom.toString();
+					s4NearestHoverOLid = cbKort.mapObj.drawWKT(wkt,
+					null,
+					{		styles: {
+							strokeColor: '#000',
+							fillColor: '#500',
+							fillOpacity: 0.5,
+							select_pointRadius: 10,
+							label: result.title
+							}
+					});
+				}
+			},
+			searchers: [_s4Params.indexsearcher.searcher],
+			omitZeroDistance: true,
+			limit: 3,
+			title: cbInfo.getString('s4.nearest.caption'),
+    		header: {
+    			caption: cbInfo.getString('s4.sq.header.caption'),
+    			text:  cbInfo.getString('s4.sq.header.text'),
+   				button: {
+   					buttonText: "Zoom til extent",
+   					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90EEg0cFwCY10wAAAOJSURBVDjL1ZRfbFN1FMdP7/21621v6taVMaUZ7DZWJLo/jmpwdIOB80VcjG8i8EYkgAkiC6RZl95i4ouJPiwZYCKLL0ZDeMHFMZj7AyHbTBjDaDQ4YTOwEtqNtbe97e/Xc3yh2m7TzEd/L7/kl/P7nO/J+Z4D8L85LcHmVd/D4fB/4liWQXc6HI5HiGjkcrn2Y8c7z3W8uSdfHLO9edvTTqfqVRTlweLiQvP3w6Nfh0IhYoyBruvAioPz+XyPaZplnHOt0uP55sfb0wMA8HtxFZIk2bJZszedNuoAgEWjp+/b7fYb4XBYAABIJXItFoNzrgEAWBmrYoxJxWWPjl0HSZIkIcR6RGRCCCDCbYhoLTBKFCKi1eVyzaRSKS0Wi7VOTozvvTx49eP213blnqhzcM7PEdEGu11JcZ5TiUAmor+EycVAv9+vbA28PJk1TTOZXNpsGMbOHybHtROdJ7+7NXXTg4g3iChQVlaWaWh86VJ5hftLWZZ/s1qtvwwPD68s+dDhoz2MsQsH3zu8z+NZ18cYMysrK595GJv3KYqSkGV5UVEcibr6hm9dLtdX1dXVZ2w22wAi5gqMEuD0ramcxWK593r77uSLdfXHamo2hZ/f8sJZzvmDwStD2fr6xne8Xm9veXnF2Xw+P8g5fxyNRpNEhP/qpQP79wMAwK93ZlgoFHIVe/H8+T5HV1eXc80ebW0JFu6K4PZXP1nm0x07WoORxOKS/E9AedkH5+jYNd7aEvQg5ocQ8a3Nz/nfOHLk/YtpI+kmoglE3DV09Uru0896xvu++NwxO/dH7tSpk9DW1gYjIyOlQK93Q38gsDVhpFJnELHJ6VQfNzQ2jiHitFaz6c6jRLwqk8m8kk4bbbenp9xC8Lc/PNE5xjnPRiIRWuFDi8XyVGx+/hIAgKIoS8/6/aMOh/MCEc1EPjoNRHS8o2OPmojHDywsJA4RkRSPxy8CQD8A5Fd0uTDbiAgba7WJqqr1vYg4AgDpJwl5U1PgA0mS7hKRhIgAAH5ElFadFABIVLjdPxGSOjd7z+vTfHe7u7uXijfP5YH+jYrieOh0qkY6bdQIkbfI8t+6SoC1mu+gpvm2JJNJtNlsqmma6QJI13XQdR32vbv351pNO5rJmOusVuYSgs9Kko2vDqzV5ojovqqqHABsACAAAHRdL06aI6KbqqqSEIIxxoQQAte8SNe6YAtxfwILoavAECTInAAAAABJRU5ErkJggg==",
+   					callBack: function(sqInfo){
+   						if (sqInfo.hitResults.length > 0){
+	   						var geojson = new OpenLayers.Format.GeoJSON();
+	   						var components = [];
+	   						for (var i=0;i < sqInfo.hitResults.length;i++){
+	   							components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+	   						}
+	   						var collection = new OpenLayers.Geometry.Collection(components);
+	   						collection.calculateBounds();
+	   						var bounds = collection.getBounds();
+						    var extent = 
+					        {  x1: bounds.left,
+					           y1: bounds.top,
+					           x2: bounds.right,
+					           y2: bounds.bottom
+					        };   
+							cbKort.mapObj.zoomToExtent(extent, 100);
+   						}
+   					}
+   				}
+    		},
+			imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey,
+			detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption')
+			});
+			
+			return sqDHB.buildHandlerDef();
+    	}
+    	
+	[endif]
+    ]]>
+    </src>
+</tool>
