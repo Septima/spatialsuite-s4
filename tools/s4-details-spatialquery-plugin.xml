@@ -12,7 +12,23 @@
     
     if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
 		var localThemes = _s4Params.themesearcher.searcher.getLocalthemes().done(Septima.bind(function(localThemes){
-			var handlerDef = s4SetupSqSearch(localThemes);
+		
+		    var s4SqSearcher = new Septima.Search.SqSearcher({
+		        layers: localThemes,
+		        profile: cbKort.getProfile(),
+		        profileQuery: 'info',
+		        buffer: 3,
+		        sessionId: cbKort.getSessionId(),
+				allowDetails: true
+		    });
+	    	
+    		//
+    		var searchers = [s4SqSearcher];
+    		
+			//Get handlerdef
+			var handlerDef = s4SetupSqSearch(searchers);
+			
+			//Attach
 	  		if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
 				_s4Params.indexsearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
@@ -32,17 +48,8 @@
 		}, this));
     }
   
-	function s4SetupSqSearch(localThemes){
+	function s4SetupSqSearch(searchers){
 	
-	    var s4SqSearcher = new Septima.Search.SqSearcher({
-	        layers: localThemes,
-	        profile: cbKort.getProfile(),
-	        profileQuery: 'info',
-	        buffer: 3,
-	        sessionId: cbKort.getSessionId(),
-			allowDetails: true
-	    });
-    	
     	var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
     		onSelect: function (result){
 				var geojson = new OpenLayers.Format.GeoJSON();
@@ -71,7 +78,7 @@
 					});
 				}
    			},
-    		searchers: [s4SqSearcher],
+    		searchers: searchers,
     		limit: 10,
     		title: cbInfo.getString('s4.sq.caption'),
     		header: {

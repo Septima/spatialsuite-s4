@@ -9,8 +9,16 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-			var handlerDef = s4SetupNearest();
+    	
+    		//
+    		var searchers = [_s4Params.indexsearcher.searcher];
+    		
+    		//
+			var handlerDef = s4SetupNearest(searchers);
+			
+			//Attach
 			_s4Params.indexsearcher.searcher.addDetailHandlerDef(handlerDef);
+			
 			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
 				_s4Params.dawasearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
@@ -24,7 +32,7 @@
     	
     	var s4NearestHoverOLid = null;
     	
-    	function s4SetupNearest(){
+    	function s4SetupNearest(searchers){
 			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
 			onSelect: function (result){
 				var geojson = new OpenLayers.Format.GeoJSON();
@@ -53,7 +61,7 @@
 					});
 				}
 			},
-			searchers: [_s4Params.indexsearcher.searcher],
+			searchers: searchers,
 			omitZeroDistance: true,
 			limit: 3,
 			title: cbInfo.getString('s4.nearest.caption'),

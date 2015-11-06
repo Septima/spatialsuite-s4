@@ -29,7 +29,13 @@
 		    	    		var title = Septima.Search.ThemeResult(themeResult, [], extraButtonDefs, {format: "compact"});
     		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true});
             			}
-    			    	deferred.resolve(detailsContent.formatList(list));
+            			
+            			var output = jQuery();
+            			
+						output = output.add(detailsContent.formatTextArea({text: "Disse temaer indeholder " + result.title}));
+            			output = output.add(detailsContent.formatList(list))
+            			
+    			    	deferred.resolve(output);
             		}, this),
             		isApplicable: Septima.bind(function(result){
             			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
