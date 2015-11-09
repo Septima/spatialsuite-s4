@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+		var s4InfoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+		var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
+		var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAABEUlEQVQ4y92RO07DUBBFz4ytLIPOCaUdIbDSsQEvAGroqdgCqehJTUlDxQJQZD6K3RJLILELiuehIeHj5yixKBC3vPPu0cx98NclPnOQpKfrhJ+KfPzTC30PTThbc6EGUH/75NBvy3NX4LcOo3gUa2DRJoDaSVWV07IB7A/TC+Co42KT+Sw/XgKjeBSL1kWH+8YYu8C+1ZpU5bRUABG33Wkvp1cGD18ZIYCpqphtDtT6ftGZqeoS6L+GV4O7ltmewZZv1grEuJ0X+aFvNEjSS4QD79KduluhEKDX48a92c7CrJHHtSrkMxP05OWjjqb6w9QMriVwJ942XHAukM1neSO/6lMyXJC1zFaf7EmM+bd6B6bIR9G+EvlcAAAAAElFTkSuQmCC";
+		var s4PrintButtonCaption = "Print";
+    
+		var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
+		
+		var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};	
+		
+		function addS4SpatialMapTools(paramEntry){
+		    if (paramEntry.info){
+		    	paramEntry.searcher.addCustomButtonDef(s4InfoButtonDef);
+		    }
+		    if (_s4Params.view.printconfig && paramEntry.print){
+		    	paramEntry.searcher.addCustomButtonDef(s4PrintButtonDef);
+		    }
+		}
+			
+		addS4SpatialMapTools(_s4Params.dawasearcher);
+		addS4SpatialMapTools(_s4Params.geosearcher);
+		addS4SpatialMapTools(_s4Params.cvrsearcher);
+		addS4SpatialMapTools(_s4Params.plansearcher);
+		addS4SpatialMapTools(_s4Params.indexsearcher);
+	
+	[endif]
+    ]]>
+    </src>
+</tool>

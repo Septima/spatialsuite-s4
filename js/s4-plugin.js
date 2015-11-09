@@ -21,6 +21,7 @@ function s4_init (params){
         	//Get localized strings
         	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
         	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+        	var detailsbuttonCaption = cbInfo.getString('s4.detailsbutton.caption');
 
         	var searchIndexToken = null;
         	
@@ -117,7 +118,7 @@ function s4_init (params){
                 }
 
             //Create view and controller
-        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit});
+        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit, detailsButtonCaption: detailsbuttonCaption});
         	
         	var blankBehavior = "search";
         	if (_s4Params.view.blankbehavior && _s4Params.view.blankbehavior == "none"){
@@ -133,6 +134,31 @@ function s4_init (params){
 			//Example:
 			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+
+			
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+            	var dawaSearcherOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase};
+            	if (_s4Params.municipality != "*"){
+            		var municipalities = _s4Params.municipality.split(' ');
+            		dawaSearcherOptions.kommunekode = municipalities.join('|');
+            	}
+            	if (_s4Params.dawasearcher.minimumShowCount){
+            		dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
+            	}
+            	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
+            	controller.addSearcher({"title": "Adresser", "searcher" : dawaSearcher});
+                _s4Params.dawasearcher.searcher = dawaSearcher;
+            }
+			
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase, allowDetails: _s4Params.indexsearcher.allowDetails};
+                if (_s4Params.indexsearcher.blankbehavior){
+                	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
+                }
+            	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
+            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
+                _s4Params.indexsearcher.searcher = s4IndexSearcher;
+            }
         	
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
             	var gstAuthParams= s4_getGstAuthParams();
@@ -155,7 +181,6 @@ function s4_init (params){
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
                 	controller.addSearcher({"title": "", "searcher" : geoSearcher});
                     _s4Params.geosearcher.searcher = geoSearcher;
-                    addS4CustomButtons(_s4Params.geosearcher);
             	}
             }
 
@@ -163,12 +188,13 @@ function s4_init (params){
 			var _s4Searchers = window["_s4Searchers"];
 			for (var i = 0;i<_s4Searchers.length;i++){
 				var searcherReg = _s4Searchers[i];
-                if (searcherReg.info && searcherReg.info == true){
-                	searcherReg.searcher.addCustomButtonDef(s4GetInfoButtonDef());
-                }
-                if (_s4Params.view.printconfig && searcherReg.print && searcherReg.print == true){
-                	searcherReg.searcher.addCustomButtonDef(s4GetPrintButtonDef());
-                }
+//				addS4SpatialMapTools(searcherReg);
+//                if (searcherReg.info && searcherReg.info == true){
+//                	searcherReg.searcher.addCustomButtonDef(s4GetInfoButtonDef());
+//                }
+//                if (_s4Params.view.printconfig && searcherReg.print && searcherReg.print == true){
+//                	searcherReg.searcher.addCustomButtonDef(s4GetPrintButtonDef());
+//                }
 				controller.addSearcher(searcherReg);
 			}
 			//Prepare for future pushes
@@ -179,17 +205,6 @@ function s4_init (params){
 					}
 			};
             
-            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase, allowDetails: _s4Params.indexsearcher.allowDetails};
-                if (_s4Params.indexsearcher.blankbehavior){
-                	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
-                }
-            	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
-                _s4Params.indexsearcher.searcher = s4IndexSearcher;
-                addS4CustomButtons(_s4Params.indexsearcher);
-            }
-        	
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
             	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
@@ -199,7 +214,6 @@ function s4_init (params){
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
             	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
                 _s4Params.plansearcher.searcher = planSearcher;
-                addS4CustomButtons(_s4Params.plansearcher);
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
@@ -211,7 +225,6 @@ function s4_init (params){
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
             	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
                 _s4Params.cvrsearcher.searcher = se;
-                addS4CustomButtons(_s4Params.cvrsearcher);
             }
 
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
@@ -275,7 +288,7 @@ function s4_init (params){
 						}
 					}
 			};
-
+			
         	controller.go ();
         	
         	s4SetMaxHeight();
@@ -300,29 +313,6 @@ function s4SetMaxHeight(){
 	if (_s4View != null && _s4View.top() !=null){
 		_s4View.setMaxHeight(jQuery(window).height() - _s4View.top() - _s4Params.view.marginToBottom);
 	}
-}
-
-function addS4CustomButtons(paramEntry){
-    
-    if (paramEntry.info){
-    	paramEntry.searcher.addCustomButtonDef(s4GetInfoButtonDef());
-    }
-    if (_s4Params.view.printconfig && paramEntry.print){
-    	paramEntry.searcher.addCustomButtonDef(s4GetPrintButtonDef());
-    }
-}
-
-function s4GetInfoButtonDef(){
-	var infoButtonCaption = cbInfo.getString('s4.infobutton.caption');
-	var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhpJREFUeNqMk02IUmEUhs91pBzB/EXR1IXuxppB2kQQzCIIhAayuii4sk3b2jbUUHcxJIgL0YVMRkhQtO4HahNEixCUsoU4bRUCCcXxX3vP5V65ogMdeLjnfPc7L+937v2E+XxOoijeIKLj6XT6C9BkMqF6vU6NRoM08RYIQKewP5vNfnBCaDrv9XpvIt1SdwcCAbJarVqBA/AYHAE92CFFiQWEdDot+Xy+KMqQ2hEOh8lisajlTwW9wp+FACzLz0wm8xROlkT8fr/WxWVwD9TAxxUBjmw2+wRObiO9wLXZbNYKSMAAHqgLKwIc+Xz+ACJ3MOCLXIdCC0PXwK52r9w4Ho+XBDgKhcIj2BeRbptMJnX5G/j+XwIcxWJxH05EONn2eDy8dAb5Of70DCnTPFWAo1QqPYzFYjrsETqdzqVut7v0XhXY0C4OBoOTSCTyrN1uD9U1QRBCwWCwWqlUaOUIaJCfaPibSqXeGAwGYyKRuNLv999jwIf44w5h+dU6h3LjcDjUczOsvsjlcu+q1epxPB6/iuHtwvLZXq932gkXAhvRaPRlrVZ7PhqNPsDFp01EMpncQ73FAq1Wi5rNJrlcrgVy8DTtdvtdsON2u8nhcJDNZrtVLpd/o/EEX+E+aloH9+oUkSNQ5VsINzzUr5IkfTYajZtOpzMAF7QOebiKA7nAsHigco7mPdyL67jWr1F+WXd+DJn+CTAAeWoNKVBP6T4AAAAASUVORK5CYII=";
-	return {"buttonText":infoButtonCaption, "buttonImage": _s4InfoUri,"callBack": s4DoInfo};
-}
-
-function s4GetPrintButtonDef(){
-	//http://dopiaza.org/tools/datauri/index.php
-	var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMkE3MEU5MTE5MjA2ODExODgwN0FGOUZDM0NFRkE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkMwNzY3Mzk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkMwNzY3Mjk1RjIxMUUxODREMEM4N0I2MDFGREQyQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0QTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIyQTcwRTkxMTkyMDY4MTE4ODA3QUY5RkMzQ0VGQTgwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+wYGX3QAAADNQTFRFVlZW////qqqqgICA1dXV39/fi4uLysrKgYGBv7+/YWFhdnZ2dXV1YGBgwMDA1NTU////aY/EbQAAABF0Uk5T/////////////////////wAlrZliAAAAb0lEQVR42oyPWQ6AMAgFWbq3Kvc/rdDSRP3yJU3I0MAA8gnoi4lnUnRQyVPRQINHmkCAV8I/QLhCE0iHgEtBex11rfYcsJbmQSaU9T/jEuNLC0q1xQ2ygXFE3GCoNkOes/y4Usq5ZhsQ95irbgEGAHZ1Bwk/T1uMAAAAAElFTkSuQmCC";
-	var printButtonCaption = "Print";
-	return {"buttonText":printButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};	
 }
 
 function s4GeoHit(result){

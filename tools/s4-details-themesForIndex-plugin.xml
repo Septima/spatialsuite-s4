@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled && _s4Params.themesearcher && _s4Params.themesearcher.enabled){
+            	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
+            		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
+            		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAACDElEQVQ4y9WTsWsTYRjGn/e706SgoSFWjKlgIL3eVJM7ubtWhy6CKehUwaUUTDb1T1BcunVTN+PSTetodeygeEm8a3Rqk4IFRYKQGlqoZ5O7z6G2NHLXi5P4jN/3vD/e7/neF/gXkjUtIWtaoh8vCzNkVEPxXFb1XFbNqIYS5heOuhzNjRcIeAFgCECcgNlTZ841W80vK0E15Hd4fnIyenzbeQSOQkBVafdk9M7G8rITChwd09JcZM8BqCGvs6jr3Vj7WPkUmKGUM/JcZNU+YACgcpFVpZyR9+0woxoK4ygDEPuAHVbXI+jrlmn3dLhumTY4rgNo/QWsRaBr+7DADCGyRQ6EjYjFPEyv1syN4AwvjKfcncTXn7HoJRBKgShCaTcWvewMRpuZMX3YFziSnchC4B9YrP2GbXdP1y2zSJyKAA6PhkOcCnXLLEY2d5KRLectE6k2kp3I7hsOBnuz+flbIjk8AOAmgzcbP5uqNWxzcSiZes2JroDQ9ghXG7a5JOWMPAR6BSANYL6x8u4ZAO6boXRRn4JLCyAMEvEHa1Z5Tta0OACsVirfJcW4B+A+ONoQ+Ez9fXmpNw0f9X4MvYx0hBnvhEsdhy+AMEWAja43/edQBwKBvfU7tvXjMYFugbBXyJHm4E87sYHbfmt3JPAgAtUoguPhb/fdumU+CasJlazoqqzo/azjf6BfagKzesm58e4AAAAASUVORK5CYII=",
+            		"handler": Septima.bind(function(result, deferred, detailsContent){
+            			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+    			    	var list = {type: "list", items: []};
+            			for (var i=0;i<themesResults.length;i++){
+            				var themeResult = themesResults[i];
+    						var icon = jQuery('<img src="' + themeResult.image + '" style="width: 20px;"/>');
+		    				var extraButtonDefs = [{
+		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
+		    					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3wQeCg4vUj8XNwAAAGVJREFUOMvt0z0KwlAQReEvDzeYpBeXJEo6F5DYZHOp/MPGtAHhNoF36uFwZ5hLZXfMGFBSwh5P3JLSFg9MOKST3pPSE944bw39c5cFHzSJdEe8cE0IV9klIevSbzP+1iy14zvmCzHLEgzBACrbAAAAAElFTkSuQmCC",
+		    					callBack: Septima.bind(function(result){
+		    						detailsContent.selectResult(result);
+		    						}, this),
+		    					fixed: true}
+		    	    		];
+		    	    		var title = Septima.Search.ThemeResult(themeResult, [], extraButtonDefs, {format: "compact"});
+    		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true});
+            			}
+            			
+            			var output = jQuery();
+            			
+						output = output.add(detailsContent.formatTextArea({text: "Disse temaer indeholder " + result.title}));
+            			output = output.add(detailsContent.formatList(list))
+            			
+    			    	deferred.resolve(output);
+            		}, this),
+            		isApplicable: Septima.bind(function(result){
+            			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+            			return themesResults.length > 0;
+            		}, this)
+            	});
+            }            
+    
+	[endif]
+    ]]>
+    </src>
+</tool>

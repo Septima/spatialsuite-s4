@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+	[endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+    	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+    		_s4Params.indexsearcher.searcher.allowDetails = true;
+		}
+	[endif]
+    ]]>
+    </src>
+</tool>
