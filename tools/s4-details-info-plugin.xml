@@ -137,7 +137,7 @@
     	var handlerDef = sqDHB.buildHandlerDef();
     	
     	handlerDef.getbuttonText = function(result){
-    		return cbInfo.getString('s4.sq.caption') + " " + result.title;
+    		return cbInfo.getString('s4.info.caption') + " " + result.title;
     	}
 
 		return handlerDef; 
