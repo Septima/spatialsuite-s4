@@ -54,9 +54,9 @@ Latest version is always located at:
 Development version (at your own risk) may be downloaded from:  
       https://github.com/Septima/spatialsuite-s4/archive/development.zip  
       
-### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
+#### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
-### Update modules.xml:
+##### Update modules.xml:
 ```xml
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
@@ -194,7 +194,7 @@ For each searcher a number of parameters may be set:
 
 The targets in the geosearcher are changed by editing the *targets* property.
 
-	geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre'], streetNameHit: false},
+	geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne', 'matrikelnumre'], streetNameHit: false},
 
 Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
 
@@ -263,13 +263,14 @@ Edit [*s4.config.dir*]/config.xml to include the datasources you want to index:
 <config>
 	<endpoint>s4index</endpoint>
 	<datasources>
-		<datasource id="ds_skoler" presentation="s4-pres-skoler"/>
+		<datasource id="ds_skoler" presentation="s4-pres-skoler" [iconuri=""]/>
 		<datasource id="ds_...." presentation="s4-pres-...."/>
 		<datasource id="ds_...." presentation="s4-pres-...."/>
 	</datasources>
 </config>
 ```
-
+, where _datasource_ and _presentaion_ are mandatory. Optionel: Specify a URL to a 20X20 pixel icon for a datasource for a custom icon in the result list.  
+   
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
 * *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
 * *Index performance*: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
