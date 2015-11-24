@@ -1,5 +1,4 @@
-﻿SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
+﻿SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
@@ -20,6 +19,9 @@ CREATE TABLE datasource (
     featuretypeplural character varying
 );
 
+ALTER TABLE ONLY datasource
+    ADD CONSTRAINT datasource_idx PRIMARY KEY (id);
+
 CREATE TABLE feature (
     datasource character varying(255),
     featureid character varying NOT NULL,
@@ -30,23 +32,17 @@ CREATE TABLE feature (
     json character varying
 );
 
+ALTER TABLE ONLY feature
+    ADD CONSTRAINT fid_idx PRIMARY KEY (datasource, featureid);
+
+CREATE INDEX f_id_ds_idx ON feature USING btree (featureid, datasource);
+
 CREATE TABLE featureterm (
     featureid character varying NOT NULL,
     level integer,
     term character varying NOT NULL,
     datasource character varying
 );
-
-ALTER TABLE ONLY datasource
-    ADD CONSTRAINT datasource_idx PRIMARY KEY (id);
-
-ALTER TABLE ONLY feature
-    ADD CONSTRAINT fid_idx PRIMARY KEY (featureid);
-
-ALTER TABLE ONLY feature
-    ADD CONSTRAINT unique_featureid UNIQUE (featureid);
-
-CREATE INDEX f_id_ds_idx ON feature USING btree (featureid, datasource);
 
 CREATE INDEX ft_term_idx ON featureterm USING btree (term);
 
