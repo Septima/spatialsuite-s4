@@ -269,7 +269,7 @@ Edit [*s4.config.dir*]/config.xml to include the datasources you want to index:
 	</datasources>
 </config>
 ```
-, where _datasource_ and _presentaion_ are mandatory. Optionel: Specify a URL to a 20X20 pixel icon for a datasource for a custom icon in the result list.  
+, where _datasource_ and _presentaion_ are mandatory. Optional: Specify a URL to a 20X20 pixel icon for a datasource for a custom icon in the result list.  
    
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
 * *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
