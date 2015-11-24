@@ -3,24 +3,44 @@
 Please read the [general installation instructions](../../../#installation) before reading this  
   
 Tools:  
+The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
+  
+This tools creates icons for Spatial Map functions (Info and print)  
+* [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
+  
+Tools relevant for Denmark only:  
 * [s4-matrikel-plugin](#s4-matrikel-plugin)  
 * [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
 * [s4-planSystem-plugin](#s4-planSystem-plugin)  
 * [s4-odeum-plugin](#s4-odeum-plugin)  
 * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
-* [s4ApiDemo](#apidemo)  
-* [s4-requires](#s4-requires)  
-
   
+API documentation:  
+* [s4ApiDemo](#apidemo)  
+    
 ###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
-The main tool. Include this to enable search in Spatial Map  
-Please include this plugin _before_ any other s4 tool  
-* s4-plugin-dk-all includes searchers only relevant in Denmark  
-* s4-plugin-all is used used outside Denmark  
-[Configuration instructions](../../../#s4customization)  
-
+The main tool.
+[Customize this tool ](../../../#include-tool-in-profiles) and include to enable search in Spatial Map. Please read the [Configuration documentation](../../../#s4customization).  
+      
+_Please include the plugin _before_ any other s4 tool_    
+```xml
+	<tool dir="custom" name="s4-plugin-dk-all" />
+```  
+  
+S4 ships with two versions of the tool:  
+* _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
+* _s4-plugin-all_ is used used outside Denmark  
+  
+###<a name="s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin    
+This tools creates icons for Spatial Map functions (Info and print).  
+  
+  _Must_ be included.    
+```xml
+	<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
+```    
+  
 ###<a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR og SKAT for matrikler  
@@ -128,9 +148,6 @@ Sæt følgende parameter for at pluginnet virker:
   
 ###<a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
-
-###<a name="s4-requires"></a>s4-requires  
-Internal tool. Used by the other tools  
 
 
 

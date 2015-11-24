@@ -1,9 +1,8 @@
 #S4 - Septima Search for SpatialSuite  
   
-Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
-offered by Septima.  
+Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch), [Adresse Web Services](http://dawa.aws.dk), as well as cvr and plan services offered by Septima.  
 
-S4 will also search local Spatial Suite data as well as profiles, themes, workspaces and favorites.  
+In addition S4 will search local Spatial Suite data as well as profiles, themes, workspaces and favorites.  
   
 ####[License](#license)
 ####[Basic installation and test](#installation)
@@ -62,7 +61,7 @@ Development version (at your own risk) may be downloaded from:
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
 
-### Include tool in profile(s):
+### Include tools in profile(s):
   
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
@@ -74,11 +73,6 @@ Add the customized tool to your profile (_panel_ is optional):
 ```xml
 <tool dir="custom" name="s4-plugin-[your-municipality-code]-all" [panel="xxx"]/>
 ```
-
-Comment out other tools conflicting with this tool e.g.:
-```xml
-<!--     <tool module="spatialaddress" name="spatialaddress-plugin" /> -->
-```  
 
 ##### Update cbinfo.xml (In Denmark):  
 In order to search the danish Plansystem and cvr data, please include the following parameter in your relevant cbinfo.xml:    
@@ -105,7 +99,13 @@ Add the customized tool to your profile (_panel_ is optional):
 ```
   
 S4 will now search themes, profiles, and workspaces. In order to search your local data please see [Search Spatial Suite data](#local)    
-
+  
+#### More tools:    
+To enable the info and print icons, please incklude the following tool:  
+```xml
+	<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
+```    
+  
 
 ## <a name="s4customization"></a>Customization of s4 tool
 
@@ -119,14 +119,15 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 * set the __panel__ parameter.
 
 ```javascript  
+//Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'.   
 {municipality: '[your-municipality-code]',
 
 //Positioning of s4. Choose between
 //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
-//  'tool': Use the panel as specified in the profile  
+//  'tool': Use the panel as specified in the profile
 //  'panel-brand': Force s4 to panel-brand 
 //  'panel-top': Force s4 to top menu
-//  'panel-middle': Force s4 to menu line (right justified)
+//  'panel-middle': Force s4 to menu linie (right justified)
 //  'menu': As the last menu in the menu line
 panel: 'default',
 
@@ -144,38 +145,44 @@ view: {
   dynamiclayer: 'userdatasource',
   infoprofilequery: 'userdatasource',
   printconfig: 'rotatet',
-  forcedblurOnSelect: false,
+  forcedblurOnSelect: 'false',
   zoomBuffer: '100',
   marginToBottom: 100 
 },
 
+//Adressesøgning i DAWA
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
+
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+//Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
 // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
-geosearcher:{enabled: true, info: true, print: true, targets: ['adresser','stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, geometrybehavior: "bbox"},
+geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
 
 //Septima CVR-index
-cvrsearcher:{enabled: true, info: true, print: true},
+cvrsearcher: {enabled: true, info: true, print: true},
 
 //Septima lokalplan-index
-plansearcher:{enabled: true, info: true, print: true},
+plansearcher: {enabled: true, info: true, print: true},
 
 //Local SpatialSuite-datasources
 //  datasources: "*" for all, or space separated names of datasources
 //  blankbehavior: search or none
-indexsearcher:{enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
+indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
 
 //Themes in profile
-themesearcher:{enabled: true},
+themesearcher: {enabled: true},
 
 //Profiles
-profilesearcher:{enabled: true},
+profilesearcher: {enabled: true},
 
 //Favorites
-favoritesearcher:{enabled: true},
+favoritesearcher: {enabled: true},
 
 //Workspaces
-workspacesearcher:{enabled: true}};
+workspacesearcher: {enabled: true}
+
+
 ```
 
 ### Searcher options
