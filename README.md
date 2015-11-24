@@ -46,7 +46,7 @@ In addition S4 will search local Spatial Suite data as well as profiles, themes,
 ### Download s4 module:
       
 Current version:  
-      2.3.0:   https://github.com/Septima/spatialsuite-s4/archive/2.3.0.zip  
+      2.3.1:   https://github.com/Septima/spatialsuite-s4/archive/2.3.1.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
@@ -273,7 +273,7 @@ Edit [*s4.config.dir*]/config.xml to include the datasources you want to index:
    
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
 * *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  
-* *Index performance*: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentaion PLUS geometry)  
+* *Index performance*: Create a datasource based on a view which only selects the necessary columns. (Those that are mentioned in the presentation PLUS geometry)  
 
 #### Presentations    
 
