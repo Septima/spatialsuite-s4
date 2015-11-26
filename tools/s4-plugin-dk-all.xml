@@ -54,7 +54,7 @@
 	            // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
 	            //Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
 	            // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
-	            geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
+	            geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
 	            
 	            //Septima CVR-index
 	            cvrsearcher: {enabled: true, info: true, print: true},
