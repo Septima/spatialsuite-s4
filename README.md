@@ -46,7 +46,7 @@ In addition S4 will search local Spatial Suite data as well as profiles, themes,
 ### Download s4 module:
       
 Current version:  
-      2.3.2:   https://github.com/Septima/spatialsuite-s4/archive/2.3.2.zip  
+      2.3.3:   https://github.com/Septima/spatialsuite-s4/archive/2.3.3.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
@@ -221,7 +221,9 @@ Finished, now try out your profile and the customized search tool
 
 ## <a name="tools"></a> Included tools  
 
-S4 comes a number of included tools. Please [the tools section](./tools)  
+S4 comes a number of included tools. 
+All included tools must be included in the profile _after_ the main tool.  
+Please [the tools section](./tools)  
 
 
 ## <a name="local"></a> Search Spatial Suite data  

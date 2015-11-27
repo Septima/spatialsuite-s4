@@ -18,20 +18,21 @@
 		var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};	
 		
 		function addS4SpatialMapTools(paramEntry){
+			if (typeof paramEntry !== 'undefined' && typeof paramEntry.searcher !== 'undefined'){
 		    if (paramEntry.info){
 		    	paramEntry.searcher.addCustomButtonDef(s4InfoButtonDef);
 		    }
 		    if (_s4Params.view.printconfig && paramEntry.print){
 		    	paramEntry.searcher.addCustomButtonDef(s4PrintButtonDef);
 		    }
+			}
 		}
-			
+		addS4SpatialMapTools(_s4Params.aSearcher);
 		addS4SpatialMapTools(_s4Params.dawasearcher);
 		addS4SpatialMapTools(_s4Params.geosearcher);
 		addS4SpatialMapTools(_s4Params.cvrsearcher);
 		addS4SpatialMapTools(_s4Params.plansearcher);
 		addS4SpatialMapTools(_s4Params.indexsearcher);
-	
 	[endif]
     ]]>
     </src>
