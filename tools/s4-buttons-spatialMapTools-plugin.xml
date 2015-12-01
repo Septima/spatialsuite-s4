@@ -27,7 +27,7 @@
 		    }
 			}
 		}
-		addS4SpatialMapTools(_s4Params.aSearcher);
+
 		addS4SpatialMapTools(_s4Params.dawasearcher);
 		addS4SpatialMapTools(_s4Params.geosearcher);
 		addS4SpatialMapTools(_s4Params.cvrsearcher);

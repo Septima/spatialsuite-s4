@@ -100,11 +100,11 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	}, this));
     },
     
-    getThemesForDatasource: function(datasourceId){
+    getThemesForDatasource: function(datasource){
         var queryResult = this.createQueryResult();
-		if (typeof this.datasources[datasourceId] !== 'undefined'){
-			for (var i=0;i<this.datasources[datasourceId].length;i++){
-				var theme = this.datasources[datasourceId][i];
+		if (typeof this.datasources[datasource.id] !== 'undefined'){
+			for (var i=0;i<this.datasources[datasource.id].length;i++){
+				var theme = this.datasources[datasource.id][i];
         		var result = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", {theme: theme});
         		result.image = this.getThemeImage(theme);
 			}

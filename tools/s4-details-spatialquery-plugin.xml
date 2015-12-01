@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Creates a Spatial Query section in detail view -->
+
+<!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
+<!-- Look for Customize HERE -->
 <tool type="plugin">
     <requires>
     [if: ModuleDefined("s4") ]
@@ -17,18 +21,22 @@
 		        layers: localThemes,
 		        profile: cbKort.getProfile(),
 		        profileQuery: 'info',
-		        buffer: 3,
+		        buffer: 0,
 		        sessionId: cbKort.getSessionId(),
-				allowDetails: true
+				allowDetails: true,
+	    		onSelect: function (result){
+					var geojson = new OpenLayers.Format.GeoJSON();
+				    var olGeom = geojson.read(result.geometry, 'Geometry');
+					var wkt = olGeom.toString();
+				    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+				    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+	   			}				
 		    });
 	    	
-    		//
-    		var searchers = [s4SqSearcher];
-    		
 			//Get handlerdef
-			var handlerDef = s4SetupSqSearch(searchers);
+			var handlerDef = s4SetupSqSearch([s4SqSearcher]);
 			
-			//Attach
+			//Customize HERE
 	  		if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
 				_s4Params.indexsearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
@@ -45,6 +53,16 @@
 				_s4Params.plansearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
 		
+			//Attach Detailhandlers to sqSearcher
+			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){
+		    	s4SqSearcher.addDetailHandlerDef({
+		    		"buttonText":  cbInfo.getString('s4.details.tools'),
+		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH3wsEEBQCC4i3FQAAAUpJREFUOMvNlKFLREEQh7/xwFcERRBEDIIWqxjNgs1kMBuMnuH6/QNmm15QEFFBLXIIBxaLQTQopxYth+XQYFBYyywMc2/fnXDBheG9/c3Ox775DU9CCPRzDdDnlQSKyKSINEQkS+TnREQ6EiGEjgAEeAYCcA+Mmdyq6q3c2gRwV4tibKk+rvsXYKQnIFAxoE+ganKnqm8bbRhYywUCU8C3AV66fE31N73tIHADnKeAO1pwAjT1fc/kL1wrYiymgO0IADJjzD5wZABf+mwD5WQPgQdg1uwz4Mndpg7MAAvAaKEpwDRQclrdATfz3C0cGwO7TvRs409Ade/WAB6BQwet9jqHJeDdFDbjEAMHDlru1sMh4NUU/AAT7kyjqKceeKczGICPPBf13LGDrqeALWBZD813McxCr1LAFeDMf2YBtKYtWoqa/Ps/9i9UVjseslrp0QAAAABJRU5ErkJggg==",
+		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true})
+		    	});
+			}
+	    	s4SqSearcher.addDetailHandlerDef(handlerDef);
+	    	
 		}, this));
     }
   
@@ -59,14 +77,14 @@
 			    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
    			},
     		onHover: function (result){
-				if (s4NearestHoverOLid !== null){
-					cbKort.mapObj.deleteFeature(s4NearestHoverOLid);
+				if (s4SqHoverOLid !== null){
+					cbKort.mapObj.deleteFeature(s4SqHoverOLid);
 				}
 				if (result !== null){
 					var geojson = new OpenLayers.Format.GeoJSON();
 				    var olGeom = geojson.read(result.geometry, 'Geometry');
 					var wkt = olGeom.toString();
-					s4NearestHoverOLid = cbKort.mapObj.drawWKT(wkt,
+					s4SqHoverOLid = cbKort.mapObj.drawWKT(wkt,
 					null,
 					{		styles: {
 							strokeColor: '#000',
@@ -95,14 +113,15 @@
 	   						for (var i=0;i < sqInfo.hitResults.length;i++){
 	   							components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
 	   						}
+	   						components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
 	   						var collection = new OpenLayers.Geometry.Collection(components);
 	   						collection.calculateBounds();
 	   						var bounds = collection.getBounds();
 						    var extent = 
 					        {  x1: bounds.left,
-					           y1: bounds.top,
+					           y2: bounds.top,
 					           x2: bounds.right,
-					           y2: bounds.bottom
+					           y1: bounds.bottom
 					        };   
 							cbKort.mapObj.zoomToExtent(extent, 100);
    						}

@@ -18,6 +18,13 @@
             			for (var i=0;i<themesResults.length;i++){
             				var themeResult = themesResults[i];
     						var icon = jQuery('<img src="' + themeResult.image + '" style="width: 20px;"/>');
+    						icon.click(Septima.bind(function(result){
+								    if (!result.data.theme.visible){
+								        result.searcher.toggleTheme(result);
+								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+								    }
+		    						detailsContent.selectResult(result);
+		    						}, this, themeResult));
 		    				var extraButtonDefs = [{
 		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
 		    					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3wQeCg4vUj8XNwAAAGVJREFUOMvt0z0KwlAQReEvDzeYpBeXJEo6F5DYZHOp/MPGtAHhNoF36uFwZ5hLZXfMGFBSwh5P3JLSFg9MOKST3pPSE944bw39c5cFHzSJdEe8cE0IV9klIevSbzP+1iy14zvmCzHLEgzBACrbAAAAAElFTkSuQmCC",
@@ -27,12 +34,20 @@
 		    					fixed: true}
 		    	    		];
 		    	    		var title = Septima.Search.ThemeResult(themeResult, [], extraButtonDefs, {format: "compact"});
-    		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true});
+    						title.click(Septima.bind(function(result){
+								    if (!result.data.theme.visible){
+								        result.searcher.toggleTheme(result);
+								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+								    }
+		    						detailsContent.selectResult(result);
+		    						}, this, themeResult));
+    		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true, clickable: true});
             			}
             			
             			var output = jQuery();
             			
-						output = output.add(detailsContent.formatTextArea({text: "Disse temaer indeholder " + result.title}));
+            			var text = cbInfo.getString('s4.themesearcher.themesrelated');
+						output = output.add(detailsContent.formatTextArea({text: text + " " + result.title + ":"}));
             			output = output.add(detailsContent.formatList(list))
             			
     			    	deferred.resolve(output);

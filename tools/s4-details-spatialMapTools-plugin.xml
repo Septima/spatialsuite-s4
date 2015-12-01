@@ -5,8 +5,17 @@
     	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
 	[endif]
    </requires>
-    <jssrc/>
     <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+		addS4SpatialMapTools(_s4Params.dawasearcher);
+		addS4SpatialMapTools(_s4Params.geosearcher);
+		addS4SpatialMapTools(_s4Params.cvrsearcher);
+		addS4SpatialMapTools(_s4Params.plansearcher);
+		addS4SpatialMapTools(_s4Params.indexsearcher);
+	[endif]
+    ]]>
+    </src>
+    <jssrc><![CDATA[
     [if: ModuleDefined("s4") ]
     	var s4SpatialMapToolsHelper = {
     	
@@ -67,7 +76,7 @@
            	}           	    	
     	}
     
-		var S4SpatialMapToolsHandler = function(paramEntry, result, deferred, detailsContent){
+		var S4SpatialMapToolsDetailHandler = function(paramEntry, result, deferred, detailsContent){
     		var list = {type: "list", items: []};
     		
     		if (paramEntry.info){
@@ -124,25 +133,15 @@
   		};
     
 		function addS4SpatialMapTools(paramEntry){
-		    if (paramEntry.enabled && (paramEntry.info || (_s4Params.view.printconfig && paramEntry.print)) ){
+		    if (typeof paramEntry !== 'undefined' && paramEntry.enabled && (paramEntry.info || (_s4Params.view.printconfig && paramEntry.print)) ){
 		    	paramEntry.searcher.addDetailHandlerDef({
 		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		//"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAYAAAACCvahAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH3QgWADsuxxIEJAAAAAd0RVh0QXV0aG9yAKmuzEgAAAAMdEVYdERlc2NyaXB0aW9uABMJISMAAAAKdEVYdENvcHlyaWdodACsD8w6AAAADnRFWHRDcmVhdGlvbiB0aW1lADX3DwkAAAAJdEVYdFNvZnR3YXJlAF1w/zoAAAALdEVYdERpc2NsYWltZXIAt8C0jwAAAAh0RVh0V2FybmluZwDAG+aHAAAAB3RFWHRTb3VyY2UA9f+D6wAAAAh0RVh0Q29tbWVudAD2zJa/AAAABnRFWHRUaXRsZQCo7tInAAABA0lEQVQ4ja2SPaqDUBCFP3/AKp0WIQErmzT2bsDaLlmCXSDrcAdZhetwCaKlYBmIiJc7N4WPpNMQ32mHjzNnzlgiYvhR9q/gZtgFeD6f1HWNMQbLshYBESEIAo7H4wy3bUue5yilVmFjDOfzmdvtNsNaa0TkPVzTNE2ftQ+HA9frFRFZdVZKcTqdALC2VOUCNE1DURRM04TjOIvAOI6kacrlcpnhx+NBVVXv3GuKoujjvNvtiOMYpRS2vVz9OI6EYQj8R+a+7ynLEhFZdVZKEccxSZLMcNd13O93tNZfOWZZ9oEdx8F1XbTWq9fWWuN5HvCXeRgG2rb9+rd932e/32872AuC+IL3DaMGjAAAAABJRU5ErkJggg==",
-		    		//"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAw5JREFUeNqsVF1Ik1EYfvfnXDrEzenc/BtMA2uSOFAG/rBBl5YkCdpVQbsxiCJICquboIuomwih2669qNyc0GDGYCVhCjptIIPhD6Km081tTnveA4rOz7rxwMs533mf93l/zyc7ODig81zKw4Pb7T6h2N/ft2J7JJPJAjh/xE6QPty1Ioi3crk8fBw/NDQkdvkZjux5eXnDRqPxLvZ7nAULn3HnVqvVI4yRMjxByEaIhsVQWVl5uaenh6xWa/Pe3t7rTCbzoqamprm7u5uqqqoswJQzNrdkylwPnBpAnqWlpWQ2m9U0NjaSXq9/wLrq6mqBgS6F7RNjz6wh1iXIe5B9RjQms9ms4QiKi4uZUADgQEhFRYV6enr6jUqlWgTpNajY4fcThCAaaGtra+Wib25uUlNTkzCGIUWj0SyfLRaLor6+noCjgoKC+/n5+YTmUDAYfAq7zlxCBwPq6uqOogkEAjQxMcEdfsLpRSKRwdXV1dsul4scDoeoH+6Y9MqppsCgy+fzefx+vyCDIUf3TalU3oI6Cn0UXb4zMzMzsrKyImo9Pj5Oo6OjY2jadSnCX4lEomt5eVl0emtri9LptJ91CoWCDhsAZ6F4PE6oH62trdH29vYNXP+UGhs9Qn9eVFQkjDUaDRPZdnd3jwB8RpoXWcdOtVotY55BZTxFCMBwe3v7446ODuEdA8wzyKkMHHPaj7vesrIyQprU0tJCTqfzIcry5dTYIKpEaWkpcYfRVaqtrWUwFRYWvlxYWOgHgayhoaHcbrcTCGh+fp51VFJSwsEkpAhfeb1eG+r2A5/ajY0NJ0eAqFlMx4c3FApx97/iGEc2dpRhUGqw/YjCzPXjLk9NTaVBqEomk7S+vi4AOp1O1HZ2djaDqFzcLMb+8+nxbPFcmUwmFX4CIprJyckxOErabLZOHmqDwaDa2dlxABvMfX6SbxnLjJQTHo/nQiwW+4Mor/J9OBxeTKVS5dBl8K3779/mkBDiw3zd/I2FSN7x82IB8Ye5ubkI5rAXGK/Uz0F23n9sOZ3z+ivAACr6eS/9XnARAAAAAElFTkSuQmCC",
-		    		//"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAAB6ElEQVQ4y62SsWuTYRDGf/d+TSy4VIqCg1g0Sd1M00KjYskkqIODU5cWwXYRRFf/AHHTOrYFaUfBwUHdU4wp1CSjTaKDk6iUWFC0ad5z+Gj6vfnyJVV607137/Pc3XMHh2zSL58av3BDIAag0Ky+f/fSd/+DcHTi0qja1gcHYLxzmxtvN6Mwphehsnv2ILHIDlOZ7BwwBXZRTOyr2t1FkKkOyryYgXm1zRNg5oF8tVRcChEmxi4fN7JTBRlqNxMtSSCnDavxVL289s0Z2dB8GCDrp28gJ0M+NqDhSC43iDDdrRNFFlCbRm1akQW6bViYTiSuHnEqJdMX02L0BeiZ/bn0Sa20fj+ITWYmHwtyL8D2Sa3crFUKFWfkWqVQEaMzTmXrrYS66YiJ0Zk9MocQQK3teUZdt9OBaT8S49kMmFXnt2nNhhhCMbPqYwPbGsnlBuPbv78DR7ss5alo6xmAindL0LuEL+Cn3T42XK+/+dNOpMaySwi3/3VkvyzL1XJxzhnZEnsA2nC+9aLYdxs+1jdvz9n68vnX8MlTW8APRO94lkcqnAc53cGV9yxX1PAcJA6yXCsX1hwNoyw1MXkNK6/cHej16sb66yhMzzMRBj4eJObme5skM9lZQeO+cLJTKxVX+uh7uPYXd3qsNDG4dJ8AAAAASUVORK5CYII=",
 		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH3wsEEBQCC4i3FQAAAUpJREFUOMvNlKFLREEQh7/xwFcERRBEDIIWqxjNgs1kMBuMnuH6/QNmm15QEFFBLXIIBxaLQTQopxYth+XQYFBYyywMc2/fnXDBheG9/c3Ox775DU9CCPRzDdDnlQSKyKSINEQkS+TnREQ6EiGEjgAEeAYCcA+Mmdyq6q3c2gRwV4tibKk+rvsXYKQnIFAxoE+ganKnqm8bbRhYywUCU8C3AV66fE31N73tIHADnKeAO1pwAjT1fc/kL1wrYiymgO0IADJjzD5wZABf+mwD5WQPgQdg1uwz4Mndpg7MAAvAaKEpwDRQclrdATfz3C0cGwO7TvRs409Ade/WAB6BQwet9jqHJeDdFDbjEAMHDlru1sMh4NUU/AAT7kyjqKceeKczGICPPBf13LGDrqeALWBZD813McxCr1LAFeDMf2YBtKYtWoqa/Ps/9i9UVjseslrp0QAAAABJRU5ErkJggg==",
-		    		"handler": Septima.bind(S4SpatialMapToolsHandler, this, paramEntry)
+		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, paramEntry)
 		    	});
 		    }
 		}
-			
-		addS4SpatialMapTools(_s4Params.dawasearcher);
-		addS4SpatialMapTools(_s4Params.geosearcher);
-		addS4SpatialMapTools(_s4Params.cvrsearcher);
-		addS4SpatialMapTools(_s4Params.plansearcher);
-		addS4SpatialMapTools(_s4Params.indexsearcher);
-	
+	]]>		    
 	[endif]
-    ]]>
-    </src>
+    </jssrc>
 </tool>
