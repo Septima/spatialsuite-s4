@@ -1,24 +1,23 @@
 #S4 - Septima Search for SpatialSuite  
   
-Septima Search for Spatial Suite (s4) is a search tool. The user can search kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch), [Adresse Web Services](http://dawa.aws.dk), as well as cvr and plan services offered by Septima.  
+Septima Search for Spatial Suite (s4) is a search tool.  
+  
+* The user can search [dawa/aws](http://dawa.aws.dk), [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
+offered by Septima.
+* S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
 
-In addition S4 will search local Spatial Suite data as well as profiles, themes, workspaces and favorites.  
   
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#s4customization)
 ####[Included tools](#tools)
 ####[Search Spatial Suite data](#local)
- *  [Build the search index](#build)
- *  [Separate indexes for separate sites](#build.site)
- *  [Using an external database as local data index](#externaldb)  
- 
 ####[FAQ and Issues](#problems)
 
-### Links  
+#### Links  
   
 * S4 product page: http://www.septima.dk/p_s4/  
-* See a demo here: http://sps-demo.septima.dk  
+* See a demo here: http://v393.sps-demo.septima.dk/spatialmap  
 * Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
 * Issues: https://github.com/Septima/spatialsuite-s4/issues  
   
@@ -151,6 +150,7 @@ view: {
 },
 
 //Adressesøgning i DAWA
+// minimumShowCount: How many adresses should always be shown
 dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
 
 //Geodatastyrelsen-geosearch
@@ -271,7 +271,7 @@ Edit [*s4.config.dir*]/config.xml to include the datasources you want to index:
 	</datasources>
 </config>
 ```
-, where _datasource_ and _presentaion_ are mandatory. Optional: Specify a URL to a 20X20 pixel icon for a datasource for a custom icon in the result list.  
+, where _datasource_ and _presentation_ are mandatory. Optional: Specify a URL to a 20X20 pixel icon for a datasource for a custom icon in the result list.  
    
 You may use any existing datasource, but there are good reasons to create specific datasources for indexing:  
 * *Sorting*: Search results are sorted first by relevance and secondly by the order in which they are returned from the datasource. It's much quicker to sort directly in a view in the database than in the datasource definition.  

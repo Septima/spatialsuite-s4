@@ -48,6 +48,7 @@
 	            },
 	            
 				//Adressesøgning i DAWA
+				// minimumShowCount: How many adresses should always be shown
 	            dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
 	            
 	            //Geodatastyrelsen-geosearch
