@@ -18,10 +18,10 @@
 		var localThemes = _s4Params.themesearcher.searcher.getLocalthemes().done(Septima.bind(function(localThemes){
 		
 		    var s4SqSearcher = new Septima.Search.SqSearcher({
-		        layers: localThemes,
+		        layers: localThemes.substr(0, 1000),
 		        profile: cbKort.getProfile(),
 		        profileQuery: 'info',
-		        buffer: 3,
+		        buffer: 0,
 		        sessionId: cbKort.getSessionId(),
 				allowDetails: true,
 	    		onSelect: function (result){
