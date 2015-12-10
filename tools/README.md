@@ -56,7 +56,13 @@ Inkludér i profil:
 ```xml
 <tool module="s4" name="s4-vejmidter-plugin" />
 ```  
-Sæt _streetNameHit_ til true i geosearcher-opsætningen i s4:  
+Sæt _streetNameHit_ til true.  
+I dawasearcher-opsætningen i s4:  
+```xml
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, streetNameHit: true},
+```  
+eller i  
+I geosearcher-opsætningen i s4:  
 ```xml
 geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: true},
 ```  
