@@ -19,9 +19,15 @@
 	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
            	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
 			_s4OnSelect.push(function(result){
+				var intCode = null;
 				if (result.data && result.data.type && result.data.type == 'streetNameType'){
 					var streetCode = trim(result.data.streetCodes);
-					var intCode = parseInt(streetCode);
+					intCode = parseInt(streetCode);
+				}else if (result.data && result.data.type && result.data.type == 'vej'){
+					var streetCode = trim(result.data.vejkode);
+					intCode = parseInt(streetCode);
+				}
+				if (intCode !== null){
 					var sessionId = cbKort.sessionId;
 					jQuery.ajax({
 						url: '/cbkort?page=dynamiclayer-read-datasource&datasource=ds_s4_vejmidte&command=read_geometry&outputformat=json',

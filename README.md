@@ -151,7 +151,8 @@ view: {
 
 //Adressesøgning i DAWA
 // minimumShowCount: How many adresses should always be shown
-dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
+// streetNameHit: true|false. Default false. Skal der udløses hit på vejnavn?
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, streetNameHit: false},
 
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']

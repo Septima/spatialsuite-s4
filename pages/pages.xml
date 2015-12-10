@@ -12,7 +12,7 @@
     	<data handler="datasource" operation="get-datasources">
 	        <url-parameters>
 	            <url-parameter name="fulter" value="(isreadable) and (true) and (endpointtype = 'postgis' or endpointtype = 'oracle' or endpointtype = 'shapefile' or endpointtype = 'mssql')"/>
-	            <url-parameter name="filter" value="endpointtype = 'postgis' or endpoint like 'ep_demo01'"/>
+	            <url-parameter name="filter" value="endpointtype = 'postgis' or endpoint like 'ep_demo01' or endpointtype = 'mssql'"/>
 	        </url-parameters>
     	</data>
     </page>
