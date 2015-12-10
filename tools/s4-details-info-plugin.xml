@@ -73,7 +73,7 @@
 			}
     		
 			//Get handlerdef
-			var handlerDef = s4SetupSqSearch(searchers);
+			var handlerDef = s4SetupInfoSearch(searchers);
 			
 			//Customize HERE (When to search)
 			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
@@ -95,7 +95,7 @@
 		}, this));
     }
   
-	function s4SetupSqSearch(searchers){
+	function s4SetupInfoSearch(searchers){
 	
     	var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
     		onSelect: function (result){
