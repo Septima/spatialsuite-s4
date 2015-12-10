@@ -23,7 +23,7 @@
 								    if (!result.data.theme.visible){
 								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
 								    }
-		    						//detailsContent.selectResult(result);
+		    						detailsContent.selectResult(result);
 		    						}, this, themeResult));
 		    				var extraButtonDefs = [{
 		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
@@ -39,7 +39,7 @@
 								    if (!result.data.theme.visible){
 								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
 								    }
-		    						//detailsContent.selectResult(result);
+		    						detailsContent.selectResult(result);
 		    						}, this, themeResult));
     		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true, clickable: true});
             			}
