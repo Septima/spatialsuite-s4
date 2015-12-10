@@ -2,8 +2,8 @@
 <tool type="plugin">
     <requires>
     
-		<file type="script"    name="//common.cdn.septima.dk/latest/js/septima.js" />
-		<file type="script"    name="//common.cdn.septima.dk/latest/js/json2.js" />
+		<file type="script"    name="//common.cdn-aws.septima.dk/1.0.3/js/septima.js" />
+		<file type="script"    name="///common.cdn-aws.septima.dk/1.0.3/js/json2.js" />
 
 		<file type="css"    name="[s4.search.css]" />
 		<file type="script" name="[s4.search.script]"/>
