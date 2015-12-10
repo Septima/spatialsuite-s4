@@ -19,11 +19,11 @@
             				var themeResult = themesResults[i];
     						var icon = jQuery('<img src="' + themeResult.image + '" style="width: 20px;"/>');
     						icon.click(Septima.bind(function(result){
+							        result.searcher.toggleTheme(result);
 								    if (!result.data.theme.visible){
-								        result.searcher.toggleTheme(result);
 								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
 								    }
-		    						detailsContent.selectResult(result);
+		    						//detailsContent.selectResult(result);
 		    						}, this, themeResult));
 		    				var extraButtonDefs = [{
 		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
@@ -35,11 +35,11 @@
 		    	    		];
 		    	    		var title = Septima.Search.ThemeResult(themeResult, [], extraButtonDefs, {format: "compact"});
     						title.click(Septima.bind(function(result){
+							        result.searcher.toggleTheme(result);
 								    if (!result.data.theme.visible){
-								        result.searcher.toggleTheme(result);
 								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
 								    }
-		    						detailsContent.selectResult(result);
+		    						//detailsContent.selectResult(result);
 		    						}, this, themeResult));
     		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true, clickable: true});
             			}

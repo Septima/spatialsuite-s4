@@ -128,6 +128,8 @@
     		searchers: searchers,
     		limit: 3,
     		title: cbInfo.getString('s4.info.caption'),
+    		detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption'),
+    		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
     		header: {
     			caption: cbInfo.getString('s4.sq.header.caption'),
     			text:  cbInfo.getString('s4.sq.header.text'),
