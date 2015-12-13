@@ -3,6 +3,11 @@ var _s4Params = null;
 
 function s4_init (params){
     if (_s4View == null) {
+    	Septima.Log.trace({
+            eventCategory: 's4',
+            eventAction: 's4_init',
+            eventLabel: cbInfo.getParam("s4.version") + "@" + cbInfo.getParam("spatialmap.version")
+        });
     			
        		_s4Params = params;
        		//Fix some defaults
@@ -521,6 +526,32 @@ Searchlast2.prototype.search = function()
     hideWaitingBox();
 }
 var searchlast2 = new Searchlast2();
+Septima.Log = (window.Septima.Log !== undefined)?window.Septima.Log:{
 
+    trace: function (options) {
 
+        if (typeof options === 'undefined') {
+            return;
+        }
+
+        defaultOptions = {
+            hitType: 'event',
+            eventCategory: 'all',
+            eventAction: 'all',
+            eventLabel: 'all'
+        };
+
+        for (var name in options) {
+            defaultOptions[name] = options[name];
+        }
+
+        ga('septimalogger.send', defaultOptions);
+    },
  
+};
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', {	'trackingId': 'UA-37344804-15',   'name': 'septimalogger'});
