@@ -3,6 +3,11 @@ var _s4Params = null;
 
 function s4_init (params){
     if (_s4View == null) {
+    	Septima.Log.trace({
+            eventCategory: 's4',
+            eventAction: 's4_init',
+            eventLabel: cbInfo.getParam("s4.version") + "@" + cbInfo.getParam("spatialmap.version")
+        });
     			
        		_s4Params = params;
        		//Fix some defaults
@@ -522,5 +527,3 @@ Searchlast2.prototype.search = function()
 }
 var searchlast2 = new Searchlast2();
 
-
- 

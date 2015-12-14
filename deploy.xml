@@ -22,8 +22,8 @@
   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
 
-  <param name="s4.search.css">//search.cdn.septima.dk/3.0.1/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/3.0.1/septimasearch.min.js</param>
+  <param name="s4.search.css">//search.cdn.septima.dk/3.0.2/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/3.0.2/septimasearch.min.js</param>
 <!--   <param name="s4.search.script">//search.cdn.septima.dk/3.0.0/septimasearch.debug.js</param> -->
    
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
@@ -34,4 +34,5 @@
 
   <param name="s4.gst.login" ignore="Not IsDefined(module.kms.login)">[module.kms.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
+  <param name="s4.version">2.4.0</param>
 </deploy>

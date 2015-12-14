@@ -8,6 +8,11 @@
     <jssrc/>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
+    	Septima.Log.trace({
+            eventCategory: 's4',
+            eventAction: 's4_details',
+            eventLabel: 's4index-plugin'
+        });
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
     		_s4Params.indexsearcher.searcher.allowDetails = true;
 		}

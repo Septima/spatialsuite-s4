@@ -160,6 +160,11 @@
 
 		return handlerDef; 
 	}
+    	Septima.Log.trace({
+            eventCategory: 's4',
+            eventAction: 's4_details',
+            eventLabel: 'spatialquery-plugin'
+        });
 		
 	[endif]
     ]]>
