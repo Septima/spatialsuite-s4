@@ -232,6 +232,11 @@ function s4_init (params){
                 _s4Params.cvrsearcher.searcher = se;
             }
 
+            var helpSearcher = new Septima.Search.HelpSearcher({onSelect: function(result){
+            	//alert (result.data.description);
+            }, matchesPhrase: matchPhrase});
+            controller.addSearcher({title: cbInfo.getString('s4.helpSearcher.title'), searcher: helpSearcher});
+        	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit, matchesPhrase: matchPhrase});
 	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
