@@ -39,4 +39,32 @@
 	    <sharedconnection>false</sharedconnection>
     </endpoint>
  <!-- {{endif}} -->
+ 
+ 
+   <endpoint name="s4GuidesFile" endpointtype="ws">
+    <service>file://d%3A%2Fspatialsuite362%2Fsites%2Fspatialsuite391%2Fappbase%2Fspatialmap%2FWEB-INF%2Fconfig%2Fmisc%2Fcustom%2Fs4/guides.xml</service>
+  </endpoint>
+  
+     <datasource name="s4Guides" endpoint="s4GuidesFile">
+     <command name="read" httpmethod="get">
+      <parameters/>
+
+      <outputmapping>
+        <rowxpath>//guides/guide</rowxpath>
+        <columnxpath name="title" type="string">/title/.</columnxpath>
+        <columnxpath name="description" type="string">/description/.</columnxpath>
+      </outputmapping>
+
+    </command>   
+   
+   </datasource>	
+  
+<!--     <endpoint name="s4ConfigDir" endpointtype="stream"> -->
+<!--     <dir>[s4.config.dir]</dir> -->
+<!--   </endpoint> -->
+
+<!--   <datasource name="s4Guides" endpoint="s4ConfigDir"> -->
+<!--     <filename>guides.txt</filename> -->
+<!--   </datasource>    -->
+  
 </datasources>

@@ -32,4 +32,12 @@
 	    </url-parameters>
         </data>
     </page>
+    <page name="s4GetGuides">
+    	<data handler="datasource"  operation="execute-command">
+            <url-parameters>
+                <url-parameter name="datasource" value="s4Guides"/>
+                <url-parameter name="command" value="read"/>
+            </url-parameters>
+    	</data>
+    </page>
 </pages>
