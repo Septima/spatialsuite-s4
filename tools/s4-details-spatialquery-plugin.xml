@@ -101,8 +101,6 @@
     		title: cbInfo.getString('s4.sq.caption'),
     		detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption'),
     		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
-    		//Hvad gælder for-ikon udkommenteret (Så bliver det info-ikon)
-    		//imageUri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAAB3ElEQVQ4y63UPWgUQRQH8P+b2fPACOcXgncQsNjbRg9u75LdwzRGUALCYauFWNvYpTSaLlUK09ppk8pOxCZVZiU3inqSvQghgkUqcwQSk2PnWeSKzX0kc+KDKWbmzY/3htkF/nNQ74JXnqxCyGuDkhOY9o9G9N4adP3gMYFenVLEXEur58M2RY9/26KruaIfPrMCBfdfwaiosASsUQuQdwC8Oxq804t6fu2pNcjAwl5W5FtazbS0mtnLijwDC8eTeMISpKUNrWbHOmLc9WuLrl9bHOuI8Q2tZgFaGnoqPfHK4WsmPACQdDJcEMackYn8CiDXTWknMrlhhDjMdOgXAEmMN/En9fCUCmlrM4q2ZeLUUxgA5GTi1DejaBuEn4NODgH53FH5/Lu/pe4a84URQFwpVmuTzsHuMgErqftZcQ52l71qeBOg86OAgOGXUspMrNU0CUyRwFSs1XSz2Twkw38AtEcDgYl956zyyuE9ZOUXEmbdLQf3i37wZF1HDQi6Mwh1TgBBwHUmvMV+AoYAdd+EVwkuxmur824lvMuMR0NBQ2Cbj5mZXniVAHFDzZdKpW/pPZmeXLpayBGobmECoFuX8wXz/bP+0NPV8TjpB9tXKWGrtbb60a6Af4y//rOdIv5OzGsAAAAASUVORK5CYII=",
     		header: {
     			caption: cbInfo.getString('s4.sq.header.caption'),
     			text:  cbInfo.getString('s4.sq.header.text'),
