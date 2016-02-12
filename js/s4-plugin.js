@@ -122,15 +122,13 @@ function s4_init (params){
                     inputContainer.addClass("v263");
                 }
 
-            //Create view and controller
-        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit, detailsButtonCaption: detailsbuttonCaption});
-        	
+            //Create controller
         	var blankBehavior = "search";
         	if (_s4Params.view.blankbehavior && _s4Params.view.blankbehavior == "none"){
         		blankBehavior = "none";
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
-        	var controller = new Septima.Search.Controller([], _s4View, controllerOptions);
+        	var controller = new Septima.Search.Controller([], controllerOptions);
         	
         	//Set up the API
 			//Create array of "OnSelect" listeners if not already created
@@ -193,13 +191,6 @@ function s4_init (params){
 			var _s4Searchers = window["_s4Searchers"];
 			for (var i = 0;i<_s4Searchers.length;i++){
 				var searcherReg = _s4Searchers[i];
-//				addS4SpatialMapTools(searcherReg);
-//                if (searcherReg.info && searcherReg.info == true){
-//                	searcherReg.searcher.addCustomButtonDef(s4GetInfoButtonDef());
-//                }
-//                if (_s4Params.view.printconfig && searcherReg.print && searcherReg.print == true){
-//                	searcherReg.searcher.addCustomButtonDef(s4GetPrintButtonDef());
-//                }
 				controller.addSearcher(searcherReg);
 			}
 			//Prepare for future pushes
@@ -233,7 +224,6 @@ function s4_init (params){
             }
 
             var helpSearcher = new Septima.Search.HelpSearcher({onSelect: function(result){
-            	//alert (result.data.description);
             }, matchesPhrase: matchPhrase});
             controller.addSearcher({title: cbInfo.getString('s4.helpSearcher.title'), searcher: helpSearcher});
         	
@@ -298,8 +288,9 @@ function s4_init (params){
 						}
 					}
 			};
-			
-        	controller.go ();
+        	
+            //Create view 
+        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit, detailsButtonCaption: detailsbuttonCaption, controller: controller});
         	
         	s4SetMaxHeight();
         	
