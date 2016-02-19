@@ -22,3 +22,24 @@
 /*     box-shadow: #666 0px 2px 3px; */
 /* } */
 
+.septimasearch .searchheader .searchbackground, .septimasearch .searchbackground .search-icon, .septimasearch .searchbackground .closebutton, .septimasearch .searchbackground .spinner {
+    height: 36px;
+    line-height: 36px;
+}
+.septimasearch .searchheader .searchbackground:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.septimasearch ul.better-autocomplete>li.result {
+/* 	border-bottom: 0px solid rgba(236,240,241,1);	 */
+	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: 12px;
+}
+.septimasearch ul.better-autocomplete>li.result.highlight {
+/* 	border-bottom: 0px solid rgba(236,240,241,1);	 */
+}
+

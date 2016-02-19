@@ -11,7 +11,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
     		displaynameProperty: 'title'
     	});
 		this.Searcher(options);
-		this.iconURI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAA3NCSVQICAjb4U/gAAAAP1BMVEX///8zMzMzMzMzMzMzMzMzMzMzMzP////z8/Pm5ubZ2dnMzMyzs7OmpqaZmZmNjY1zc3NmZmZZWVlAQEAzMzNox2MjAAAAFXRSTlMAVWaImard//////////////////9PbNDmAAAACXBIWXMAAAsSAAALEgHS3X78AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1MzmNZGAwAAABV0RVh0Q3JlYXRpb24gVGltZQA2LzI5LzA4c6yDqAAABBF0RVh0WE1MOmNvbS5hZG9iZS54bXAAPD94cGFja2V0IGJlZ2luPSIgICAiIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNC4xLWMwMzQgNDYuMjcyOTc2LCBTYXQgSmFuIDI3IDIwMDcgMjI6MTE6NDEgICAgICAgICI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOnhhcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+CiAgICAgICAgIDx4YXA6Q3JlYXRvclRvb2w+QWRvYmUgRmlyZXdvcmtzIENTMzwveGFwOkNyZWF0b3JUb29sPgogICAgICAgICA8eGFwOkNyZWF0ZURhdGU+MjAwOC0wNi0yOVQxMToyNjo1MVo8L3hhcDpDcmVhdGVEYXRlPgogICAgICAgICA8eGFwOk1vZGlmeURhdGU+MjAwOS0wNC0wOVQxODoxMzowN1o8L3hhcDpNb2RpZnlEYXRlPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIj4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgBm8vvgAAAIhJREFUGJV1kdEagyAIhdESVlabi/d/1hIQ61s7V/ArHEQAUUzIjClCVziJCkNjA180KBv5plFqLSll16B20H7fiYgWwXj66vGL3p+JNokjJK2lmXmjLEkCn4Y506JzgaM902xWHa7mUyH24sbQjG5KbaR6s1gUwesd4uWZrvBvIc+re17yz3cciIwVjZdkDgYAAAAASUVORK5CYII=";
+		this.iconURI = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE1LjA3LDExLjI1TDE0LjE3LDEyLjE3QzEzLjQ1LDEyLjg5IDEzLDEzLjUgMTMsMTVIMTFWMTQuNUMxMSwxMy4zOSAxMS40NSwxMi4zOSAxMi4xNywxMS42N0wxMy40MSwxMC40MUMxMy43OCwxMC4wNSAxNCw5LjU1IDE0LDlDMTQsNy44OSAxMy4xLDcgMTIsN0EyLDIgMCAwLDAgMTAsOUg4QTQsNCAwIDAsMSAxMiw1QTQsNCAwIDAsMSAxNiw5QzE2LDkuODggMTUuNjQsMTAuNjcgMTUuMDcsMTEuMjVNMTMsMTlIMTFWMTdIMTNNMTIsMkExMCwxMCAwIDAsMCAyLDEyQTEwLDEwIDAgMCwwIDEyLDIyQTEwLDEwIDAgMCwwIDIyLDEyQzIyLDYuNDcgMTcuNSwyIDEyLDJaIiAvPjwvc3ZnPg==";
     	this.currentProfile = cbKort.getProfile();
     	this.addDetailHandlerDef({
     		//{"buttonText": text, "buttonImage": imageUri, "handler": function(result, cancellableDeferred, detailsContent)[, "target": target][, more: true|false]};
@@ -19,7 +19,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
     		"buttonText": "Abekat",
     		"buttonImage": this.iconURI,
     		"handler": function(result, deferred, detailsContent){
-    			var formattedFooter = detailsContent.formatTextArea({text: result.data.text});
+    			var formattedFooter = detailsContent.formatTextArea({caption: result.data.description, text: result.data.text});
 				deferred.resolve(formattedFooter);
     		},
     		more: true
@@ -51,9 +51,10 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
                 	for (var i = entries.length -1; i>-1;i--){
                 		thisEntry = entries[i];
                 		entry = jQuery(entries[i]);
-                		var h3 = entry.find('h3').text().replace(/'/g, "").replace(/Menuen /g, "").trim();
+                		//var h3 = entry.find('h3').text().replace(/'/g, "").replace(/Menuen /g, "").trim();
+                		var h3 = entry.find('h3').text().replace(/'/g, "").trim();
                 		if (h3 !== ""){
-                			currentMenu = h3 + ": ";
+                			currentMenu = h3 + " -> ";
                 		} else{
                     		var topic = entry.find('h4').text();
                     		var text = entry.find('p').text();

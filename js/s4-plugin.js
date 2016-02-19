@@ -222,10 +222,6 @@ function s4_init (params){
             	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
                 _s4Params.cvrsearcher.searcher = se;
             }
-
-            var helpSearcher = new Septima.Search.HelpSearcher({onSelect: function(result){
-            }, matchesPhrase: matchPhrase});
-            controller.addSearcher({title: cbInfo.getString('s4.helpSearcher.title'), searcher: helpSearcher});
         	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit, matchesPhrase: matchPhrase});

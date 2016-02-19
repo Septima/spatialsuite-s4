@@ -22,6 +22,7 @@
   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
   <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4HelpSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4HelpSearcher.js"/>
+  <copyfile fromfile="[module:s4.dir]/js/s4GuideSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4GuideSearcher.js"/>
 
 <!-- production -->
 <!--   <param name="s4.search.css">//search.cdn.septima.dk/3.0.3/css/defaultView.css</param> -->

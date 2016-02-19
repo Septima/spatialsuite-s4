@@ -28,7 +28,7 @@ offered by Septima.
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013-2015  
+ Copyright:   (c) Septima P/S 2013-2016  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
