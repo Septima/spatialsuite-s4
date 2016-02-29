@@ -286,7 +286,12 @@ function s4_init (params){
 			};
         	
             //Create view 
-        	_s4View = new Septima.Search.DefaultView({input:"s4box", placeholder:inputPlaceHolder, limit: _s4Params.view.limit, detailsButtonCaption: detailsbuttonCaption, controller: controller});
+        	_s4View = new Septima.Search.DefaultView({
+        		input:"s4box",
+        		placeholder:inputPlaceHolder,
+        		limit: _s4Params.view.limit,
+        		detailsButtonCaption: detailsbuttonCaption,
+        		controller: controller});
         	
         	s4SetMaxHeight();
         	

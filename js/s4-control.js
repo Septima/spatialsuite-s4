@@ -76,11 +76,10 @@ Septima.Search.S4Control = Septima.Class ({
         	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
         }
     	
-    	this.view = new Septima.Search.DefaultView({input:this.options.div, placeholder:this.options.placeHolder, limit: this.options.view.limit});
-    	
     	var controllerOptions = {};
-    	var controller = new Septima.Search.Controller(searchers, this.view, controllerOptions);
-    	controller.go ();
+    	var controller = new Septima.Search.Controller(searchers, controllerOptions);
+
+    	this.view = new Septima.Search.DefaultView({input:this.options.div, placeholder:this.options.placeHolder, limit: this.options.view.limit, controller: controller});
     	
     },
     
