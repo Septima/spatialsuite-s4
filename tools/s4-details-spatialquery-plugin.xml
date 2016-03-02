@@ -57,7 +57,7 @@
 			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){
 		    	s4SqSearcher.addDetailHandlerDef({
 		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH3wsEEBQCC4i3FQAAAUpJREFUOMvNlKFLREEQh7/xwFcERRBEDIIWqxjNgs1kMBuMnuH6/QNmm15QEFFBLXIIBxaLQTQopxYth+XQYFBYyywMc2/fnXDBheG9/c3Ox775DU9CCPRzDdDnlQSKyKSINEQkS+TnREQ6EiGEjgAEeAYCcA+Mmdyq6q3c2gRwV4tibKk+rvsXYKQnIFAxoE+ganKnqm8bbRhYywUCU8C3AV66fE31N73tIHADnKeAO1pwAjT1fc/kL1wrYiymgO0IADJjzD5wZABf+mwD5WQPgQdg1uwz4Mndpg7MAAvAaKEpwDRQclrdATfz3C0cGwO7TvRs409Ade/WAB6BQwet9jqHJeDdFDbjEAMHDlru1sMh4NUU/AAT7kyjqKceeKczGICPPBf13LGDrqeALWBZD813McxCr1LAFeDMf2YBtKYtWoqa/Ps/9i9UVjseslrp0QAAAABJRU5ErkJggg==",
+		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI,
 		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true})
 		    	});
 			}
@@ -106,7 +106,7 @@
     			text:  cbInfo.getString('s4.sq.header.text'),
    				button: {
    					buttonText: cbInfo.getString('s4.sq.zoomtoextent'),
-   					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90EEg0cFwCY10wAAAOJSURBVDjL1ZRfbFN1FMdP7/21621v6taVMaUZ7DZWJLo/jmpwdIOB80VcjG8i8EYkgAkiC6RZl95i4ouJPiwZYCKLL0ZDeMHFMZj7AyHbTBjDaDQ4YTOwEtqNtbe97e/Xc3yh2m7TzEd/L7/kl/P7nO/J+Z4D8L85LcHmVd/D4fB/4liWQXc6HI5HiGjkcrn2Y8c7z3W8uSdfHLO9edvTTqfqVRTlweLiQvP3w6Nfh0IhYoyBruvAioPz+XyPaZplnHOt0uP55sfb0wMA8HtxFZIk2bJZszedNuoAgEWjp+/b7fYb4XBYAABIJXItFoNzrgEAWBmrYoxJxWWPjl0HSZIkIcR6RGRCCCDCbYhoLTBKFCKi1eVyzaRSKS0Wi7VOTozvvTx49eP213blnqhzcM7PEdEGu11JcZ5TiUAmor+EycVAv9+vbA28PJk1TTOZXNpsGMbOHybHtROdJ7+7NXXTg4g3iChQVlaWaWh86VJ5hftLWZZ/s1qtvwwPD68s+dDhoz2MsQsH3zu8z+NZ18cYMysrK595GJv3KYqSkGV5UVEcibr6hm9dLtdX1dXVZ2w22wAi5gqMEuD0ramcxWK593r77uSLdfXHamo2hZ/f8sJZzvmDwStD2fr6xne8Xm9veXnF2Xw+P8g5fxyNRpNEhP/qpQP79wMAwK93ZlgoFHIVe/H8+T5HV1eXc80ebW0JFu6K4PZXP1nm0x07WoORxOKS/E9AedkH5+jYNd7aEvQg5ocQ8a3Nz/nfOHLk/YtpI+kmoglE3DV09Uru0896xvu++NwxO/dH7tSpk9DW1gYjIyOlQK93Q38gsDVhpFJnELHJ6VQfNzQ2jiHitFaz6c6jRLwqk8m8kk4bbbenp9xC8Lc/PNE5xjnPRiIRWuFDi8XyVGx+/hIAgKIoS8/6/aMOh/MCEc1EPjoNRHS8o2OPmojHDywsJA4RkRSPxy8CQD8A5Fd0uTDbiAgba7WJqqr1vYg4AgDpJwl5U1PgA0mS7hKRhIgAAH5ElFadFABIVLjdPxGSOjd7z+vTfHe7u7uXijfP5YH+jYrieOh0qkY6bdQIkbfI8t+6SoC1mu+gpvm2JJNJtNlsqmma6QJI13XQdR32vbv351pNO5rJmOusVuYSgs9Kko2vDqzV5ojovqqqHABsACAAAHRdL06aI6KbqqqSEIIxxoQQAte8SNe6YAtxfwILoavAECTInAAAAABJRU5ErkJggg==",
+   					buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
    					callBack: function(sqInfo){
    						if (sqInfo.hitResults.length > 0){
 	   						var geojson = new OpenLayers.Format.GeoJSON();
@@ -130,22 +130,22 @@
    				}
     		},
    			footer: {
-   				icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAadJREFUeNqUlDFLw0AUx88jEJfGxWRpXawIooMKpSBFFL+AFHQploI49eNIwbGluChIFQfFtVRKZ3Xq1HZpneLSOKjvHe9qGu9y9Q8/0iTv/r289+7NnVcumEIZoAzkgCRg0/MAGABNoAJ0ogutyD0HqsAhkFD80TyQJvJAAygBX2EDKQxqAScas6gSFNuitVOGeL0Esuz/ytJaHjasxpl5rsvOTkvs+CjPbNvWmValYYZyplUqlRRGaOy5i7ow9MhYVM3YnL28vjHPc5nv+6zXH8TltGxRa8QqCAL28Pg0Sz5zFvWZUttbm2xjfY05jiN2dnt3bzJM8lDTKj+19dwWv5cgj4hBNjd96vT9p/GbOR0nrbAY0nw4GhnTzelsarWSXhbXmOqGNeB00JXCYiDCsNefxbDJaWp8qN4uOL/tiT1oEHpUOI2ghipiOHqf5G1/b1cgd6wQenTk+MIRtBo9z1iIq+sb0S5Y4ZiitMljMhxwnhXoxR9hQQxmBTkTw33YBXaAui6nipzVaU1XNWDlTovAAVCjwDHwTYzpWY1iiuFpjfoRYACfl3zxsR8JHgAAAABJRU5ErkJggg==",
+   				icon: Septima.Search.icons.infoGrey,
     			caption: cbInfo.getString('s4.sq.footer.caption'),
     			text:  cbInfo.getString('s4.sq.footer.text'),
    				button: {
    					buttonText: cbInfo.getString('s4.infobutton.caption'),
-   					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAAB3ElEQVQ4y63UPWgUQRQH8P+b2fPACOcXgncQsNjbRg9u75LdwzRGUALCYauFWNvYpTSaLlUK09ppk8pOxCZVZiU3inqSvQghgkUqcwQSk2PnWeSKzX0kc+KDKWbmzY/3htkF/nNQ74JXnqxCyGuDkhOY9o9G9N4adP3gMYFenVLEXEur58M2RY9/26KruaIfPrMCBfdfwaiosASsUQuQdwC8Oxq804t6fu2pNcjAwl5W5FtazbS0mtnLijwDC8eTeMISpKUNrWbHOmLc9WuLrl9bHOuI8Q2tZgFaGnoqPfHK4WsmPACQdDJcEMackYn8CiDXTWknMrlhhDjMdOgXAEmMN/En9fCUCmlrM4q2ZeLUUxgA5GTi1DejaBuEn4NODgH53FH5/Lu/pe4a84URQFwpVmuTzsHuMgErqftZcQ52l71qeBOg86OAgOGXUspMrNU0CUyRwFSs1XSz2Twkw38AtEcDgYl956zyyuE9ZOUXEmbdLQf3i37wZF1HDQi6Mwh1TgBBwHUmvMV+AoYAdd+EVwkuxmur824lvMuMR0NBQ2Cbj5mZXniVAHFDzZdKpW/pPZmeXLpayBGobmECoFuX8wXz/bP+0NPV8TjpB9tXKWGrtbb60a6Af4y//rOdIv5OzGsAAAAASUVORK5CYII=",
+   					buttonImage: Septima.Search.s4Icons.infoIconUri,
    					callBack: function(sqInfo){s4DoInfo(sqInfo.mainResult);}
 				}
     		},
    			noResults:{
-   				icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2tpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpGNzdGMTE3NDA3MjA2ODExODA4M0VCODNDNjJCRDdDMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2MUE0MUQ0NzFGNDYxMUUzOEY1QkIzMUJGOUM4QzQ0NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2MUE0MUQ0NjFGNDYxMUUzOEY1QkIzMUJGOUM4QzQ0NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4NmFiMTk1Mi1kMzdlLTQ3YTItYTJjZi02MmY0NjIyMmE4NDYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Rjc3RjExNzQwNzIwNjgxMTgwODNFQjgzQzYyQkQ3QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6ddKQnAAABvklEQVR42oyUTShEURTH73tJNCtGSiRqMgtJNpSxISULX0mkRImFj2yULCRSbGyUnQ0LSUjkYyXJhoVEZDEbFEmUEo2P4X/GeXXd7rtvTv16H+fMf84597xj/RSHhMbyQR1oBAF+Z/E1DBbBNrgUR4f/fpigCCWBUTAAkoXeipgxMAEmZaclZZgKVkC5RuQbzIM70A3SJR9l24ZMo/Rg80sf2HARE+zrBCNgWPG1giVRUmbLglRmSLjbl5Ktak1gyCk5iOsp989ks+CW+5uh8T+DAjqU9jjEyHo9/HQGLSTYYAja4oOKgAuQHevXX891VkGCOQbBV3AGTqSR8RniC+lQPgwBzaBHeq72KNtvewTQbK3xfZrHJAhnbBIN/gew75QDsjz0nuzY9+hux+CN70vjmIRzEtw0BOxK3zwtiz1wbYjfsXkMIhrnp1RuJlfSz33VlktaJHgFpjUBL7yqBGfVAaZArovgOBbEo3PKtIoOlAA61T7eg3lgGdS4iC1AbEZdX34uv1IJDrMvxUVsDmJd8tjIPajipfkuvQ+4iN2DQVlMt7GjvPMo03pQC4LS+he8mVbBOrhR/+VXgAEAavJfaB/PXcEAAAAASUVORK5CYII=",
+   				icon: Septima.Search.icons.infoRed,
     			caption: cbInfo.getString('s4.sq.noresults.caption'),
     			text:  cbInfo.getString('s4.sq.noresults.text'),
    				button: {
    					buttonText: cbInfo.getString('s4.infobutton.caption'),
-   					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAAB3ElEQVQ4y63UPWgUQRQH8P+b2fPACOcXgncQsNjbRg9u75LdwzRGUALCYauFWNvYpTSaLlUK09ppk8pOxCZVZiU3inqSvQghgkUqcwQSk2PnWeSKzX0kc+KDKWbmzY/3htkF/nNQ74JXnqxCyGuDkhOY9o9G9N4adP3gMYFenVLEXEur58M2RY9/26KruaIfPrMCBfdfwaiosASsUQuQdwC8Oxq804t6fu2pNcjAwl5W5FtazbS0mtnLijwDC8eTeMISpKUNrWbHOmLc9WuLrl9bHOuI8Q2tZgFaGnoqPfHK4WsmPACQdDJcEMackYn8CiDXTWknMrlhhDjMdOgXAEmMN/En9fCUCmlrM4q2ZeLUUxgA5GTi1DejaBuEn4NODgH53FH5/Lu/pe4a84URQFwpVmuTzsHuMgErqftZcQ52l71qeBOg86OAgOGXUspMrNU0CUyRwFSs1XSz2Twkw38AtEcDgYl956zyyuE9ZOUXEmbdLQf3i37wZF1HDQi6Mwh1TgBBwHUmvMV+AoYAdd+EVwkuxmur824lvMuMR0NBQ2Cbj5mZXniVAHFDzZdKpW/pPZmeXLpayBGobmECoFuX8wXz/bP+0NPV8TjpB9tXKWGrtbb60a6Af4y//rOdIv5OzGsAAAAASUVORK5CYII=",
+   					buttonImage: Septima.Search.s4Icons.infoIconUri,
    					callBack: function(sqInfo){s4DoInfo(sqInfo.mainResult);}
 				}
    			}

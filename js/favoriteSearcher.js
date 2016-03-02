@@ -1,7 +1,7 @@
 Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
 
     initialize: function (options) {
-    	this.iconURI = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE3LjI3TDE4LjE4LDIxTDE2LjU0LDEzLjk3TDIyLDkuMjRMMTQuODEsOC42MkwxMiwyTDkuMTksOC42MkwyLDkuMjRMNy40NSwxMy45N0w1LjgyLDIxTDEyLDE3LjI3WiIgLz48L3N2Zz4=";
+    	this.iconURI = Septima.Search.s4Icons.favoriteSearcher.iconURI;
     	this.favoriteRowList = {row: []};
     	this.lastUpdated = null;
     	this.host = options.host;

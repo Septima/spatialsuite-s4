@@ -51,7 +51,7 @@
 			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){
 		    	s4DetailsNearestIndexSearcher.addDetailHandlerDef({
 		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH3wsEEBQCC4i3FQAAAUpJREFUOMvNlKFLREEQh7/xwFcERRBEDIIWqxjNgs1kMBuMnuH6/QNmm15QEFFBLXIIBxaLQTQopxYth+XQYFBYyywMc2/fnXDBheG9/c3Ox775DU9CCPRzDdDnlQSKyKSINEQkS+TnREQ6EiGEjgAEeAYCcA+Mmdyq6q3c2gRwV4tibKk+rvsXYKQnIFAxoE+ganKnqm8bbRhYywUCU8C3AV66fE31N73tIHADnKeAO1pwAjT1fc/kL1wrYiymgO0IADJjzD5wZABf+mwD5WQPgQdg1uwz4Mndpg7MAAvAaKEpwDRQclrdATfz3C0cGwO7TvRs409Ade/WAB6BQwet9jqHJeDdFDbjEAMHDlru1sMh4NUU/AAT7kyjqKceeKczGICPPBf13LGDrqeALWBZD813McxCr1LAFeDMf2YBtKYtWoqa/Ps/9i9UVjseslrp0QAAAABJRU5ErkJggg==",
+		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI,
 		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true})
 		    	});
 			}
@@ -129,7 +129,7 @@
     			text:  cbInfo.getString('s4.sq.header.text'),
    				button: {
    					buttonText: cbInfo.getString('s4.sq.zoomtoextent'),
-   					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90EEg0cFwCY10wAAAOJSURBVDjL1ZRfbFN1FMdP7/21621v6taVMaUZ7DZWJLo/jmpwdIOB80VcjG8i8EYkgAkiC6RZl95i4ouJPiwZYCKLL0ZDeMHFMZj7AyHbTBjDaDQ4YTOwEtqNtbe97e/Xc3yh2m7TzEd/L7/kl/P7nO/J+Z4D8L85LcHmVd/D4fB/4liWQXc6HI5HiGjkcrn2Y8c7z3W8uSdfHLO9edvTTqfqVRTlweLiQvP3w6Nfh0IhYoyBruvAioPz+XyPaZplnHOt0uP55sfb0wMA8HtxFZIk2bJZszedNuoAgEWjp+/b7fYb4XBYAABIJXItFoNzrgEAWBmrYoxJxWWPjl0HSZIkIcR6RGRCCCDCbYhoLTBKFCKi1eVyzaRSKS0Wi7VOTozvvTx49eP213blnqhzcM7PEdEGu11JcZ5TiUAmor+EycVAv9+vbA28PJk1TTOZXNpsGMbOHybHtROdJ7+7NXXTg4g3iChQVlaWaWh86VJ5hftLWZZ/s1qtvwwPD68s+dDhoz2MsQsH3zu8z+NZ18cYMysrK595GJv3KYqSkGV5UVEcibr6hm9dLtdX1dXVZ2w22wAi5gqMEuD0ramcxWK593r77uSLdfXHamo2hZ/f8sJZzvmDwStD2fr6xne8Xm9veXnF2Xw+P8g5fxyNRpNEhP/qpQP79wMAwK93ZlgoFHIVe/H8+T5HV1eXc80ebW0JFu6K4PZXP1nm0x07WoORxOKS/E9AedkH5+jYNd7aEvQg5ocQ8a3Nz/nfOHLk/YtpI+kmoglE3DV09Uru0896xvu++NwxO/dH7tSpk9DW1gYjIyOlQK93Q38gsDVhpFJnELHJ6VQfNzQ2jiHitFaz6c6jRLwqk8m8kk4bbbenp9xC8Lc/PNE5xjnPRiIRWuFDi8XyVGx+/hIAgKIoS8/6/aMOh/MCEc1EPjoNRHS8o2OPmojHDywsJA4RkRSPxy8CQD8A5Fd0uTDbiAgba7WJqqr1vYg4AgDpJwl5U1PgA0mS7hKRhIgAAH5ElFadFABIVLjdPxGSOjd7z+vTfHe7u7uXijfP5YH+jYrieOh0qkY6bdQIkbfI8t+6SoC1mu+gpvm2JJNJtNlsqmma6QJI13XQdR32vbv351pNO5rJmOusVuYSgs9Kko2vDqzV5ojovqqqHABsACAAAHRdL06aI6KbqqqSEIIxxoQQAte8SNe6YAtxfwILoavAECTInAAAAABJRU5ErkJggg==",
+   					buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
    					callBack: function(sqInfo){
    						if (sqInfo.hitResults.length > 0){
 	   						var geojson = new OpenLayers.Format.GeoJSON();

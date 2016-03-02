@@ -13,6 +13,7 @@
   <copyfile fromfile="[module:s4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/s4/css/s4.css"/>
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
+  <copyfile fromfile="[module:s4.dir]/js/icons.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/icons.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4-control.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-control.js"/>
   <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>

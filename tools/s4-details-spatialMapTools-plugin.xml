@@ -86,7 +86,7 @@
     		
     		if (paramEntry.info){
 				var infoButtonCaption = cbInfo.getString('s4.infobutton.caption') + " " + result.title;
-				var _s4InfoUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAAB3ElEQVQ4y63UPWgUQRQH8P+b2fPACOcXgncQsNjbRg9u75LdwzRGUALCYauFWNvYpTSaLlUK09ppk8pOxCZVZiU3inqSvQghgkUqcwQSk2PnWeSKzX0kc+KDKWbmzY/3htkF/nNQ74JXnqxCyGuDkhOY9o9G9N4adP3gMYFenVLEXEur58M2RY9/26KruaIfPrMCBfdfwaiosASsUQuQdwC8Oxq804t6fu2pNcjAwl5W5FtazbS0mtnLijwDC8eTeMISpKUNrWbHOmLc9WuLrl9bHOuI8Q2tZgFaGnoqPfHK4WsmPACQdDJcEMackYn8CiDXTWknMrlhhDjMdOgXAEmMN/En9fCUCmlrM4q2ZeLUUxgA5GTi1DejaBuEn4NODgH53FH5/Lu/pe4a84URQFwpVmuTzsHuMgErqftZcQ52l71qeBOg86OAgOGXUspMrNU0CUyRwFSs1XSz2Twkw38AtEcDgYl956zyyuE9ZOUXEmbdLQf3i37wZF1HDQi6Mwh1TgBBwHUmvMV+AoYAdd+EVwkuxmur824lvMuMR0NBQ2Cbj5mZXniVAHFDzZdKpW/pPZmeXLpayBGobmECoFuX8wXz/bP+0NPV8TjpB9tXKWGrtbb60a6Af4y//rOdIv5OzGsAAAAASUVORK5CYII=";
+				var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
 	    		var infoClickFunction = Septima.bind(function(result){s4DoInfo(result);}, this, result);
 	    		
 				var infoIcon = jQuery('<img src="' + _s4InfoUri + '" style="width: 20px;"/>');
@@ -101,7 +101,7 @@
     		}
     		
     		if (_s4Params.view.printconfig && paramEntry.print){
-				var _s4PrintUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAAUAAAAFACjOyrRAAABEUlEQVQ4y92RO07DUBBFz4ytLIPOCaUdIbDSsQEvAGroqdgCqehJTUlDxQJQZD6K3RJLILELiuehIeHj5yixKBC3vPPu0cx98NclPnOQpKfrhJ+KfPzTC30PTThbc6EGUH/75NBvy3NX4LcOo3gUa2DRJoDaSVWV07IB7A/TC+Co42KT+Sw/XgKjeBSL1kWH+8YYu8C+1ZpU5bRUABG33Wkvp1cGD18ZIYCpqphtDtT6ftGZqeoS6L+GV4O7ltmewZZv1grEuJ0X+aFvNEjSS4QD79KduluhEKDX48a92c7CrJHHtSrkMxP05OWjjqb6w9QMriVwJ942XHAukM1neSO/6lMyXJC1zFaf7EmM+bd6B6bIR9G+EvlcAAAAAElFTkSuQmCC";
+				var _s4PrintUri = Septima.Search.s4Icons.printIconUri;
 				var printButtonCaption = "Print";
 	    		var printClickFunction = Septima.bind(function(result){s4DoPrint(result);}, this, result);
 	
@@ -117,7 +117,7 @@
     		}
    	    	
     		if (s4SpatialMapToolsHelper.workspace_isOpen()){
-				var _s4WorkspaceUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB80lEQVR4XqWMO2tUURhF13fmkipoFDSFYrCxiZBgbNTSJn9AnEL9AYJB7U1hlXRmUASFCCJCXgYEMzh5gRJtUhhMK0RRMIqFyGQycx/bc89FBiURwQWbc1h8e5sk/gdrzLDi4HTJQIIkAwTOQXDs7jLjFdvTqFZ9qsr4kl4uTEubt6RPFdXmZr1b3tG9mJ/yrqKG79KYQvo4pJtXjuvEmfMaudonvUZaQTeH+r0r/+H61H/qnOZm7yp+glwGsF3jxuV1Lg1+pvruLKPVQdiLd2+4MLjJ3C/Xlbs1Lvq7R8+bOAf27TEbnR30dERAiUCWQpwS6PDOHGRZkcgVdwi+N3gP0AsMXBu+r+vD95T/d8sOd71oFkYrk4zdeaCx2+MaGZtA0xBPQssnnoLERzP53US4y+M7oRs9bFY53N2khEMScepYPfaB7WZGkibESUqWJGRZi0PxBpGVAEiJyLv2rFrDTKAAR3qOWqsZ04oT0jQJI2mS+jcfihGpDBCYZETORMCseJDMiZIPElkGMmE+knDOwmsQnB8wCoJh/e0ahQr+tz8SXfv2I9pE5hztvlEul0/yF+YXFleR2p3FpWUKkJlhnq9fNnFhuE2WZRw42I0KAAwgamxttdeCNjo791Cv/8AsGCQFt1Wvg4TYmYEibf7l7if3nz3WIn/amwAAAABJRU5ErkJggg==";
+				var _s4WorkspaceUri = Septima.Search.s4Icons.workSpaceIconURI;
 				var buttonCaption = cbInfo.getString('s4.add2workspace.caption');
 	    		var clickFunction = Septima.bind(function(result){s4SpatialMapToolsHelper.workspace_addResult(result);}, this, result);
 	
@@ -141,7 +141,7 @@
 		    if (typeof paramEntry !== 'undefined' && paramEntry.enabled && (paramEntry.info || (_s4Params.view.printconfig && paramEntry.print)) ){
 		    	paramEntry.searcher.addDetailHandlerDef({
 		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		"buttonImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH3wsEEBQCC4i3FQAAAUpJREFUOMvNlKFLREEQh7/xwFcERRBEDIIWqxjNgs1kMBuMnuH6/QNmm15QEFFBLXIIBxaLQTQopxYth+XQYFBYyywMc2/fnXDBheG9/c3Ox775DU9CCPRzDdDnlQSKyKSINEQkS+TnREQ6EiGEjgAEeAYCcA+Mmdyq6q3c2gRwV4tibKk+rvsXYKQnIFAxoE+ganKnqm8bbRhYywUCU8C3AV66fE31N73tIHADnKeAO1pwAjT1fc/kL1wrYiymgO0IADJjzD5wZABf+mwD5WQPgQdg1uwz4Mndpg7MAAvAaKEpwDRQclrdATfz3C0cGwO7TvRs409Ade/WAB6BQwet9jqHJeDdFDbjEAMHDlru1sMh4NUU/AAT7kyjqKceeKczGICPPBf13LGDrqeALWBZD813McxCr1LAFeDMf2YBtKYtWoqa/Ps/9i9UVjseslrp0QAAAABJRU5ErkJggg==",
+		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI,
 		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, paramEntry)
 		    	});
 		    }

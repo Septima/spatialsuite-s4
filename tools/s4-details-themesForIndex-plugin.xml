@@ -11,7 +11,7 @@
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled && _s4Params.themesearcher && _s4Params.themesearcher.enabled){
             	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
             		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
-            		"buttonImage": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE2TDE5LjM2LDEwLjI3TDIxLDlMMTIsMkwzLDlMNC42MywxMC4yN00xMiwxOC41NEw0LjYyLDEyLjgxTDMsMTQuMDdMMTIsMjEuMDdMMjEsMTQuMDdMMTkuMzcsMTIuOEwxMiwxOC41NFoiIC8+PC9zdmc+",
+            		"buttonImage": Septima.Search.s4Icons.layersIconUri,
             		"handler": Septima.bind(function(result, deferred, detailsContent){
             			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
     			    	var list = {type: "list", items: []};
@@ -27,7 +27,7 @@
 		    						}, this, themeResult));
 		    				var extraButtonDefs = [{
 		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
-		    					buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3wQeCg4vUj8XNwAAAGVJREFUOMvt0z0KwlAQReEvDzeYpBeXJEo6F5DYZHOp/MPGtAHhNoF36uFwZ5hLZXfMGFBSwh5P3JLSFg9MOKST3pPSE944bw39c5cFHzSJdEe8cE0IV9klIevSbzP+1iy14zvmCzHLEgzBACrbAAAAAElFTkSuQmCC",
+		    					buttonImage: Septima.Search.icons.list.detailsIcon,
 		    					callBack: Septima.bind(function(result){
 		    						detailsContent.selectResult(result);
 		    						}, this),
