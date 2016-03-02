@@ -114,8 +114,13 @@
 				}
 			},
 			searchers: searchers,
-			omitZeroDistance: true,
+			distanceFilter: 'all',
 			limit: 3,
+			geometryPreProcessor: function(result){
+				var deferred = jQuery.Deferred();
+				deferred.resolve({queryGeometry: null, distGeometry: result.geometry});
+				return deferred.promise();
+			},
 			title: cbInfo.getString('s4.nearest.caption'),
     		detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption'),
     		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),

@@ -16,52 +16,52 @@
  	String datasources = null;
  	String query = null;
  	String wkt = null;
+ 	String queryWkt = null;
+ 	String distWkt = null;
  
  	int limitToUse = 10;
 	String datasourcesToUse = "*";
  	String queryToUse = "";
- 	//if (request.getMethod().toLowerCase().equals("get")){
  		
- 	 	limit = request.getParameter("limit");
- 	 	if (limit != null){
- 	 		limitToUse = Integer.parseInt(limit);
+ 	limit = request.getParameter("limit");
+ 	if (limit != null){
+ 		limitToUse = Integer.parseInt(limit);
+ 	}
+ 	
+ 	datasources = request.getParameter("datasources");
+ 	if (datasources != null && !datasources.trim().equals("")){
+ 		datasourcesToUse = datasources;
+ 	}
+ 	
+	query = request.getParameter("query");
+ 	queryWkt = request.getParameter("querywkt");
+ 	distWkt = request.getParameter("distwkt");
+ 	//Backwards compatibility
+ 	wkt = request.getParameter("wkt");
+ 	
+ 	boolean isOldClient;
+ 	if (queryWkt != null || distWkt != null){
+ 		isOldClient = false;
+ 	}else{
+ 		isOldClient = true;
+ 	}
+ 	
+ 	if (isOldClient){
+ 		//Backwards comp
+ 	 	if (wkt != null){
+ 	 	 	queryWkt = null;
+ 	 	 	distWkt = wkt;
  	 	}
- 	 	
- 	 	datasources = request.getParameter("datasources");
- 	 	if (datasources != null && !datasources.trim().equals("")){
- 	 		datasourcesToUse = datasources;
- 	 	}
- 	 	
- 		query = request.getParameter("query");
- 	 	wkt = request.getParameter("wkt");
-//  	}else{
-//  		try{
-//  	 		Properties requestParameters = getPostParams(request);
-
-//  	 	 	limit = requestParameters.getProperty("limit");
-//  	 	 	if (limit != null){
-//  	 	 		limitToUse = Integer.parseInt(limit);
-//  	 	 	}
- 	 	 	
-//  	 	 	datasources = requestParameters.getProperty("datasources");
-//  	 	 	if (datasources != null && !datasources.trim().equals("")){
-//  	 	 		datasourcesToUse = datasources;
-//  	 	 	}
- 	 	 	
-//  	 	 	query = requestParameters.getProperty("query");
-//  	 	 	wkt = requestParameters.getProperty("wkt");
-//  	 		out.println ("wkt:" + wkt);
-//  		}catch (Exception e){
-// 			String a = "Klavs"; 			
-//  		}
-//  	}
+ 	}
+ 	
+ 	
  	
 	IndexQuerier iq = new IndexQuerier();
 	QueryResults qr = null;
 	
  	//If wkt is set perform a spatial query. Else perform text query. In a later version the two will be combined.
-	if (wkt != null){
-	 	qr = iq.spatialQuery(wkt, limitToUse, datasourcesToUse); 
+	if (queryWkt != null || distWkt != null){
+	 	qr = iq.spatialQuery(queryWkt, distWkt, limitToUse, datasourcesToUse); 
 	}else{
 	 	if (query != null){
 	 		String utf8behaviour = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("module.s4.index.utf8behaviour");
