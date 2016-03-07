@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.4.2</version>
+   <version>2.4.3</version>
 
    <stoponerror>true</stoponerror>
   
@@ -13,30 +13,32 @@
   <copyfile fromfile="[module:s4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/s4/css/s4.css"/>
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
-  <copyfile fromfile="[module:s4.dir]/js/icons.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/icons.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4-control.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-control.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/datasourceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/datasourceSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/workspaceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/workspaceSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/profileSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/profileSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4HelpSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4HelpSearcher.js"/>
-  <copyfile fromfile="[module:s4.dir]/js/s4GuideSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4GuideSearcher.js"/>
+  <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
+  
+<!--   <copyfile fromfile="[module:s4.dir]/js/icons.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/icons.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/s4-plugin.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-plugin.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/s4-control.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4-control.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/s4ThemeSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4ThemeSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/datasourceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/datasourceSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/workspaceSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/workspaceSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/profileSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/profileSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/favoriteSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/favoriteSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/searchableRowList.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/searchableRowList.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/s4HelpSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4HelpSearcher.js"/> -->
+<!--   <copyfile fromfile="[module:s4.dir]/js/s4GuideSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4GuideSearcher.js"/> -->
 
 <!-- production -->
-<!--   <param name="s4.search.css">//search.cdn.septima.dk/3.0.3/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.0.3/septimasearch.min.js</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.0.3/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/3.1.0/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/3.1.0/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.1.0/septimasearch.debug.js</param> -->
    
 <!-- cdn.develop -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
 <!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param> -->
   
 <!-- development -->
-  <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param>
-  <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param>
+<!--   <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param> -->
   
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
@@ -44,5 +46,5 @@
 
   <param name="s4.gst.login" ignore="Not IsDefined(module.kms.login)">[module.kms.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
-  <param name="s4.version">2.4.2</param>
+  <param name="s4.version">2.4.3</param>
 </deploy>

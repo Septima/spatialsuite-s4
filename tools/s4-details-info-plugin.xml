@@ -131,10 +131,10 @@
     		detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption'),
     		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
     		header: {
-    			caption: cbInfo.getString('s4.sq.header.caption'),
-    			text:  cbInfo.getString('s4.sq.header.text'),
+<!--     			caption: cbInfo.getString('s4.sq.header.caption'), -->
+<!--     			text:  cbInfo.getString('s4.sq.header.text'), -->
    				button: {
-   					buttonText: cbInfo.getString('s4.sq.zoomtoextent'),
+   					buttonText: cbInfo.getString('s4.sq.header.text'),
    					buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
    					callBack: function(sqInfo){
    						if (sqInfo.hitResults.length > 0){
