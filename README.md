@@ -45,7 +45,7 @@ offered by Septima.
 ### Download s4 module:
       
 Current version:  
-      2.4.3:   https://github.com/Septima/spatialsuite-s4/archive/2.4.3.zip  
+      2.4.4:   https://github.com/Septima/spatialsuite-s4/archive/2.4.4.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
