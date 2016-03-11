@@ -28,8 +28,8 @@
 <!--   <copyfile fromfile="[module:s4.dir]/js/s4GuideSearcher.js" tofile="[cbinfo.wwwroot.dir]/modules/s4/js/s4GuideSearcher.js"/> -->
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/3.1.0/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/3.1.0/septimasearch.min.js</param>
+<!--   <param name="s4.search.css">//search.cdn.septima.dk/3.1.0/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.1.0/septimasearch.min.js</param> -->
 <!--   <param name="s4.search.script">//search.cdn.septima.dk/3.1.0/septimasearch.debug.js</param> -->
    
 <!-- cdn.develop -->
@@ -37,9 +37,8 @@
 <!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param> -->
   
 <!-- development -->
-<!--   <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param> -->
-  
+  <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param>
+  <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param>
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>
