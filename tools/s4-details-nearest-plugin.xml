@@ -17,9 +17,9 @@
     	
     		var targetSearcher = new Septima.Search.S4IndexSearcher({
 				//Customize HERE (What to search for)
-				datasources: _s4Params.indexsearcher.datasources,
+				//datasources: _s4Params.indexsearcher.datasources,
 				//Example:
-				//datasources: "ds_esbjerg-skoler",
+				datasources: "ds_esbjerg-skoler",
 				allowDetails: true,
 	    		onSelect: function (result){
 					var geojson = new OpenLayers.Format.GeoJSON();
@@ -30,7 +30,7 @@
 	   			}				
 			})
 			
-			var useProxySearcher = false;
+			var useProxySearcher = true;
      		var proxySearcher = new Septima.Search.S4IndexSearcher({
  				//Customize HERE (What to use in search instead of selected Result (First result is used))
  				//datasources: _s4Params.indexsearcher.datasources,
@@ -40,9 +40,9 @@
 			
 			var handlerOptions = {
 				proxySearcher: useProxySearcher ? proxySearcher : null,
-				//showRoute: true,
+				showRoute: true,
 				//limit: 10,
-				//title: "Skriv titel her"
+				title: "Nærmeste skoler i distriktet"
 			};
 			
 			var handlerDef = createNearestHandlerDef([targetSearcher], handlerOptions);

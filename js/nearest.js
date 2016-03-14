@@ -126,7 +126,8 @@
 								fromGeometry: result.geometry,
 								toFeatureCollection: featureCollection,
 								apikey: routeApiKey,
-								proj4: proj4});
+								proj4: proj4,
+								profile: "foot"});
 							
 							RouteCalculator.calculate().done(Septima.bind(function(hitResults, deferred, featureCollection){
 								for (var i =0;i < hitResults.length;i++){
