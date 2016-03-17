@@ -79,7 +79,15 @@ Septima.Search.S4Control = Septima.Class ({
     	var controllerOptions = {};
     	var controller = new Septima.Search.Controller(searchers, controllerOptions);
 
-    	this.view = new Septima.Search.DefaultView({input:this.options.div, placeholder:this.options.placeHolder, limit: this.options.view.limit, controller: controller});
+    	var container;
+		if (this.options.div instanceof jQuery){
+			container = this.options.div;
+		}else{
+			container = jQuery('#'+this.options.div);
+		}
+		container.addClass("s4control");
+
+    	this.view = new Septima.Search.DefaultView({input: container, placeholder: this.options.placeHolder, limit: this.options.view.limit, controller: controller});
     	
     },
     
