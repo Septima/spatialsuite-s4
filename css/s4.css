@@ -22,7 +22,11 @@
     z-index: 10;
 }
 
-.septimasearch .searchheader .searchbackground, .septimasearch .searchbackground .search-icon, .septimasearch .searchbackground .closebutton, .septimasearch .searchbackground .spinner {
+.septimasearch .searchheader .searchbackground,
+.septimasearch .searchbackground input.ssInput,
+.septimasearch .searchbackground .search-icon,
+.septimasearch .searchbackground .closebutton,
+.septimasearch .searchbackground .spinner {
     height: 36px;
     line-height: 36px;
 }
@@ -43,3 +47,23 @@
 /* 	border-bottom: 0px solid rgba(236,240,241,1);	 */
 }
 
+/* PADDING HACK */
+.septimasearch .ssDetailTitle {
+    padding: 12px 10px;
+}
+.septimasearch .ssDetailTitleImage {
+    float: left;
+    padding-left: 0;
+}
+
+.septimasearch .ssDetailTitleText {
+    padding-left: 32px;
+}
+
+/* Mindre header */
+.septimasearch li.ssDetailHeader .ssResult .resulttitle{
+	padding-top: 0px;
+}
+.septimasearch li.ssDetailHeader .ssResult .resulttitle{
+	padding-bottom: 13px;
+}

@@ -14,41 +14,32 @@
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,
             		"handler": Septima.bind(function(result, deferred, detailsContent){
             			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
-    			    	var list = {type: "list", items: []};
+    			    	var output = jQuery();
+    			    	
             			for (var i=0;i<themesResults.length;i++){
             				var themeResult = themesResults[i];
-    						var icon = jQuery('<img src="' + themeResult.image + '" style="width: 20px;"/>');
-    						icon.click(Septima.bind(function(result){
-							        result.searcher.toggleTheme(result);
-								    if (!result.data.theme.visible){
-								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
-								    }
+            			
+	            			var clickFunction = Septima.bind(function(result){
+						        result.searcher.toggleTheme(result);
+							    if (!result.data.theme.visible){
+							    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+							    }
+	    						detailsContent.selectResult(result);
+    						}, this, themeResult) 
+            			
+    						var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
+    						themeIcon.click(clickFunction);
+    						var title = jQuery("<span>" + themeResult.title + "</span>");
+    						title.click(clickFunction);
+    						
+    						
+    						var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
+    						detailsIcon.click(Septima.bind(function(result){
 		    						detailsContent.selectResult(result);
-		    						}, this, themeResult));
-		    				var extraButtonDefs = [{
-		    					buttonText: cbInfo.getString('s4.detailsbutton.caption'),
-		    					buttonImage: Septima.Search.icons.list.detailsIcon,
-		    					callBack: Septima.bind(function(result){
-		    						detailsContent.selectResult(result);
-		    						}, this),
-		    					fixed: true}
-		    	    		];
-		    	    		var title = Septima.Search.ThemeResult(themeResult, [], extraButtonDefs, {format: "compact"});
-    						title.click(Septima.bind(function(result){
-							        result.searcher.toggleTheme(result);
-								    if (!result.data.theme.visible){
-								    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
-								    }
-		    						detailsContent.selectResult(result);
-		    						}, this, themeResult));
-    		    	    	list.items.push({type: "object", icon: icon, o1: title, hoverable: true, clickable: true});
+		    						}, this));
+		    						
+		    				output = output.add(detailsContent.formatArea({icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true})); 
             			}
-            			
-            			var output = jQuery();
-            			
-            			//var text = cbInfo.getString('s4.themesearcher.themesrelated');
-						//output = output.add(detailsContent.formatTextArea({text: text + " " + result.title + ":"}));
-            			output = output.add(detailsContent.formatList(list))
             			
     			    	deferred.resolve(output);
             		}, this),

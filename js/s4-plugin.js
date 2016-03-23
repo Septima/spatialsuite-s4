@@ -151,6 +151,8 @@ function s4_init (params){
             	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
             	controller.addSearcher({"title": "Adresser", "searcher" : dawaSearcher});
                 _s4Params.dawasearcher.searcher = dawaSearcher;
+                
+                _s4Params.adressSearcher = dawaSearcher;
             }
 			
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
@@ -318,7 +320,7 @@ function s4SetMaxHeight(){
 }
 
 function s4GeoHit(result){
-	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.geosearcher.streetNameHit)){
+	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.streetNameHit)){
     	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'zoom' && (result.data.type == "kommune" || result.data.type == "opstillingskreds" || result.data.type == "politikreds" || result.data.type == "postdistrikt" || result.data.type == "region" || result.data.type == "retskreds" || result.data.type == "stednavn")){
     		s4Hit(result, "zoom");
     	}else{
@@ -328,7 +330,7 @@ function s4GeoHit(result){
 }
 
 function s4DawaHit(result){
-	if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.dawasearcher.streetNameHit)){
+	if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.streetNameHit)){
     	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'zoom' && (result.data.type == "kommune" || result.data.type == "opstillingskreds" || result.data.type == "politikreds" || result.data.type == "postdistrikt" || result.data.type == "region" || result.data.type == "retskreds" || result.data.type == "stednavn")){
     		s4Hit(result, "zoom");
     	}else{

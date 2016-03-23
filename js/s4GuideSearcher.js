@@ -20,11 +20,11 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		"handler": function(result, deferred, detailsContent){
     			var output =  detailsContent.formatTextArea({text: result.data.text});
     			
-    			var list = {type: "list", items: []};
-    			var hyperLink = jQuery("<a href='" + result.data.link + "' target= '_blank'>" + result.data.title + "</a>");
-    			var icon = jQuery('<img src="' + Septima.Search.icons.details.link + '"/>');
-    			list.items.push({type: "object", icon: icon, o1: hyperLink});
-    			output = output.add(detailsContent.formatList(list));
+    			var link = result.data.link;
+    			var icon = Septima.Search.icons.details.link;
+    			var linkTitle = result.title;
+    			
+    			output = output.add(detailsContent.formatLink({icon: icon, link: link, linkTitle: linkTitle}));
 
 				deferred.resolve(output);
     		},

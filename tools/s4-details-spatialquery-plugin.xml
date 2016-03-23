@@ -53,15 +53,19 @@
 				_s4Params.plansearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
 		
-			//Attach Detailhandlers to sqSearcher
-			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){
-		    	s4SqSearcher.addDetailHandlerDef({
-		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI,
-		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true})
-		    	});
+			if (typeof addS4SpatialMapTools !== 'undefined'){
+				addS4SpatialMapTools({info: true, print: true, searcher: s4SqSearcher});
 			}
-	    	s4SqSearcher.addDetailHandlerDef(handlerDef);
+			
+			//Attach Detailhandlers to sqSearcher
+<!-- 			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){ -->
+<!-- 		    	s4SqSearcher.addDetailHandlerDef({ -->
+<!-- 		    		"buttonText":  cbInfo.getString('s4.details.tools'), -->
+<!-- 		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI, -->
+<!-- 		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true}) -->
+<!-- 		    	}); -->
+<!-- 			} -->
+	    	//s4SqSearcher.addDetailHandlerDef(handlerDef);
 	    	
 		}, this));
     }

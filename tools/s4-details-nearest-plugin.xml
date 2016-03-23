@@ -20,14 +20,15 @@
 				datasources: _s4Params.indexsearcher.datasources,
 				//Example:
 				//datasources: "ds_esbjerg-skoler",
-				allowDetails: true,
-	    		onSelect: function (result){
-					var geojson = new OpenLayers.Format.GeoJSON();
-				    var olGeom = geojson.read(result.geometry, 'Geometry');
-					var wkt = olGeom.toString();
-				    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-				    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-	   			}				
+				allowDetails: true
+<!-- 				, -->
+<!-- 	    		onSelect: function (result){ -->
+<!-- 					var geojson = new OpenLayers.Format.GeoJSON(); -->
+<!-- 				    var olGeom = geojson.read(result.geometry, 'Geometry'); -->
+<!-- 					var wkt = olGeom.toString(); -->
+<!-- 				    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true}); -->
+<!-- 				    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer); -->
+<!-- 	   			}				 -->
 			})
 			
 			var useProxySearcher = false;
@@ -62,15 +63,18 @@
 			//	_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
 		}
+			if (typeof addS4SpatialMapTools !== 'undefined'){
+				addS4SpatialMapTools({info: true, print: true, searcher: targetSearcher});
+			}
 
 			//Attach Detailhandlers to targetSearcher
-			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){
-		    	targetSearcher.addDetailHandlerDef({
-		    		"buttonText":  cbInfo.getString('s4.details.tools'),
-		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI,
-		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true})
-		    	});
-			}
+<!-- 			if (typeof S4SpatialMapToolsDetailHandler !== 'undefined'){ -->
+<!-- 		    	targetSearcher.addDetailHandlerDef({ -->
+<!-- 		    		"buttonText":  cbInfo.getString('s4.details.tools'), -->
+<!-- 		    		"buttonImage": Septima.Search.s4Icons.toolsIconURI, -->
+<!-- 		    		"handler": Septima.bind(S4SpatialMapToolsDetailHandler, this, {info: true, print: true}) -->
+<!-- 		    	}); -->
+<!-- 			} -->
     	
 
     	Septima.Log.trace({
