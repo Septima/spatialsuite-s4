@@ -19,14 +19,14 @@ Tools relevant for Denmark only:
   
   
 Tools using the details view function:  
-* [s4-details-nearest-plugin] (#s4-details-nearest)  
-* [s4-details-spatialquery-plugin] (#s4-details-spatialquery)  
-* [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex)
-* [s4-details-s4index-plugin] (#s4-details-s4index)  
+* [s4-details-nearest-plugin] (#s4-details-nearest-plugin)  
+* [s4-details-spatialquery-plugin] (#s4-details-spatialquery-plugin)  
+* [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex-plugin)
+* [s4-details-s4index-plugin] (#s4-details-s4index-plugin)  
   
 Experimental tools:  
-* [s4-details-guides-plugin] (#s4-details-guides)  
-* [s4-details-help-plugin] (#s4-details-help)  
+* [s4-details-guides-plugin] (#s4-details-guides-plugin)  
+* [s4-details-help-plugin] (#s4-details-help-plugin)  
 
 API documentation:  
 * [s4ApiDemo](#apidemo)  
@@ -158,7 +158,7 @@ S�t f�lgende parameter for at pluginnet virker:
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
   
 
-###<a name="#s4-details-nearest"></a>s4-details-nearest-plugin    
+###<a name="#s4-details-nearest-plugin"></a>s4-details-nearest-plugin    
 For an address; show the nearest three features of each type in your s4 index.  
   
 To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
@@ -168,7 +168,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-nearest-plugin" />
 ```    
 
-###<a name="#s4-details-spatialquery"></a>s4-details-spatialquery-plugin      
+###<a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin      
 Perform a standard Spatial Suite spatial query against your _local_ datasources.  
   
 To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
@@ -178,7 +178,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-spatialquery-plugin" />
 ```    
 
-###<a name="#s4-details-themesForIndex"></a>s4-details-themesForIndex-plugin      
+###<a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
 Show relevant themes for features from the s4 index.  
 
 Include in profile:  
@@ -186,7 +186,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-themesForIndex-plugin" />
 ```    
 
-###<a name="#s4-details-s4index"></a>s4-details-s4index-plugin  
+###<a name="#s4-details-s4index-plugin"></a>s4-details-s4index-plugin  
 Show all columns from presentations used to build the s4 index.  
 
 Include in profile:  
@@ -194,7 +194,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-s4index-plugin" />
 ```    
   
-###<a name="#s4-details-guides"></a>s4-details-guides-plugin  
+###<a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
 Let your users search and discover your Spatial Map guides.  
   
 Copy the tool to tools/custom.
@@ -204,7 +204,7 @@ Include in profile:
 	<tool dir="custom" name="s4-details-guides-plugin" />
 ```    
     
-###<a name="#s4-details-help"></a>s4-details-help-plugin    
+###<a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
 Let your users search and the built-in Spatial Map on-line help  
   
 Copy the tool to tools/custom.
