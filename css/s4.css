@@ -63,7 +63,9 @@
 /* Mindre header */
 .septimasearch li.ssDetailHeader .ssResult .resulttitle{
 	padding-top: 0px;
+	padding-bottom: 5px;
 }
-.septimasearch li.ssDetailHeader .ssResult .resulttitle{
-	padding-bottom: 13px;
+
+.septimasearch li.ssDetailHeader .ssResult {
+	padding-bottom: 15px;	
 }

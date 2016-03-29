@@ -32,11 +32,8 @@
     						var title = jQuery("<span>" + themeResult.title + "</span>");
     						title.click(clickFunction);
     						
-    						
     						var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
-    						detailsIcon.click(Septima.bind(function(result){
-		    						detailsContent.selectResult(result);
-		    						}, this));
+    						detailsIcon.click(clickFunction);
 		    						
 		    				output = output.add(detailsContent.formatArea({icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true})); 
             			}

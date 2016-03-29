@@ -104,7 +104,11 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 		if (typeof this.datasources[datasource.id] !== 'undefined'){
 			for (var i=0;i<this.datasources[datasource.id].length;i++){
 				var theme = this.datasources[datasource.id][i];
-        		var result = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", theme.description, " ", {theme: theme});
+				var description = null;
+				if (typeof theme.description !== 'undefined' && theme.description !== null){
+					description = theme.description;
+				}
+        		var result = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", description, " ", {theme: theme});
         		result.image = this.getThemeImage(theme);
 			}
 		}
