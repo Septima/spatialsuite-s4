@@ -6,7 +6,7 @@ Tools:
 The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
   
-This tools creates icons for Spatial Map functions (Info and print)  
+This tool creates icons for Spatial Map functions (Info and print)  
 * [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
   
 Tools relevant for Denmark only:  
@@ -17,6 +17,17 @@ Tools relevant for Denmark only:
 * [s4-odeum-plugin](#s4-odeum-plugin)  
 * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
   
+  
+Tools using the details view function:  
+* [s4-details-nearest-plugin] (#s4-details-nearest)  
+* [s4-details-spatialquery-plugin] (#s4-details-spatialquery)  
+* [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex)
+* [s4-details-s4index-plugin] (#s4-details-s4index)  
+  
+Experimental tools:  
+* [s4-details-guides-plugin] (#s4-details-guides)  
+* [s4-details-help-plugin] (#s4-details-help)  
+
 API documentation:  
 * [s4ApiDemo](#apidemo)  
     
@@ -44,32 +55,23 @@ This tools creates icons for Spatial Map functions (Info and print).
 ###<a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR og SKAT for matrikler  
-Inkludér i profil:  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-matrikel-plugin" />
 ```  
   
 ###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
 Only relevant in Denmark  
-Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af geosearch), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
-Inkludér i profil:  
+Dette er et tool, som understï¿½tter sï¿½gning af veje uden husnumre (Understï¿½ttes ikke af geosearch), samt visning af vejgeometri nï¿½r en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-vejmidter-plugin" />
 ```  
-Sæt _streetNameHit_ til true.  
-I dawasearcher-opsætningen i s4:  
-```xml
-dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, streetNameHit: true},
-```  
-eller i  
-I geosearcher-opsætningen i s4:  
-```xml
-geosearcher: {enabled: true, info: true, print: true, targets: ['adresser', 'stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: true},
-```  
+
 Forbered en datasource:  
   
 s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med to commands:  
-* read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnér max [limit] veje.  
+* read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnï¿½r max [limit] veje.  
 * read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
   
 Eksempel:  
@@ -92,24 +94,24 @@ Dette er den datasource, bruges i Silkeborg.
 </datasource>       
 ```  
 Jacob Nicolajsen skriver:  
-Vejmidtedata er genereret ud fra ”FOT Vejmidte brudt” hvor GST har lagt CPR-Vejkode på de fleste vejmidter (der er stumper af småveje der ikke er med).
-Jeg har lavet et script i databasen, der aggregerer geometrien på baggrund af vejkoden og sætter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kører en gang i døgnet, så rettelser i vejmidten og test mod adresserne altid er ajour.
-Scriptet deler jeg selvfølgeligt gerne, men det virker jo kun i SQL server.  
+Vejmidtedata er genereret ud fra ï¿½FOT Vejmidte brudtï¿½ hvor GST har lagt CPR-Vejkode pï¿½ de fleste vejmidter (der er stumper af smï¿½veje der ikke er med).
+Jeg har lavet et script i databasen, der aggregerer geometrien pï¿½ baggrund af vejkoden og sï¿½tter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kï¿½rer en gang i dï¿½gnet, sï¿½ rettelser i vejmidten og test mod adresserne altid er ajour.
+Scriptet deler jeg selvfï¿½lgeligt gerne, men det virker jo kun i SQL server.  
 
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
-Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-søgeren.  
-Inkludér i profil:  
+Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-sï¿½geren.  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-eknap-plugin" />
 ```  
-Hvis du ønsker E-Knap for andre typer søgeresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
-Inkludér i profil:  
+Hvis du ï¿½nsker E-Knap for andre typer sï¿½geresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
+Inkludï¿½r i profil:  
 ```xml
 <tool dir="custom" name="s4-eknap-plugin" />
 ```  
-For tilføje E-Knap for resultater fra dit lokale indeks skal du sætte target til _entalsformen_ af den presentation, der bruges i indekset. Eksempel:  
+For tilfï¿½je E-Knap for resultater fra dit lokale indeks skal du sï¿½tte target til _entalsformen_ af den presentation, der bruges i indekset. Eksempel:  
 ```javascript
 _s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for skolen", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "indexsearcher", "target": "skole"});
 ```  
@@ -121,7 +123,7 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 ###<a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
 Only relevant in Denmark  
 Viser ikon med link til plansystemets pdf for lokalplaner  
-Inkludér i profil:  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-planSystem-plugin" />
 ```  
@@ -129,11 +131,11 @@ Inkludér i profil:
 ###<a name="s4-odeum-plugin"></a>s4-odeum-plugin  
 Only relevant in Denmark  
 Viser ikon med link til ODEUM for lokalplaner. (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)  
-Inkludér i profil:  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-odeum-plugin" />
 ```  
-Sæt følgende parameter for at pluginnet virker:  
+Sï¿½t fï¿½lgende parameter for at pluginnet virker:  
 ```xml
 <param name="s4.odeumClientName">odeumClientName</param>
 ```  
@@ -141,12 +143,12 @@ Sæt følgende parameter for at pluginnet virker:
   
 ###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
-Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr så hvis du klikker på en plan i en anden kommune så vises _din_ plan med det plannr.)  
-Inkludér i profil:  
+Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr sï¿½ hvis du klikker pï¿½ en plan i en anden kommune sï¿½ vises _din_ plan med det plannr.)  
+Inkludï¿½r i profil:  
 ```xml
 <tool module="s4" name="s4-dkPlan-plugin" />
 ```  
-Sæt følgende parameter for at pluginnet virker:  
+Sï¿½t fï¿½lgende parameter for at pluginnet virker:  
 ```xml
 <param name="s4.dkPlanClientName">dkPlanClientName</param>
 ```  
@@ -154,6 +156,62 @@ Sæt følgende parameter for at pluginnet virker:
   
 ###<a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
+  
 
+###<a name="#s4-details-nearest"></a>s4-details-nearest-plugin    
+For an address; show the nearest three features of each type in your s4 index.  
+  
+To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
+
+Include in profile:  
+```xml
+	<tool module="s4" name="s4-details-nearest-plugin" />
+```    
+
+###<a name="#s4-details-spatialquery"></a>s4-details-spatialquery-plugin      
+Perform a standard Spatial Suite spatial query against your _local_ datasources.  
+  
+To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
+
+Include in profile:  
+```xml
+	<tool module="s4" name="s4-details-spatialquery-plugin" />
+```    
+
+###<a name="#s4-details-themesForIndex"></a>s4-details-themesForIndex-plugin      
+Show relevant themes for features from the s4 index.  
+
+Include in profile:  
+```xml
+	<tool module="s4" name="s4-details-themesForIndex-plugin" />
+```    
+
+###<a name="#s4-details-s4index"></a>s4-details-s4index-plugin  
+Show all columns from presentations used to build the s4 index.  
+
+Include in profile:  
+```xml
+	<tool module="s4" name="s4-details-s4index-plugin" />
+```    
+  
+###<a name="#s4-details-guides"></a>s4-details-guides-plugin  
+Let your users search and discover your Spatial Map guides.  
+  
+Copy the tool to tools/custom.
+
+Include in profile:  
+```xml
+	<tool dir="custom" name="s4-details-guides-plugin" />
+```    
+    
+###<a name="#s4-details-help"></a>s4-details-help-plugin    
+Let your users search and the built-in Spatial Map on-line help  
+  
+Copy the tool to tools/custom.
+
+Include in profile:  
+```xml
+	<tool module="s4" name="s4-details-help-plugin" />
+```   
 
 

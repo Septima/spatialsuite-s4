@@ -151,14 +151,13 @@ view: {
 
 //Adressesøgning i DAWA
 // minimumShowCount: How many adresses should always be shown
-// streetNameHit: true|false. Default false. Skal der udløses hit på vejnavn?
-dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, streetNameHit: false},
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
 
 //Geodatastyrelsen-geosearch
-// Full set of geosearcher targets is: ['adresser','stednavne', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-//Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
+// Full set of geosearcher targets is: ['adresser','stednavne_v2', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+// Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
 // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
-geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
+geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
 
 //Septima CVR-index
 cvrsearcher: {enabled: true, info: true, print: true},
@@ -195,7 +194,7 @@ For each searcher a number of parameters may be set:
 
 The targets in the geosearcher are changed by editing the *targets* property.
 
-	geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne', 'matrikelnumre'], streetNameHit: false},
+	geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre']},
 
 Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
 
@@ -224,7 +223,7 @@ Finished, now try out your profile and the customized search tool
 
 S4 comes a number of included tools. 
 All included tools must be included in the profile _after_ the main tool.  
-Please [the tools section](./tools)  
+Please see [the tools section](./tools#tools-included-in-s4)  
 
 
 ## <a name="local"></a> Search Spatial Suite data  
