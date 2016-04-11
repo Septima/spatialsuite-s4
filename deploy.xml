@@ -16,9 +16,9 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/3.1.5/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/3.1.5/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.1.5/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/3.1.6/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/3.1.6/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.1.6/septimasearch.debug.js</param> -->
    
 <!-- cdn.develop -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->

@@ -9,15 +9,15 @@
 		<file type="css"    name="[s4.search.css]" />
 		<file type="script" name="[s4.search.script]"/>
 		
-		<file type="css"    name="/modules/s4/css/s4.css" />
-		<file type="script" name="/modules/s4/js/icons.js"/>
-		<file type="script" name="/modules/s4/js/s4-control.js"/>
- 		<file type="script" name="/modules/s4/js/s4-plugin.js"/>
-		<file type="script" name="/modules/s4/js/searchableRowList.js"/>
-		<file type="script" name="/modules/s4/js/datasourceSearcher.js"/>
-		<file type="script" name="/modules/s4/js/s4HelpSearcher.js"/>
-		<file type="script" name="/modules/s4/js/s4GuideSearcher.js"/>
-		<file type="script" name="/modules/s4/js/nearest.js"/>
+		<file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
+		<file type="script" name="/modules/s4/js/icons.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/s4-control.js?_=[s4.version]"/>
+ 		<file type="script" name="/modules/s4/js/s4-plugin.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/searchableRowList.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/datasourceSearcher.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/s4HelpSearcher.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/s4GuideSearcher.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/nearest.js?_=[s4.version]"/>
     </requires>
     <src/>
     <jssrc/>

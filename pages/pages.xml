@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-    <page name="s4SearchDatasource">
-    <!--  This page is called with three parameters; query, limit, datasource -->
-    	<data handler="datasource"  operation="execute-command">
-            <url-parameters>
-                <url-parameter name="command" value="read_search"/>
-            </url-parameters>
-    	</data>
-    </page>
-    <page name="s4GetLocalDatasources" contenttype="text/xml">
-    	<data handler="datasource" operation="get-datasources">
-	        <url-parameters>
-	            <url-parameter name="fulter" value="(isreadable) and (true) and (endpointtype = 'postgis' or endpointtype = 'oracle' or endpointtype = 'shapefile' or endpointtype = 'mssql')"/>
-	            <url-parameter name="filter" value="endpointtype = 'postgis' or endpoint like 'ep_demo01' or endpointtype = 'mssql'"/>
-	        </url-parameters>
-    	</data>
-    </page>
-    <page name="s4spatialquery-getresult" contenttype="text/xml">
-        <data handler="spatialquery2" operation="execute-query">
-            <url-parameters>
-                <url-parameter name="saveresult" value="true" />
-                <url-parameter name="savename" value="last_s4sq_result" />
-                <url-parameter name="distance">if IsDefined(distance) then ToNumber(distance) else '0' endif</url-parameter>
-            </url-parameters>
-        </data>
-    </page>
-    <page name="s4spatialquery-getoutput" contenttype="text/xml">
-	    <data handler="session" operation="get-output">
-	    <url-parameters>
-	        <url-parameter name="savename" value="last_s4sq_result"/>
-	    </url-parameters>
-        </data>
-    </page>
-    <page name="s4GetGuides">
-    	<data handler="datasource"  operation="execute-command">
-            <url-parameters>
-                <url-parameter name="datasource" value="s4Guides"/>
-                <url-parameter name="command" value="read"/>
-            </url-parameters>
-    	</data>
-    </page>
+	<page name="s4SearchDatasource">
+		<!-- This page is called with three parameters; query, limit, datasource -->
+		<data handler="datasource" operation="execute-command">
+			<url-parameters>
+				<url-parameter name="command" value="read_search" />
+			</url-parameters>
+		</data>
+	</page>
+	<page name="s4GetLocalDatasources" contenttype="text/xml">
+		<data handler="datasource" operation="get-datasources">
+			<url-parameters>
+				<url-parameter name="filter"
+					value="endpointtype = 'postgis' or endpointtype = 'shapefile' or endpointtype = 'mssql'" />
+			</url-parameters>
+		</data>
+	</page>
+	<page name="s4spatialquery-getresult" contenttype="text/xml">
+		<data handler="spatialquery2" operation="execute-query">
+			<url-parameters>
+				<url-parameter name="saveresult" value="true" />
+				<url-parameter name="savename" value="last_s4sq_result" />
+				<url-parameter name="distance">if IsDefined(distance) then
+					ToNumber(distance) else '0' endif</url-parameter>
+			</url-parameters>
+		</data>
+	</page>
+	<page name="s4spatialquery-getoutput" contenttype="text/xml">
+		<data handler="session" operation="get-output">
+			<url-parameters>
+				<url-parameter name="savename" value="last_s4sq_result" />
+			</url-parameters>
+		</data>
+	</page>
+	<page name="s4GetGuides">
+		<data handler="datasource" operation="execute-command">
+			<url-parameters>
+				<url-parameter name="datasource" value="s4Guides" />
+				<url-parameter name="command" value="read" />
+			</url-parameters>
+		</data>
+	</page>
 </pages>

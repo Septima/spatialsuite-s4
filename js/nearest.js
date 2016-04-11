@@ -86,6 +86,11 @@
 	   					}
 	   				}
 	    		},
+	   			noResults:{
+	   				icon: Septima.Search.icons.infoRed,
+	    			caption: cbInfo.getString('s4.sq.noresults.caption'),
+	    			text:  cbInfo.getString('s4.sq.noresults.text')
+	   			},
 				imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey,
 				detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption')
     		}
@@ -94,7 +99,12 @@
 					var deferred = jQuery.Deferred();
 					var resultWKT = result.searcher.translateGeoJsonObjectToWkt(result.geometry);
 					proxySearcher.sq({limit: 1, wkt: resultWKT}).done(Septima.bind(function(deferred, result, sqResult){
-						deferred.resolve({queryGeometry: sqResult.getAllResults()[0].geometry, distGeometry: result.geometry});
+						var results = sqResult.getAllResults();
+						if (results.length > 0){
+							deferred.resolve({queryGeometry: results[0].geometry, distGeometry: result.geometry});
+						}else{
+							deferred.resolve(null);
+						}
 					}, this, deferred, result));
 					return deferred.promise();
 				}, this, options.proxySearcher);
@@ -110,6 +120,10 @@
 			if (options.showRoute){
 				var routeApiKey = cbInfo.getParam("module.route.token");
 				if (routeApiKey !== "module.route.token"){
+					var routeProfile = "car";
+					if (options.routeProfile){
+						routeProfile = options.routeProfile;
+					}
 					require(['https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js'], Septima.bind(function (sqDHB, proj4) {
 						sqDHB.addResultsProcessor(function(sqInfo){
 							//{mainResult: mainResult, hitResults: allResults};
@@ -127,7 +141,7 @@
 								toFeatureCollection: featureCollection,
 								apikey: routeApiKey,
 								proj4: proj4,
-								profile: "foot"});
+								profile: routeProfile});
 							
 							RouteCalculator.calculate().done(Septima.bind(function(hitResults, deferred, featureCollection){
 								for (var i =0;i < hitResults.length;i++){

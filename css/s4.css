@@ -18,19 +18,19 @@
     margin-top: -4px;
 }
 
-.septimasearch, .septimasearch.active{
+.septimasearch, .septimasearch.ssActive{
     z-index: 10;
 }
 
-.septimasearch .searchheader .searchbackground,
-.septimasearch .searchbackground input.ssInput,
-.septimasearch .searchbackground .search-icon,
-.septimasearch .searchbackground .closebutton,
-.septimasearch .searchbackground .spinner {
+.septimasearch .ssSearchHeader .ssSearchBackground,
+.septimasearch .ssSearchBackground input.ssInput,
+.septimasearch .ssSearchBackground .ssSearchIcon,
+.septimasearch .ssSearchBackground .ssCloseButton,
+.septimasearch .ssSearchBackground .ssSpinner {
     height: 36px;
     line-height: 36px;
 }
-.septimasearch .searchheader .searchbackground:before {
+.septimasearch .ssSearchHeader .ssSearchBackground:before {
     content: '';
     display: inline-block;
     height: 100%;
@@ -60,12 +60,12 @@
     padding-left: 32px;
 }
 
-/* Mindre header */
-.septimasearch li.ssDetailHeader .ssResult .resulttitle{
-	padding-top: 0px;
-	padding-bottom: 5px;
-}
+/* Mindre header Dude */
+/* .septimasearch li.ssDetailHeader .ssResult .ssResultTitle{ */
+/* 	padding-top: 0px; */
+/* 	padding-bottom: 5px; */
+/* } */
 
-.septimasearch li.ssDetailHeader .ssResult {
-	padding-bottom: 15px;	
-}
+/* .septimasearch li.ssDetailHeader .ssResult { */
+/* 	padding-bottom: 15px;	 */
+/* } */
