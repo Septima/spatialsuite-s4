@@ -97,7 +97,7 @@
 	  	    	infoTitle.click(infoClickFunction);
 	  	    	infoTitle.css("cursor", "pointer");
 	  	    		
-	   	    	list.items.push({type: "object", icon: infoIcon, o1: infoTitle});
+	   	    	list.items.push({type: "button", icon: infoIcon, title: infoTitle});
     		}
     		
     		if (_s4Params.view.printconfig && paramEntry.print){
@@ -113,7 +113,7 @@
 	  	    	printTitle.click(printClickFunction);
 	  	    	printTitle.css("cursor", "pointer");
 	    		
-	   	    	list.items.push({type: "object", icon: printIcon, o1: printTitle});
+	   	    	list.items.push({type: "button", icon: printIcon, title: printTitle});
     		}
    	    	
     		if (s4SpatialMapToolsHelper.workspace_isOpen()){
@@ -129,12 +129,12 @@
 	  	    	title.click(clickFunction);
 	  	    	title.css("cursor", "pointer");
 	    		
-	   	    	list.items.push({type: "object", icon: icon, o1: title});
+	   	    	list.items.push({type: "button", icon: icon, title: title});
     		}
     		
     		//Legend.show();
     		
-    		deferred.resolve(detailsContent.formatList(list));
+    		deferred.resolve(detailsContent.formatItems(list.items));
   		};
     
 		function addS4SpatialMapTools(paramEntry){
