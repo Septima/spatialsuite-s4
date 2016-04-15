@@ -54,9 +54,7 @@
  	 	}
  	}
  	
- 	
- 	
-	IndexQuerier iq = new IndexQuerier();
+	IndexQuerier iq = dk.septima.spatialsuite.search.v103.Api.getIndexQuerier();
 	QueryResults qr = null;
 	
  	//If wkt is set perform a spatial query. Else perform text query. In a later version the two will be combined.

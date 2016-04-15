@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"
- import="dk.septima.spatialsuite.search.IndexBuilder"
  import="com.carlbro.cbinfo.global.GlobalRessources"
  import="java.util.concurrent.TimeUnit"
  %>
@@ -13,7 +12,7 @@
  	 		throw new Exception ("The cbInfo parameter s4.config.dir is not defined. Please see https://github.com/Septima/spatialsuite-s4#readme");
  	 	}else{
  	 		long startTime = System.currentTimeMillis();
- 	 		IndexBuilder ib = new IndexBuilder();
+ 	 		IndexBuilder ib = dk.septima.spatialsuite.search.v103.Api.getIndexBuilder();
  	 		ib.build();
 
  	 		long endTime = System.currentTimeMillis();
