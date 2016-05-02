@@ -65,15 +65,15 @@ Inkludér i profil:
 ###<a name="s4-adresse-plugin"></a>s4-adresse-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
-Inklud�r i profil:  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-adresse-plugin" />
 ```  
   
 ###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
 Only relevant in Denmark  
-Dette er et tool, som underst�tter s�gning af veje uden husnumre (Underst�ttes ikke af geosearch), samt visning af vejgeometri n�r en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
-Inklud�r i profil:  
+Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af geosearch), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-vejmidter-plugin" />
 ```  
@@ -103,25 +103,25 @@ Dette er den datasource, bruges i Silkeborg.
 	</sql>
 </datasource>       
 ```  
-Jacob Nicolajsen skriver:  
-Vejmidtedata er genereret ud fra �FOT Vejmidte brudt� hvor GST har lagt CPR-Vejkode p� de fleste vejmidter (der er stumper af sm�veje der ikke er med).
-Jeg har lavet et script i databasen, der aggregerer geometrien p� baggrund af vejkoden og s�tter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script k�rer en gang i d�gnet, s� rettelser i vejmidten og test mod adresserne altid er ajour.
-Scriptet deler jeg selvf�lgeligt gerne, men det virker jo kun i SQL server.  
+Silkeborg skriver:  
+Vejmidtedata er genereret ud fra FOT Vejmidte brudt hvor GST har lagt CPR-Vejkode på de fleste vejmidter (der er stumper af småveje der ikke er med).
+Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af vejkoden og sætter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kører en gang i døgnet, så rettelser i vejmidten og test mod adresserne altid er ajour.
+Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
 
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
 Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-s�geren.  
-Inklud�r i profil:  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-eknap-plugin" />
 ```  
-Hvis du �nsker E-Knap for andre typer s�geresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
-Inklud�r i profil:  
+Hvis du ønsker E-Knap for andre typer s�geresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
+Inkludér i profil:  
 ```xml
 <tool dir="custom" name="s4-eknap-plugin" />
 ```  
-For tilf�je E-Knap for resultater fra dit lokale indeks skal du s�tte target til _entalsformen_ af den presentation, der bruges i indekset. Eksempel:  
+For tilføje E-Knap for resultater fra dit lokale indeks skal du sætte target til _entalsformen_ af den presentation, der bruges i indekset. Eksempel:  
 ```javascript
 _s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for skolen", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "indexsearcher", "target": "skole"});
 ```  
@@ -133,7 +133,7 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 ###<a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
 Only relevant in Denmark  
 Viser ikon med link til plansystemets pdf for lokalplaner  
-Inklud�r i profil:  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-planSystem-plugin" />
 ```  
@@ -141,11 +141,11 @@ Inklud�r i profil:
 ###<a name="s4-odeum-plugin"></a>s4-odeum-plugin  
 Only relevant in Denmark  
 Viser ikon med link til ODEUM for lokalplaner. (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)  
-Inklud�r i profil:  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-odeum-plugin" />
 ```  
-S�t f�lgende parameter for at pluginnet virker:  
+Sæt følgende parameter for at pluginnet virker:  
 ```xml
 <param name="s4.odeumClientName">odeumClientName</param>
 ```  
@@ -154,11 +154,11 @@ S�t f�lgende parameter for at pluginnet virker:
 ###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
 Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr s� hvis du klikker p� en plan i en anden kommune s� vises _din_ plan med det plannr.)  
-Inklud�r i profil:  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-dkPlan-plugin" />
 ```  
-S�t f�lgende parameter for at pluginnet virker:  
+Sæt følgende parameter for at pluginnet virker:  
 ```xml
 <param name="s4.dkPlanClientName">dkPlanClientName</param>
 ```  
@@ -205,6 +205,8 @@ Include in profile:
 ```    
   
 ###<a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
+Only relevant in Denmark.  
+  
 Vis DAGI-information for adresse.  
 
 Inkludér in profil:  

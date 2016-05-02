@@ -10,7 +10,7 @@ offered by Septima.
 ####[License](#license)
 ####[Basic installation and test](#installation)
 ####[Customization](#s4customization)
-####[Included tools](#tools)
+####[Included tools](./tools#tools-included-in-s4) 
 ####[Search Spatial Suite data](#local)
 ####[FAQ and Issues](#problems)
 
