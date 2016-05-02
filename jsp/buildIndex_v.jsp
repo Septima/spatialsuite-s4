@@ -38,14 +38,12 @@
 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script>
 	
 	<!-- Include septimaSearch -->
-	<script type="text/javascript" src="http://search.cdn.septima.dk/2.9.9/septimasearch.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/2.9.9/css/defaultView.css">
+	<script type="text/javascript" src="http://search.cdn.septima.dk/3.1.7/septimasearch.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/3.1.7/css/defaultView.css">
 	
 	<style type="text/css">
 		#inputcontainer {
 		    width: 400px;
-/* 		    position: absolute; */
-/* 		    top: 35px; */
 		}
 		#log {
 		    position: absolute;
@@ -63,16 +61,23 @@
 			var $demoDiv = jQuery('#searchDiv');
 			$demoDiv.append('<div id="inputcontainer"/><div id="log"/>');
 
-			_view = new Septima.Search.DefaultView({input:jQuery("#inputcontainer"), placeholder:"Test index"});
-
 			var controllerOptions = {onError: error, blankBehavior: "search"};
-			_controller = new Septima.Search.Controller([], _view, controllerOptions);
+			_controller = new Septima.Search.Controller([], controllerOptions);
 
-			var s4IndexSearcherOptions = {datasources: "*", onSelect: s4IndexHit, matchesPhrase: "match", blankBehavior: "search", "allowDetails": true};
+			var s4IndexSearcherOptions = {
+			        datasources: "*",
+			        onSelect: s4IndexHit,
+			        matchesPhrase: "match",
+			        blankBehavior: "search",
+			        "allowDetails": true};
+			
 			var indexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
 			_controller.addSearcher({"title": "", "searcher" : indexSearcher});
-
-			_controller.go ();
+			
+            _view = new Septima.Search.DefaultView({
+                input:jQuery("#inputcontainer"),
+                placeholder:"Test index",
+                controller: _controller});
 		}
 		
 		function s4IndexHit(result){

@@ -11,6 +11,7 @@ This tool creates icons for Spatial Map functions (Info and print)
   
 Tools relevant for Denmark only:  
 * [s4-matrikel-plugin](#s4-matrikel-plugin)  
+* [s4-adresse-plugin](#s4-adresse-plugin)  
 * [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
 * [s4-planSystem-plugin](#s4-planSystem-plugin)  
@@ -23,6 +24,7 @@ Tools using the details view function:
 * [s4-details-spatialquery-plugin] (#s4-details-spatialquery-plugin)  
 * [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex-plugin)
 * [s4-details-s4index-plugin] (#s4-details-s4index-plugin)  
+* [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
   
 Experimental tools:  
 * [s4-details-guides-plugin] (#s4-details-guides-plugin)  
@@ -54,10 +56,18 @@ This tools creates icons for Spatial Map functions (Info and print).
   
 ###<a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
 Only relevant in Denmark  
-Viser ikoner med links til BBR og SKAT for matrikler  
-Inklud�r i profil:  
+Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for matrikler  
+Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-matrikel-plugin" />
+```  
+  
+###<a name="s4-adresse-plugin"></a>s4-adresse-plugin  
+Only relevant in Denmark  
+Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
+Inklud�r i profil:  
+```xml
+<tool module="s4" name="s4-adresse-plugin" />
 ```  
   
 ###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
@@ -192,6 +202,14 @@ Show all columns from presentations used to build the s4 index.
 Include in profile:  
 ```xml
 	<tool module="s4" name="s4-details-s4index-plugin" />
+```    
+  
+###<a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
+Vis DAGI-information for adresse.  
+
+Inkludér in profil:  
+```xml
+    <tool module="s4" name="s4-details-dawa-dagi-plugin" />
 ```    
   
 ###<a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  

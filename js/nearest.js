@@ -137,7 +137,7 @@
 								featureCollection.features.push({"type": "Feature", "geometry": hitResults[i].geometry});
 							}
 							var RouteCalculator = new Septima.Search.RouteCalculator({
-								fromGeometry: result.geometry,
+							    fromResult: result,
 								toFeatureCollection: featureCollection,
 								apikey: routeApiKey,
 								proj4: proj4,
