@@ -111,12 +111,12 @@ Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
-Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-s�geren.  
+Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-søgeren.  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-eknap-plugin" />
 ```  
-Hvis du ønsker E-Knap for andre typer s�geresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
+Hvis du ønsker E-Knap for andre typer søgeresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:  
 Inkludér i profil:  
 ```xml
 <tool dir="custom" name="s4-eknap-plugin" />
@@ -153,7 +153,7 @@ Sæt følgende parameter for at pluginnet virker:
   
 ###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
-Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr s� hvis du klikker p� en plan i en anden kommune s� vises _din_ plan med det plannr.)  
+Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr så hvis du klikker på en plan i en anden kommune så vises _din_ plan med det plannr.)  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-dkPlan-plugin" />
