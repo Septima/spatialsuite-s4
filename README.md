@@ -306,6 +306,7 @@ Each presentation *MAY* have the following columns
 <column format="description"> : The description when presented as a search result
 <column format="searchstring"> : Text which is indexed and free text queried. This text is not visible to the end user
 <column format="hyperlink"> : A link which will be presented directly in the search result
+<column format="javascriptlink"> : Javascript which may invoke a function (See examples below)
 ```
 #### Extended presentation file
 ```xml
@@ -329,6 +330,11 @@ Each presentation *MAY* have the following columns
 			<label>'Se skolens hjemmeside'</label>
 			<value>hyperlink</value>
 		</column>
+        <column format="javascriptlink">
+            <label>'Alert navnet på skolen1'</label>
+            <value>'alert("' + skolensnav + '")'</value>
+            <condition/>
+        </column>
 </presentation>
 ```
 

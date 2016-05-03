@@ -2,9 +2,6 @@
  import="dk.septima.spatialsuite.search.IndexQuerier"
  import="dk.septima.spatialsuite.search.QueryResults"
  import="com.carlbro.cbinfo.global.GlobalRessources"
- import="java.util.Properties"
- import="java.util.Enumeration"
- import="java.util.Map"
  %>
  
  <%
@@ -92,28 +89,6 @@ String utf8Convert(String utf8String) throws java.io.UnsupportedEncodingExceptio
 	bytes[i] = (byte) utf8String.charAt(i);
 	}
 	return new String(bytes, "UTF-8");
-}
-
-// Properties getRequestParameters(HttpServletRequest request) throws Exception{
-//     Enumeration parameters = request.getParameterNames();
-//     Properties requestParameters = new Properties();
-//     while (parameters.hasMoreElements()){
-//         String parameter = (String) parameters.nextElement();
-//         if (parameter == null){
-//         }else{
-//         	requestParameters.setProperty(parameter, request.getParameter(parameter));
-//     	  }
-//     }
-//     return (requestParameters);
-// }
-
-Properties getPostParams(HttpServletRequest request){
-	Map<String, String[]> parameters = request.getParameterMap();
-    Properties requestParameters = new Properties();
-	for(String parameter : parameters.keySet()) {
-    	requestParameters.setProperty(parameter, parameters.get(parameter)[0]);
-	}
-    return (requestParameters);
 }
 
 %>
