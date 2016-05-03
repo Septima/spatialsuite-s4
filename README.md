@@ -297,6 +297,7 @@ Maximum length of the title is 255 characters.
 			<label></label>
 			<value>skolensnavn</value> <!-- Max 255 chars -->
 		</column>
+    </columns>
 </presentation>
 ```  
 _value_ and _plural_ are mandatory.  
@@ -307,6 +308,7 @@ Each presentation *MAY* have the following columns
 <column format="searchstring"> : Text which is indexed and free text queried. This text is not visible to the end user
 <column format="hyperlink"> : A link which will be presented directly in the search result
 <column format="javascriptlink"> : Javascript which may invoke a function (See examples below)
+<column>: Ordinary columns
 ```
 #### Extended presentation file
 ```xml
@@ -335,6 +337,22 @@ Each presentation *MAY* have the following columns
             <value>'alert("' + skolensnav + '")'</value>
             <condition/>
         </column>
+        <column>
+            <label>'Klassetrin'</label>
+            <value>bem + ' klasse ' </value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Tlf'</label>
+            <value>tlf</value>
+            <condition/>
+        </column>
+        <column>
+            <label>'Mail'</label>
+            <value>email</value>
+            <condition/>
+        </column>
+    </columns>
 </presentation>
 ```
 
