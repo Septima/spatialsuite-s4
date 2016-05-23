@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not customize this tool. Make copy of module and create your own tool -->
+<tool>
+    <requires>
+		<include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+        <file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
+        <file type="script" name="/modules/s4/js/profileSearcher.js"/>
+        <file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
+
+        <!-- Include custom css if you need to customize styles -->
+        <!-- <file type="css" name="/css/custom/s4.css" /> -->
+    </requires>
+    <displayname>s4Plugin</displayname>
+    <src><![CDATA[
+            s4_init ({
+
+                //Positioning of s4. Choose between
+                //  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
+                //  'tool': Use the panel as specified in the profile
+                //  'panel-brand': Force s4 to panel-brand 
+                //  'panel-top': Force s4 to top menu
+                //  'panel-middle': Force s4 to menu linie (right justified)
+                //  'menu': As the last menu in the menu line
+                panel: 'default',
+
+	            //Result presentation
+	            //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
+	            //  blankbehavior: search or none  
+	            //  autofocus: true or false. Default is false
+	            //  forcedblurOnSelect: Force close of result list. Default is false
+	            //  zoomBuffer: Buffer when result is shown in map. Default is '100'
+	            //  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
+	            view: {
+	              limit: 20,
+	              blankbehavior: "search",
+	              autofocus: false,
+	              dynamiclayer: 'userdatasource',
+	              infoprofilequery: 'userdatasource',
+	              printconfig: 'rotatet',
+	              forcedblurOnSelect: 'false',
+	              zoomBuffer: '100',
+	              marginToBottom: 100 
+	            },
+	            
+	            //Local SpatialSuite datasources
+	            //  datasources: "*" for all, or space separated names of datasources
+	            //  blankbehavior: search or none
+	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
+	            
+	            //Themes in profile
+	            themesearcher: {enabled: true},
+	            
+	            //Profiles
+	            profilesearcher: {enabled: true},
+	            
+	            //Favorites
+	            favoritesearcher: {enabled: true},
+	            
+	            //Workspaces
+	            workspacesearcher: {enabled: true}
+	            
+            });
+    ]]></src>
+</tool>
