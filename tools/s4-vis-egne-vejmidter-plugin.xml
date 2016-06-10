@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Dette er et tool som understøtter s4 i søgning af veje uden husnumre (Understøttes ikke af gst), samt -->
-<!-- visning af vejgeometri når en vej er valgt i geosearch -->
-<!-- https://github.com/Septima/spatialsuite-s4/issues/45 -->
+<!-- Visning af egen vejgeometri når en vej er valgt i geosearch -->
 
 <!-- Læs om s4's API her: -->
 <!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
@@ -55,20 +53,6 @@
 						return true;
 					}
 				});
-				//Søg vejnavne
-				//https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher
-				window["_s4Searchers"] = window["_s4Searchers"] || [];
-	 			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
-	 			var options = { 
-	 				datasource: "ds_s4_vejmidte",
-	 				iconURI: Septima.Search.icons.road 
-	 			}; 
-	            	_s4Searchers.push({
-	            		title: "veje",
-	            		searcher : new Septima.Search.DatasourceSearcher(options), 
-	            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet 
-	            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
-	            	});
 		    }
 		[endif]
     ]]>

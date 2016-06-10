@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Visning af vejgeometri fra DAWA når en vej er valgt -->
+
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		[endif]
+   </requires>
+    <src><![CDATA[
+	    [if: ModuleDefined("s4") ]
+		    if (typeof _s4Params !== 'undefined' && _s4Params !== null){
+		    	//Callback på select af vej
+		    	if (_s4Params.adressSearcher){
+			    	_s4Params.adressSearcher.showOneStreet = true;
+		    	}
+		    	_s4Params.streetNameHit = true;
+		    }
+		[endif]
+    ]]>
+    
+    </src>
+    <jssrc></jssrc>
+</tool>

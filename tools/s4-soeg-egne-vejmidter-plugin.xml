@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dette er et tool som understøtter s4 i søgning af egne veje (uden husnumre (Understøttes ikke af gst)) -->
+
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		[endif]
+   </requires>
+    <src><![CDATA[
+	    [if: ModuleDefined("s4") ]
+			//https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher
+			window["_s4Searchers"] = window["_s4Searchers"] || [];
+ 			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
+ 			var options = { 
+ 				datasource: "ds_s4_vejmidte",
+ 				iconURI: Septima.Search.icons.road 
+ 			}; 
+            	_s4Searchers.push({
+            		title: "veje",
+            		searcher : new Septima.Search.DatasourceSearcher(options), 
+            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet 
+            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+            	});
+		[endif]
+    ]]>
+    
+    </src>
+    <jssrc></jssrc>
+</tool>
