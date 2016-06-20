@@ -14,7 +14,7 @@
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/queryIndex.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/queryIndex.jsp"/>
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/css"/>
-  <copyfile fromfile="[module:s4.dir]/css/s4.css" tofile="[cbinfo.wwwroot.dir]/modules/s4/css/s4.css"/>
+  <copydir fromdir="[module:s4.dir]/css" todir="[cbinfo.wwwroot.dir]/modules/s4/css"/>
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
