@@ -10,6 +10,10 @@ function s4_init (params){
         });
     			
        		_s4Params = params;
+       		try{
+                var locale = cbInfo.getParam("cbinfo.locale");
+                Septima.Search.setLocale(locale);
+       		} catch (e){}
        		//Fix some defaults
        		if (typeof _s4Params.view.forcedblurOnSelect === 'undefined'){
        			_s4Params.view.forcedblurOnSelect = false;
@@ -23,11 +27,6 @@ function s4_init (params){
        			_s4Params.view.marginToBottom = 100;
        		}
        		
-        	//Get localized strings
-        	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
-        	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
-        	var detailsbuttonCaption = cbInfo.getString('s4.detailsbutton.caption');
-
         	var searchIndexToken = null;
         	
         	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
@@ -140,7 +139,7 @@ function s4_init (params){
 
 			
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-            	var dawaSearcherOptions = {onSelect: s4DawaHit, matchesPhrase: matchPhrase};
+            	var dawaSearcherOptions = {onSelect: s4DawaHit};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
             		dawaSearcherOptions.kommunekode = municipalities.join('|');
@@ -156,7 +155,7 @@ function s4_init (params){
             }
 			
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, matchesPhrase: matchPhrase, allowDetails: _s4Params.indexsearcher.allowDetails};
+            	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, allowDetails: _s4Params.indexsearcher.allowDetails};
                 if (_s4Params.indexsearcher.blankbehavior){
                 	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
                 }
@@ -171,7 +170,7 @@ function s4_init (params){
                 	var geoSearchOptions = {
                 			targets: _s4Params.geosearcher.targets,
                 			authParams: gstAuthParams,
-                		    onSelect: s4GeoHit, matchesPhrase: matchPhrase
+                		    onSelect: s4GeoHit
                 	};
                 	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'centroid'){
                 		geoSearchOptions.returnCentroid = true;
@@ -204,7 +203,7 @@ function s4_init (params){
 			};
             
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
-            	var planSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
+            	var planSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
             		planSearchOptions.filter = { 'komnr' : municipalities };
@@ -215,7 +214,7 @@ function s4_init (params){
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
-            	var cvr_enhedSearchOptions = {onSelect: s4Hit, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
+            	var cvr_enhedSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
             		cvr_enhedSearchOptions.filter = { 'beliggenhedsadresse_kommune_kode' : municipalities };
@@ -226,7 +225,7 @@ function s4_init (params){
             }
         	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
-	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit, matchesPhrase: matchPhrase});
+	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit});
 	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
                 _s4Params.themesearcher.searcher = themeSearcher;
             }
@@ -237,8 +236,7 @@ function s4_init (params){
         			onSelect: workspaceHit,
             		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
             		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
-            		sessionId: sessionId,
-            		matchesPhrase: matchPhrase
+            		sessionId: sessionId
         		});
             	controller.addSearcher({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: workspaceSearcher});
                 _s4Params.workspacesearcher.searcher = workspaceSearcher;
@@ -250,8 +248,7 @@ function s4_init (params){
         			onSelect: profileHit,
             		singular: cbInfo.getString('s4.profilesearcher.profile'),
             		plural: cbInfo.getString('s4.profilesearcher.profiles'),
-            		sessionId: sessionId,
-            		matchesPhrase: matchPhrase
+            		sessionId: sessionId
         		});
             	controller.addSearcher({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: profileSearcher});
                 _s4Params.profilesearcher.searcher = profileSearcher;
@@ -263,8 +260,7 @@ function s4_init (params){
         			onSelect: favoriteHit,
             		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
             		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
-            		sessionId: sessionId,
-            		matchesPhrase: matchPhrase
+            		sessionId: sessionId
         		});
         		controller.addSearcher({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: favoriteSearcher});
                 _s4Params.favoritesearcher.searcher = favoriteSearcher;
@@ -290,9 +286,7 @@ function s4_init (params){
             //Create view 
         	_s4View = new Septima.Search.DefaultView({
         		input:"s4box",
-        		placeholder:inputPlaceHolder,
         		limit: _s4Params.view.limit,
-        		detailsButtonCaption: detailsbuttonCaption,
         		controller: controller});
         	
         	s4SetMaxHeight();

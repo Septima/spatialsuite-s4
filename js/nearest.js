@@ -58,7 +58,6 @@
 				distanceFilter: 'all',
 				limit: options.limit ? options.limit : 3,
 				title: options.title ? options.title : cbInfo.getString('s4.nearest.caption'),
-	    		detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption'),
 	    		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
 	    		header: {
 	   				button: {
@@ -92,7 +91,6 @@
 	    			text:  cbInfo.getString('s4.sq.noresults.text')
 	   			},
 				imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey,
-				detailsButtonCaption: cbInfo.getString('s4.detailsbutton.caption')
     		}
     		if (options.proxySearcher && options.proxySearcher !== null){
     			sqDetailsHandlerBuilderOptions.geometryPreProcessor = Septima.bind(function(proxySearcher, result){
