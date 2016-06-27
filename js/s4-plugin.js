@@ -154,6 +154,20 @@ function s4_init (params){
                 _s4Params.adressSearcher = dawaSearcher;
             }
 			
+            //Collect searchers that have been pushed until now
+            var _s4Searchers = window["_s4Searchers"];
+            for (var i = 0;i<_s4Searchers.length;i++){
+                var searcherReg = _s4Searchers[i];
+                controller.addSearcher(searcherReg);
+            }
+            //Prepare for future pushes
+            window["_s4Searchers"] = {
+                    controller: controller,
+                    push: function (searcherReg) {
+                        this.controller.addSearcher(searcherReg);
+                    }
+            };
+            
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, allowDetails: _s4Params.indexsearcher.allowDetails};
                 if (_s4Params.indexsearcher.blankbehavior){
@@ -188,20 +202,6 @@ function s4_init (params){
             	}
             }
 
-            //Collect searchers that have been pushed until now
-			var _s4Searchers = window["_s4Searchers"];
-			for (var i = 0;i<_s4Searchers.length;i++){
-				var searcherReg = _s4Searchers[i];
-				controller.addSearcher(searcherReg);
-			}
-			//Prepare for future pushes
-			window["_s4Searchers"] = {
-					controller: controller,
-					push: function (searcherReg) {
-						this.controller.addSearcher(searcherReg);
-					}
-			};
-            
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
             	var planSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
