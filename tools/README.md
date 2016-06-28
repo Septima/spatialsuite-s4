@@ -12,17 +12,17 @@ Please read the [general installation instructions](../../../#installation) befo
         <td></td>
     </tr>
     <tr>
-        <td>Main tools  
-        Must be copied to custom and customized. _Please include this tool _before_ any other s4 tool_  
-        </td>
+        <td>Main tools</td>
+        <td colspan = "3">Must be copied to custom and customized. _Please include these tools _before_ any other s4 tool_</td>
+    </tr>
+    <tr>
         <td>
             [s4-plugin-dk-all](#s4-plugin-dk-all)
         </td>
-        <td>Danish</td>
-        <td>
+        <td colspan = "#">  
 ```xml
     <tool dir="custom" name="s4-plugin-dk-all" />
-```  
+```   
         </td>
     </tr>
     <tr>
