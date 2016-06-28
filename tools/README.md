@@ -9,7 +9,7 @@ This tool creates icons for Spatial Map functions (Info and print)
 * [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
   
 Tools relevant for Denmark only:  
-* Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
+* Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
  * [s4-matrikel-plugin](#s4-matrikel-plugin)  
  * [s4-adresse-plugin](#s4-adresse-plugin)  
 * Visning af- og søgning i vejmidter  
@@ -39,17 +39,18 @@ API documentation:
 * [s4ApiDemo](#apidemo)  
     
 ###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
-The main tool.
-[Customize this tool ](../../../#include-tool-in-profiles) and include to enable search in Spatial Map. Please read the [Configuration documentation](../../../#s4customization).  
+The main tool.  
+[Customize this tool ](../../../#include-tool-in-profiles) and include to enable search in Spatial Map.  
+Please read the [Configuration documentation](../../../#s4customization).  
       
-_Please include the plugin _before_ any other s4 tool_    
+_Please include this tool before any other s4 tool_    
 ```xml
 	<tool dir="custom" name="s4-plugin-dk-all" />
 ```  
   
 S4 ships with two versions of the tool:  
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
-* _s4-plugin-all_ is used used outside Denmark  
+* _s4-plugin-all_ is used outside of Denmark  
   
 ###<a name="s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin    
 This tools creates icons for Spatial Map functions (Info and print).  
@@ -86,7 +87,7 @@ Inkludér i profil:
 Forbered en datasource _ds_s4_vejmidte_:  
   
 s4-soeg-egne-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med følgende command:  
-* read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnér max [limit] veje.  
+* _read_search_, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnér max [limit] veje.  
   
 Eksempel:  
 Dette er den datasource, bruges i Silkeborg.  
@@ -111,8 +112,8 @@ Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.
   
 ###<a name="s4-vis-egne-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
 Only relevant in Denmark  
-Dette er et tool, som understøtter visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
-OBS: Dawa-searcheren kan vise vejmidter ra dawa, hvis du istedet bruger toolet s4-vis-dawa-vejmidter-plugin  
+Dette er et tool, som understøtter visning af vejgeometri når en vej er valgt i geosearch. Se https://github.com/Septima/spatialsuite-s4/issues/45.    
+OBS: Dawa-searcheren kan vise vejmidter fra dawa, hvis du istedet bruger toolet [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-vis-egne-vejmidter-plugin" />
@@ -121,7 +122,7 @@ Inkludér i profil:
 Forbered en datasource _ds_s4_vejmidte_:  
   
 s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med følgende command:  
-* read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
+* _read_geometry_, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
   
 Eksempel:  
 Dette er den datasource, bruges i Silkeborg.  
@@ -141,11 +142,11 @@ Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af ve
 Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
 
   
-###<a name="s4-vis-dawa-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
+###<a name="s4-vis-dawa-vejmidter-plugin"></a>4-vis-dawa-vejmidter-plugin  
 Only relevant in Denmark  
 Viser vejmidter fra dawa når en vej er valgt  
 ```xml
-<tool module="s4" name="s4-vis-egne-vejmidter-plugin" />
+<tool module="s4" name="4-vis-dawa-vejmidter-plugin" />
 ```  
 
   
@@ -189,7 +190,7 @@ Sæt følgende parameter for at pluginnet virker:
 ```xml
 <param name="s4.odeumClientName">odeumClientName</param>
 ```  
-, hvor _odeumClientName_ er den del af urlen som bruges i ODEUM til din kommune. For url'en _http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/horsens/lokalplaner.lpplandk2_join/xxx_ er det _horsens_.  
+, hvor _odeumClientName_ er den del af urlen som bruges i ODEUM til din kommune. For url'en _http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/__horsens__/lokalplaner.lpplandk2_join/xxx_ er det _horsens_.  
   
 ###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
@@ -267,8 +268,6 @@ Include in profile:
 ###<a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
 Let your users search and the built-in Spatial Map on-line help  
   
-Copy the tool to tools/custom.
-
 Include in profile:  
 ```xml
 	<tool module="s4" name="s4-details-help-plugin" />
