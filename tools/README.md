@@ -19,7 +19,7 @@ Please read the [general installation instructions](../../../#installation) befo
         <td>
             [s4-plugin-dk-all](#s4-plugin-dk-all)
         </td>
-        <td colspan = "#">  
+        <td colspan = "3">  
 ```xml
     <tool dir="custom" name="s4-plugin-dk-all" />
 ```   
