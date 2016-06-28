@@ -2,7 +2,6 @@
 ##Tools included in s4  
 Please read the [general installation instructions](../../../#installation) before reading this  
   
-Tools:  
 The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
   
@@ -13,13 +12,15 @@ Tools relevant for Denmark only:
 * Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
  * [s4-matrikel-plugin](#s4-matrikel-plugin)  
  * [s4-adresse-plugin](#s4-adresse-plugin)  
-* [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
-* [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
-* [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
+* Visning af- og søgning i vejmidter  
+ * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
+ * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
+ * [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
+* Links vedrørende lokalplaner
+ * [s4-planSystem-plugin](#s4-planSystem-plugin)  
+ * [s4-odeum-plugin](#s4-odeum-plugin)  
+ * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
-* [s4-planSystem-plugin](#s4-planSystem-plugin)  
-* [s4-odeum-plugin](#s4-odeum-plugin)  
-* [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
   
   
 Tools using the details view function:  
@@ -29,9 +30,10 @@ Tools using the details view function:
 * [s4-details-s4index-plugin] (#s4-details-s4index-plugin)  
 * [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
   
-Experimental tools:  
-* [s4-details-guides-plugin] (#s4-details-guides-plugin)  
-* [s4-details-help-plugin] (#s4-details-help-plugin)  
+* Experimental tools:  
+ * [s4-details-guides-plugin] (#s4-details-guides-plugin)  
+ * [s4-details-help-plugin] (#s4-details-help-plugin)  
+ * [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
 
 API documentation:  
 * [s4ApiDemo](#apidemo)  
@@ -73,19 +75,18 @@ Inkludér i profil:
 <tool module="s4" name="s4-adresse-plugin" />
 ```  
   
-###<a name="s4-vejmidter-plugin"></a>s4-vejmidter-plugin  
+###<a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
 Only relevant in Denmark  
-Dette er et tool, som understøtter søgning af veje uden husnumre (Understøttes ikke af geosearch), samt visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
+Dette er et tool, som understøtter søgning i egne vejmidter.
 Inkludér i profil:  
 ```xml
-<tool module="s4" name="s4-vejmidter-plugin" />
+<tool module="s4" name="s4-soeg-egne-vejmidter-plugin" />
 ```  
 
-Forbered en datasource:  
+Forbered en datasource _ds_s4_vejmidte_:  
   
-s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med to commands:  
-* read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Return�r max [limit] veje.  
-* read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
+s4-soeg-egne-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med følgende command:  
+* read_search, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Returnér max [limit] veje.  
   
 Eksempel:  
 Dette er den datasource, bruges i Silkeborg.  
@@ -100,16 +101,52 @@ Dette er den datasource, bruges i Silkeborg.
 		order	by vejnavn
 		limit [limit];
 	</sql>
-	<sql command="read_geometry">select	st_astext(geom) as shape_wkt
-		from	testdata.vejmidte_aggregeret
-		where	cprvejkode = [vejkode];
-	</sql>
 </datasource>       
 ```  
 Silkeborg skriver:  
 Vejmidtedata er genereret ud fra FOT Vejmidte brudt hvor GST har lagt CPR-Vejkode på de fleste vejmidter (der er stumper af småveje der ikke er med).
 Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af vejkoden og sætter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kører en gang i døgnet, så rettelser i vejmidten og test mod adresserne altid er ajour.
 Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
+
+  
+###<a name="s4-vis-egne-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
+Only relevant in Denmark  
+Dette er et tool, som understøtter visning af vejgeometri når en vej er valgt i geosearch https://github.com/Septima/spatialsuite-s4/issues/45  
+OBS: Dawa-searcheren kan vise vejmidter ra dawa, hvis du istedet bruger toolet s4-vis-dawa-vejmidter-plugin  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-vis-egne-vejmidter-plugin" />
+```  
+
+Forbered en datasource _ds_s4_vejmidte_:  
+  
+s4-vejmidter-plugin forventer, at der findes en datasource, som hedder _ds_s4_vejmidte_ med følgende command:  
+* read_geometry, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.  
+  
+Eksempel:  
+Dette er den datasource, bruges i Silkeborg.  
+```xml
+<datasource endpoint="s4_vejmidte" name="ds_s4_vejmidte">
+    <!-- https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher -->
+       <table geometrycolumn="geom" name="testdata.vejmidte_aggregeret" pkcolumn="gid"/>
+    <sql command="read_geometry">select st_astext(geom) as shape_wkt
+        from    testdata.vejmidte_aggregeret
+        where   cprvejkode = [vejkode];
+    </sql>
+</datasource>       
+```  
+Silkeborg skriver:  
+Vejmidtedata er genereret ud fra FOT Vejmidte brudt hvor GST har lagt CPR-Vejkode på de fleste vejmidter (der er stumper af småveje der ikke er med).
+Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af vejkoden og sætter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script kører en gang i døgnet, så rettelser i vejmidten og test mod adresserne altid er ajour.
+Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
+
+  
+###<a name="s4-vis-dawa-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
+Only relevant in Denmark  
+Viser vejmidter fra dawa når en vej er valgt  
+```xml
+<tool module="s4" name="s4-vis-egne-vejmidter-plugin" />
+```  
 
   
 ###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
