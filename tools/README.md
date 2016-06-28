@@ -2,46 +2,134 @@
 ##Tools included in s4  
 Please read the [general installation instructions](../../../#installation) before reading this  
   
-Tools:  
-The main tool:    
-* [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
-  
-This tool creates icons for Spatial Map functions (Info and print)  
-* [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
-  
-Tools relevant for Denmark only:  
-* [s4-matrikel-plugin](#s4-matrikel-plugin)  
-* [s4-adresse-plugin](#s4-adresse-plugin)  
-* [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
-* [s4-eknap-plugin](#s4-eknap-plugin)  
-* [s4-planSystem-plugin](#s4-planSystem-plugin)  
-* [s4-odeum-plugin](#s4-odeum-plugin)  
-* [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
   
   
-Tools using the details view function:  
-* [s4-details-nearest-plugin] (#s4-details-nearest-plugin)  
-* [s4-details-spatialquery-plugin] (#s4-details-spatialquery-plugin)  
-* [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex-plugin)
-* [s4-details-s4index-plugin] (#s4-details-s4index-plugin)  
-* [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
+<table>
+    <tr>
+        <td></td>
+        <td>Tool</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Main tools</td>
+        <td>[s4-plugin-dk-all] (#s4-plugin-dk-all)</td>
+        <td>The main tool. Must be copied to custom and customized. _Please include this tool _before_ any other s4 tool_</td>
+        <td>
+            ```xml
+                <tool dir="custom" name="s4-plugin-dk-all" />
+            ```  
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-plugin-all] (#s4-plugin-dk-all)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)</td>
+        <td>Creates icons for Spatial Map functions (Info and print)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Danish tools</td>
+        <td>[s4-matrikel-plugin](#s4-matrikel-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-adresse-plugin](#s4-adresse-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-vejmidter-plugin](#s4-vejmidter-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-eknap-plugin](#s4-eknap-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-planSystem-plugin](#s4-planSystem-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-odeum-plugin](#s4-odeum-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-dkPlan-plugin](#s4-dkPlan-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Detail views</td>
+        <td>[s4-details-nearest-plugin] (#s4-details-nearest-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-details-spatialquery-plugin] (#s4-details-spatialquery-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-details-themesForIndex-plugin] (#s4-details-themesForIndex-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-details-s4index-plugin] (#s4-details-s4index-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>[s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Experimental tools</td>
+        <td>[s4-details-guides-plugin] (#s4-details-guides-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>[s4-details-help-plugin] (#s4-details-help-plugin)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>API documentation</td>
+        <td>[s4ApiDemo](#apidemo)</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
   
-Experimental tools:  
-* [s4-details-guides-plugin] (#s4-details-guides-plugin)  
-* [s4-details-help-plugin] (#s4-details-help-plugin)  
-
-API documentation:  
-* [s4ApiDemo](#apidemo)  
     
 ###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
 The main tool.
 [Customize this tool ](../../../#include-tool-in-profiles) and include to enable search in Spatial Map. Please read the [Configuration documentation](../../../#s4customization).  
       
-_Please include the plugin _before_ any other s4 tool_    
-```xml
-	<tool dir="custom" name="s4-plugin-dk-all" />
-```  
-  
 S4 ships with two versions of the tool:  
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used used outside Denmark  
