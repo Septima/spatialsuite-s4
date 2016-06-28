@@ -10,9 +10,12 @@ This tool creates icons for Spatial Map functions (Info and print)
 * [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
   
 Tools relevant for Denmark only:  
-* [s4-matrikel-plugin](#s4-matrikel-plugin)  
-* [s4-adresse-plugin](#s4-adresse-plugin)  
-* [s4-vejmidter-plugin](#s4-vejmidter-plugin)  
+* Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
+ * [s4-matrikel-plugin](#s4-matrikel-plugin)  
+ * [s4-adresse-plugin](#s4-adresse-plugin)  
+* [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
+* [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
+* [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
 * [s4-eknap-plugin](#s4-eknap-plugin)  
 * [s4-planSystem-plugin](#s4-planSystem-plugin)  
 * [s4-odeum-plugin](#s4-odeum-plugin)  
