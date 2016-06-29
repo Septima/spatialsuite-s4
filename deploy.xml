@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.5.2</version>
-   <param name="s4.version">2.5.2</param>
+   <version>2.6.0</version>
+   <param name="s4.version">2.6.0</param>
 
    <stoponerror>true</stoponerror>
   
@@ -20,17 +20,17 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-<!--   <param name="s4.search.css">//search.cdn.septima.dk/3.2.2/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.2.2/septimasearch.min.js</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.2.2/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/3.2.99/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/3.2.99/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/3.2.99/septimasearch.debug.js</param> -->
    
 <!-- cdn.develop -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/develop/css/defaultView.css</param> -->
 <!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/develop/septimasearch.debug.js</param> -->
   
 <!-- development -->
-  <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param>
-  <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param>
+<!--   <param name="s4.search.css">http://localhost:7001/dist/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">http://localhost:7001/dist/septimasearch.debug.js</param> -->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>

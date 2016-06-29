@@ -40,8 +40,7 @@ API documentation:
     
 ###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
 The main tool.  
-[Customize this tool ](../../../#include-tool-in-profiles) and include to enable search in Spatial Map.  
-Please read the [Configuration documentation](../../../#s4customization).  
+[Customize the tool ](../../../#customization-of-s4-tool) and include to enable search in Spatial Map.  
       
 _Please include this tool before any other s4 tool_    
 ```xml
