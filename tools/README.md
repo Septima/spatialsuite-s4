@@ -12,6 +12,7 @@ Tools relevant for Denmark only:
 * Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
  * [s4-matrikel-plugin](#s4-matrikel-plugin)  
  * [s4-adresse-plugin](#s4-adresse-plugin)  
+  * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
 * Visning af- og søgning i vejmidter  
  * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
  * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
@@ -73,6 +74,14 @@ Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adress
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-adresse-plugin" />
+```  
+  
+###<a name="s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin  
+Only relevant in Denmark  
+Viser ikoner med links til BBR, SKAT, jordforureningsattest fra DAI samt _Hvad gælder for matriklen_ for adresse fra Dawa  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-adresse-hgf-matrikel-plugin" />
 ```  
   
 ###<a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  

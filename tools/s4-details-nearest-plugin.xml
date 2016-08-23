@@ -20,7 +20,8 @@
 				datasources: _s4Params.indexsearcher.datasources,
 				//Example:
 				//datasources: "ds_esbjerg-skoler",
-				allowDetails: true
+				allowDetails: true,
+				onSelect: s4Hit
 			})
 			
 			var useProxySearcher = false;

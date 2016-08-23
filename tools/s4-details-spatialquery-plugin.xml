@@ -24,13 +24,7 @@
 		        buffer: 0,
 		        sessionId: cbKort.getSessionId(),
 				allowDetails: true,
-	    		onSelect: function (result){
-					var geojson = new OpenLayers.Format.GeoJSON();
-				    var olGeom = geojson.read(result.geometry, 'Geometry');
-					var wkt = olGeom.toString();
-				    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-				    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-	   			}				
+	    		onSelect: s4Hit				
 		    });
 	    	
 			//Get handlerdef
@@ -63,33 +57,6 @@
 	function s4SetupSqSearch(searchers){
 	
     	var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
-    		onSelect: function (result){
-				var geojson = new OpenLayers.Format.GeoJSON();
-			    var olGeom = geojson.read(result.geometry, 'Geometry');
-				var wkt = olGeom.toString();
-			    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-			    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-   			},
-    		onHover: function (result){
-				if (s4SqHoverOLid !== null){
-					cbKort.mapObj.deleteFeature(s4SqHoverOLid);
-				}
-				if (result !== null){
-					var geojson = new OpenLayers.Format.GeoJSON();
-				    var olGeom = geojson.read(result.geometry, 'Geometry');
-					var wkt = olGeom.toString();
-					s4SqHoverOLid = cbKort.mapObj.drawWKT(wkt,
-					null,
-					{		styles: {
-							strokeColor: '#000',
-							fillColor: '#500',
-							fillOpacity: 0.5,
-							select_pointRadius: 10,
-							label: result.title
-							}
-					});
-				}
-   			},
     		searchers: searchers,
     		limit: 10,
     		title: cbInfo.getString('s4.sq.caption'),

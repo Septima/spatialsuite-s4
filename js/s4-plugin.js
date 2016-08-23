@@ -1,5 +1,64 @@
 var _s4View = null;
 var _s4Params = null;
+var _s4HoverOLids = [];
+
+function s4_onPeak(result){
+    cbKort.mapObj.deleteFeature(_s4HoverOLids);
+    _s4HoverOLids = [];
+    if (result !== null){
+        var geojson = new OpenLayers.Format.GeoJSON();
+        var olGeom;
+        var wkt;
+        if (result.route){
+            olGeom = geojson.read(result.route.geometry, 'Geometry');
+            wkt = olGeom.toString();
+            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
+            null,
+            {       styles: {
+                    strokeColor: '#0470bd',
+                    strokeWidth: 6,
+                    strokeOpacity: 0.45
+            }
+            }));
+        }
+        if (result.geometry){
+            olGeom = geojson.read(result.geometry, 'Geometry');
+            wkt = olGeom.toString();
+            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
+            null,
+            {       styles: {
+                    strokeColor: '#0470bd',
+                    fillColor: '#0470bd',
+                    fillOpacity: 0.5,
+                    select_pointRadius: 10,
+                    label: result.title
+                    }
+            }));
+        }
+    }
+}
+
+function s4_onInspect(result){
+    cbKort.mapObj.deleteFeature(_s4HoverOLids);
+    _s4HoverOLids = [];
+    var geojson = new OpenLayers.Format.GeoJSON();
+    var olGeom;
+    var wkt;
+
+    if (result.geometry){
+        olGeom = geojson.read(result.geometry, 'Geometry');
+        wkt = olGeom.toString();
+        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+    }
+    
+    if (result.route){
+        olGeom = geojson.read(result.route.geometry, 'Geometry');
+        wkt = olGeom.toString();
+        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:false});
+    }
+    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+    
+}
 
 function s4_init (params){
     if (_s4View == null) {
@@ -128,6 +187,8 @@ function s4_init (params){
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
         	var controller = new Septima.Search.Controller([], controllerOptions);
+        	controller.addOnPeakHandler(s4_onPeak);
+            controller.addOnInspectHandler(s4_onInspect);
         	
         	//Set up the API
 			//Create array of "OnSelect" listeners if not already created

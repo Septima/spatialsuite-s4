@@ -2,58 +2,6 @@
     	
     	function createNearestHandlerDef(searchers, options){
     		var sqDetailsHandlerBuilderOptions = {
-				onSelect: function (result){
-					cbKort.mapObj.deleteFeature(s4NearestHoverOLids);
-					s4NearestHoverOLids = [];
-					var geojson = new OpenLayers.Format.GeoJSON();
-					var olGeom;
-					var wkt;
-
-					olGeom = geojson.read(result.geometry, 'Geometry');
-					wkt = olGeom.toString();
-				    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-				    
-				    if (result.route){
-					    olGeom = geojson.read(result.route.geometry, 'Geometry');
-						wkt = olGeom.toString();
-					    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:false});
-					}
-				    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-				},
-				onHover: function (result){
-					cbKort.mapObj.deleteFeature(s4NearestHoverOLids);
-					s4NearestHoverOLids = [];
-					if (result !== null){
-						var geojson = new OpenLayers.Format.GeoJSON();
-						var olGeom;
-						var wkt;
-						if (result.route){
-						    olGeom = geojson.read(result.route.geometry, 'Geometry');
-							wkt = olGeom.toString();
-							s4NearestHoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-							null,
-							{		styles: {
-					                strokeColor: '#0470bd',
-					                strokeWidth: 6,
-					                strokeOpacity: 0.45
-							}
-							}));
-						}
-						
-					    olGeom = geojson.read(result.geometry, 'Geometry');
-						wkt = olGeom.toString();
-						s4NearestHoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-						null,
-						{		styles: {
-								strokeColor: '#0470bd',
-								fillColor: '#0470bd',
-								fillOpacity: 0.5,
-								select_pointRadius: 10,
-								label: result.title
-								}
-						}));
-					}
-				},
 				searchers: searchers,
 				distanceFilter: 'all',
 				limit: options.limit ? options.limit : 3,

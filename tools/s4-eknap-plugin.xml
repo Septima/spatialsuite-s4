@@ -22,10 +22,10 @@
 		
 			var _s4eKnapUri = Septima.Search.s4Icons.eKnapPlugin.iconURI;
 		    
-			_s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for adressens matrikel", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "adresser"});
-			_s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for adressens matrikel", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "dawasearcher"});
-			_s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for matriklen", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-			_s4CustomButtons.push({"buttonText": "Vis ejeroplysninger for virksomhedens matrikel", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "cvrsearcher"});
+			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "adresser"});
+			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "dawasearcher"});
+			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
+			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "cvrsearcher"});
 		}
 
 		function s4DoEKnap(result){
