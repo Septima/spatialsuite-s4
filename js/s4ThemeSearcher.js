@@ -28,6 +28,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 		this.toolsIconURI = Septima.Search.s4Icons.themeSearcher.toolsIconURI;
 		this.defaultThemeIconURI = Septima.Search.s4Icons.themeSearcher.defaultThemeIconURI;
 		this.iconURI = Septima.Search.s4Icons.themeSearcher.iconURI;
+        this.themeGroupIconURI = Septima.Search.s4Icons.themeSearcher.themeGroupIconURI;
 		this.onCustomButtonDef= [{"buttonText": this.hidePhrase, "buttonImage": this.themeOnUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 		this.offCustomButtonDef= [{"buttonText": this.showPhrase, "buttonImage": this.themeOffUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 		this.onLockCustomButtonDef= [{"buttonText": this.hideLockedPhrase, "buttonImage": this.themeOnLockUri, "callBack": Septima.bind( this.toggleTheme, this)}];
@@ -69,8 +70,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			themes.sort(function(t1, t2){
     				return (t1.displayname.localeCompare(t2.displayname));
     			});
-        		this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")"});
-    			this.registerTarget(group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")")
+        		//this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")"});
+                this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "")});
+    			//this.registerTarget(group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")")
+                this.registerTarget(group.displayname.replace(/:/g, ""))
     		}
     	}
 		this.registerTarget(this.visibleThemesPhrase);
@@ -190,6 +193,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     			groupName = query.target;
     		}else{
     			var result = queryResult.addNewQuery(this.visibleThemesPhrase, this.visibleThemesPhrase, this.visibleThemesPhrase + ":", null, null, null);
+    			result.image = Septima.Search.s4Icons.themeSearcher.themeOnUri;
 	        }
     	}
     	
@@ -201,21 +205,28 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         		result.image = theme.image;
         	}
         }else{
-        	var groupsWithMatchingNames = [];
-        	var groupsWithMatchingThemes = [];
-        	var nameMatchingThemes = [];
+        	//var groupsWithMatchingNames = [];
+        	//var groupsWithMatchingThemes = [];
+            var matchingGroups = [];
+        	//var nameMatchingThemes = [];
         	var queryTerms = query.queryString.split(" ");
         	if (queryTerms.length>0){
-        		groupsWithMatchingThemes = this.getGroupsWithMatchingThemes(queryTerms, groupName);
+        	    matchingGroups = this.getMatchingGroups(queryTerms, groupName);
         		var totalThemeCount = 0;
-        		for (var i=0;i<groupsWithMatchingThemes.length;i++){
-        			totalThemeCount += groupsWithMatchingThemes[i].themes.length;
+        		for (var i=0;i<matchingGroups.length;i++){
+        			totalThemeCount += matchingGroups[i].themes.length;
         		}
         		if (query.type == "list.force" || totalThemeCount<query.limit){
         			var themesToShow = [];
-        			for (var i=0;i<groupsWithMatchingThemes.length;i++){
-        				themesToShow = themesToShow.concat(groupsWithMatchingThemes[i].themes);
-        			}
+                    for (var i=0;i<matchingGroups.length;i++){
+                        if (matchingGroups[i].themes.length > 0){
+                            themesToShow = themesToShow.concat(matchingGroups[i].themes);
+                        }else{
+                            var target = matchingGroups[i].group.displayname.replace(/:/g, "");
+                            var result3 = queryResult.addNewQuery(matchingGroups[i].group.displayname, null, target + ":", null, null, null)
+                            result3.image = this.themeGroupIconURI;
+                        }
+                    }
         			themesToShow.sort(function(a, b){
     					if (a.score == b.score){
     						return a.theme.displayname.localeCompare(b.theme.displayname)
@@ -234,17 +245,18 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         result1.image = theme.image;
     				}
         		}else if (query.type == "list"){
-            		var freeSlots = query.limit - groupsWithMatchingThemes.length;
-            		if (groupsWithMatchingThemes.length > freeSlots && !query.hasTarget){
+            		var freeSlots = query.limit - matchingGroups.length;
+            		if (matchingGroups.length > freeSlots && !query.hasTarget){
             			var description = null;
-//            			if (query.queryString.length > 0){
-//            				description = totalThemeCount + " " + this.themesPhrase + " " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
-//            			}
-    					var result3 = queryResult.addNewQuery(this.title + " (" + totalThemeCount + ")", description, query.queryString, null, null, null)
+    					var result3 = queryResult.addNewQuery(this.title + " (" + totalThemeCount + ")", description, query.queryString, null, null, null);
             		}else{
-            			for (var i=0;i<groupsWithMatchingThemes.length;i++){
-            				var group = groupsWithMatchingThemes[i];
-            				if (group.themes.length==1 || group.themes.length<freeSlots){
+            			for (var i=0;i<matchingGroups.length;i++){
+            				var group = matchingGroups[i];
+            				if (group.themes.length==0){
+                                var target = group.group.displayname.replace(/:/g, "");
+                                var result3 = queryResult.addNewQuery(group.group.displayname, null, target + ":", null, null, null)
+                                result3.image = this.themeGroupIconURI;
+            				}else if (group.themes.length==1 || group.themes.length<freeSlots){
             					//TODO: list all themes
             					for (var j=0;j<group.themes.length;j++){
                 					theme = group.themes[j];
@@ -266,6 +278,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             					//TODO: Encode group.group.displayname to avoid ":" in groupname (destroys target computation) &#58;
             					var target = group.group.displayname.replace(/:/g, "");
             					var result3 = queryResult.addNewQuery(group.group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, target + ": " + query.queryString, null, null, null)
+                                result3.image = this.themeGroupIconURI;
             				}
             			}
             		}
@@ -278,7 +291,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
     
-    getGroupsWithMatchingThemes: function (queryTerms, groupName){
+    getMatchingGroups: function (queryTerms, groupName){
 
     	var groupsWithMatchingThemes = [];
         	for (var j=0;j<this.groups.length;j++){
@@ -309,6 +322,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         					}
         				});
                 		groupsWithMatchingThemes.push({"group": group, "themes": themes});
+            		}else{
+            		    if (group.displayname.toLowerCase().indexOf(queryTerms[0]) == 0){
+                            groupsWithMatchingThemes.push({"group": group, "themes": []});
+            		    }
             		}
         		}
         	}
