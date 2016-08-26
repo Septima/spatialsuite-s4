@@ -2,7 +2,7 @@
 
 ### Update modules.xml:
 ```xml
-<module name="adrsearch" dir="thirdparty/septima/s4/modules/adrsearch " permissionlevel="public"/>
+<module name="adrsearch" dir="thirdparty/septima/s4/modules/adrsearch" permissionlevel="public"/>
 ```
 
 ### Copy .jar file  
