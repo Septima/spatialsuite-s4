@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+			<file type="script" name="/modules/adrsearch/js/adrSearcher.js"/>
+		[endif]
+   </requires>
+    <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+        
+            var s4AdrSearcher = window["s4AdrSearcher"];
+            addS4SpatialMapTools({info: true, print: true, searcher: window["s4AdrSearcher"]});
+            
+          //Configure Nearest
+            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+            
+                var targetSearcher = new Septima.Search.S4IndexSearcher({
+                    //Customize HERE (What to search for)
+                    datasources: _s4Params.indexsearcher.datasources,
+                    //Example:
+                    //datasources: "ds_esbjerg-skoler",
+                    allowDetails: true
+                })
+                
+                var useProxySearcher = false;
+                var proxySearcher = new Septima.Search.S4IndexSearcher({
+                    //Customize HERE (What to use in search instead of selected Result (First result is used))
+                    //datasources: _s4Params.indexsearcher.datasources,
+                    //Example:
+                    datasources: "ds_esbjerg-skoledistrikter"
+                })
+                
+                var handlerOptions = {
+                    proxySearcher: useProxySearcher ? proxySearcher : null,
+                    showRoute: false,
+                    //'car', 'bus', 'bicycle', 'foot'
+                    //routeProfile: "bicycle", 
+                    //limit: 10,
+                    //title: "Nærmeste skoler i distriktet"
+                };
+                
+               s4AdrSearcher.addDetailHandlerDef(createNearestHandlerDef([targetSearcher], handlerOptions));
+            }
+          
+          //Configure spatialQuery
+            if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
+                var localThemes = _s4Params.themesearcher.searcher.getLocalthemes().done(Septima.bind(function(localThemes){
+                
+                    var s4SqSearcher = new Septima.Search.SqSearcher({
+                        layers: localThemes.substr(0, 1000),
+                        profile: cbKort.getProfile(),
+                        profileQuery: 'info',
+                        buffer: 0,
+                        sessionId: cbKort.getSessionId(),
+                        allowDetails: true,
+                        onSelect: function (result){
+                            var geojson = new OpenLayers.Format.GeoJSON();
+                            var olGeom = geojson.read(result.geometry, 'Geometry');
+                            var wkt = olGeom.toString();
+                            cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+                            cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+                        }               
+                    });
+                    
+                    s4AdrSearcher.addDetailHandlerDef(s4SetupSqSearch([s4SqSearcher]));
+                    
+                    if (typeof addS4SpatialMapTools !== 'undefined'){
+                        addS4SpatialMapTools({info: true, print: true, searcher: s4SqSearcher});
+                    }
+                    
+                }, this));
+            }
+
+        Septima.Log.trace({
+            eventCategory: 's4',
+            eventAction: 's4_details',
+            eventLabel: 'details-svadr-plugin'
+        });
+            
+        [endif]
+    ]]>
+    </src>
+    <jssrc>
+    </jssrc>
+</tool>

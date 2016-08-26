@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- Datasource and command from which to read addresses -->
+	<!-- 	Edit to suit your installation -->
+	<!-- 	The command MUST return these columns which MUST be not null -->
+	<!-- 	  addressaccessid varchar(255) Unique id of address -->
+	<!-- 	  streetname varchar(255) -->
+	<!-- 	  streetbuildingidentifier varchar(5) number and evt litra combined, eg "11A" -->
+	<!-- 	  postcodeidentifier varchar(10) -->
+	<!-- 	  districtname varchar(50) -->
+	<!-- 	  presentationstring varchar(325) Full presentation of address -->
+	<!-- 	  geometrywkt varchar(50) Point in wkt format -->
+	<!-- 	The command MUST sort the streetbuildingidentifier in a natural order -->
+	<!-- 	The command name MUST start with "read" -->
+	<datasource name="ds_adrsearch" command="read_adresser"/>
+	<!-- 	Example: -->
+	<!-- 	Stenungsund kommun keeps addresses in the following table: -->
+	<!-- 	  CREATE TABLE adr -->
+	<!-- 	  ( -->
+	<!-- 	    adressplats_id character varying, -->
+	<!-- 	    adromrade_namn character varying, -->
+	<!-- 	    fastighet character varying, -->
+	<!-- 	    postnr character varying, -->
+	<!-- 	    postort character varying, -->
+	<!-- 	    nr_num character varying, -->
+	<!-- 	    nr_litt character varying, -->
+	<!-- 	    adress_postnr_ort character varying, -->
+	<!-- 	    wkt character varying, -->
+	<!-- 	    geom geometry(Point,4326) -->
+	<!-- 	  ) -->
+	<!-- 	This is the correct datasource definition: -->
+	<!-- 	  <datasource name="ds_svadr" endpoint="ep_stenungsund"> -->
+	<!-- 	 	  <sql command="read_adresser">  -->
+	<!-- 	 	      select adressplats_id as addressaccessid, -->
+	<!-- 			  	  adromrade_namn as streetname, -->
+	<!-- 				  nr_num || nr_litt as streetbuildingidentifier, -->
+	<!-- 				  postnr as postcodeidentifier, -->
+	<!-- 				  postort as districtname, -->
+	<!-- 				  adress_postnr_ort as presentationstring, -->
+	<!-- 				  wkt as geometrywkt -->
+	<!-- 			  from	adr -->
+	<!-- 			  where	postnr is not null AND postnr <> '' -->
+	<!-- 			  order	by nr_num, nr_litt -->
+	<!-- 		</sql> -->
+	<!-- 	</datasource> -->
+
+	<!-- The endpoint of the database in which the index is saved (Must be a db datasource) -->
+	<!-- Do not edit -->
+	<endpoint>adrSearchIndex</endpoint>
+	
+</config>

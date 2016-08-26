@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<datasources>
+ <!-- {{if: '[module.adrSearch.index.externdb.type]' != 'postgis' }} -->
+	<endpoint name="adrSearchIndex" endpointtype="embedded">
+		<srs>[cbinfo.mapserver.epsg]</srs>
+		<config version="1" requires="1">
+			CREATE SCHEMA adrsearch AUTHORIZATION SA
+			CREATE TABLE adrsearch.addressaccess
+			(
+			  addressaccessid VARCHAR(255) NOT NULL,
+			  streetname VARCHAR_IGNORECASE(255) NOT NULL,
+			  streetbuildingidentifier VARCHAR_IGNORECASE(5) NOT NULL,
+			  postcodeidentifier VARCHAR_IGNORECASE(10) NOT NULL,
+			  districtname varchar(50) NOT NULL,
+			  presentationstring varchar(325) NOT NULL,
+			  geometrywkt varchar(50) NOT NULL,
+			  sortorder int,
+			  CONSTRAINT addressaccess_pkey PRIMARY KEY (addressaccessid)
+			)			
+			CREATE TABLE adrsearch.streetname
+			(
+			  id varchar(255) NOT NULL,
+			  streetname VARCHAR_IGNORECASE(255),
+			  postcodeidentifier VARCHAR_IGNORECASE(10) NOT NULL,
+			  districtname varchar(50) NOT NULL,
+			  presentationstring varchar(325) NOT NULL,
+			  CONSTRAINT streetname_pkey PRIMARY KEY (id)
+			);
+
+			CREATE INDEX addressaccess_streetname_postcodeIdentifier_sortorder_idx
+			  ON adrsearch.addressaccess(streetname, postcodeidentifier, sortorder);
+			
+			CREATE INDEX addressaccess_streetname_postcodei_streetbuildingidentifier_idx
+			  ON adrsearch.addressaccess(streetname, postcodeidentifier, streetbuildingidentifier);
+			CREATE INDEX streetname_streetname_postcodeidentifier_idx
+			  ON adrsearch.streetname(streetname, postcodeidentifier);			
+		</config>
+        <config version="2" requires="1">
+            ALTER TABLE adrsearch.addressaccess ADD json varchar(2000);
+        </config>
+	</endpoint>
+      <!-- {{endif}} -->
+
+	<!-- Use this kind of endpoint if you have placed your index in an external database -->
+
+ <!-- {{if: '[module.adrSearch.index.externdb.type]' = 'postgis' }} -->
+    <endpoint name="adrSearchIndex" endpointtype="[module.adrSearch.index.externdb.type]">
+        <connect>[module.adrSearch.index.externdb.connect]</connect>
+        <user>[module.adrSearch.index.externdb.user]</user>
+        <pwd>[module.adrSearch.index.externdb.pwd]</pwd>
+        <srid>[module.adrSearch.index.externdb.srid]</srid>
+	    <sharedconnection>false</sharedconnection>
+    </endpoint>
+      <!-- {{endif}} -->
+</datasources>
+

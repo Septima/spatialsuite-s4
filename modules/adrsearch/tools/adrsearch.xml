@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+			<file type="script" name="/modules/adrsearch/js/adrSearcher.js?_=[adrsearch.version]"/>
+		[endif]
+   </requires>
+    <src>
+    </src>
+    <jssrc><![CDATA[
+        [if: ModuleDefined("s4") ]
+            var _s4Searchers = _s4Searchers || [];
+            var options = {onSelect: s4Hit};
+            window["s4AdrSearcher"] = new AdrSearcher(options);
+            _s4Searchers.push({"title": "Adresser", "searcher" : window["s4AdrSearcher"], info: true, print:true});
+            //_s4Searchers.push({"title": "Adresser", "searcher" : new AdrSearcher(options)});
+        [endif]
+    ]]>
+    </jssrc>
+</tool>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+           
+        window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+        var _s4CustomButtons = window["_s4CustomButtons"];
+        
+        var _adrsearchFastighetsIkon = Septima.Search.icons.linksymbol;
+        window["s4AdrSearcher"].addCustomButtonDef({"buttonText": "Eget urval fastighet", "buttonImage": _adrsearchFastighetsIkon, "callBack": adrsearchFastighetsKnapp});
+
+        function adrsearchFastighetsKnapp (result){
+            _s4View.blur();
+             var url = "http://tekiswebb.stenungsund.se/FBWebb/TekisWebbRapport/TekisFirRapportUsr.aspx?DataBase=Stenungsund&amp;user=FBLASA&amp;pass=FBLASA&amp;fnr=" + result.data.properties.fnr; 
+             window.open(url, "_adrsearchFastighetsKnapp");
+        }
+
+    [endif]
+    ]]>
+    </src>
+    <jssrc>
+    </jssrc>
+</tool>
