@@ -92,8 +92,12 @@ function s4_init (params){
             	var searchIndexTokenParamName = 's4.searchchindex.token';
             	searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
             	if (searchIndexToken === searchIndexTokenParamName){
-            		//getParam returns paramName if param isn't defined
-            		searchIndexToken = null;
+            	    searchIndexTokenParamName = 's4.searchindex.token';
+                    searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+                    if (searchIndexToken === searchIndexTokenParamName){
+                        //getParam returns paramName if param isn't defined
+                        searchIndexToken = null;
+                    }
             	}
         	}
         	
