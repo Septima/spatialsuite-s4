@@ -369,6 +369,11 @@ function s4_init (params){
             	_s4View.focus();
                 }, this, _s4View),500);
         	}
+            addS4SpatialMapTools(_s4Params.dawasearcher);
+            addS4SpatialMapTools(_s4Params.geosearcher);
+            addS4SpatialMapTools(_s4Params.cvrsearcher);
+            addS4SpatialMapTools(_s4Params.plansearcher);
+            addS4SpatialMapTools(_s4Params.indexsearcher);
     }
 }
 
@@ -474,6 +479,7 @@ function workspaceHit(result){
 	cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: result.data});
 }
 
+
 function s4DoInfo(result){
     showResultInMap(result);
     searchlast2.showDialog(result.title);
@@ -494,6 +500,23 @@ function s4DoPrint(result){
 		setTimeout(function(){jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input').val(result.title);}, 500);
 	}
 	cbKort.events.fireEvent('S4', {type: 's4DoPrint', result: result});
+}
+
+function addS4SpatialMapTools(paramEntry){
+    if (typeof paramEntry !== 'undefined' && typeof paramEntry.searcher !== 'undefined'){
+    if (paramEntry.info){
+        var s4InfoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+        var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
+        var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
+        paramEntry.searcher.addCustomButtonDef(s4InfoButtonDef);
+    }
+    if (_s4Params.view.printconfig && paramEntry.print){
+        var _s4PrintUri = Septima.Search.s4Icons.printIconUri;
+        var s4PrintButtonCaption = "Print";
+        var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};  
+        paramEntry.searcher.addCustomButtonDef(s4PrintButtonDef);
+    }
+    }
 }
 
 function s4_getGstAuthParams(){

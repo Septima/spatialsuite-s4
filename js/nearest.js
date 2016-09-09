@@ -38,7 +38,7 @@
 	    			caption: cbInfo.getString('s4.sq.noresults.caption'),
 	    			text:  cbInfo.getString('s4.sq.noresults.text')
 	   			},
-				imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey,
+				imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey
     		}
     		if (options.proxySearcher && options.proxySearcher !== null){
     			sqDetailsHandlerBuilderOptions.geometryPreProcessor = Septima.bind(function(proxySearcher, result){
