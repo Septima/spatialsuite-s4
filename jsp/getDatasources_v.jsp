@@ -10,7 +10,7 @@
  	if (filter != null){
  		filterToUse = filter;
  	}
-	IndexQuerier iq = dk.septima.spatialsuite.search.v103.Api.getIndexQuerier();
+	IndexQuerier iq = dk.septima.spatialsuite.search.v105.Api.getIndexQuerier();
  	QueryResults qr = iq.getIndexedDatasources(filterToUse);
  	String callback = request.getParameter("callback");
  	if (callback != null){
