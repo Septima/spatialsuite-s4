@@ -15,9 +15,9 @@
 			CREATE INDEX f_feature_idx ON feature (featureid);
 			CREATE INDEX f_dat_feature_idx ON feature (datasource, featureid);
 		</config>
-<!-- 		<config version="3" requires="1"> -->
-<!-- 			ALTER TABLE feature MODIFY COLUMN wkt varchar(100000); -->
-<!-- 		</config> -->
+		<config version="3" requires="1">
+			ALTER TABLE feature ALTER COLUMN wkt varchar(1000000);
+		</config>
 		
 	</endpoint>
       <!-- {{endif}} -->
