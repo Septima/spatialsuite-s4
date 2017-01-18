@@ -17,16 +17,21 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
     	this.addDetailHandlerDef({
     		"buttonText": "Guide",
     		"buttonImage": this.iconURI,
-    		"handler": function(result, deferred, detailsContent){
-    			var output =  detailsContent.formatTextArea({text: result.data.text});
-    			
-    			var link = result.data.link;
-    			var icon = Septima.Search.icons.details.link;
-    			var linkTitle = result.title;
-    			
-    			output = output.add(detailsContent.formatLink({icon: icon, link: link, linkTitle: linkTitle}));
+    		"handler": function(result, detailsContent){
+                let promise = new Promise(function(resolve, reject){
+                    var items = [];
+                    items.push({type: 'textarea', text: result.data.text});
+                    
+                    var link = result.data.link;
+                    var icon = Septima.Search.icons.details.link;
+                    var linkTitle = result.title;
+                    
+                    items.push({type: 'link', icon: icon, link: link, linkTitle: linkTitle});
 
-				deferred.resolve(output);
+                    resolve(detailsContent.formatItems(items));
+                });
+                return promise;
+
     		},
     		more: true
     	});

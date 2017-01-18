@@ -71,7 +71,7 @@ function s4_init (params){
        		_s4Params = params;
        		try{
                 var locale = cbInfo.getParam("cbinfo.locale");
-                Septima.Search.setLocale(locale);
+                Septima.Search.setLocaleByIdentifier(locale);
        		} catch (e){}
        		//Fix some defaults
        		if (typeof _s4Params.view.forcedblurOnSelect === 'undefined'){
@@ -239,7 +239,7 @@ function s4_init (params){
                 	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
                 }
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	controller.addSearcher({title: "", searcher: s4IndexSearcher});
+            	controller.addSearcher({title: "webgis", searcher: s4IndexSearcher});
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
             }
         	
@@ -262,7 +262,7 @@ function s4_init (params){
                 		geoSearchOptions.area = municipalities.join();
                 	}
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-                	controller.addSearcher({"title": "", "searcher" : geoSearcher});
+                	controller.addSearcher({"title": "geosearch", "searcher" : geoSearcher});
                     _s4Params.geosearcher.searcher = geoSearcher;
             	}
             }

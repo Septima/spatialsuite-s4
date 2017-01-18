@@ -55,7 +55,7 @@
 			//	_s4Params.geosearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
 			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-			//	_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
+				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
 		}
 			if (typeof addS4SpatialMapTools !== 'undefined'){

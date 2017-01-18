@@ -12,33 +12,36 @@
             	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
             		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,
-            		"handler": Septima.bind(function(result, deferred, detailsContent){
-            			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
-    			    	var output = jQuery();
-    			    	
-            			for (var i=0;i<themesResults.length;i++){
-            				var themeResult = themesResults[i];
-            			
-	            			var clickFunction = Septima.bind(function(result){
-						        result.searcher.toggleTheme(result);
-							    if (!result.data.theme.visible){
-							    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
-							    }
-	    						detailsContent.selectResult(result);
-    						}, this, themeResult) 
-            			
-    						var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
-    						themeIcon.click(clickFunction);
-    						var title = jQuery("<span>" + themeResult.title + "</span>");
-    						title.click(clickFunction);
-    						
-    						var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
-    						detailsIcon.click(clickFunction);
-		    						
-		    				output = output.add(detailsContent.formatArea({icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true})); 
-            			}
-            			
-    			    	deferred.resolve(output);
+            		"handler": Septima.bind(function(result, detailsContent){
+					    let promise = new Promise(function(resolve, reject){
+	                        var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+	                        var items = [];
+	                        for (var i=0;i<themesResults.length;i++){
+	                            let themeResult = themesResults[i];
+	                        
+	                            //var clickFunction = Septima.bind(function(result){
+	                            //    result.searcher.toggleTheme(result);
+	                            //    if (!result.data.theme.visible){
+	                            //        cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+	                            //    }
+	                            //    detailsContent.selectResult(result);
+	                            //}, this, themeResult) 
+	                        
+	                            var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
+	                            //themeIcon.click(clickFunction);
+	                            var title = jQuery("<span>" + themeResult.title + "</span>");
+	                            //title.click(clickFunction);
+	                            
+	                            //var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
+	                            //detailsIcon.click(clickFunction);
+	                            
+	                            //items.push({type: 'area', icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true});
+                                items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
+	                        }
+	                        
+	                        resolve(detailsContent.formatItems(items));
+					    });
+					    return promise;
             		}, this),
             		isApplicable: Septima.bind(function(result){
             			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();

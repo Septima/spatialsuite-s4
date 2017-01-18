@@ -42,23 +42,23 @@
     		}
     		if (options.proxySearcher && options.proxySearcher !== null){
     			sqDetailsHandlerBuilderOptions.geometryPreProcessor = Septima.bind(function(proxySearcher, result){
-					var deferred = jQuery.Deferred();
-					var resultWKT = result.searcher.translateGeoJsonObjectToWkt(result.geometry);
-					proxySearcher.sq({limit: 1, wkt: resultWKT}).done(Septima.bind(function(deferred, result, sqResult){
-						var results = sqResult.getAllResults();
-						if (results.length > 0){
-							deferred.resolve({queryGeometry: results[0].geometry, distGeometry: result.geometry});
-						}else{
-							deferred.resolve(null);
-						}
-					}, this, deferred, result));
-					return deferred.promise();
+    	            var p = new Promise((resolve, reject)=>{
+                        var resultWKT = result.searcher.translateGeoJsonObjectToWkt(result.geometry);
+                        proxySearcher.sq({limit: 1, wkt: resultWKT}).then(Septima.bind(function(resolve, result, sqResult){
+                            var results = sqResult.getAllResults();
+                            if (results.length > 0){
+                                resolve({queryGeometry: results[0].geometry, distGeometry: result.geometry});
+                            }else{
+                                resolve(null);
+                            }
+                        }, this, resolve, result));
+    	            });
+					return p;
 				}, this, options.proxySearcher);
-    		}else{
+    		}
+    		else{
     			sqDetailsHandlerBuilderOptions.geometryPreProcessor = function(result){
-					var deferred = jQuery.Deferred();
-					deferred.resolve({queryGeometry: null, distGeometry: result.geometry});
-					return deferred.promise();
+    			    return Promise.resolve({queryGeometry: null, distGeometry: result.geometry});
 				};
     		}
     		
@@ -89,7 +89,7 @@
 								proj4: proj4,
 								profile: routeProfile});
 							
-							RouteCalculator.calculate().done(Septima.bind(function(hitResults, deferred, featureCollection){
+							RouteCalculator.calculate().then(Septima.bind(function(hitResults, deferred, featureCollection){
 								for (var i =0;i < hitResults.length;i++){
 									if (featureCollection.features[i].route){
 										hitResults[i].route = featureCollection.features[i].route;

@@ -2,9 +2,9 @@
 <tool type="plugin">
     <requires>
     
-		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/septima.js" />
-		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/json2.js" />
-		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
+<!-- 		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/septima.js" /> -->
+<!-- 		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/json2.js" /> -->
+        <file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
 
 		<file type="css"    name="[s4.search.css]" />
 		<file type="script" name="[s4.search.script]"/>

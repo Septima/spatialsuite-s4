@@ -14,13 +14,13 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
 		
     	this.currentProfile = cbKort.getProfile();
     	this.addDetailHandlerDef({
-    		//{"buttonText": text, "buttonImage": imageUri, "handler": function(result, cancellableDeferred, detailsContent)[, "target": target][, more: true|false]};
-    	    //cancellableDeferred.resolve(jQuery DOM-able object)
     		"buttonText": "",
     		"buttonImage": this.iconURI,
-    		"handler": function(result, deferred, detailsContent){
-    			var formattedFooter = detailsContent.formatTextArea({icon: result.image, text: result.data.text});
-				deferred.resolve(formattedFooter);
+    		"handler": function(result, detailsContent){
+                let promise = new Promise(function(resolve, reject){
+                    resolve(detailsContent.formatItems([{type: 'textarea', icon: result.image, text: result.data.text}]));
+                });
+                return promise;
     		},
     		more: true
     	});

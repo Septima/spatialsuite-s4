@@ -111,7 +111,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 				if (typeof theme.description !== 'undefined' && theme.description !== null){
 					description = theme.description;
 				}
-        		var result = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", description, " ", {theme: theme});
+        		var result = queryResult.addResult(theme.displayname + " (" + this.themePhrase + ")", description, null, {theme: theme});
         		result.image = this.getThemeImage(theme);
 			}
 		}
@@ -380,26 +380,26 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
             return [];
         }else{
-        	return ([{"buttonText": this.toolsPhrase, "buttonImage": this.toolsIconURI, "handler": function(result, deferred, detailsContent){
-        		//result.data.displayname
-        		//var output = jQuery();
-        		var buttons = jQuery("<ul style='list-style: none'/>");
-        		for (var i=0;i<result.data.theme.actions.length;i++){
-        			var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
-        			button.element.css("float", "left");
-        			button.element.css("list-style", "none");
-        			button.element.css("padding", "4px");
-        			button.element.css("margin", "2px");
-        			buttons.append(button.element);
-        			//output = output.add(detailsContent.formatButton({icon: button.element}));
-        		}
-        		var copyRightLink = result.searcher.getCopyRightLink(result);
-        		if (copyRightLink !== null){
-        			buttons.append(copyRightLink);
-        		}
-        		//output.find(".toolbar-icon-txt").remove();
-        		//deferred.resolve(output);
-        		deferred.resolve(buttons);
+        	return ([{"buttonText": this.toolsPhrase, "buttonImage": this.toolsIconURI, "handler": function(result, detailsContent){
+        	    var p = new Promise(function(resolve, reject){
+                    //result.data.displayname
+                    //var output = jQuery();
+                    var buttons = jQuery("<ul style='list-style: none'/>");
+                    for (var i=0;i<result.data.theme.actions.length;i++){
+                        var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
+                        button.element.css("float", "left");
+                        button.element.css("list-style", "none");
+                        button.element.css("padding", "4px");
+                        button.element.css("margin", "2px");
+                        buttons.append(button.element);
+                    }
+                    var copyRightLink = result.searcher.getCopyRightLink(result);
+                    if (copyRightLink !== null){
+                        buttons.append(copyRightLink);
+                    }
+                    resolve(detailsContent.formatItems([{type: 'jquery-dom-object', object: buttons}]));
+        	    });
+        	    return p;
         	}}]);
         }
     },
