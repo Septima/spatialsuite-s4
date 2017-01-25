@@ -42,7 +42,7 @@
     		}
     		if (options.proxySearcher && options.proxySearcher !== null){
     			sqDetailsHandlerBuilderOptions.geometryPreProcessor = Septima.bind(function(proxySearcher, result){
-    	            var p = new Promise((resolve, reject)=>{
+    	            var p = new Promise(function(resolve, reject){
                         var resultWKT = result.searcher.translateGeoJsonObjectToWkt(result.geometry);
                         proxySearcher.sq({limit: 1, wkt: resultWKT}).then(Septima.bind(function(resolve, result, sqResult){
                             var results = sqResult.getAllResults();

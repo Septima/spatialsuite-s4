@@ -36,70 +36,90 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
     	this.groups = [];
     	this.datasources = {};
-    	for (var i=0;i<cbKort.themeContainer.elements.length;i++){
-    		var group = cbKort.themeContainer.elements[i];
-    		var groupHasThemes = false;
-    		var themes = [];
-    		for (var j=0;j<group.elements.length;j++){
-    			var theme = group.elements[j];
-    			if (theme.selectable=="true"){
-    				for (l=0;l<theme.layers.length;l++){
-    					var layer = theme.layers[l];
-    					if (layer.datasource){
-        					if (typeof this.datasources[layer.datasource] === 'undefined'){
-        						this.datasources[layer.datasource] = [];
-        					}
-        					this.datasources[layer.datasource].push(theme);
-    					}
-    				}
-    				groupHasThemes = true;
-    				var themeDescription = this.getThemeDescription(theme);
-    				var terms = (theme.displayname + " " + themeDescription).split(" ");
-    				var termsToSearch = [];
-    				for (var k=0;k<terms.length;k++){
-    					term = terms[k];
-    					if (term.length > 1){
-    						termsToSearch.push(term.toLowerCase());
-    					}
-    				}
-        			themes.push({"group": group, "theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": theme.displayname});
-    			}
-    		}
-    		if (groupHasThemes){
-    			//sort themes
-    			themes.sort(function(t1, t2){
-    				return (t1.displayname.localeCompare(t2.displayname));
-    			});
-        		//this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")"});
-                this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "")});
-    			//this.registerTarget(group.displayname.replace(/:/g, "") + " (" + this.themesPhrase +")")
-                this.registerTarget(group.displayname.replace(/:/g, ""))
-    		}
-    	}
-		this.registerTarget(this.visibleThemesPhrase);
-    	
-    	//Sort groups
-    	this.groups.sort(function(g1, g2){
-			return (g1.displayname.localeCompare(g2.displayname));
-		});
-    	
-    	this.getLocalThemesDeferred = jQuery.Deferred();
+        this.getLocalThemesDeferred = jQuery.Deferred();
 
-    	this.getLocalDatasources().done(Septima.bind(function(localDatasources){
-        	localThemesArray = [];
-        	localThemesString = "";
-    		for (var i=0;i<localDatasources.length;i++){
-    			var localDatasource = localDatasources[i];
-    			if (typeof this.datasources[localDatasource] !== "undefined"){
-    				var themesArray = this.datasources[localDatasource];
-    				for (var j=0;j<themesArray.length;j++){
-    					localThemesArray.push(themesArray[j].name);
-    				}
-    			}
-    		}
-    		localThemesString = localThemesArray.join(" ");
-    		this.getLocalThemesDeferred.resolve(localThemesString);
-    	}, this));
+        if (cbInfo.getParam('spatialmap.version').indexOf('3.12') === 0){
+            cbKort.themeSelector.createThemeStore(Septima.bind(function(){
+                this.doIndex();
+            }, this));
+        }else{
+            this.doIndex();
+        }
+    	
+    },
+    
+    doIndex: function(){
+        for (var i=0;i<cbKort.themeContainer.elements.length;i++){
+            var group = cbKort.themeContainer.elements[i];
+            this.doIndexForGroup(group, null);
+        }
+        
+        this.registerTarget(this.visibleThemesPhrase);
+        
+        //Sort groups
+        this.groups.sort(function(g1, g2){
+            return (g1.displayname.localeCompare(g2.displayname));
+        });
+        
+        this.getLocalDatasources().done(Septima.bind(function(localDatasources){
+            localThemesArray = [];
+            localThemesString = "";
+            for (var i=0;i<localDatasources.length;i++){
+                var localDatasource = localDatasources[i];
+                if (typeof this.datasources[localDatasource] !== "undefined"){
+                    var themesArray = this.datasources[localDatasource];
+                    for (var j=0;j<themesArray.length;j++){
+                        localThemesArray.push(themesArray[j].name);
+                    }
+                }
+            }
+            localThemesString = localThemesArray.join(" ");
+            this.getLocalThemesDeferred.resolve(localThemesString);
+        }, this));
+    },
+    
+    doIndexForGroup: function(group, parentGroup){
+            var groupHasThemes = false;
+            var themes = [];
+            for (var j=0;j<group.elements.length;j++){
+                var element = group.elements[j];
+                if (element.type === "Theme"){
+                    var theme = element;
+                    if (theme.selectable=="true"){
+                        for (l=0;l<theme.layers.length;l++){
+                            var layer = theme.layers[l];
+                            if (layer.datasource){
+                                if (typeof this.datasources[layer.datasource] === 'undefined'){
+                                    this.datasources[layer.datasource] = [];
+                                }
+                                this.datasources[layer.datasource].push(theme);
+                            }
+                        }
+                        groupHasThemes = true;
+                        var themeDescription = this.getThemeDescription(theme);
+                        var terms = (theme.displayname + " " + themeDescription).split(" ");
+                        var termsToSearch = [];
+                        for (var k=0;k<terms.length;k++){
+                            term = terms[k];
+                            if (term.length > 1){
+                                termsToSearch.push(term.toLowerCase());
+                            }
+                        }
+                        themes.push({"group": group, "theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": theme.displayname});
+                    }
+                }else{
+                    var thisGroup = element;
+                    this.doIndexForGroup(thisGroup, group);
+                }
+            }
+            if (groupHasThemes){
+                //sort themes
+                themes.sort(function(t1, t2){
+                    return (t1.displayname.localeCompare(t2.displayname));
+                });
+                this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "")});
+                this.registerTarget(group.displayname.replace(/:/g, ""))
+            }
     },
     
     getThemesForDatasource: function(datasource){
@@ -172,7 +192,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     getThemeImage: function(theme){
-    	if (theme.img !== ""){
+    	if (theme.img !== null && theme.img !== ""){
     		return theme.img; 
     	}
     	for (var i=0;i<theme.copyright.length;i++){
@@ -205,21 +225,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         		result.image = theme.image;
         	}
         }else{
-        	//var groupsWithMatchingNames = [];
-        	//var groupsWithMatchingThemes = [];
             var matchingGroups = [];
-        	//var nameMatchingThemes = [];
-        	var queryTerms = query.queryString.split(" ");
-        	if (queryTerms.length>0){
-        	    matchingGroups = this.getMatchingGroups(queryTerms, groupName);
+        	    matchingGroups = this.getMatchingGroups(query.queryString, groupName);
         		var totalThemeCount = 0;
         		for (var i=0;i<matchingGroups.length;i++){
         			totalThemeCount += matchingGroups[i].themes.length;
         		}
-        		if (query.type == "list.force" || totalThemeCount<query.limit){
+                if (query.type == "list.force"){
         			var themesToShow = [];
                     for (var i=0;i<matchingGroups.length;i++){
-                        if (matchingGroups[i].themes.length > 0){
+                        if (matchingGroups[i].themes.length > 0 && !(groupName === '*' && query.queryString === '')){
                             themesToShow = themesToShow.concat(matchingGroups[i].themes);
                         }else{
                             var target = matchingGroups[i].group.displayname.replace(/:/g, "");
@@ -283,54 +298,67 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             			}
             		}
         		}
-
-        	}
-             	
         }
    	
     	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
     
-    getMatchingGroups: function (queryTerms, groupName){
-
-    	var groupsWithMatchingThemes = [];
-        	for (var j=0;j<this.groups.length;j++){
-        		var group = this.groups[j];
-        		if (groupName == "*" || group.displayname.toLowerCase() == groupName.toLowerCase()){
-            		var themes = [];
-            		for (var k=0;k<group.themes.length;k++){
-            			var theme = group.themes[k];
-            			theme.score = 0;
-            	       	for (var i=0;i<queryTerms.length;i++){
-            	    		var term = queryTerms[i].toLowerCase();
-                			if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
-                				theme.score += 2;
-                			}else if (this.match(term, theme.termsToSearch)){
-                				theme.score += 1;
-                			}
-            	    	}
-            			if (theme.score > 0){
-        					themes.push(theme);
-            			}
-            		}
-            		if (themes.length>0){
-            			themes.sort(function(a, b){
-        					if (a.score == b.score){
-        						return a.theme.displayname.localeCompare(b.theme.displayname)
-        					}else{
-            					return b.score - a.score;
-        					}
-        				});
-                		groupsWithMatchingThemes.push({"group": group, "themes": themes});
-            		}else{
-            		    if (group.displayname.toLowerCase().indexOf(queryTerms[0]) == 0){
-                            groupsWithMatchingThemes.push({"group": group, "themes": []});
-            		    }
-            		}
-        		}
-        	}
+    getMatchingGroups: function (queryString, groupName){
+        var matchingGroups = [];
+        if (queryString === ""){
+            for (var j=0;j<this.groups.length;j++){
+                var group = this.groups[j];
+                if (groupName === "*" || (group.displayname.toLowerCase() === groupName.toLowerCase())){
+                    matchingGroups.push({"group": group, "themes": group.themes});
+                }
+            }
+        }else{
+            var queryTerms = queryString.split(" ");
+            for (var j=0;j<this.groups.length;j++){
+                var group = this.groups[j];
+                if (groupName == "*" || group.displayname.toLowerCase() == groupName.toLowerCase()){
+                    var themes = this.getScoredGroupThemes(group, queryTerms);
+                    if (themes.length>0){
+                        matchingGroups.push({"group": group, "themes": themes});
+                    }else{
+                        if (group.displayname.toLowerCase().indexOf(queryTerms[0]) == 0){
+                            matchingGroups.push({"group": group, "themes": []});
+                        }
+                    }
+                }
+            }
+        }
         	
-    	return groupsWithMatchingThemes;
+    	return matchingGroups;
+    },
+    
+    getScoredGroupThemes: function(group, queryTerms){
+        var themes = [];
+        for (var k=0;k<group.themes.length;k++){
+            var theme = group.themes[k];
+            theme.score = 0;
+            for (var i=0;i<queryTerms.length;i++){
+                var term = queryTerms[i].toLowerCase();
+                if (theme.theme.displayname.toLowerCase().indexOf(term)==0){
+                    theme.score += 2;
+                }else if (this.match(term, theme.termsToSearch)){
+                    theme.score += 1;
+                }
+            }
+            if (theme.score > 0){
+                themes.push(theme);
+            }
+        }
+        themes.sort(this.sortByScoreName);
+        return themes;
+    },
+    
+    sortByScoreName: function(a, b){
+        if (a.score == b.score){
+            return a.theme.displayname.localeCompare(b.theme.displayname)
+        }else{
+            return b.score - a.score;
+        }
     },
     
     match: function(testTerm, terms){

@@ -16,13 +16,16 @@
 .inpucontainer-spacer {
     width: 400px;
     height: 30px;
-    margin-top: -4px;
+/*     margin-top: -4px; */
 }
 
 .septimasearch, .septimasearch.ssActive{
     z-index: 10;
 }
 
+#legendcontainer.legendcontainer{
+    z-index: 8;
+}
 .septimasearch .ssSearchHeader .ssSearchBackground,
 .septimasearch .ssSearchBackground input.ssInput,
 .septimasearch .ssSearchBackground .ssSearchIcon,

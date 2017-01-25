@@ -18,7 +18,7 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		"buttonText": "Guide",
     		"buttonImage": this.iconURI,
     		"handler": function(result, detailsContent){
-                let promise = new Promise(function(resolve, reject){
+                var promise = new Promise(function(resolve, reject){
                     var items = [];
                     items.push({type: 'textarea', text: result.data.text});
                     

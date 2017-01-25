@@ -17,7 +17,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
     		"buttonText": "",
     		"buttonImage": this.iconURI,
     		"handler": function(result, detailsContent){
-                let promise = new Promise(function(resolve, reject){
+                var promise = new Promise(function(resolve, reject){
                     resolve(detailsContent.formatItems([{type: 'textarea', icon: result.image, text: result.data.text}]));
                 });
                 return promise;
@@ -69,7 +69,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
                     		if (typeof img !== 'undefined' && img !== ''){
                     			var imgUri = img;
                     		}
-                    		this.helpEntries.push({title: topic, iconUri: imgUri, description: currentMenu + topic, text: text});
+                    		this.helpEntries.push({title: topic, iconUri: imgUri, description: text, text: currentMenu + topic});
                 		}
                 	}
               }, this)

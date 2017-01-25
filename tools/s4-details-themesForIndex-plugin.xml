@@ -13,11 +13,11 @@
             		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,
             		"handler": Septima.bind(function(result, detailsContent){
-					    let promise = new Promise(function(resolve, reject){
+					    var promise = new Promise(function(resolve, reject){
 	                        var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
 	                        var items = [];
 	                        for (var i=0;i<themesResults.length;i++){
-	                            let themeResult = themesResults[i];
+	                            var themeResult = themesResults[i];
 	                        
 	                            //var clickFunction = Septima.bind(function(result){
 	                            //    result.searcher.toggleTheme(result);
