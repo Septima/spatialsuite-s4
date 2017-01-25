@@ -16,8 +16,9 @@ offered by Septima.
 
 #### Links  
   
-* S4 product page: http://www.septima.dk/p_s4/  
-* See a demo here: http://v393.sps-demo.septima.dk/spatialmap  
+* S4 product page: http://www.septima.dk/p_s4  
+* Seaptima Search product page: http://www.septima.dk/p_search  
+* See a demo here: http://v3113.sps-demo.septima.dk/spatialmap  
 * Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
 * Issues: https://github.com/Septima/spatialsuite-s4/issues  
   
@@ -28,7 +29,7 @@ offered by Septima.
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013-2016  
+ Copyright:   (c) Septima P/S 2013-2017  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
@@ -45,7 +46,7 @@ offered by Septima.
 ### Download s4 module:
       
 Current version:  
-      2.6.16:   https://github.com/Septima/spatialsuite-s4/archive/2.6.16.zip  
+      2.6.20:   https://github.com/Septima/spatialsuite-s4/archive/2.6.20.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
