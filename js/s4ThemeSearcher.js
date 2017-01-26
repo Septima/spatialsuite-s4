@@ -38,14 +38,33 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	this.datasources = {};
         this.getLocalThemesDeferred = jQuery.Deferred();
 
-        if (cbInfo.getParam('spatialmap.version').indexOf('3.12') === 0){
-            cbKort.themeSelector.createThemeStore(Septima.bind(function(){
-                this.doIndex();
-            }, this));
+        //if (cbInfo.getParam('spatialmap.version').indexOf('3.12') === 0){
+        if (this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0){
+            if (cbKort.themeSelector){
+                cbKort.themeSelector.createThemeStore(Septima.bind(function(){
+                    this.doIndex();
+                }, this));
+            }
         }else{
             this.doIndex();
         }
     	
+    },
+    
+    cmpVersions: function (cmpVersion, refVersion) {
+        var i, diff;
+        var regExStrip0 = /(\.0+)+$/;
+        var segmentsCmpVersion = cmpVersion.replace(regExStrip0, '').split('.');
+        var segmentsRrefVersion = refVersion.replace(regExStrip0, '').split('.');
+        var l = Math.min(segmentsCmpVersion.length, segmentsRrefVersion.length);
+
+        for (i = 0; i < l; i++) {
+            diff = parseInt(segmentsCmpVersion[i], 10) - parseInt(segmentsRrefVersion[i], 10);
+            if (diff) {
+                return diff;
+            }
+        }
+        return segmentsCmpVersion.length - segmentsRrefVersion.length;
     },
     
     doIndex: function(){

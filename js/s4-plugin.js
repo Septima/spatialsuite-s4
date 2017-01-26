@@ -110,7 +110,8 @@ function s4_init (params){
                     	var menuItem = jQuery("li[id^=s4-plugin]");
                     	menuItem.empty();
                     	menuItem.addClass("inpucontainer-spacer");
-                    	jQuery("body").append(inputContainer);
+                    	//jQuery("body").append(inputContainer);
+                    	menuItem.append(inputContainer);
                 	}else{
                         var panel = 'panel-brand';
                         if (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30) {
