@@ -8,14 +8,13 @@
 			</url-parameters>
 		</data>
 	</page>
-	<page name="s4GetLocalDatasources" contenttype="text/xml">
-		<data handler="datasource" operation="get-datasources">
-			<url-parameters>
-				<url-parameter name="filter"
-					value="endpointtype = 'postgis' or endpointtype = 'shapefile' or endpointtype = 'mssql'" />
-			</url-parameters>
-		</data>
-	</page>
+    <page name="s4GetLocalDatasources" contenttype="text/xml">
+      <data handler="datasource" operation="get-datasources">
+        <url-parameters>
+          <url-parameter name="filter" value="(endpointtype in ('postgis','shapefile', 'mssql') or base_endpointtype in ('postgis','shapefile', 'mssql')" />
+        </url-parameters>
+      </data>
+    </page>
 	<page name="s4spatialquery-getresult" contenttype="text/xml">
 		<data handler="spatialquery2" operation="execute-query">
 			<url-parameters>
