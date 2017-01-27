@@ -26,11 +26,15 @@
 #legendcontainer.legendcontainer{
     z-index: 8;
 }
-.septimasearch > div > ul.better-autocomplete {
+.septimasearch > div > ul.better-autocomplete,
+.septimasearch > div > ul.better-autocomplete .ssDetailContent > ul {
     position: relative;
 }
 .septimasearch > div > ul.better-autocomplete > li {
-    display: block;
+ display: block;
+}
+.septimasearch > div > ul.better-autocomplete > li .ssDetailContent > ul > a {
+ display: inline;
 }
 
 .septimasearch .ssSearchHeader .ssSearchBackground,
