@@ -211,7 +211,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     getThemeImage: function(theme){
-    	if (theme.img !== null && theme.img !== ""){
+    	if (typeof theme.img !== 'undefined' && theme.img !== null && theme.img !== ""){
     		return theme.img; 
     	}
     	for (var i=0;i<theme.copyright.length;i++){
@@ -436,12 +436,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
                         button.element.css("float", "left");
                         button.element.css("list-style", "none");
-                        button.element.css("padding", "4px");
-                        button.element.css("margin", "2px");
+                        button.element.css("padding", "2px");
+                        button.element.css("margin", "1px");
                         buttons.append(button.element);
                     }
                     var copyRightLink = result.searcher.getCopyRightLink(result);
                     if (copyRightLink !== null){
+                        copyRightLink.css("float", "left");
+                        copyRightLink.css("list-style", "none");
+                        copyRightLink.css("padding", "2px");
+                        copyRightLink.css("margin", "1px");
                         buttons.append(copyRightLink);
                     }
                     resolve(detailsContent.formatItems([{type: 'jquery-dom-object', object: buttons}]));
@@ -467,11 +471,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     		}
     		var copyRightIconUri = Septima.Search.s4Icons.themeSearcher.copyRightIconUri;
     		if (text !== null && url !== null){
-    			link = jQuery("<a target='_blank' href='" + url + "' title='" + text + "'><img src='" + copyRightIconUri + "'/></a>");
-    			link.css("padding", "4px");
-    			link.css("margin", "2px");
-    			link.css("top", "4px");
-    			link.css("position", "relative");
+    			link = jQuery("<li class='statebutton-icon'><a target='_blank' href='" + url + "' title='" + text + "'><img src='" + copyRightIconUri + "'/></a><li>");
+    			link.css("top", "-2px");
+//    			link.css("position", "relative");
     		}
     	}
     	return link;
