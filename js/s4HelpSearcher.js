@@ -77,6 +77,9 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
                     }else{
                         var themeSelectorWorkAroundEntry = a.find(".helpH3:contains('" + th + "')");
                         entries = themeSelectorWorkAroundEntry.prevAll('.helpEntry');
+                        if (entries.length === 0){
+                            entries = themeSelectorWorkAroundEntry.parent().prevAll('.helpEntry');
+                        }
                         for (var i = entries.length -1; i>-1;i--){
                             thisEntry = entries[i];
                             entry = jQuery(entries[i]);
