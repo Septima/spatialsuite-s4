@@ -448,7 +448,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         copyRightLink.css("margin", "1px");
                         buttons.append(copyRightLink);
                     }
-                    resolve(detailsContent.formatItems([{type: 'jquery-dom-object', object: buttons}]));
+                    resolve([{type: 'jquery-dom-object', object: buttons}]);
+                    //resolve(detailsContent.formatItems([{type: 'jquery-dom-object', object: buttons}]));
         	    });
         	    return p;
         	}}]);

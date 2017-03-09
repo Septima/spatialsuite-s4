@@ -27,8 +27,8 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
                     var linkTitle = result.title;
                     
                     items.push({type: 'link', icon: icon, link: link, linkTitle: linkTitle});
-
-                    resolve(detailsContent.formatItems(items));
+                    resolve(items);
+                    //resolve(detailsContent.formatItems(items));
                 });
                 return promise;
 

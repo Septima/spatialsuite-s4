@@ -38,8 +38,8 @@
 	                            //items.push({type: 'area', icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true});
                                 items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
 	                        }
-	                        
-	                        resolve(detailsContent.formatItems(items));
+                            resolve(items);
+	                        //resolve(detailsContent.formatItems(items));
 					    });
 					    return promise;
             		}, this),

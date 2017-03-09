@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<presentation>
+    <text name="overskrift" plural="Stedfæstelser" value="Stedfæstelse"/>
+    <columns>
+        <column format="heading">
+            <label></label>
+            <value>SUBSTR(TOSTRING(sagstitel),1,250)</value>
+        </column>
+         <column format="description">
+            <label></label>
+            <value>sagsnummer + ' ' + sagsansvarlig</value>
+            <condition/>
+        </column>
+        <column format="hyperlink">
+            <condition>isDefined(SAGSID) and Trim(SAGSID) != "" and SAGSID != null</condition>
+            <label>'Vis i SBSYS'</label>
+            <value>'sbsyslauncher:sag_id=' + SAGSID</value>
+        </column>
+        <column>
+            <label>'Sagstitel:'</label>
+            <value>SAGSTITEL</value>
+        </column>
+        <column>
+            <label>'Sagsansvarlig:'</label>
+            <value>sagsAnsvarlig</value>
+        </column>
+        <column>
+            <label>'Afdeling:'</label>
+            <value>afdeling</value>
+        </column>
+        <column>
+            <label>'Sagsnummer:'</label>
+            <value>SAGSNUMMER</value>
+        </column>
+        <column>
+            <label>'Sagsstatus:'</label>
+            <value>SAGSSTATUS</value>
+        </column>
+    </columns>
+</presentation>
