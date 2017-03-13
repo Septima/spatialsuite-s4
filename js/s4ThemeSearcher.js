@@ -8,8 +8,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 	themesPhrase: null,
 	showPhrase: null,
 	hidePhrase: null,
-
 	groups: [],
+	
     initialize: function (options) {
 		this.Searcher(options);
 		this.visibleThemesPhrase = cbInfo.getString('s4.themesearcher.visiblethemes');
@@ -37,18 +37,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     	this.groups = [];
     	this.datasources = {};
         this.getLocalThemesDeferred = jQuery.Deferred();
-
-        //if (cbInfo.getParam('spatialmap.version').indexOf('3.12') === 0){
-        if (this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0){
-            if (cbKort.themeSelector){
-                cbKort.themeSelector.createThemeStore(Septima.bind(function(){
-                    this.doIndex();
-                }, this));
-            }
-        }else{
-            this.doIndex();
-        }
-    	
+        this.indexDone = false;
+        
     },
     
     cmpVersions: function (cmpVersion, refVersion) {
@@ -223,6 +213,27 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     fetchData: function (query, caller) {
+        if (this.indexDone){
+            this.fetchIndexedData(query, caller);
+        }else{
+            if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
+                    cbKort.themeSelector &&
+                    cbKort.themeSelector.createThemeStore &&
+                    !cbKort.themeSelector.storeInitialized){
+                cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
+                    this.doIndex();
+                    this.indexDone = true;
+                    this.fetchIndexedData(query, caller);
+                }, this, query, caller));
+            }else{
+                this.doIndex();
+                this.indexDone = true;
+                this.fetchIndexedData(query, caller);
+            }
+        }
+    },
+    
+    fetchIndexedData: function (query, caller) {
     	var groupName = "*";
 
         var queryResult = this.createQueryResult();
