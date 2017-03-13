@@ -252,9 +252,6 @@ function s4_init (params){
                 			authParams: gstAuthParams,
                 		    onSelect: s4GeoHit
                 	};
-                	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'centroid'){
-                		geoSearchOptions.returnCentroid = true;
-                	}
                 	if (_s4Params.municipality != "*"){
                 		var municipalities = _s4Params.municipality.split(' ');
                 		for (var i=0;i<municipalities.length;i++){
@@ -386,11 +383,7 @@ function s4SetMaxHeight(){
 
 function s4GeoHit(result){
 	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.streetNameHit)){
-    	if (_s4Params.geosearcher.geometrybehavior && _s4Params.geosearcher.geometrybehavior == 'zoom' && (result.data.type == "kommune" || result.data.type == "opstillingskreds" || result.data.type == "politikreds" || result.data.type == "postdistrikt" || result.data.type == "region" || result.data.type == "retskreds" || result.data.type == "stednavn")){
-    		s4Hit(result, "zoom");
-    	}else{
-    		s4Hit(result);
-    	}
+   		s4Hit(result);
 	}
 }
 
