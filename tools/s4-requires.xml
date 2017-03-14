@@ -18,6 +18,7 @@
 		<file type="script" name="/modules/s4/js/s4HelpSearcher.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/s4GuideSearcher.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/nearest.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/s4-tinglysning.js?_=[s4.version]"/>
     </requires>
     <src/>
     <jssrc/>
