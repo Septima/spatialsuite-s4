@@ -7,12 +7,12 @@ offered by Septima.
 * S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
 
   
-####[License](#license)  
-####[Basic installation and test](#installation)  
-####[Customization](#s4customization)  
-####[Included tools](./tools#tools-included-in-s4)   
-####[Search Spatial Suite data](#local)  
-####[FAQ and Issues](#problems)  
+#### [License](#license)  
+#### [Basic installation and test](#installation)  
+#### [Customization](#s4customization)  
+#### [Included tools](./tools#tools-included-in-s4)   
+#### [Search Spatial Suite data](#local)  
+#### [FAQ and Issues](#problems)  
 
 #### Links  
   
