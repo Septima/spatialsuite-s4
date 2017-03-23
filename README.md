@@ -195,7 +195,9 @@ For each searcher a number of parameters may be set:
 
 The targets in the geosearcher are changed by editing the *targets* property.
 
-	geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre']},
+```javascript
+geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre']},
+```
 
 Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
 
