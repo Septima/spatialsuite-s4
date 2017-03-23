@@ -1,5 +1,5 @@
-#S4 - Septima Search for SpatialSuite  
-##Tools included in s4  
+# S4 - Septima Search for SpatialSuite  
+## Tools included in s4  
 Please read the [general installation instructions](../../../#installation) before reading this  
   
 The main tool:    
@@ -10,22 +10,25 @@ This tool creates icons for Spatial Map functions (Info and print)
   
 Tools relevant for Denmark only:  
 * Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
-** [s4-matrikel-plugin](#s4-matrikel-plugin)  
-** [s4-adresse-plugin](#s4-adresse-plugin)  
-*** [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
-  
+    * [s4-matrikel-plugin](#s4-matrikel-plugin)  
+    * [s4-adresse-plugin](#s4-adresse-plugin)  
+    * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
+
+ 
 * Visning af- og søgning i vejmidter  
-** [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
-** [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
-** [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
-  
+    * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
+    * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
+    * [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
+
+ 
 * Links vedrørende lokalplaner
-** [s4-planSystem-plugin](#s4-planSystem-plugin)  
-** [s4-odeum-plugin](#s4-odeum-plugin)  
-** [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
-  
+    * [s4-planSystem-plugin](#s4-planSystem-plugin)  
+    * [s4-odeum-plugin](#s4-odeum-plugin)  
+    * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
+
+ 
 * Vis E-Knap   
-* [s4-eknap-plugin](#s4-eknap-plugin)  
+    * [s4-eknap-plugin](#s4-eknap-plugin)  
   
 Tools using the details view function:  
 * [s4-details-nearest-plugin](#s4-details-nearest-plugin)  
@@ -34,10 +37,11 @@ Tools using the details view function:
 * [s4-details-s4index-plugin](#s4-details-s4index-plugin)  
 * [s4-details-dawa-dagi-plugin](#s4-details-dawa-dagi-plugin)  
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
-    
+
+ 
 * Experimental tools:  
- * [s4-details-guides-plugin] (#s4-details-guides-plugin)  
- * [s4-details-help-plugin] (#s4-details-help-plugin)  
+    * [s4-details-guides-plugin](#s4-details-guides-plugin)  
+    * [s4-details-help-plugin](#s4-details-help-plugin)  
  
 API documentation:  
 * [s4ApiDemo](#apidemo)  
