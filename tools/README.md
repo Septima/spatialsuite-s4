@@ -46,7 +46,7 @@ Tools using the details view function:
 API documentation:  
 * [s4ApiDemo](#apidemo)  
     
-###<a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
+### <a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
 The main tool.  
 [Customize the tool ](../../../#customization-of-s4-tool) and include to enable search in Spatial Map.  
       
@@ -59,7 +59,7 @@ S4 ships with two versions of the tool:
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used outside of Denmark  
   
-###<a name="s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin    
+### <a name="s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin    
 This tools creates icons for Spatial Map functions (Info and print).  
   
   _Must_ be included.    
@@ -67,7 +67,7 @@ This tools creates icons for Spatial Map functions (Info and print).
 	<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
 ```    
   
-###<a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
+### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for matrikler  
 Inkludér i profil:  
@@ -75,7 +75,7 @@ Inkludér i profil:
 <tool module="s4" name="s4-matrikel-plugin" />
 ```  
   
-###<a name="s4-adresse-plugin"></a>s4-adresse-plugin  
+### <a name="s4-adresse-plugin"></a>s4-adresse-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
 Inkludér i profil:  
@@ -83,7 +83,7 @@ Inkludér i profil:
 <tool module="s4" name="s4-adresse-plugin" />
 ```  
   
-###<a name="s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin  
+### <a name="s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT, jordforureningsattest fra DAI samt _Hvad gælder for matriklen_ for adresse fra Dawa  
 Inkludér i profil:  
@@ -91,7 +91,7 @@ Inkludér i profil:
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin" />
 ```  
   
-###<a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
+### <a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
 Only relevant in Denmark  
 Dette er et tool, som understøtter søgning i egne vejmidter.
 Inkludér i profil:  
@@ -125,7 +125,7 @@ Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af ve
 Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
 
   
-###<a name="s4-vis-egne-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
+### <a name="s4-vis-egne-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin  
 Only relevant in Denmark  
 Dette er et tool, som understøtter visning af vejgeometri når en vej er valgt i geosearch. Se https://github.com/Septima/spatialsuite-s4/issues/45.    
 OBS: Dawa-searcheren kan vise vejmidter fra dawa, hvis du istedet bruger toolet [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
@@ -157,7 +157,7 @@ Vi har lavet et script i databasen, der aggregerer geometrien på baggrund af ve
 Scriptet deler vi selvfølgeligt gerne, men det virker jo kun i SQL server.  
 
   
-###<a name="s4-vis-dawa-vejmidter-plugin"></a>4-vis-dawa-vejmidter-plugin  
+### <a name="s4-vis-dawa-vejmidter-plugin"></a>4-vis-dawa-vejmidter-plugin  
 Only relevant in Denmark  
 Viser vejmidter fra dawa når en vej er valgt  
 ```xml
@@ -165,7 +165,7 @@ Viser vejmidter fra dawa når en vej er valgt
 ```  
 
   
-###<a name="s4-eknap-plugin"></a>s4-eknap-plugin  
+### <a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
 Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-søgeren.  
 Inkludér i profil:  
@@ -186,7 +186,7 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 <text name="overskrift" value="Skole" plural="Skoler"/>
 ```  
 
-###<a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
+### <a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
 Only relevant in Denmark  
 Viser ikon med link til plansystemets pdf for lokalplaner  
 Inkludér i profil:  
@@ -194,7 +194,7 @@ Inkludér i profil:
 <tool module="s4" name="s4-planSystem-plugin" />
 ```  
   
-###<a name="s4-odeum-plugin"></a>s4-odeum-plugin  
+### <a name="s4-odeum-plugin"></a>s4-odeum-plugin  
 Only relevant in Denmark  
 Viser ikon med link til ODEUM for lokalplaner. (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)  
 Inkludér i profil:  
@@ -207,7 +207,7 @@ Sæt følgende parameter for at pluginnet virker:
 ```  
 , hvor _odeumClientName_ er den del af urlen som bruges i ODEUM til din kommune. For url'en _http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/__horsens__/lokalplaner.lpplandk2_join/xxx_ er det _horsens_.  
   
-###<a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
+### <a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
 Only relevant in Denmark  
 Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr så hvis du klikker på en plan i en anden kommune så vises _din_ plan med det plannr.)  
 Inkludér i profil:  
@@ -220,11 +220,11 @@ Sæt følgende parameter for at pluginnet virker:
 ```  
 , hvor _dkPlanClientName_ er den del af urlen som bruges i din kommune. For url'en _http://silkeborglokalplaner.viewer.dkplan.niras.dk/dkplan/dkplan.aspx?LokalplanNr=xxx_ er det _silkeborglokalplaner_.    
   
-###<a name="apidemo"></a>s4ApiDemo  
+### <a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  
   
 
-###<a name="#s4-details-nearest-plugin"></a>s4-details-nearest-plugin    
+### <a name="#s4-details-nearest-plugin"></a>s4-details-nearest-plugin    
 For an address; show the nearest three features of each type in your s4 index.  
   
 To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
@@ -234,7 +234,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-nearest-plugin" />
 ```    
 
-###<a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin      
+### <a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin      
 Perform a standard Spatial Suite spatial query against your _local_ datasources.  
   
 To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
@@ -244,7 +244,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-spatialquery-plugin" />
 ```    
 
-###<a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
+### <a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
 Show relevant themes for features from the s4 index.  
 
 Include in profile:  
@@ -252,7 +252,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-themesForIndex-plugin" />
 ```    
 
-###<a name="#s4-details-s4index-plugin"></a>s4-details-s4index-plugin  
+### <a name="#s4-details-s4index-plugin"></a>s4-details-s4index-plugin  
 Show all columns from presentations used to build the s4 index.  
 
 Include in profile:  
@@ -260,7 +260,7 @@ Include in profile:
 	<tool module="s4" name="s4-details-s4index-plugin" />
 ```    
   
-###<a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
+### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
 Only relevant in Denmark.  
   
 Vis DAGI-information for adresse.  
@@ -270,7 +270,7 @@ Inkludér in profil:
     <tool module="s4" name="s4-details-dawa-dagi-plugin" />
 ```    
   
-###<a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
+### <a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
 Vis Link til Tingbogen for en adresse.  
 
 Inkludér in profil:  
@@ -278,7 +278,7 @@ Inkludér in profil:
     <tool module="s4" name="s4-details-adresse-tinglysninger" />
 ```    
   
-###<a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
+### <a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
 Let your users search and discover your Spatial Map guides.  
   
 Copy the tool to tools/custom.
@@ -288,7 +288,7 @@ Include in profile:
 	<tool dir="custom" name="s4-details-guides-plugin" />
 ```    
     
-###<a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
+### <a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
 Let your users search and the built-in Spatial Map on-line help  
   
 Include in profile:  

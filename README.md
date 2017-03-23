@@ -1,4 +1,4 @@
-#S4 - Septima Search for SpatialSuite  
+# S4 - Septima Search for SpatialSuite  
   
 Septima Search for Spatial Suite (s4) is a search tool.  
   
@@ -17,7 +17,7 @@ offered by Septima.
 #### Links  
   
 * S4 product page: http://www.septima.dk/p_s4  
-* Seaptima Search product page: http://www.septima.dk/p_search  
+* Septima Search product page: http://www.septima.dk/p_search  
 * See a demo here: http://v3113.sps-demo.septima.dk/spatialmap  
 * Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
 * Issues: https://github.com/Septima/spatialsuite-s4/issues  
