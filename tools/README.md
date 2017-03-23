@@ -10,32 +10,35 @@ This tool creates icons for Spatial Map functions (Info and print)
   
 Tools relevant for Denmark only:  
 * Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
- * [s4-matrikel-plugin](#s4-matrikel-plugin)  
- * [s4-adresse-plugin](#s4-adresse-plugin)  
-  * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
+** [s4-matrikel-plugin](#s4-matrikel-plugin)  
+** [s4-adresse-plugin](#s4-adresse-plugin)  
+*** [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
+  
 * Visning af- og søgning i vejmidter  
- * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
- * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
- * [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
+** [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
+** [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
+** [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
+  
 * Links vedrørende lokalplaner
- * [s4-planSystem-plugin](#s4-planSystem-plugin)  
- * [s4-odeum-plugin](#s4-odeum-plugin)  
- * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
+** [s4-planSystem-plugin](#s4-planSystem-plugin)  
+** [s4-odeum-plugin](#s4-odeum-plugin)  
+** [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
+  
+* Vis E-Knap   
 * [s4-eknap-plugin](#s4-eknap-plugin)  
   
-  
 Tools using the details view function:  
-* [s4-details-nearest-plugin] (#s4-details-nearest-plugin)  
-* [s4-details-spatialquery-plugin] (#s4-details-spatialquery-plugin)  
-* [s4-details-themesForIndex-plugin] (#s4-details-themesForIndex-plugin)
-* [s4-details-s4index-plugin] (#s4-details-s4index-plugin)  
-* [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
-  
+* [s4-details-nearest-plugin](#s4-details-nearest-plugin)  
+* [s4-details-spatialquery-plugin](#s4-details-spatialquery-plugin)  
+* [s4-details-themesForIndex-plugin](#s4-details-themesForIndex-plugin)
+* [s4-details-s4index-plugin](#s4-details-s4index-plugin)  
+* [s4-details-dawa-dagi-plugin](#s4-details-dawa-dagi-plugin)  
+* [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
+    
 * Experimental tools:  
  * [s4-details-guides-plugin] (#s4-details-guides-plugin)  
  * [s4-details-help-plugin] (#s4-details-help-plugin)  
- * [s4-details-dawa-dagi-plugin] (#s4-details-dawa-dagi-plugin)  
-
+ 
 API documentation:  
 * [s4ApiDemo](#apidemo)  
     
@@ -261,6 +264,14 @@ Vis DAGI-information for adresse.
 Inkludér in profil:  
 ```xml
     <tool module="s4" name="s4-details-dawa-dagi-plugin" />
+```    
+  
+###<a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
+Vis Link til Tingbogen for en adresse.  
+
+Inkludér in profil:  
+```xml
+    <tool module="s4" name="s4-details-adresse-tinglysninger" />
 ```    
   
 ###<a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
