@@ -77,10 +77,10 @@ Add the customized tool to your profile (_panel_ is optional):
 ##### Update cbinfo.xml (In Denmark):  
 In order to search the danish Plansystem and cvr data, please include the following parameter in your relevant cbinfo.xml:    
 ```xml
-	<!-- =================================== -->
-	<!-- S4 Index parameters                 -->
-	<!-- =================================== -->  
-	<param name="s4.searchchindex.token">aaaaAAAA-00000000</param>
+<!-- =================================== -->
+<!-- S4 Index parameters                 -->
+<!-- =================================== -->  
+<param name="s4.searchchindex.token">aaaaAAAA-00000000</param>
 ```  
 where aaaaAAAA-00000000 is a special token provided to you by Septima.  
   
@@ -103,7 +103,7 @@ S4 will now search themes, profiles, and workspaces. In order to search your loc
 #### More tools:    
 To enable the info and print icons, please incklude the following tool:  
 ```xml
-	<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
+<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
 ```    
   
 
@@ -158,7 +158,7 @@ dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
 // Full set of geosearcher targets is: ['adresser','stednavne_v2', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
 // Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
 // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
-geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false, "geometrybehavior": "bbox"},
+geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
 
 //Septima CVR-index
 cvrsearcher: {enabled: true, info: true, print: true},
@@ -201,11 +201,15 @@ Another useful option is to choose which local datasources the tool will search 
 
 To search all local datasources:
 
-	indexsearcher:{enabled: true, info: true, print: true, datasources: "*"}
+```javascript
+indexsearcher:{enabled: true, info: true, print: true, datasources: "*"}
+```
 
 To search specific datasources:
 
-	indexsearcher:{enabled: true, info: true, print: true, datasources: "ds_skoler ds_boligforeninger"}
+```javascript
+indexsearcher:{enabled: true, info: true, print: true, datasources: "ds_skoler ds_boligforeninger"}
+```
 
 ### Create profile specific search tools
 
@@ -247,7 +251,9 @@ For each site you need to create a configuration folder eg.:
 
 You may copy the attached examples 
 
-	Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
+```
+Copy /s4/config-example/* to WEB-INF/config/misc/custom/s4
+```
     
 In cbinfo.xml create a param pointing to the configuration folder  
 ```xml

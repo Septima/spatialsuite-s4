@@ -52,7 +52,7 @@ The main tool.
       
 _Please include this tool before any other s4 tool_    
 ```xml
-	<tool dir="custom" name="s4-plugin-dk-all" />
+<tool dir="custom" name="s4-plugin-dk-all" />
 ```  
   
 S4 ships with two versions of the tool:  
@@ -64,7 +64,7 @@ This tools creates icons for Spatial Map functions (Info and print).
   
   _Must_ be included.    
 ```xml
-	<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
+<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
 ```    
   
 ### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
@@ -231,7 +231,7 @@ To customize, copy to tools/custom and follow the instructions in the _Customize
 
 Include in profile:  
 ```xml
-	<tool module="s4" name="s4-details-nearest-plugin" />
+<tool module="s4" name="s4-details-nearest-plugin" />
 ```    
 
 ### <a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin      
@@ -241,7 +241,7 @@ To customize, copy to tools/custom and follow the instructions in the _Customize
 
 Include in profile:  
 ```xml
-	<tool module="s4" name="s4-details-spatialquery-plugin" />
+<tool module="s4" name="s4-details-spatialquery-plugin" />
 ```    
 
 ### <a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
@@ -249,7 +249,7 @@ Show relevant themes for features from the s4 index.
 
 Include in profile:  
 ```xml
-	<tool module="s4" name="s4-details-themesForIndex-plugin" />
+<tool module="s4" name="s4-details-themesForIndex-plugin" />
 ```    
 
 ### <a name="#s4-details-s4index-plugin"></a>s4-details-s4index-plugin  
@@ -257,7 +257,7 @@ Show all columns from presentations used to build the s4 index.
 
 Include in profile:  
 ```xml
-	<tool module="s4" name="s4-details-s4index-plugin" />
+<tool module="s4" name="s4-details-s4index-plugin" />
 ```    
   
 ### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
@@ -267,7 +267,7 @@ Vis DAGI-information for adresse.
 
 Inkludér in profil:  
 ```xml
-    <tool module="s4" name="s4-details-dawa-dagi-plugin" />
+<tool module="s4" name="s4-details-dawa-dagi-plugin" />
 ```    
   
 ### <a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
@@ -275,7 +275,7 @@ Vis Link til Tingbogen for en adresse.
 
 Inkludér in profil:  
 ```xml
-    <tool module="s4" name="s4-details-adresse-tinglysninger" />
+<tool module="s4" name="s4-details-adresse-tinglysninger" />
 ```    
   
 ### <a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
@@ -285,7 +285,7 @@ Copy the tool to tools/custom.
 
 Include in profile:  
 ```xml
-	<tool dir="custom" name="s4-details-guides-plugin" />
+<tool dir="custom" name="s4-details-guides-plugin" />
 ```    
     
 ### <a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
@@ -293,7 +293,7 @@ Let your users search and the built-in Spatial Map on-line help
   
 Include in profile:  
 ```xml
-	<tool module="s4" name="s4-details-help-plugin" />
+<tool module="s4" name="s4-details-help-plugin" />
 ```   
 
 
