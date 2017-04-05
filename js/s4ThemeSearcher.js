@@ -216,18 +216,17 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (this.indexDone){
             this.fetchIndexedData(query, caller);
         }else{
+            this.indexDone = true;
             if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
                     cbKort.themeSelector &&
                     cbKort.themeSelector.createThemeStore &&
                     !cbKort.themeSelector.storeInitialized){
                 cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
                     this.doIndex();
-                    this.indexDone = true;
                     this.fetchIndexedData(query, caller);
                 }, this, query, caller));
             }else{
                 this.doIndex();
-                this.indexDone = true;
                 this.fetchIndexedData(query, caller);
             }
         }
