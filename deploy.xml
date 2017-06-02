@@ -6,9 +6,6 @@
    <stoponerror>true</stoponerror>
   
    <makedir dir="[cbinfo.wwwroot.dir]/jsp/modules/s4"/>
-   <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/buildIndex_v.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/buildIndex_[s4.version].jsp"/>
-   <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/getDatasources_v.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/getDatasources_[s4.version].jsp"/>
-   <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/queryIndex_v.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/queryIndex_[s4.version].jsp"/>
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/buildIndex.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/buildIndex.jsp"/>
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/getDatasources.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/getDatasources.jsp"/>
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/queryIndex.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/queryIndex.jsp"/>
