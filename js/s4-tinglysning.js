@@ -7,10 +7,15 @@ function createTinglysningsHandlerDef(){
 
 function tinglysningsHandler(result){
     var promise = new Promise(function(resolve, reject){
-        
+
+        //vejnavn, husnummer, etage, doer, postnummer, supplerendebynavn
+        var qAdr = result.data.properties.vejstykke.navn + ' ' + result.data.properties.husnr + ' ' + result.data.properties.postnummer.nr + ' ' + result.data.properties.supplerendebynavn;
+        if (result.data.properties.supplerendebynavn !== null){
+            qAdr += result.data.properties.supplerendebynavn;
+        }
         jQuery.ajax(
             {
-                url: "https://www.tinglysning.dk/rest/soeg/" + result.title,
+                url: "https://www.tinglysning.dk/rest/soeg/" + qAdr,
                 dataType: 'jsonp',
                 crossDomain : true,
                 async:true,
