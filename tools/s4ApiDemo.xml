@@ -12,6 +12,8 @@
  			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
 			var options = {
 				datasource: "ds_park_monumenter",    // Obligatorisk
+				source: "Monumenter",    // Obligatorisk
+				type: "Monument",    // Obligatorisk
 				onSelect: s4Hit,                     // valgfri. Angiv egen funktion. Default er visning i kort
 				matchesPhrase: "matcher",            // Valgfri. Angiv et ord. Defaulter til param: 's4.list.matchphrase'
 				hyperLinkLabel: "Læs om monumentet", // Valgfri. Angiv en henvisningstekst
@@ -26,7 +28,7 @@
 	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
            	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
             	_s4OnSelect.push(function(result){ 
-            		if (result.searcher.title == "Monumenter"){ 
+            		if (result.searcher.source == "Monumenter"){ 
             			alert("Monument " + result.title + " valgt"); 
             		} 
         			return true; 

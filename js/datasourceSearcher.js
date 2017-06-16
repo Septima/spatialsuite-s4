@@ -19,6 +19,11 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		}
 		this.Searcher(options);
 		//Options
+		this.type = this.source;
+		this.registerType(this.type);
+		if (options.type){
+	        this.type = options.type;
+		}
 	    this.datasource = options.datasource;
 		if (options.hyperLinkLabel === undefined){
 			if (cbKort){
@@ -97,7 +102,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
                     if (thisHit['url']){
                     	description = description + " " + "<a href='" + thisHit['url'] + "' target='blank'>" + this.hyperLinkLabel + "</a>";
                     }
-                    var result1 = queryResult.addResult(thisHit['heading'], description, resultGeometry, thisHit);
+                    var result1 = queryResult.addResult(this.source, this.type, thisHit['heading'], description, resultGeometry, thisHit);
                     if (query.type == 'list') {
                         result1.image = this.iconURI;
                     }
@@ -105,10 +110,10 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	        } else {
 				var description = null;
 				if (query.queryString.length > 0){
-					description = this.title + ", som " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
+					description = this.source + " " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
 				}
 	        	
-	        	var result2 = queryResult.addNewQuery(this.title, description, query.queryString, null, null);
+	        	var result2 = queryResult.addNewQuery(this.source, this.type, this.type, description, query.queryString, null, null);
 	        }
 		}
 	    return queryResult;

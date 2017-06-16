@@ -8,12 +8,13 @@
     <jssrc/>
     <src><![CDATA[
 	    [if: ModuleDefined("s4") ]
-            var helpSearcher = new Septima.Search.HelpSearcher({});
+            var helpSearcher = new Septima.Search.HelpSearcher({
+                source: "Hjælpeemner"
+            });
 
 			window["_s4Searchers"] = window["_s4Searchers"] || [];
  			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en ny
  			_s4Searchers.push({
-           		title: "Hjælpeemner",
            		searcher : helpSearcher 
            	});
 

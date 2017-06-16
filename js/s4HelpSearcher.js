@@ -10,6 +10,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
     		displaynameProperty: 'title'
     	});
 		this.Searcher(options);
+		this.type = "Emne";
 		this.iconURI = Septima.Search.s4Icons.helpSearcher.iconURI;
 		
     	this.currentProfile = cbKort.getProfile();
@@ -130,11 +131,11 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
 	    				displayname += " (" + this.searchableData.singular + ")";
 	    			}
 	    			var description = hit.description;
-	    			var result = queryResult.addResult(hit.title, hit.description, " ", hit);
+	    			var result = queryResult.addResult(this.source, this.type, hit.title, hit.description, " ", hit);
 	    			result.image = hit.iconUri;
 	    		}
 			}else{
-		        var result2 = queryResult.addNewQuery(this.searchableData.plural + " (" + count + ")", null, query.queryString, null, null);
+		        var result2 = queryResult.addNewQuery(this.source, this.type, this.searchableData.plural + " (" + count + ")", null, query.queryString, null, null);
 			}
 		}
     	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);

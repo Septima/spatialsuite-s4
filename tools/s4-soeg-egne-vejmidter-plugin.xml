@@ -17,10 +17,11 @@
  			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
  			var options = { 
  				datasource: "ds_s4_vejmidte",
+                source: "Veje",    // Obligatorisk
+                type: "Vej",    // Obligatorisk
  				iconURI: Septima.Search.icons.road 
  			}; 
             	_s4Searchers.push({
-            		title: "veje",
             		searcher : new Septima.Search.DatasourceSearcher(options), 
             		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet 
             		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
