@@ -26,7 +26,8 @@
         function s4DawaDoBBRKnap(result){
             _s4View.blur();
             var komnr = result.data.properties.kommune.kode;
-            var ejdnr = result.data.properties.esrejendomsnr;
+            //var ejdnr = result.data.properties.esrejendomsnr;
+            var ejdnr = result.data.properties.jordstykke.esrejendomsnr;
             var url = "http://www.ois.dk/ui/linkpartner/linkpartner.aspx?CBKORT=TRUE&komnr=" + komnr + "&ejdnr=" + ejdnr;
             window.open(url, "_s4DoBBRKnap");
         }
@@ -34,7 +35,8 @@
         function s4DawaDoVurderingKnap(result){
             _s4View.blur();
             var komnr = result.data.properties.kommune.kode.substr(1, 3);
-            var ejdnr = result.data.properties.esrejendomsnr;
+            //var ejdnr = result.data.properties.esrejendomsnr;
+            var ejdnr = result.data.properties.jordstykke.esrejendomsnr;
             var url = "http://www.vurdering.skat.dk/borger/ejendomsvurdering/Vis.do?KMNR=" + komnr + "&sideNavn=vstarte&EJDNR=" + ejdnr + "&POSTNR=&VEJKODE=&VEJNAVN="; 
             window.open(url, "_s4DoVurderingKnap");
         }
