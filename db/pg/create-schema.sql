@@ -29,7 +29,8 @@ CREATE TABLE feature (
     description character varying,
     searchstring character varying,
     wkt character varying,
-    json character varying
+    json character varying,
+    sortorder integer
 );
 
 ALTER TABLE ONLY feature

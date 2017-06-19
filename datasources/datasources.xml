@@ -18,6 +18,9 @@
 		<config version="3" requires="1">
 			ALTER TABLE feature ALTER COLUMN wkt varchar(1000000);
 		</config>
+        <config version="3" requires="1">
+            ALTER TABLE feature ADD sortorder integer;
+        </config>
 		
 	</endpoint>
       <!-- {{endif}} -->
