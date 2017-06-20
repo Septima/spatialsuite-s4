@@ -249,7 +249,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
                 cbKort.themeSelector &&
                 cbKort.themeSelector.createThemeStore &&
-                !cbKort.themeSelector.storeInitialized){
+                !cbKort.themeSelector.storeInitialized &&
+                cbKort.themeSelector.getButton &&
+                cbKort.themeSelector.getButton('theme_store_categories')){
                 try{
                     cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
                         this.doIndex();
