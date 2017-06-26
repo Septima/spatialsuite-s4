@@ -43,8 +43,6 @@ function tinglysningsHandler(result){
                 }, this, resolve)
             }
         );
-        
     });
     return promise;
-    
 }

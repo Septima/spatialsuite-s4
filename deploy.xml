@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.6.30</version>
-   <param name="s4.version">2.6.30</param>
+   <version>2.6.31</version>
+   <param name="s4.version">2.6.31</param>
 
    <stoponerror>true</stoponerror>
   
@@ -20,7 +20,7 @@
 <!-- production -->
   <param name="s4.search.css">//search.cdn.septima.dk/4.2.7/css/defaultView.css</param>
   <param name="s4.search.script">//search.cdn.septima.dk/4.2.7/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.2.4/septimasearch.debug.js</param> -->
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.2.7/septimasearch.debug.js</param> -->
    
 <!-- cdn-aws -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.2.4/css/defaultView.css</param> -->

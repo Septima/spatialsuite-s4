@@ -38,8 +38,8 @@
 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script>
 	
 	<!-- Include septimaSearch -->
-	<script type="text/javascript" src="http://search.cdn.septima.dk/3.1.7/septimasearch.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/3.1.7/css/defaultView.css">
+	<script type="text/javascript" src="http://search.cdn.septima.dk/4.2.7/septimasearch.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/4.2.7/css/defaultView.css">
 	
 	<style type="text/css">
 		#inputcontainer {
@@ -81,7 +81,7 @@
 		}
 		
 		function s4IndexHit(result){
-			log(result.target + ": " + result.title + ". Geometry: " + JSON.stringify(result.geometry));
+			log(result.type + ": " + result.title + ". Geometry: " + JSON.stringify(result.geometry));
 		}
 
 		function log(message){

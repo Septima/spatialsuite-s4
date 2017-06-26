@@ -29,6 +29,7 @@
 .septimasearch > div > ul.better-autocomplete,
 .septimasearch > div > ul.better-autocomplete .ssDetailContent > ul {
     position: relative;
+    background-color: #FDFEFD; 
 }
 .septimasearch > div > ul.better-autocomplete > li {
  display: block;
@@ -57,6 +58,7 @@
 	padding-top: 8px;
 	padding-bottom: 8px;
 	font-size: 12px;
+	background-color: #FDFEFD; 
 }
 .septimasearch ul.better-autocomplete>li.result.highlight {
 /* 	border-bottom: 0px solid rgba(236,240,241,1);	 */
