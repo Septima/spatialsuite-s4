@@ -1,0 +1,1 @@
+alter table dbo.feature add sortorder int null;

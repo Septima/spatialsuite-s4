@@ -1,0 +1,1 @@
+alter table s4.feature add column sortorder int null;
