@@ -2,15 +2,14 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
 
     initialize: function (options) {
     	this.helpEntries =  [];
-		this.searchableData =  new Septima.Search.SearchableData({
+    	options.searchableData =  new Septima.Search.SearchableData({
     		data: Septima.bind(function(){return this.helpEntries;}, this),
-    		singular: "Emne",
-    		plural: "Emner",
+    		singular: options.singular,
+    		plural: options.plural,
     		searchProperties: ['title', 'description', 'tekst'],
     		displaynameProperty: 'title'
     	});
-		this.Searcher(options);
-		this.type = "Emne";
+        Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
 		this.iconURI = Septima.Search.s4Icons.helpSearcher.iconURI;
 		
     	this.currentProfile = cbKort.getProfile();

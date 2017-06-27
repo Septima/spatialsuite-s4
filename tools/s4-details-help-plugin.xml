@@ -9,14 +9,13 @@
     <src><![CDATA[
 	    [if: ModuleDefined("s4") ]
             var helpSearcher = new Septima.Search.HelpSearcher({
-                source: "Hjælpeemner"
+	            singular: "Emneg",
+	            plural: "Emnerg",
             });
 
 			window["_s4Searchers"] = window["_s4Searchers"] || [];
- 			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en ny
- 			_s4Searchers.push({
-           		searcher : helpSearcher 
-           	});
+ 			var _s4Searchers = window["_s4Searchers"];
+ 			_s4Searchers.push({searcher : helpSearcher});
 
 		[endif]
     ]]>
