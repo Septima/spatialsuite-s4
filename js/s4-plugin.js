@@ -382,16 +382,19 @@ function s4SetMaxHeight(){
 }
 
 function s4GeoHit(result){
-	if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.streetNameHit)){
-   		s4Hit(result);
-	}
+    if (result.data && result.data.type){
+        if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.streetNameHit)){
+            s4Hit(result);
+        }
+    }
 }
 
 function s4DawaHit(result){
-	if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.streetNameHit)){
-   		s4Hit(result);
-	}
-	
+    if (result.data && result.data.type){
+        if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.streetNameHit)){
+            s4Hit(result);
+        }
+    }
 }
 
 function s4Hit(result, geometryBehavior){
