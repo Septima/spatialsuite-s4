@@ -8,11 +8,13 @@
     <jssrc/>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
-        Septima.Log.trace({
-            eventCategory: 's4',
-            eventAction: 's4_details',
-            eventLabel: 's4dawadagi-plugin'
-        });
+        if (Septima.Log){
+	        Septima.Log.trace({
+	            eventCategory: 's4',
+	            eventAction: 's4_details',
+	            eventLabel: 's4dawadagi-plugin'
+	        });
+        }
         if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
             _s4Params.dawasearcher.searcher.allowDetails = true;
         }

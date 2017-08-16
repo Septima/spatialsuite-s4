@@ -71,12 +71,14 @@
                     
                 }, this));
             }
-
-        Septima.Log.trace({
-            eventCategory: 's4',
-            eventAction: 's4_details',
-            eventLabel: 'details-svadr-plugin'
-        });
+            
+         if (Septima.Log){
+	        Septima.Log.trace({
+	            eventCategory: 's4',
+	            eventAction: 's4_details',
+	            eventLabel: 'details-svadr-plugin'
+	        });
+         }
             
         [endif]
     ]]>

@@ -61,13 +61,14 @@
 			if (typeof addS4SpatialMapTools !== 'undefined'){
 				addS4SpatialMapTools({info: true, print: true, searcher: targetSearcher});
 			}
-
-    	Septima.Log.trace({
-            eventCategory: 's4',
-            eventAction: 's4_details',
-            eventLabel: 'nearest-plugin'
-        });
-    	
+		if (Septima.Log){
+	        Septima.Log.trace({
+	            eventCategory: 's4',
+	            eventAction: 's4_details',
+	            eventLabel: 'nearest-plugin'
+	        });
+		}
+		
 	[endif]
     ]]>
     </src>

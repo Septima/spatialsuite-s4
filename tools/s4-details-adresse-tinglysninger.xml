@@ -16,13 +16,15 @@
             var handlerDef = createTinglysningsHandlerDef();
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(handlerDef);
             }
-
-
-        Septima.Log.trace({
-            eventCategory: 's4',
-            eventAction: 's4_details',
-            eventLabel: 'adresse-tinglysnings-plugin'
-        });
+            
+            
+            if (Septima.Log){
+		        Septima.Log.trace({
+		            eventCategory: 's4',
+		            eventAction: 's4_details',
+		            eventLabel: 'adresse-tinglysnings-plugin'
+		        });
+            }
         
     [endif]
     ]]>

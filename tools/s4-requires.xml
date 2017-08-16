@@ -4,7 +4,9 @@
     
 <!-- 		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/septima.js" /> -->
 <!-- 		<file type="script"    name="//common.cdn.septima.dk/1.0.7/js/json2.js" /> -->
+    [if: not isDefined("module.s4.log.disable") ]
         <file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
+    [endif]
 
 		<file type="css"    name="[s4.search.css]" />
 		<file type="script" name="[s4.search.script]"/>
