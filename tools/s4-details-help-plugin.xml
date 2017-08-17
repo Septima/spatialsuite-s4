@@ -9,8 +9,8 @@
     <src><![CDATA[
 	    [if: ModuleDefined("s4") ]
             var helpSearcher = new Septima.Search.HelpSearcher({
-	            singular: "Emneg",
-	            plural: "Emnerg",
+	            singular: "Emne",
+	            plural: "Emner",
             });
 
 			window["_s4Searchers"] = window["_s4Searchers"] || [];

@@ -20,8 +20,16 @@
        	
        	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
 	       	var planSearcher = _s4Params.plansearcher.searcher;
-	       	if (planSearcher){
-				planSearcher.addCustomButtonDef(planSearcher.getPlansystemCustomButtonDef());
+            if (planSearcher){
+	            var iconUri = Septima.Search.s4Icons.planPlugin.plansystem;
+	            var buttonDef = {
+	               "buttonText": "Se plandokument",
+	               "buttonImage": iconUri,
+	               "callBack": function(result){
+    	                window.open(result.data['properties.doklink'][0], "_blank");
+	            }};
+
+				planSearcher.addCustomButtonDef(buttonDef);
 	       	}
        	}
 

@@ -24,8 +24,17 @@
 	       	
 	       	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
 		       	var planSearcher = _s4Params.plansearcher.searcher;
-		       	if (planSearcher){
-					planSearcher.addCustomButtonDef(planSearcher.getOdeumCustomButtonDef(clientName));
+                if (planSearcher){
+		            var buttonDef = {
+		               "buttonText": "Se plandokument i ODEUM (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)",
+		               "buttonImage": Septima.Search.s4Icons.planPlugin.odeumURI,
+		               "callBack": function(result){
+			                var planId = result.data['properties.planid'][0];
+			                var url = 'http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/' + clientName + '/lokalplaner.lpplandk2_join/' + planId;
+		                window.open(url, "_blank");
+		            }};
+		       	
+					planSearcher.addCustomButtonDef(buttonDef);
 		       	}
 	       	}
         }

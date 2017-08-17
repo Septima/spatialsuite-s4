@@ -37,7 +37,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.onLockCustomButtonDef= [{"buttonText": this.hideLockedPhrase, "buttonImage": this.themeOnLockUri, "callBack": Septima.bind( this.toggleTheme, this)}];
         this.offLockCustomButtonDef= [{"buttonText": this.showLockedPhrase, "buttonImage": this.themeOffLockUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 
-        options.source = this.themesPhrase;
+        this.source = this.themesPhrase;
+        options.source = this.source;
+        
         this.Searcher(options);
 
         //Internal structures used to hold data

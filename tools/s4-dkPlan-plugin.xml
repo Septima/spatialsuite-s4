@@ -25,7 +25,15 @@
 	       	if(typeof _s4Params !== 'undefined' && _s4Params !== null){
 		       	var planSearcher = _s4Params.plansearcher.searcher;
 		       	if (planSearcher){
-					planSearcher.addCustomButtonDef(planSearcher.getDKPlanCustomButtonDef(clientName));
+		            var buttonDef = {
+		              "buttonText": "Se plandokument i DKPlan",
+		              "buttonImage": Septima.Search.s4Icons.planPlugin.dkplanURI,
+		              "callBack": function(result){
+		                var planNr = result.data['properties.plannr'][0];
+		                var url = 'http://' + clientName + '.viewer.dkplan.niras.dk/dkplan/dkplan.aspx?LokalplanNr=' + planNr;
+		                window.open(url, "_blank");
+		            }};
+					planSearcher.addCustomButtonDef(buttonDef);
 		       	}
 	       	}
         }
