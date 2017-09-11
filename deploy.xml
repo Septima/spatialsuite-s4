@@ -10,6 +10,7 @@
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/getDatasources.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/getDatasources.jsp"/>
    <copyfile replacetext="true" fromfile="[module:s4.dir]/jsp/queryIndex.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/queryIndex.jsp"/>
    <copyfile fromfile="[module:s4.dir]/jsp/getFeature.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/getFeature.jsp"/>
+   <copyfile fromfile="[module:s4.dir]/jsp/testConfig.jsp" tofile="[cbinfo.wwwroot.dir]/jsp/modules/s4/testConfig.jsp"/>
 
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/css"/>
   <copydir fromdir="[module:s4.dir]/css" todir="[cbinfo.wwwroot.dir]/modules/s4/css"/>
