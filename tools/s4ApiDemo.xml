@@ -13,14 +13,13 @@
 			var options = {
 				datasource: "ds_park_monumenter",    // Obligatorisk
 				source: "Monumenter",    // Obligatorisk
-				type: "Monument",    // Obligatorisk
-				onSelect: s4Hit,                     // valgfri. Angiv egen funktion. Default er visning i kort
-				matchesPhrase: "matcher",            // Valgfri. Angiv et ord. Defaulter til param: 's4.list.matchphrase'
-				hyperLinkLabel: "Læs om monumentet", // Valgfri. Angiv en henvisningstekst
+				type: "Monumenter",    // Obligatorisk
+				onSelect: s4Hit,                     // valgfri. Angiv egen funktion. Default er s4Hit
+				matchesPhrase: "matcher",            // Valgfri. Angiv et ord.
+				hyperLinkLabel: "Læs om monumentet", // Valgfri. Angiv en henvisningstekst. Default er s4.DatasourceSearcher.hyperLinkLabel
 				iconURI: "data:image/gif;base64,R0lGODlhGQAZAMZQAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQoKCgsLCw0NDRERERQUFBUVFRgYGBoaGh0dHR4eHiAgICkpKTQ0NDc3Nzg4ODk5OTo6Ojs7Ozw8PExMTFJSUllZWVxcXF1dXV9fX2FhYWJiYmNjY2RkZGVlZWZmZmdnZ21tbW5ubm9vb3FxcXJycnNzc3Z2dnl5eXp6eoCAgIGBgYaGhpGRkZiYmJmZmaOjo6WlpampqaysrK+vr7Gxsbi4uMDAwMLCwsXFxcrKysvLy8zMzM/Pz9TU1NXV1dbW1tfX1+Hh4eLi4uXl5fPz8/7+/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////yH5BAEKAH8ALAAAAAAZABkAAAe7gH+Cg4SFhoeIiYqHTU6LikszDRc5j4geAAIAAD6WhUgWmwUAOp6ERxUDmwA4poNFEQAEAAM2roJEEKsCNbd/Qw6bAQAvvkIMqpsqvkEEmpoovkDJmyK+PwPZmx9Ptz3Dqx2+SiIpJykkN648GhsZFxocGRgZNJ48CQ8TFBQTEhMFYFjCEQPECBMlSIwgUSLEixpJFDFpYGCBAgQHECRAYGCjgB2LZLBo4aKkixcvSrJYYcSXy5cwYxYKBAA7"
 			};
            	_s4Searchers.push({
-           		title: "Monumenter",                // Valgfri
            		searcher : new Septima.Search.DatasourceSearcher(options),
            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 

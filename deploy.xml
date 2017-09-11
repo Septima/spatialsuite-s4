@@ -20,8 +20,8 @@
 
 <!-- production -->
   <param name="s4.search.css">//search.cdn.septima.dk/4.2.8/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/4.2.8/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.2.8/septimasearch.debug.js</param> -->
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.2.8/septimasearch.min.js</param> -->
+  <param name="s4.search.script">//search.cdn.septima.dk/4.2.8/septimasearch.debug.js</param>
    
 <!-- cdn-aws -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.2.4/css/defaultView.css</param> -->

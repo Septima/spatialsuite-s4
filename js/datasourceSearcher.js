@@ -6,34 +6,33 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		}
 		
 		options.usesGeoFunctions = true;
-		if (options.matchesPhrase === undefined){
-			if (cbKort){
-				options.matchesPhrase = cbInfo.getString('s4.list.matchphrase');
-			}else{
-				options.matchesPhrase = 'matcher';
-			}
-		}
 		
-		if (options.onSelect === undefined){
+		if (typeof options.onSelect === 'undefined'){
 			options.onSelect = s4Hit;
 		}
+		
+        this.datasource = options.datasource;
+        
+		//default source
+		this.source = this.datasource;
+        if (options.source){
+            this.source = options.source;
+        }else{
+            options.source = this.source;
+        }
+        
+        //default type
+        this.type = this.source;
+        if (options.type){
+            this.type = options.type;
+        }
+		
 		this.Searcher(options);
-		//Options
-		this.type = this.source;
-		this.registerType(this.type);
-		if (options.type){
-	        this.type = options.type;
-		}
-	    this.datasource = options.datasource;
-		if (options.hyperLinkLabel === undefined){
-			if (cbKort){
-			    this.hyperLinkLabel = cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
-			}else{
-			    this.hyperLinkLabel = 'Se mere';
-			}
-		}else{
-		    this.hyperLinkLabel = options.hyperLinkLabel || cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
-		}
+		
+        this.registerType(this.type);
+        
+        this.hyperLinkLabel = options.hyperLinkLabel;
+		
 	    this.iconURI = options.iconURI || null;
     },
     
@@ -63,21 +62,13 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	        	}
 	        },this, caller)     
         });
-    	
-	    caller.registerOnCancelHandler ( Septima.bind(function (xhr) {
-	    	if (xhr && xhr.readystate != 4){
-	    		xhr.abort();
-	    	}
-	    },this, xhr));
     },
     
 	success: function(caller, data, textStatus, jqXHR){
-		if (caller.isActive()){
-			if (jqXHR.status == 200){
-				caller.fetchSuccess(this.getDataFromDatasource(data));
-			}else{
-				caller.fetchError(this, jqXHR.statusText);
-			}
+		if (jqXHR.status == 200){
+			caller.fetchSuccess(this.getDataFromDatasource(data));
+		}else{
+			caller.fetchError(this, jqXHR.statusText);
 		}
 	},
 
@@ -100,6 +91,9 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	                }
                     var description = thisHit['description'] || "";
                     if (thisHit['url']){
+                        if (typeof this.hyperLinkLabel === 'undefined'){
+                            this.hyperLinkLabel = cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
+                        }
                     	description = description + " " + "<a href='" + thisHit['url'] + "' target='blank'>" + this.hyperLinkLabel + "</a>";
                     }
                     var result1 = queryResult.addResult(this.source, this.type, thisHit['heading'], description, resultGeometry, thisHit);
@@ -108,12 +102,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
                     }
 	            }
 	        } else {
-				var description = null;
-				if (query.queryString.length > 0){
-					description = this.source + " " + this.getMatchesPhrase() +" <em>" + query.queryString + "</em>";
-				}
-	        	
-	        	var result2 = queryResult.addNewQuery(this.source, this.type, this.type, description, query.queryString, null, null);
+	        	var result2 = queryResult.addNewQuery(this.source, this.type, this.type, null, query.queryString, null, null);
 	        }
 		}
 	    return queryResult;
