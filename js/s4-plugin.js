@@ -227,12 +227,24 @@ function s4_init (params){
             for (var i = 0;i<_s4Searchers.length;i++){
                 var searcherReg = _s4Searchers[i];
                 controller.addSearcher(searcherReg);
+                if (searcherReg.info){
+                    addInfoButtonToSearcher(searcherReg.searcher);
+                }
+                if (searcherReg.print){
+                    addPrintButtonToSearcher(searcherReg.searcher);
+                }
             }
             //Prepare for future pushes
             window["_s4Searchers"] = {
                     controller: controller,
                     push: function (searcherReg) {
                         this.controller.addSearcher(searcherReg);
+                        if (searcherReg.info){
+                            addInfoButtonToSearcher(searcherReg.searcher);
+                        }
+                        if (searcherReg.print){
+                            addPrintButtonToSearcher(searcherReg.searcher);
+                        }
                     }
             };
             
@@ -503,18 +515,28 @@ function s4DoPrint(result){
 
 function addS4SpatialMapTools(paramEntry){
     if (typeof paramEntry !== 'undefined' && typeof paramEntry.searcher !== 'undefined'){
-    if (paramEntry.info){
-        var s4InfoButtonCaption = cbInfo.getString('s4.infobutton.caption');
-        var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
-        var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
-        paramEntry.searcher.addCustomButtonDef(s4InfoButtonDef);
+        if (paramEntry.info){
+            addInfoButtonToSearcher(paramEntry.searcher);
+        }
+        if (paramEntry.print){
+            addPrintButtonToSearcher(paramEntry.searcher);
+        }
     }
-    if (_s4Params.view.printconfig && paramEntry.print){
+}
+
+function addInfoButtonToSearcher(searcher){
+    var s4InfoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+    var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
+    var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
+    searcher.addCustomButtonDef(s4InfoButtonDef);
+}
+
+function addPrintButtonToSearcher(searcher){
+    if (_s4Params.view.printconfig){
         var _s4PrintUri = Septima.Search.s4Icons.printIconUri;
         var s4PrintButtonCaption = "Print";
         var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};  
-        paramEntry.searcher.addCustomButtonDef(s4PrintButtonDef);
-    }
+        searcher.addCustomButtonDef(s4PrintButtonDef);
     }
 }
 
