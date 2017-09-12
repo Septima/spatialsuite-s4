@@ -9,6 +9,103 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled && _s4Params.themesearcher && _s4Params.themesearcher.enabled){
+            
+                _s4Params.indexsearcher.searcher.addCustomButtonDef({
+                      "buttonText": _s4Params.themesearcher.searcher.showPhrase,
+                      "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOffUri,
+                      "callBack": function(result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            alert(_s4Params.themesearcher.searcher.showPhrase + " " + theme.displayname + " (Tema)");
+                          }
+                        }
+                      },
+                      isApplicable: function (result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            if (theme !== null && !theme.visible){
+                                return true;
+                            }
+                          }
+                        }
+                        return false;
+                      },
+                    getbuttonText: function(result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            if (theme !== null){
+                                return _s4Params.themesearcher.searcher.showPhrase + " " + theme.displayname + " (Tema)";
+                            }
+                          }
+                        }
+                        return _s4Params.themesearcher.searcher.showPhrase;
+                    }
+                });
+
+                _s4Params.indexsearcher.searcher.addCustomButtonDef({
+                      "buttonText": _s4Params.themesearcher.searcher.hidePhrase,
+                      "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOnUri,
+                      "callBack": function(result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            alert(_s4Params.themesearcher.searcher.hidePhrase + " " + theme.displayname + " (Tema)");
+                          }
+                        }
+                      },
+                      isApplicable: function (result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            if (theme !== null && theme.visible){
+                                return true;
+                            }
+                          }
+                        }
+                        return false;
+                      },
+                    getbuttonText: function(result){
+                        var feature = result.data;
+                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                          var row = feature.pcol.row[i];
+                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
+                            var caption = row.label;
+                            var themeId = row.value;
+                            var theme = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
+                            if (theme !== null){
+                                return _s4Params.themesearcher.searcher.hidePhrase + " " + theme.displayname + " (Tema)";
+                            }
+                          }
+                        }
+                        return _s4Params.themesearcher.searcher.hidePhrase;
+                    }
+                });
+
+
+                
             	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
             		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,

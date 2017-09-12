@@ -93,7 +93,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             this.doIndexForGroup(group, null);
         }
         
-        this.registerType(this.visibleThemesPhrase);
+        this.registerType(this.source, this.themesPhrase);
+        this.registerType(this.source, this.visibleThemesPhrase);
         
         //Sort groups
         this.groups.sort(function(g1, g2){
@@ -158,8 +159,22 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     return (t1.displayname.localeCompare(t2.displayname));
                 });
                 this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "")});
-                this.registerType(group.displayname.replace(/:/g, ""))
+                this.registerType(this.source, group.displayname.replace(/:/g, ""))
             }
+    },
+    
+    getThemeFromId: function(themeId){
+        var visibleThemes = [];
+        for (var i=0;i<this.groups.length;i++){
+            var group = this.groups[i];
+            for (var j=0;j<group.themes.length;j++){
+                var indexedTheme = group.themes[j];
+                if (indexedTheme.theme.name === themeId){
+                    return indexedTheme.theme;
+                }
+            }
+        }
+        return null;
     },
     
     getThemesForDatasource: function(datasource){
@@ -277,7 +292,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         var queryResult = this.createQueryResult();
         
         if (query.hasTarget){
-            if (query.target.type && this.hasType(query.target.type)){
+            if (query.target.type && this.hasType(query.target.type) && query.target.type !== this.themesPhrase){
                 groupName = query.target.type;
             }
             var result = queryResult.addNewQuery(this.source, this.visibleThemesPhrase, this.visibleThemesPhrase, "", "", null, null);
