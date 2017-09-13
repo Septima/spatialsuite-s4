@@ -170,7 +170,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             for (var j=0;j<group.themes.length;j++){
                 var indexedTheme = group.themes[j];
                 if (indexedTheme.theme.name === themeId){
-                    return indexedTheme.theme;
+                    return this.createQueryResult().addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", null, null, {theme: indexedTheme.theme});
                 }
             }
         }
