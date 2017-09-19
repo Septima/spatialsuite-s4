@@ -9,9 +9,9 @@ function tinglysningsHandler(result){
     var promise = new Promise(function(resolve, reject){
 
         //vejnavn, husnummer, etage, doer, postnummer, supplerendebynavn
-        var qAdr = result.data.properties.vejstykke.navn + ' ' + result.data.properties.husnr + ' ' + result.data.properties.postnummer.nr + ' ' + result.data.properties.supplerendebynavn;
+        var qAdr = result.data.properties.vejstykke.navn + ' ' + result.data.properties.husnr + ' ' + result.data.properties.postnummer.nr;
         if (result.data.properties.supplerendebynavn !== null){
-            qAdr += result.data.properties.supplerendebynavn;
+            qAdr += (' ' + result.data.properties.supplerendebynavn);
         }
         jQuery.ajax(
             {

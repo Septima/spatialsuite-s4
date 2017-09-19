@@ -29,7 +29,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		
 		this.Searcher(options);
 		
-        this.registerType(this.type);
+        this.registerType(this.source, this.type);
         
         this.hyperLinkLabel = options.hyperLinkLabel;
 		
