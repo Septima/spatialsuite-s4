@@ -37,6 +37,9 @@
 	                            }
                                 if (themeResult.data.theme.visible){
                                    newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOnUri;
+                                   if (result.geometry && result.geometry.type.toLowerCase() === 'polygon'){
+                                        cbKort.dynamicLayers.removeAll();
+                                   }
                                 }else{
                                    newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOffUri;
                                 }
@@ -108,6 +111,9 @@
                                 }
                                 if (themeResult.data.theme.visible){
                                    newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOnUri;
+                                   if (result.geometry && result.geometry.type.toLowerCase() === 'polygon'){
+                                        cbKort.dynamicLayers.removeAll();
+                                   }
                                 }else{
                                    newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOffUri;
                                 }
