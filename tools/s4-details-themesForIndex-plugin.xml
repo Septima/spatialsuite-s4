@@ -16,7 +16,7 @@
                       "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOffUri,
                       "callBack": function(result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
@@ -50,7 +50,7 @@
                       },
                       isApplicable: function (result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
@@ -65,7 +65,7 @@
                       },
                       getbuttonText: function(result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
@@ -90,7 +90,7 @@
                       "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOnUri,
                       "callBack": function(result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
@@ -124,7 +124,7 @@
                       },
                       isApplicable: function (result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
@@ -139,7 +139,7 @@
                       },
                     getbuttonText: function(result){
                         var feature = result.data;
-                        for (let i = 0; i < feature.pcol.row.length; i++) {
+                        for (var i = 0; i < feature.pcol.row.length; i++) {
                           var row = feature.pcol.row[i];
                           if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
                             var caption = row.label;
