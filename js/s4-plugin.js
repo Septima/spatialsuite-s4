@@ -348,14 +348,22 @@ function s4_init (params){
 			for (var i = 0;i<_s4CustomButtons.length;i++){
 				var customButton = _s4CustomButtons[i];
 				if (customButton.searcher && _s4Params[customButton.searcher] && _s4Params[customButton.searcher].searcher){
-					_s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+				    if (customButton.target){
+	                    _s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton, customButton.target);
+				    }else{
+	                    _s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+				    }
 				}
 			}
 			//Prepare for future pushes
 			window["_s4CustomButtons"] = {
 					push: function (customButton) {
 						if (customButton.searcher && _s4Params[customButton.searcher] && _s4Params[customButton.searcher].searcher){
-							_s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+		                    if (customButton.target){
+		                        _s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton, customButton.target);
+		                    }else{
+		                        _s4Params[customButton.searcher].searcher.addCustomButtonDef(customButton);
+		                    }
 						}
 					}
 			};
@@ -413,7 +421,7 @@ function s4DawaHit(result){
 
 function s4Hit(result, geometryBehavior){
 	//geometryBehavior: ['zoom']
-	cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
+	//cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
     for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
 			return;
