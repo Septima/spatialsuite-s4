@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.6.36</version>
-   <param name="s4.version">2.6.36</param>
+   <version>2.6.37</version>
+   <param name="s4.version">2.6.37</param>
 
    <stoponerror>true</stoponerror>
   
@@ -19,13 +19,13 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/4.3.2/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/4.3.2/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.2/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/4.3.3/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.3.3/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.3/septimasearch.debug.js</param> -->
    
 <!-- cdn-aws -->
-<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.2/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.2/septimasearch.debug.js</param> -->
+<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.3/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.3/septimasearch.debug.js</param> -->
   
 <!-- development (serve)-->
 <!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
