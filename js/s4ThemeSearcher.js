@@ -68,7 +68,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         //Internal house keeping
         this.getLocalThemesDeferred = jQuery.Deferred();
         this.indexDone = false;
-        
+        this.indexStarted = false;
     },
     
     cmpVersions: function (cmpVersion, refVersion) {
@@ -101,6 +101,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             return (g1.displayname.localeCompare(g2.displayname));
         });
         
+        this.indexDone = true;
         this.getLocalDatasources().done(Septima.bind(function(localDatasources){
             localThemesArray = [];
             localThemesString = "";
@@ -263,25 +264,32 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (this.indexDone){
             this.fetchIndexedData(query, caller);
         }else{
-            this.indexDone = true;
+            //Return newquery right away and then call doIndex()
+            var queryResult = this.createQueryResult();
+            queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase, null, query.queryString, null, null, null);
+            caller.fetchSuccess(queryResult);
+
             if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
                 cbKort.themeSelector &&
                 cbKort.themeSelector.createThemeStore &&
                 !cbKort.themeSelector.storeInitialized &&
                 cbKort.themeSelector.getButton &&
                 cbKort.themeSelector.getButton('theme_store_categories')){
-                try{
-                    cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
+                if (!this.indexStarted){
+                    this.indexStarted = true;
+                    try{
+                        cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
+                            this.doIndex();
+                            //this.fetchIndexedData(query, caller);
+                        }, this, query, caller));
+                    }catch (error){
                         this.doIndex();
-                        this.fetchIndexedData(query, caller);
-                    }, this, query, caller));
-                }catch (error){
-                    this.doIndex();
-                    this.fetchIndexedData(query, caller);
+                        //this.fetchIndexedData(query, caller);
+                    }
                 }
             }else{
                 this.doIndex();
-                this.fetchIndexedData(query, caller);
+                //this.fetchIndexedData(query, caller);
             }
         }
     },

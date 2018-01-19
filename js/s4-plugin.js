@@ -607,7 +607,9 @@ Searchlast2.prototype.closeDialog = function()
 }
 Searchlast2.prototype.search = function()
 {
-    showWaitingBox(cbInfo.getString('standard.message.getting_data'));
+    try{
+        showWaitingBox(cbInfo.getString('standard.message.getting_data'));
+    }catch (error){}
     
     this.closeDialog();
     
@@ -629,7 +631,9 @@ Searchlast2.prototype.search = function()
     var searchtext = (this.searchText || cbInfo.getString('spatialquery.lastdisplayed.searchtext'));
     spatialquery_doQuery("userdatasource", url, searchtext, null);
     
-    hideWaitingBox();
+    try{
+        hideWaitingBox();
+    }catch (error){}
 }
 var searchlast2 = new Searchlast2();
 
