@@ -77,12 +77,43 @@
     padding-left: 32px;
 }
 
-/* Mindre header Dude */
-/* .septimasearch li.ssDetailHeader .ssResult .ssResultTitle{ */
-/* 	padding-top: 0px; */
-/* 	padding-bottom: 5px; */
-/* } */
+/* Farve i details */
 
-/* .septimasearch li.ssDetailHeader .ssResult { */
-/* 	padding-bottom: 15px;	 */
-/* } */
+.septimasearch ul.better-autocomplete li.ssDetailHeader{
+    background-color: rgb(59, 68, 73);
+    background: -webkit-linear-gradient(left, rgb(59, 68, 73), rgb(59, 68, 73));
+}
+
+.septimasearch .ssTargetbit .ssTargetlabel, .septimasearch .ssTargetbit .ssTargetclosebutton{
+    background-color: rgb(59, 68, 73);
+} 
+
+.septimasearch li.ssDetailHeader .ssBackButton:hover{
+    background-color: rgb(59, 68, 73);
+    background: -webkit-linear-gradient(left, rgb(59, 68, 73), rgb(59, 68, 73));
+}
+
+/* Mindre header*/
+.septimasearch li.ssDetailHeader .ssBackButton {
+    padding: 0px 25px 0 8px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.5s ease;
+}
+.septimasearch li.ssDetailHeader .ssBackButton:hover .ssTxt {
+  transition: all 0.5s ease;
+}
+.septimasearch li.ssDetailHeader .ssResult .ssResultTitle {
+    font-size: 12px;
+    margin: 7px;
+}
+.septimasearch li.ssDetailHeader .ssResult .ssResultImage {
+    width: 32px;
+    height: 32px;
+    display: none;
+}
+.septimasearch li.ssDetailHeader .ssResult .ssResultImage img {
+    width: 32px;
+    height: 32px;
+}
+

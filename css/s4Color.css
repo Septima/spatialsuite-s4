@@ -2,9 +2,13 @@
 .septimasearch ul.better-autocomplete li.ssDetailHeader{
 	background-color: #005292;
     background: -webkit-linear-gradient(left,#0070b0,#005292);
-    /* background: -webkit-linear-gradient(left,#005292,#005292); */
 }
 
 .septimasearch .ssTargetbit .ssTargetlabel, .septimasearch .ssTargetbit .ssTargetclosebutton{
     background-color: #005292;
 } 
+
+.septimasearch li.ssDetailHeader .ssBackButton:hover{
+    background: -webkit-linear-gradient(left,#0070b0,#005292);
+}
+
