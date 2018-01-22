@@ -165,7 +165,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     getThemeFromId: function(themeId){
-        var visibleThemes = [];
         for (var i=0;i<this.groups.length;i++){
             var group = this.groups[i];
             for (var j=0;j<group.themes.length;j++){
@@ -190,6 +189,30 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 var result = queryResult.addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", description, null, indexedTheme);
                 //result.image = this.getThemeImage(indexedTheme);
                 result.image = indexedTheme.image;
+            }
+        }
+        return queryResult;
+    },
+    
+    getThemeGroupsForTheme: function (themeResult){
+        return [themeResult.data.group];
+        //Todo: get themeId and traverse all indexedThemes to see if in more than one group
+    },
+    
+    getThemesForThemeGroup: function (themeGroup){
+        var queryResult = this.createQueryResult();
+        for (var i=0; i<this.groups.length; i++){
+            var thisGroup = this.groups[i];
+            if (thisGroup.group.name === themeGroup.name){
+                for (var t=0; t<thisGroup.themes.length; t++){
+                    var indexedTheme = thisGroup.themes[t];
+                    var description = null;
+                    if (typeof indexedTheme.description !== 'undefined' && indexedTheme.description !== null){
+                        description = indexedTheme.description;
+                    }
+                    var result = queryResult.addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname, description, null, indexedTheme);
+                    result.image = indexedTheme.image;
+                }
             }
         }
         return queryResult;

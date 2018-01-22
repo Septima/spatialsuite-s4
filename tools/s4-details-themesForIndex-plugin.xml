@@ -168,6 +168,7 @@
 	                        for (var i=0;i<themesResults.length;i++){
 	                            var themeResult = themesResults[i];
 	                        
+	                        /*
 	                            var clickFunction = Septima.bind(function(result){
 	                                result.searcher.toggleTheme(result);
 	                                if (!result.data.theme.visible){
@@ -175,18 +176,32 @@
 	                                }
 	                                //detailsContent.selectResult(result);
 	                            }, this, themeResult) 
-	                        
+	                        */
 	                            var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
-	                            themeIcon.click(clickFunction);
+	                            //themeIcon.click(clickFunction);
 	                            var title = jQuery("<span>" + themeResult.title + "</span>");
-	                            title.click(clickFunction);
+	                            //title.click(clickFunction);
 	                            
-	                            var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
-	                            detailsIcon.click(clickFunction);
+	                            //var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
+	                            //detailsIcon.click(clickFunction);
 	                            
 	                            //items.push({type: 'area', icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true});
                                 items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
 	                        }
+                            for (var i=0;i<themesResults.length;i++){
+                                var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(themesResults[i]);
+                                for (var g=0; g<themeGroupsForTheme.length; g++){
+                                    var thisThemeGroup = themeGroupsForTheme[g];
+                                    items.push({type: "listheader", icon: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI, title: thisThemeGroup.displayname});
+                                    var themesForThemeGroup = _s4Params.themesearcher.searcher.getThemesForThemeGroup(thisThemeGroup).getResults();
+                                    for (var t=0; t<themesForThemeGroup.length; t++){
+                                        var thisTheme = themesForThemeGroup[t];
+		                                var themeIcon = jQuery("<img src='" + thisTheme.image + "'/>");
+		                                var title = jQuery("<span>" + thisTheme.title + "</span>");
+                                        items.push({type: 'area', icon: themeIcon, value: title, result: thisTheme, clickable: true, isListItem: true});
+                                    }
+                                }
+                            }
                             resolve(items);
 	                        //resolve(detailsContent.formatItems(items));
 					    });
