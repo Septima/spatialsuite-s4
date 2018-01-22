@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+            if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
+                
+                _s4Params.indexsearcher.searcher.addDetailHandlerDef({
+                    "buttonText":  cbInfo.getString('s4.themesearcher.themes'),
+                    "buttonImage": Septima.Search.s4Icons.layersIconUri,
+                    "handler": Septima.bind(function(result, detailsContent){
+                        var promise = new Promise(function(resolve, reject){
+                            var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+                            var items = [];
+                            for (var i=0;i<themesResults.length;i++){
+                                var themeResult = themesResults[i];
+                                var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
+                                var title = jQuery("<span>" + themeResult.title + "</span>");
+                                items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
+                            }
+                            for (var i=0;i<themesResults.length;i++){
+                                var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(themesResults[i]);
+                                for (var g=0; g<themeGroupsForTheme.length; g++){
+                                    var thisThemeGroup = themeGroupsForTheme[g];
+                                    items.push({type: "listheader", icon: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI, title: thisThemeGroup.displayname});
+                                    var themesForThemeGroup = _s4Params.themesearcher.searcher.getThemesForThemeGroup(thisThemeGroup).getResults();
+                                    for (var t=0; t<themesForThemeGroup.length; t++){
+                                        var thisTheme = themesForThemeGroup[t];
+                                        var themeIcon = jQuery("<img src='" + thisTheme.image + "'/>");
+                                        var title = jQuery("<span>" + thisTheme.title + "</span>");
+                                        items.push({type: 'area', icon: themeIcon, value: title, result: thisTheme, clickable: true, isListItem: true});
+                                    }
+                                }
+                            }
+                            resolve(items);
+                        });
+                        return promise;
+                    }, this),
+                    isApplicable: Septima.bind(function(result){
+                        //return false;
+                        var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+                        return themesResults.length > 0;
+                    }, this),
+                    getbuttonText: function(result){
+                        var text = cbInfo.getString('s4.themesearcher.themesrelated');
+                        return text + " " + result.title;
+                    }
+                });
+            }
+            if (Septima.Log){
+                Septima.Log.trace({
+                    eventCategory: 's4',
+                    eventAction: 's4_details',
+                    eventLabel: 'themesForindex-plugin'
+                });
+            }
+    
+    [endif]
+    ]]>
+    </src>
+</tool>
