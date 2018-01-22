@@ -168,21 +168,21 @@
 	                        for (var i=0;i<themesResults.length;i++){
 	                            var themeResult = themesResults[i];
 	                        
-	                            //var clickFunction = Septima.bind(function(result){
-	                            //    result.searcher.toggleTheme(result);
-	                            //    if (!result.data.theme.visible){
-	                            //        cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
-	                            //    }
-	                            //    detailsContent.selectResult(result);
-	                            //}, this, themeResult) 
+	                            var clickFunction = Septima.bind(function(result){
+	                                result.searcher.toggleTheme(result);
+	                                if (!result.data.theme.visible){
+	                                    cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+	                                }
+	                                //detailsContent.selectResult(result);
+	                            }, this, themeResult) 
 	                        
 	                            var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
-	                            //themeIcon.click(clickFunction);
+	                            themeIcon.click(clickFunction);
 	                            var title = jQuery("<span>" + themeResult.title + "</span>");
-	                            //title.click(clickFunction);
+	                            title.click(clickFunction);
 	                            
-	                            //var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
-	                            //detailsIcon.click(clickFunction);
+	                            var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
+	                            detailsIcon.click(clickFunction);
 	                            
 	                            //items.push({type: 'area', icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true});
                                 items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
@@ -193,9 +193,9 @@
 					    return promise;
             		}, this),
             		isApplicable: Septima.bind(function(result){
-            		    return false;
-            			//var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
-            			//return themesResults.length > 0;
+            		    //return false;
+            			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
+            			return themesResults.length > 0;
             		}, this),
             		getbuttonText: function(result){
             			var text = cbInfo.getString('s4.themesearcher.themesrelated');

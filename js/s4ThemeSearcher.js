@@ -171,7 +171,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             for (var j=0;j<group.themes.length;j++){
                 var indexedTheme = group.themes[j];
                 if (indexedTheme.theme.name === themeId){
-                    return this.createQueryResult().addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", null, null, {theme: indexedTheme.theme});
+                    return this.createQueryResult().addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", null, null, indexedTheme);
                 }
             }
         }
@@ -187,7 +187,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 if (typeof indexedTheme.description !== 'undefined' && indexedTheme.description !== null){
                     description = indexedTheme.description;
                 }
-                var result = queryResult.addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", description, null, {theme: indexedTheme});
+                var result = queryResult.addResult(this.source, indexedTheme.group.displayname.replace(/:/g, ""), indexedTheme.displayname + " (" + this.themePhrase + ")", description, null, indexedTheme);
                 //result.image = this.getThemeImage(indexedTheme);
                 result.image = indexedTheme.image;
             }
