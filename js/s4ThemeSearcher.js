@@ -13,7 +13,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     initialize: function (options) {
         //Strings
         this.visibleThemesPhrase = cbInfo.getString('s4.themesearcher.visiblethemes');
-        this.toolsPhrase = cbInfo.getString('s4.themesearcher.tools');
+        //this.toolsPhrase = cbInfo.getString('s4.themesearcher.tools');
         this.themePhrase = cbInfo.getString('s4.themesearcher.theme');
         this.themesPhrase = cbInfo.getString('s4.themesearcher.themes');
         this.showPhrase = cbInfo.getString('s4.themesearcher.show');
@@ -26,7 +26,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.themeOffLockUri = Septima.Search.s4Icons.themeSearcher.themeOffLockUri;
         this.themeOnUri = Septima.Search.s4Icons.themeSearcher.themeOnUri;
         this.themeOnLockUri = Septima.Search.s4Icons.themeSearcher.themeOnLockUri;
-        this.toolsIconURI = Septima.Search.s4Icons.themeSearcher.toolsIconURI;
+        //this.toolsIconURI = Septima.Search.s4Icons.themeSearcher.toolsIconURI;
         this.defaultThemeIconURI = Septima.Search.s4Icons.themeSearcher.defaultThemeIconURI;
         this.iconURI = Septima.Search.s4Icons.themeSearcher.iconURI;
         this.themeGroupIconURI = Septima.Search.s4Icons.themeSearcher.themeGroupIconURI;
@@ -500,20 +500,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
         }
     },
-    
-    hasdetailHandlerDefs: function(result){
-        if (typeof result.newquery !== 'undefined'){
-            return false;
-        }else{
-            if (result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
-                return false;
-            }else{
-                return true;
-            }
-        }
-    },
 
-    getdetailHandlerDefs: function(result){
+    getdetailHandlerDefs_old: function(result){
         if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
             return [];
         }else{
@@ -539,7 +527,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         buttons.append(copyRightLink);
                     }
                     resolve([{type: 'jquery-dom-object', object: buttons}]);
-                    //resolve(detailsContent.formatItems([{type: 'jquery-dom-object', object: buttons}]));
                 });
                 return p;
             }}]);

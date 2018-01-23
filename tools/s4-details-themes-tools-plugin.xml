@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+            if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
+                _s4Params.themesearcher.searcher.addDetailHandlerDef({
+                    "buttonText":  cbInfo.getString('s4.themesearcher.tools'),
+                    "buttonImage": Septima.Search.s4Icons.themeSearcher.toolsIconURI,
+                    "handler": Septima.bind(function(result){
+                        var promise = new Promise(function(resolve, reject){
+	                    var buttons = jQuery("<ul style='list-style: none'/>");
+	                    for (var i=0;i<result.data.theme.actions.length;i++){
+	                        var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
+	                        button.element.css("float", "left");
+	                        button.element.css("list-style", "none");
+	                        button.element.css("padding", "2px");
+	                        button.element.css("margin", "1px");
+	                        buttons.append(button.element);
+	                    }
+	                    var copyRightLink = result.searcher.getCopyRightLink(result);
+	                    if (copyRightLink !== null){
+	                        copyRightLink.css("float", "left");
+	                        copyRightLink.css("list-style", "none");
+	                        copyRightLink.css("padding", "2px");
+	                        copyRightLink.css("margin", "1px");
+	                        buttons.append(copyRightLink);
+	                    }
+	                    resolve([{type: 'jquery-dom-object', object: buttons}]);
+                        });
+                        return promise;
+                    }, this),
+                    isApplicable: Septima.bind(function(result){
+                        if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    }, this)
+                });
+            }
+            if (Septima.Log){
+                Septima.Log.trace({
+                    eventCategory: 's4',
+                    eventAction: 's4_details',
+                    eventLabel: 'themesTools-plugin'
+                });
+            }
+    [endif]
+    ]]>
+    </src>
+</tool>
