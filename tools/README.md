@@ -5,9 +5,6 @@ Please read the [general installation instructions](../../../#installation) befo
 The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
   
-This tool creates icons for Spatial Map functions (Info and print)  
-* [s4-buttons-spatialMapTools-plugin](#s4-buttons-spatialMapTools-plugin)  
-  
 Tools relevant for Denmark only:  
 * Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
     * [s4-matrikel-plugin](#s4-matrikel-plugin)  
