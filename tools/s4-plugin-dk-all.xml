@@ -8,15 +8,13 @@
         <file type="script" name="/modules/s4/js/workspaceSearcher.js?_=[s4.version]"/>
         <file type="script" name="/modules/s4/js/profileSearcher.js?_=[s4.version]"/>
         <file type="script" name="/modules/s4/js/favoriteSearcher.js?_=[s4.version]"/>
-
-        <!-- Include s4TopBar.css if you need to squeeze the height of the input box -->
-        <!-- <file type="css" name="/modules/s4/css/s4TopBar.css" /> -->
-        
-        <!-- Include custom css if you need to customize colors -->
-        <!-- <file type="css" name="/css/custom/s4Color.css" /> -->
         
         <!-- Include custom css if you need to customize styles -->
         <!-- <file type="css" name="/css/custom/s4.css" /> -->
+        
+        <!-- Include custom colors css if you need to customize colors -->
+        <!-- <file type="css" name="/css/custom/s4Color.css" /> -->
+
     </requires>
     <displayname>s4Plugin</displayname>
     <src><![CDATA[

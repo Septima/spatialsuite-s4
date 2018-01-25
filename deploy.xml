@@ -19,17 +19,17 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-<!--   <param name="s4.search.css">//search.cdn.septima.dk/4.3.4/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.4/septimasearch.min.js</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.4/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/4.3.6/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.3.6/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.6/septimasearch.debug.js</param> -->
    
 <!-- cdn-aws -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.4/css/defaultView.css</param> -->
 <!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.4/septimasearch.debug.js</param> -->
   
 <!-- development (serve)-->
-  <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param>
-  <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param>
+<!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param> -->
 <!--   <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param> -->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>

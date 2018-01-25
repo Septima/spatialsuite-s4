@@ -21,3 +21,7 @@
     width: 32px;
     height: 32px;
 }
+
+.septimasearch li.ssDetailHeader .ssResult {
+    padding-left: 40px;
+}
