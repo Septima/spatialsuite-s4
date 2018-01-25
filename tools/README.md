@@ -38,6 +38,7 @@ Tools using the details view function:
 * [s4-details-dawa-planer-plugin](#s4-details-dawa-planer-plugin)
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
 * [s4-details-themes-related-plugin](#s4-details-themes-related-plugin)  
+* [s4-details-themes-tools-plugin](#s4-details-themes-tools-plugin)
  
 * Experimental tools:  
     * [s4-details-guides-plugin](#s4-details-guides-plugin)  
@@ -163,7 +164,6 @@ Viser vejmidter fra dawa når en vej er valgt
 ```xml
 <tool module="s4" name="4-vis-dawa-vejmidter-plugin" />
 ```  
-
   
 ### <a name="s4-eknap-plugin"></a>s4-eknap-plugin  
 Only relevant in Denmark  
@@ -303,6 +303,14 @@ Show other themes belonging to the themegroup
 Include in profile:  
 ```xml
 <tool dir="custom" name="s4-details-themes-related-plugin" />
+```    
+  
+### <a name="#s4-details-themes-tools-plugin"></a>s4-details-themes-tools-plugin  
+Show tools (transparency, meetadat, copyright etc) for a theme.  
+
+Include in profile:  
+```xml
+<tool dir="custom" name="s4-details-themes-tools-plugin" />
 ```    
   
 ### <a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
