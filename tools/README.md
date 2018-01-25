@@ -26,6 +26,8 @@ Tools relevant for Denmark only:
     * [s4-odeum-plugin](#s4-odeum-plugin)  
     * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
 
+* Link til cvr-info
+    * [s4-cvr-virk-plugin](#s4-cvr-virk-plugin)
  
 * Vis E-Knap   
     * [s4-eknap-plugin](#s4-eknap-plugin)  
@@ -36,8 +38,9 @@ Tools using the details view function:
 * [s4-details-themesForIndex-plugin](#s4-details-themesForIndex-plugin)
 * [s4-details-s4index-plugin](#s4-details-s4index-plugin)  
 * [s4-details-dawa-dagi-plugin](#s4-details-dawa-dagi-plugin)  
+* [s4-details-dawa-planer-plugin](#s4-details-dawa-planer-plugin)
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
-
+* [s4-details-themes-related-plugin](#s4-details-themes-related-plugin)  
  
 * Experimental tools:  
     * [s4-details-guides-plugin](#s4-details-guides-plugin)  
@@ -186,6 +189,15 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 <text name="overskrift" value="Skole" plural="Skoler"/>
 ```  
 
+### <a name="s4-cvr-virk-plugin"></a>s4-cvr-virk-plugin  
+Only relevant in Denmark  
+
+Link til cvr-info på virk.dk.  
+
+```xml
+<tool module="s4" name="s4-cvr-virk-plugin" />
+```  
+
 ### <a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
 Only relevant in Denmark  
 Viser ikon med link til plansystemets pdf for lokalplaner  
@@ -260,6 +272,16 @@ Include in profile:
 <tool module="s4" name="s4-details-s4index-plugin" />
 ```    
   
+### <a name="#s4-details-dawa-planer-plugin"></a>s4-details-dawa-planer-plugin  
+Only relevant in Denmark.  
+
+Vis vedtaget lokalplan for adressen.  
+
+Inkludér in profil:  
+```xml
+<tool module="s4" name="s4-details-dawa-planer-plugin" />
+```    
+  
 ### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
 Only relevant in Denmark.  
   
@@ -276,6 +298,14 @@ Vis Link til Tingbogen for en adresse.
 Inkludér in profil:  
 ```xml
 <tool module="s4" name="s4-details-adresse-tinglysninger" />
+```    
+  
+### <a name="#s4-details-themes-related-plugin"></a>s4-details-themes-related-plugin    
+Show other themes belonging to the themegroup  
+
+Include in profile:  
+```xml
+<tool dir="custom" name="s4-details-themes-related-plugin" />
 ```    
   
 ### <a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
