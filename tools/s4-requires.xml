@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tool type="plugin">
     <requires>
-    [if: not isDefined("module.s4.log.disable") ]
-        <file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
-    [endif]
+	    [if: not isDefined("module.s4.log.disable") ]
+	        <file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
+	    [endif]
 
 		<file type="css"    name="[s4.search.css]" />
 		<file type="script" name="[s4.search.script]"/>
+
+        <file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
+        
+	    [if: isDefinedAndTrue("s4.header.small") ]
+	        <file type="css" name="/modules/s4/css/s4SmallHeader.css?_=[s4.version]" />
+	    [endif]
+	    [if: isDefinedAndTrue("s4.input.topbar") ]
+            <file type="css"  name="/modules/s4/css/s4TopBar.css?_=[s4.version]" />
+        [endif]
+        <file type="css" name="/modules/s4/css/s4[s4.color].css?_=[s4.version]" />
 		
-		<file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
 		<file type="script" name="/modules/s4/js/icons.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/s4-control.js?_=[s4.version]"/>
  		<file type="script" name="/modules/s4/js/s4-plugin.js?_=[s4.version]"/>

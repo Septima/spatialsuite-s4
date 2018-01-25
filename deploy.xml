@@ -37,4 +37,7 @@
 
   <param name="s4.gst.login" ignore="Not IsDefined(module.kms.login)">[module.kms.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
+  
+  <param name="s4.color" ignore="IsDefined(s4.color)">Blue</param>
+  
 </deploy>
