@@ -45,7 +45,8 @@
 
         function s4DawaDoJordforureningKnap(result){
             _s4View.blur();
-             var url = "http://arealinformation.miljoeportal.dk/gis/SoilContamination.aspx?elav=" + result.data.properties.ejerlav.kode + "&matrnr=" + result.data.properties.jordstykke.matrikelnr; 
+             //var url = "http://arealinformation.miljoeportal.dk/gis/SoilContamination.aspx?elav=" + result.data.properties.ejerlav.kode + "&matrnr=" + result.data.properties.jordstykke.matrikelnr; 
+             var url = "http://jordrapport.miljoeportal.dk/?elav=" + result.data.properties.ejerlav.kode + "&matrnr="+ result.data.properties.jordstykke.matrikelnr;
              window.open(url, "_s4DoJordforureningKnap");
         }
 

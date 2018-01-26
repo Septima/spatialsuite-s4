@@ -49,7 +49,8 @@
             if (result.data.type == 'matrikelnummer' && result.data.esrejdnr){
                 var komnr = result.data.esrejdnr.substring(0, 3);
                 var ejdnr = result.data.esrejdnr.substring(3);
-                var url = "http://arealinformation.miljoeportal.dk/gis/SoilContamination.aspx?elav=" + result.data.elavskode + "&matrnr=" + result.data.matrnr; 
+                //var url = "http://arealinformation.miljoeportal.dk/gis/SoilContamination.aspx?elav=" + result.data.elavskode + "&matrnr=" + result.data.matrnr;
+                var url = "http://jordrapport.miljoeportal.dk/?elav=" + result.data.elavskode + "&matrnr=" + result.data.matrnr;
                 window.open(url, "_s4DoJordforureningKnap");
             }
         }
