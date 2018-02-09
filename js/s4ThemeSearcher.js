@@ -102,21 +102,24 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         });
         
         this.indexDone = true;
-        this.getLocalDatasources().done(Septima.bind(function(localDatasources){
-            localThemesArray = [];
-            localThemesString = "";
-            for (var i=0;i<localDatasources.length;i++){
-                var localDatasource = localDatasources[i];
-                if (typeof this.datasources[localDatasource] !== "undefined"){
-                    var indexedThemes = this.datasources[localDatasource];
-                    for (var j=0;j<indexedThemes.length;j++){
-                        localThemesArray.push(indexedThemes[j].theme.name);
+        
+        setTimeout(Septima.bind(function () {
+            this.getLocalDatasources().done(Septima.bind(function(localDatasources){
+                localThemesArray = [];
+                localThemesString = "";
+                for (var i=0;i<localDatasources.length;i++){
+                    var localDatasource = localDatasources[i];
+                    if (typeof this.datasources[localDatasource] !== "undefined"){
+                        var indexedThemes = this.datasources[localDatasource];
+                        for (var j=0;j<indexedThemes.length;j++){
+                            localThemesArray.push(indexedThemes[j].theme.name);
+                        }
                     }
                 }
-            }
-            localThemesString = localThemesArray.join(" ");
-            this.getLocalThemesDeferred.resolve(localThemesString);
-        }, this));
+                localThemesString = localThemesArray.join(" ");
+                this.getLocalThemesDeferred.resolve(localThemesString);
+            }, this));
+         }, this), 500);
     },
     
     doIndexForGroup: function(group, parentGroup){
@@ -129,24 +132,22 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     if (theme.selectable=="true"){
                         groupHasThemes = true;
                         var themeDescription = this.getThemeDescription(theme);
-                        var terms = (theme.displayname + " " + themeDescription).split(" ");
+                        var terms = (theme.displayname + " " + themeDescription).toLowerCase().split(" ");
                         var termsToSearch = [];
                         for (var k=0;k<terms.length;k++){
                             term = terms[k];
                             if (term.length > 1){
-                                termsToSearch.push(term.toLowerCase());
+                                termsToSearch.push(term);
                             }
                         }
                         var indexedTheme = {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": theme.displayname, "group": group};
                         themes.push(indexedTheme);
-                        for (l=0;l<theme.layers.length;l++){
-                            var layer = theme.layers[l];
-                            if (layer.datasource){
-                                if (typeof this.datasources[layer.datasource] === 'undefined'){
-                                    this.datasources[layer.datasource] = [];
-                                }
-                                this.datasources[layer.datasource].push(indexedTheme);
+                        if (theme.primarydatasource){
+                            var datasource = theme.datasource; 
+                            if (typeof this.datasources[datasource] === 'undefined'){
+                                this.datasources[datasource] = [];
                             }
+                            this.datasources[datasource].push(indexedTheme);
                         }
                     }
                 }else{
@@ -156,9 +157,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
             if (groupHasThemes){
                 //sort themes
-                themes.sort(function(t1, t2){
-                    return (t1.displayname.localeCompare(t2.displayname));
-                });
+//                themes.sort(function(t1, t2){
+//                    return (t1.displayname.localeCompare(t2.displayname));
+//                });
                 this.groups.push({"group": group, "themes": themes, "displayname": group.displayname.replace(/:/g, "")});
                 this.registerType(this.source, group.displayname.replace(/:/g, ""))
             }
@@ -263,9 +264,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     getThemeDescription: function(theme){
-        for (var i=0;i<theme.copyright.length;i++){
-            if (theme.copyright[i].name == "metadata.text"){
-                return theme.copyright[i].value;
+        var copyright = theme.copyright;
+        for (var i=0;i<copyright.length;i++){
+            if (copyright[i].name == "metadata.text"){
+                return copyright[i].value;
             }
         }
         return "";
@@ -291,29 +293,32 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var queryResult = this.createQueryResult();
             queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase, null, query.queryString, null, null, null);
             caller.fetchSuccess(queryResult);
-
-            if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
-                cbKort.themeSelector &&
-                cbKort.themeSelector.createThemeStore &&
-                !cbKort.themeSelector.storeInitialized &&
-                cbKort.themeSelector.getButton &&
-                cbKort.themeSelector.getButton('theme_store_categories')){
-                if (!this.indexStarted){
-                    this.indexStarted = true;
-                    try{
-                        cbKort.themeSelector.createThemeStore(Septima.bind(function(query, caller){
-                            this.doIndex();
-                            //this.fetchIndexedData(query, caller);
-                        }, this, query, caller));
-                    }catch (error){
+            
+            setTimeout(Septima.bind(function () {
+                if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
+                        cbKort.themeSelector &&
+                        cbKort.themeSelector.createThemeStore &&
+                        //NYT
+                        !cbKort.themeSelector.areThemesLoaded &&
+                        cbKort.themeSelector.getButton &&
+                        cbKort.themeSelector.getButton('theme_store_categories')){
+                        if (!this.indexStarted){
+                            this.indexStarted = true;
+                            try{
+                                //NYT
+                                cbKort.themeSelector.loadThemes(Septima.bind(function(){
+                                    setTimeout(Septima.bind(function () {
+                                            this.doIndex();
+                                        }, this), 100);
+                                }, this));
+                            }catch (error){
+                                this.doIndex();
+                            }
+                        }
+                    }else{
                         this.doIndex();
-                        //this.fetchIndexedData(query, caller);
                     }
-                }
-            }else{
-                this.doIndex();
-                //this.fetchIndexedData(query, caller);
-            }
+                }, this), 100);
         }
     },
     
