@@ -147,7 +147,8 @@ view: {
   printconfig: 'rotatet',
   forcedblurOnSelect: 'false',
   zoomBuffer: '100',
-  marginToBottom: 100 
+  marginToBottom: 100,
+  placeholder: 'Søg' 
 },
 
 //Adressesøgning i DAWA

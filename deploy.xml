@@ -39,5 +39,10 @@
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
   
   <param name="s4.color" ignore="IsDefined(s4.color)">Blue</param>
+
+<!--   <param name="s4.search.placeholder" ignore="IsDefined(s4.search.placeholder)">[text:s4.search.placeholder]</param> -->
+<!--   <param name="s4.search.matches" ignore="IsDefined(s4.search.matches)">[text:s4.search.matches]</param> -->
+<!--   <param name="s4.search.close" ignore="IsDefined(s4.search.close)">[text:s4.search.close]</param> -->
+<!--   <param name="s4.search.dodetails" ignore="IsDefined(s4.search.dodetails)">[text:s4.search.dodetails]</param> -->
   
 </deploy>
