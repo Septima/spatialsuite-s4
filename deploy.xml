@@ -19,13 +19,13 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/4.3.7/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/4.3.7/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.6/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/4.3.8/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.3.8/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.8/septimasearch.debug.js</param> -->
    
 <!-- cdn-aws -->
-<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.7/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.7/septimasearch.debug.js</param> -->
+<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.8/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.8/septimasearch.debug.js</param> -->
   
 <!-- development (serve)-->
 <!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
@@ -39,5 +39,10 @@
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
   
   <param name="s4.color" ignore="IsDefined(s4.color)">Blue</param>
+
+<!--   <param name="s4.search.placeholder" ignore="IsDefined(s4.search.placeholder)">[text:s4.search.placeholder]</param> -->
+<!--   <param name="s4.search.matches" ignore="IsDefined(s4.search.matches)">[text:s4.search.matches]</param> -->
+<!--   <param name="s4.search.close" ignore="IsDefined(s4.search.close)">[text:s4.search.close]</param> -->
+<!--   <param name="s4.search.dodetails" ignore="IsDefined(s4.search.dodetails)">[text:s4.search.dodetails]</param> -->
   
 </deploy>

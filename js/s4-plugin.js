@@ -71,10 +71,24 @@ function s4_init (params){
         }
     			
        		_s4Params = params;
-       		try{
-                var locale = cbInfo.getParam("cbinfo.locale");
-                Septima.Search.setLocaleByIdentifier(locale);
-       		} catch (e){}
+       		var s4Locale = {
+       		      "search": cbInfo.getString('s4.search.placeholder'),
+       		      "matches": cbInfo.getString('s4.search.matches'),
+       		      "close": cbInfo.getString('s4.search.close'),
+       		      "doDetails": cbInfo.getString('s4.search.dodetails')
+       		};
+       		
+            if (typeof _s4Params.view.placeholder !== 'undefined'){
+                s4Locale.search = _s4Params.view.placeholder;
+            }else{
+                var placeHolder = cbInfo.getParam("s4.search.placeholder");
+                if (placeHolder !== "s4.search.placeholder"){
+                    s4Locale.search = placeHolder;
+                }
+            }
+            
+       		Septima.Search.setLocale(s4Locale);
+       		    
        		//Fix some defaults
        		if (typeof _s4Params.view.forcedblurOnSelect === 'undefined'){
        			_s4Params.view.forcedblurOnSelect = false;

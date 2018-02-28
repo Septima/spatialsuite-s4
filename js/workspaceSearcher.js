@@ -78,9 +78,10 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		}else{
     			//Workspace version3
                 if (typeof workspace_container === 'undefined' || workspace_container === null) {
-    				var workspacejs = cbInfo.getParam('module.workspace.js');
-    				var spatialmapVersion = cbInfo.getParam('spatialmap.version');
-    	            require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
+    				//var workspacejs = cbInfo.getParam('module.workspace.js');
+    				//var spatialmapVersion = cbInfo.getParam('spatialmap.version');
+                    //require([workspacejs + '?ver=' + spatialmapVersion, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
+    	            require(['[module.workspace.js]', '/js/standard/color.js'], Septima.bind(function(workspaceId) {
     	                workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
     	                this.showWorkSpace3(workspaceId);
     	            }, this, workspaceId));
