@@ -156,7 +156,7 @@ view: {
 dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
 
 //Geodatastyrelsen-geosearch
-// Full set of geosearcher targets is: ['adresser','stednavne_v2', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+// Full set of geosearcher targets is: ['adresser','stednavne_v2', 'kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse', 'sogne']
 // Søg ikke i adresser i geosearch, hvis DAWA-searcheren er enabled
 // geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'stednavne', 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
 geosearcher: {enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
