@@ -293,33 +293,27 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var queryResult = this.createQueryResult();
             queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase, null, query.queryString, null, null, null);
             caller.fetchSuccess(queryResult);
-            
-            setTimeout(Septima.bind(function () {
-                if ((this.cmpVersions(cbInfo.getParam('spatialmap.version'), '3.12.0') > 0) &&
-                        cbKort.themeSelector &&
-                        cbKort.themeSelector.createThemeStore &&
-                        //NYT
-                        !cbKort.themeSelector.areThemesLoaded &&
-                        cbKort.themeSelector.getButton &&
-                        cbKort.themeSelector.getButton('theme_store_categories')){
-                        if (!this.indexStarted){
-                            this.indexStarted = true;
-                            try{
-                                //NYT
-                                cbKort.themeSelector.loadThemes(Septima.bind(function(){
-                                    setTimeout(Septima.bind(function () {
-                                            this.doIndex();
-                                        }, this), 100);
-                                }, this));
-                            }catch (error){
-                                this.doIndex();
-                            }
-                        }
-                    }else{
-                        this.doIndex();
-                    }
-                }, this), 100);
+            this.loadThemesAndDoIndex();
         }
+    },
+    
+    loadThemesAndDoIndex: function(){
+        var callDoIndexAfterDelay = Septima.bind(function(){
+            setTimeout(Septima.bind(function () {
+                this.doIndex();
+            }, this), 100);
+        }, this);
+        
+        setTimeout(Septima.bind(function(afterLoadFunction){
+            if (typeof cbKort.themeSelector.loadThemes !== 'undefined'){
+                cbKort.themeSelector.loadThemes(afterLoadFunction);
+            }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
+                cbKort.themeSelector.createThemeStore(afterLoadFunction);
+            }else{
+                //Assume themes are already loaded
+                afterLoadFunction();
+            }
+        }, this, callDoIndexAfterDelay), 100);
     },
     
     fetchIndexedData: function (query, caller) {
