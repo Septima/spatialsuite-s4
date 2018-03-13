@@ -8,15 +8,13 @@
     color: black;
 }
 
-#mysearchbox{
-	height:32px;
-	top: 0px;
-}
-
-.inpucontainer-spacer {
+.inputcontainer-spacer {
     width: 400px;
     height: 30px;
-/*     margin-top: -4px; */
+}
+
+#panel-top .inputcontainer-spacer{
+ margin-top: -4px;
 }
 
 .septimasearch, .septimasearch.ssActive{
@@ -29,7 +27,6 @@
 .septimasearch > div > ul.better-autocomplete,
 .septimasearch > div > ul.better-autocomplete .ssDetailContent > ul {
     position: relative;
-/*     background-color: #FDFEFD;  */
 }
 .septimasearch > div > ul.better-autocomplete > li {
  display: block;

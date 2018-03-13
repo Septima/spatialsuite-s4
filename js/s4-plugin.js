@@ -120,86 +120,69 @@ function s4_init (params){
         	var sessionId = cbKort.sessionId;
 
             //Set up search input box
-            var inputContainer = jQuery('<div type="text" id="s4box" name="s4box" class="inputcontainer"/>');
-                if (jQuery("#panel-brand div.right").length > 0){
-                	if (jQuery("li[id^=s4-plugin]") && typeof params.panel !== 'undefined' && params.panel === 'tool' ){
-                    	var menuItem = jQuery("li[id^=s4-plugin]");
-                    	menuItem.empty();
-                    	menuItem.addClass("inpucontainer-spacer");
-                    	//jQuery("body").append(inputContainer);
-                    	menuItem.append(inputContainer);
-                	}else{
-                        var panel = 'panel-brand';
-                        if (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30) {
-                            panel = 'panel-middle';
-                        }
-                        if (typeof params.panel !== 'undefined' && params.panel !== 'default') {
-                            panel = params.panel;
-                        }
-
-                    	if (jQuery("li[id^=s4-plugin]")){
-                        	var menuItem = jQuery("li[id^=s4-plugin]");
-                        	menuItem.remove();
-                    	}
-                        inputContainer.addClass('in-'+panel);
-                        
-                        if (panel === 'panel-brand'){
-                            //Add spacer
-                            jQuery("#panel-brand div.right").append('<div class="inpucontainer-spacer"></div>');
-                            jQuery("#panel-brand div.right").append(inputContainer);
-                        } else if (panel === 'panel-middle'){
-                            //Add spacer
-                            jQuery('#panel-middle > .inner.right > .midnav').append('<li class="inpucontainer-spacer"></li>');
-                            jQuery('#panel-middle > .inner.right').append(inputContainer);
-                            
-                            if (cbKort.themeSelector && cbKort.themeSelector.panels) {
-                                var panel = cbKort.themeSelector.panels["panel-themes-headerleft"];
-                                if (panel) {
-                                    var button = panel.getButton('theme_store_setting');
-                                    button.element.click(function () {
-                                        if (cbKort.themeSelector.editMode) {
-                                            jQuery('#s4box').hide();
-                                        } else {
-                                            jQuery('#s4box').show();
-                                        }
-                                    });
-                                }
-                            }                        
-                        } else if (panel === 'panel-top'){
-                            jQuery('#panel-top > .inner.right > .topnav').append('<li class="inpucontainer-spacer"></li>');
-                            jQuery('#panel-top > .inner.right').append(inputContainer);
-                        } else if (panel === 'menu'){
-                            jQuery('#panel-middle > .inner.left > .midnav').append('<li class="inpucontainer-spacer"></li>');
-                            jQuery('#panel-middle > .inner.left').append(inputContainer);
-                        }else {
-                        	if (panel.indexOf('panel-middle') > -1){
-                                jQuery(panel).append('<li class="inpucontainer-spacer"></li>');
-                        	}else{
-                                jQuery(panel).append('<div class="inpucontainer-spacer"></div>');
-                        	}
-                        	jQuery(panel).append(inputContainer);
-                        }
-                	}
-                    
-
-                    //Place inputcontainer according to the spacer
-                    inputContainer.offset(jQuery('.inpucontainer-spacer').offset());
-                    //Compensate for a delay in Chrome
-                    setTimeout(function () {
-                        jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
-                    },500);
-
-                    //onResize: Place inputcontainer according to the spacer
-                    jQuery(window).resize(function () {
-                        setTimeout(function () {
-                            jQuery('#s4box').offset(jQuery('.inpucontainer-spacer').offset());
-                        },100);
-                    });
-
-                }else{
-                    jQuery("body").append(inputContainer);
-                    inputContainer.addClass("v263");
+            var inputContainer = jQuery('<div id="s4box " class="inputcontainer"/>');
+            var s4MenuItem = jQuery("li[id^=s4-plugin]");
+        	if (jQuery("li[id^=s4-plugin]") && typeof params.panel !== 'undefined' && params.panel === 'tool' ){
+        	    s4MenuItem.empty();
+        	    s4MenuItem.addClass("inputcontainer-spacer");
+        	    s4MenuItem.append(inputContainer);
+        	}else{
+                var panel = 'panel-brand';
+                if (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30) {
+                    panel = 'panel-middle';
                 }
+                if (typeof params.panel !== 'undefined' && params.panel !== 'default') {
+                    panel = params.panel;
+                }
+
+                s4MenuItem.remove();
+                inputContainer.addClass('in-'+panel);
+                
+                if (panel === 'panel-brand'){
+                    //Add spacer
+                    jQuery("#panel-brand div.right").append('<div class="inputcontainer-spacer"></div>');
+                    jQuery("#panel-brand div.right").append(inputContainer);
+                } else if (panel === 'panel-middle'){
+                    //Add spacer
+                    jQuery('#panel-middle > .inner.right > .midnav').append('<li class="inputcontainer-spacer"></li>');
+                    jQuery('#panel-middle > .inner.right').append(inputContainer);
+                    
+                    if (cbKort.themeSelector && cbKort.themeSelector.panels) {
+                        var panel = cbKort.themeSelector.panels["panel-themes-headerleft"];
+                        if (panel) {
+                            var button = panel.getButton('theme_store_setting');
+                            button.element.click(function () {
+                                if (cbKort.themeSelector.editMode) {
+                                    jQuery('.inputcontainer').hide();
+                                } else {
+                                    jQuery('.inputcontainer').show();
+                                }
+                            });
+                        }
+                    }                        
+                } else if (panel === 'panel-top'){
+                    jQuery('#panel-top > .inner.right > .topnav').append('<li class="inputcontainer-spacer"></li>');
+                    jQuery('#panel-top > .inner.right').append(inputContainer);
+                } else if (panel === 'menu'){
+                    jQuery('#panel-middle > .inner.left > .midnav').append('<li class="inputcontainer-spacer"></li>');
+                    jQuery('#panel-middle > .inner.left').append(inputContainer);
+                }
+        	}
+            
+
+            //Place inputcontainer according to the spacer
+            inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+            //Compensate for a delay in Chrome
+            setTimeout(function () {
+                jQuery('.inputcontainer').offset(jQuery('.inputcontainer-spacer').offset());
+            },500);
+
+            //onResize: Place inputcontainer according to the spacer
+            jQuery(window).resize(function () {
+                setTimeout(function () {
+                    jQuery('.inputcontainer').offset(jQuery('.inputcontainer-spacer').offset());
+                },100);
+            });
 
             //Create controller
         	var blankBehavior = "search";
@@ -384,7 +367,7 @@ function s4_init (params){
         	
             //Create view 
         	_s4View = new Septima.Search.DefaultView({
-        		input:"s4box",
+        		input: inputContainer,
         		limit: _s4Params.view.limit,
         		controller: controller});
         	
