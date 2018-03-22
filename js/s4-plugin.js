@@ -120,7 +120,7 @@ function s4_init (params){
         	var sessionId = cbKort.sessionId;
 
             //Set up search input box
-            var inputContainer = jQuery('<div id="s4box " class="inputcontainer"/>');
+            var inputContainer = jQuery('<div id="s4box" class="inputcontainer"/>');
             var s4MenuItem = jQuery("li[id^=s4-plugin]");
         	if (jQuery("li[id^=s4-plugin]") && typeof params.panel !== 'undefined' && params.panel === 'tool' ){
         	    s4MenuItem.empty();
