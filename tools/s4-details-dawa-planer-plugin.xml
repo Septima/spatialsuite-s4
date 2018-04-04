@@ -14,23 +14,26 @@
                     "buttonImage": Septima.Search.icons.searchers.planer.result,
                     "handler": Septima.bind(function(result){
                         var promise = new Promise(function(resolve, reject){
-                            var onResolve = Septima.bind(function(resolve, planResult){
+                            var onResolve = Septima.bind(function(resolve, planResults){
                                  var items = [];
-                                 if (planResult === null){
+                                 if (planResults.length == 0){
                                      items.push({type: 'textarea', text: 'Ingen lokalplan fundet for adressen'});
                                  }else{
+                                    for (var i=0; i<planResults.length; i++){
+                                     var planResult = planResults[i];
                                      items.push({type: 'textarea', icon: Septima.Search.icons.searchers.planer.result, text: planResult.title});
-                                     items.push({type: 'textarea', text: planResult.description});
-                                     items.push({type: 'area', value: 'Mere ...', result: planResult, clickable: true, hoverable: true, isListItem: false});
+                                     //items.push({type: 'textarea', text: planResult.description});
+                                     items.push({type: 'area', value: planResult.description, result: planResult, clickable: true, hoverable: true, isListItem: false});
+                                    }
                                  }
                                  resolve(items);
                              }, this, resolve);
                             var onReject = Septima.bind(function(resolve, error){
                                  var items = [];
-                                 items.push({type: 'textarea', text: 'Der opstod en fejl'});
+                                 items.push({type: 'textarea', text: 'Der opstod en fejl: ' + error});
                                  resolve(items);
                              }, this, resolve);
-                            _s4Params.plansearcher.searcher.getPlanForPoint(result.geometry).then(onResolve, onReject);
+                            _s4Params.plansearcher.searcher.getPlansForPoint(result.geometry).then(onResolve, onReject);
                         });
                         return promise;
                     }, this)

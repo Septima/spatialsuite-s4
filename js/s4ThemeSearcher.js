@@ -68,7 +68,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         //Internal house keeping
         this.getLocalThemesDeferred = jQuery.Deferred();
         this.indexDone = false;
-        this.indexStarted = false;
+        this.loadStarted = false;
     },
     
     cmpVersions: function (cmpVersion, refVersion) {
@@ -143,7 +143,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         var indexedTheme = {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": theme.displayname, "group": group};
                         themes.push(indexedTheme);
                         if (theme.primarydatasource){
-                            var datasource = theme.datasource; 
+                            var datasource = theme.primarydatasource; 
                             if (typeof this.datasources[datasource] === 'undefined'){
                                 this.datasources[datasource] = [];
                             }
@@ -298,22 +298,25 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     loadThemesAndDoIndex: function(){
-        var callDoIndexAfterDelay = Septima.bind(function(){
-            setTimeout(Septima.bind(function () {
-                this.doIndex();
-            }, this), 100);
-        }, this);
-        
-        setTimeout(Septima.bind(function(afterLoadFunction){
-            if (typeof cbKort.themeSelector.loadThemes !== 'undefined'){
-                cbKort.themeSelector.loadThemes(afterLoadFunction);
-            }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
-                cbKort.themeSelector.createThemeStore(afterLoadFunction);
-            }else{
-                //Assume themes are already loaded
-                afterLoadFunction();
-            }
-        }, this, callDoIndexAfterDelay), 100);
+        if (!this.loadStarted){
+            this.loadStarted = true;
+            var callDoIndexAfterDelay = Septima.bind(function(){
+                setTimeout(Septima.bind(function () {
+                    this.doIndex();
+                }, this), 100);
+            }, this);
+            
+            setTimeout(Septima.bind(function(afterLoadFunction){
+                if (typeof cbKort.themeSelector.loadThemes !== 'undefined'){
+                    cbKort.themeSelector.loadThemes(afterLoadFunction);
+                }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
+                    cbKort.themeSelector.createThemeStore(afterLoadFunction);
+                }else{
+                    //Assume themes are already loaded
+                    afterLoadFunction();
+                }
+            }, this, callDoIndexAfterDelay), 100);
+        }
     },
     
     fetchIndexedData: function (query, caller) {
