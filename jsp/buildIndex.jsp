@@ -8,6 +8,8 @@
  <%
  	try{
  	 	String configDir = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.config.dir");
+        String searchCss = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.css");
+        String searchScript = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.script");
  	 	if (configDir == null || configDir.equalsIgnoreCase("")){
  	 		throw new Exception ("The cbInfo parameter s4.config.dir is not defined. Please see https://github.com/Septima/spatialsuite-s4#readme");
  	 	}else{
@@ -38,9 +40,12 @@
 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script>
 	
 	<!-- Include septimaSearch -->
-	<script type="text/javascript" src="http://search.cdn.septima.dk/4.2.7/septimasearch.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/4.2.7/css/defaultView.css">
+<!-- 	<script type="text/javascript" src="http://search.cdn.septima.dk/4.2.7/septimasearch.min.js"></script> -->
+<!-- 	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/4.2.7/css/defaultView.css"> -->
 	
+    <link rel="stylesheet" type="text/css" href="<%=searchCss%>">
+    <script type="text/javascript" src="<%=searchScript%>"></script>
+    
 	<style type="text/css">
 		#inputcontainer {
 		    width: 400px;
@@ -104,6 +109,7 @@
  	}catch (Exception e){
 	 	out.println ("<h3>ERROR: There was an error building the index:</h3>");
 	 	out.println ("<h2>" + e.getMessage() + "</h2>");
+        out.println ("<a href='./testConfig.jsp'>Test configuration</a>");
 	 	out.println ("<pre>");
 		e.printStackTrace(new java.io.PrintWriter(out));
 	 	out.println ("</pre>");

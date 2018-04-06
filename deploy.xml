@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.8</version>
-   <param name="s4.version">2.8</param>
+   <version>2.9</version>
+   <param name="s4.version">2.9</param>
 
    <stoponerror>true</stoponerror>
   
@@ -19,17 +19,12 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-<!--   <param name="s4.search.css">//search.cdn.septima.dk/4.3.8/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.8/septimasearch.min.js</param> -->
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.8/septimasearch.debug.js</param> -->
+  <param name="s4.search.css">//search.cdn.septima.dk/4.3.9/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.3.9/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.3.9/septimasearch.debug.js</param> -->
    
-<!-- cdn-aws -->
-<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.3.8/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.3.8/septimasearch.debug.js</param> -->
-  
-<!-- development (serve)-->
-  <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param>
-  <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param>
+<!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param> -->
 <!--   <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param> -->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
@@ -39,10 +34,5 @@
   <param name="s4.gst.password" ignore="Not IsDefined(module.kms.password)">[module.kms.password]</param>
   
   <param name="s4.color" ignore="IsDefined(s4.color)">Blue</param>
-
-<!--   <param name="s4.search.placeholder" ignore="IsDefined(s4.search.placeholder)">[text:s4.search.placeholder]</param> -->
-<!--   <param name="s4.search.matches" ignore="IsDefined(s4.search.matches)">[text:s4.search.matches]</param> -->
-<!--   <param name="s4.search.close" ignore="IsDefined(s4.search.close)">[text:s4.search.close]</param> -->
-<!--   <param name="s4.search.dodetails" ignore="IsDefined(s4.search.dodetails)">[text:s4.search.dodetails]</param> -->
   
 </deploy>
