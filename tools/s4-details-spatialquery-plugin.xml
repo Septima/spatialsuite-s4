@@ -18,7 +18,10 @@
 		var localThemes = _s4Params.themesearcher.searcher.getLocalthemes().done(Septima.bind(function(localThemes){
 		
 		    var s4SqSearcher = new Septima.Search.SqSearcher({
-		        layers: localThemes.substr(0, 2000),
+                //Customize HERE
+		        layers: localThemes.substr(0, 1000),
+		        // or
+                //layers: "theme_skole theme_park",
 		        profile: cbKort.getProfile(),
 		        profileQuery: 'info',
 		        buffer: 0,

@@ -68,7 +68,7 @@ This tools creates icons for Spatial Map functions (Info and print).
 <tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
 ```    
   
-### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin  
+### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin    
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for matrikler  
 Inkludér i profil:  
@@ -243,14 +243,32 @@ Include in profile:
 <tool module="s4" name="s4-details-nearest-plugin" />
 ```    
 
-### <a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin      
+### <a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin        
 Perform a standard Spatial Suite spatial query against your _local_ datasources.  
   
-To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
-
 Include in profile:  
 ```xml
 <tool module="s4" name="s4-details-spatialquery-plugin" />
+```    
+To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
+  
+```javascript
+   var s4SqSearcher = new Septima.Search.SqSearcher({
+       //Customize HERE
+       layers: "theme_skole theme_park",
+       profile: cbKort.getProfile(),
+       profileQuery: 'info',
+       buffer: 0,
+       sessionId: cbKort.getSessionId(),
+       allowDetails: true,
+       onSelect: s4Hit             
+   });
+
+```    
+Include in profile:  
+
+```xml
+<tool dir="custom" name="s4-details-spatialquery-plugin" />
 ```    
 
 ### <a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
