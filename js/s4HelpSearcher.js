@@ -11,6 +11,8 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
     	});
         Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
 		this.iconURI = Septima.Search.s4Icons.helpSearcher.iconURI;
+
+		this.registerType(options.plural, options.singular);
 		
     	this.currentProfile = cbKort.getProfile();
     	this.addDetailHandlerDef({

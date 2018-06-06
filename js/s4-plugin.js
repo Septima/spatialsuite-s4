@@ -172,18 +172,19 @@ function s4_init (params){
 
             //Place inputcontainer according to the spacer
             inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+
             //Compensate for a delay in Chrome
-            setTimeout(function () {
-                jQuery('.inputcontainer').offset(jQuery('.inputcontainer-spacer').offset());
-            },500);
+            setTimeout(Septima.bind(function (inputContainer) {
+                inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+            }, this, inputContainer), 300);
 
             //onResize: Place inputcontainer according to the spacer
-            jQuery(window).resize(function () {
-                setTimeout(function () {
-                    jQuery('.inputcontainer').offset(jQuery('.inputcontainer-spacer').offset());
-                },100);
-            });
-
+            jQuery(window).resize(Septima.bind(function (inputContainer) {
+                setTimeout(Septima.bind(function (inputContainer) {
+                    inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                }, this, inputContainer), 100);
+            }, this, inputContainer));
+            
             //Create controller
         	var blankBehavior = "search";
         	if (_s4Params.view.blankbehavior && _s4Params.view.blankbehavior == "none"){
