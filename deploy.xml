@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.9.2</version>
-   <param name="s4.version">2.9.2</param>
+   <version>2.9.3</version>
+   <param name="s4.version">2.9.3</param>
 
    <stoponerror>true</stoponerror>
   
@@ -18,11 +18,16 @@
   <makedir dir="[cbinfo.wwwroot.dir]/modules/s4/js"/>
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
-<!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/4.4.1/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/4.4.1/septimasearch.min.js</param>
-<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.4.1/septimasearch.debug.js</param> -->
+<!-- production (Cloudfront) -->
+  <param name="s4.search.css">//search.cdn.septima.dk/4.4.2/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.4.2/septimasearch.min.js</param>
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/4.4.2/septimasearch.debug.js</param> -->
    
+<!-- aws -->
+<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/4.4.2/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.4.2/septimasearch.min.js</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/4.4.2/septimasearch.debug.js</param> -->
+
 <!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
 <!--   <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param> -->
 <!--   <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param> -->

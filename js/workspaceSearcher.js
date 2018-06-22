@@ -80,7 +80,7 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
                 if (typeof workspace_container === 'undefined' || workspace_container === null) {
     				var workspacejs = cbInfo.getParam('module.workspace.js');
     				//var spatialmapVersion = cbInfo.getParam('spatialmap.version');
-                    require([workspacejs, '/js/standard/color.js'], Septima.bind(function(workspaceId) {
+                    require(['/modules/workspace/js/workspace.js', '/js/standard/color.js'], Septima.bind(function(workspaceId) {
     	            //require(['[module.workspace.js]', '/js/standard/color.js'], Septima.bind(function(workspaceId) {
     	                workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
     	                this.showWorkSpace3(workspaceId);
