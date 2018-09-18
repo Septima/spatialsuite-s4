@@ -23,12 +23,12 @@
 <!--   <param name="s4.search.script">//search.cdn.septima.dk/4.4.2/septimasearch.min.js</param> -->
    
 <!-- aws -->
-  <param name="s4.search.css">//search.cdn-aws.septima.dk/master/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn-aws.septima.dk/master/septimasearch.min.js</param>
+<!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/master/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn-aws.septima.dk/master/septimasearch.min.js</param> -->
 
 <!-- Dev -->
-<!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param> -->
+  <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param>
+  <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param>
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>

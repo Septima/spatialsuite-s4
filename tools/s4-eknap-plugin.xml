@@ -54,7 +54,7 @@
 					eknap_infoHandler(pointOnSurfaceOlGeom);
 			    } else {
 			    	//3.9+
-			    	if (eknapModule === null){
+			    	if (typeof eknapModule === 'undefined' || eknapModule === null){
 			    		//Adapted from eknap.xml
 						require(["[module.emdb.eknap.js]"], Septima.bind(function (pointOnSurfaceOlGeom) {
 							if (!eknapModule) {

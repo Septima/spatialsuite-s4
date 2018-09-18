@@ -4,13 +4,17 @@
     <requires>
 		<include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-        <file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
-        <file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
-        <file type="script" name="/modules/s4/js/profileSearcher.js"/>
-        <file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
+        <file type="script" name="/modules/s4/js/s4ThemeSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/workspaceSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/profileSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/favoriteSearcher.js?_=[s4.version]"/>
 
         <!-- Include custom css if you need to customize styles -->
         <!-- <file type="css" name="/css/custom/s4.css" /> -->
+        
+        <!-- Include custom colors css if you need to customize colors -->
+        <!-- <file type="css" name="/css/custom/s4Color.css" /> -->
+
     </requires>
     <displayname>s4Plugin</displayname>
     <src><![CDATA[

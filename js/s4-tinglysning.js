@@ -29,9 +29,9 @@ function tinglysningsHandler(result){
                             var item = data.items[i];
                             var link;
                             if (item.bog === "Andelsboligbog"){
-                                link = "https://www.tinglysning.dk/m/#/andelsbolig/" + item.uuid;
+                                link = "https://www.tinglysning.dk/m/andelsbolig/" + item.uuid;
                             }else if (item.bog === "Tingbog"){
-                                link = "https://www.tinglysning.dk/m/#/ejendomme/" + item.uuid;
+                                link = "https://www.tinglysning.dk/m/ejendom/" + item.uuid;
                             }
                             var linkTitle = item.adresse;
                             detailItems.push({type: 'link', icon: icon, link: link, linkTitle: linkTitle});
