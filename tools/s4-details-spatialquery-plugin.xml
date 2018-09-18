@@ -62,11 +62,11 @@
     	var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
     		searchers: searchers,
     		limit: 10,
-    		title: cbInfo.getString('s4.sq.caption'),
-    		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
+    		title: cbKort.getSession().getString('s4.sq.caption'),
+    		selectButtonCaption: cbKort.getSession().getString('s4.showinmap.caption'),
     		header: {
    				button: {
-   					buttonText: cbInfo.getString('s4.sq.header.text'),
+   					buttonText: cbKort.getSession().getString('s4.sq.header.text'),
    					buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
    					callBack: function(sqInfo){
    						if (sqInfo.hitResults.length > 0){
@@ -92,20 +92,20 @@
     		},
    			footer: {
    				icon: Septima.Search.icons.infoGrey,
-    			caption: cbInfo.getString('s4.sq.footer.caption'),
-    			text:  cbInfo.getString('s4.sq.footer.text'),
+    			caption: cbKort.getSession().getString('s4.sq.footer.caption'),
+    			text:  cbKort.getSession().getString('s4.sq.footer.text'),
    				button: {
-   					buttonText: cbInfo.getString('s4.infobutton.caption'),
+   					buttonText: cbKort.getSession().getString('s4.infobutton.caption'),
    					buttonImage: Septima.Search.s4Icons.infoIconUri,
    					callBack: function(sqInfo){s4DoInfo(sqInfo.mainResult);}
 				}
     		},
    			noResults:{
    				icon: Septima.Search.icons.infoRed,
-    			caption: cbInfo.getString('s4.sq.noresults.caption'),
-    			text:  cbInfo.getString('s4.sq.noresults.text'),
+    			caption: cbKort.getSession().getString('s4.sq.noresults.caption'),
+    			text:  cbKort.getSession().getString('s4.sq.noresults.text'),
    				button: {
-   					buttonText: cbInfo.getString('s4.infobutton.caption'),
+   					buttonText: cbKort.getSession().getString('s4.infobutton.caption'),
    					buttonImage: Septima.Search.s4Icons.infoIconUri,
    					callBack: function(sqInfo){s4DoInfo(sqInfo.mainResult);}
 				}
@@ -115,7 +115,7 @@
     	var handlerDef = sqDHB.buildHandlerDef();
     	
     	handlerDef.getbuttonText = function(result){
-    		return cbInfo.getString('s4.sq.caption') + " " + result.title;
+    		return cbKort.getSession().getString('s4.sq.caption') + " " + result.title;
     	}
 
 		return handlerDef; 

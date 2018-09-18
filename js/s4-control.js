@@ -18,14 +18,14 @@ Septima.Search.S4Control = Septima.Class ({
     	var searchers = [];
     	
     	//Get localized strings
-    	var inputPlaceHolder = cbInfo.getString('s4.input.placeholder');
-    	var matchPhrase = cbInfo.getString('s4.list.matchphrase');
+    	var inputPlaceHolder = cbKort.getSession().getString('s4.input.placeholder');
+    	var matchPhrase = cbKort.getSession().getString('s4.list.matchphrase');
 
     	var searchIndexToken = null;
     	
     	if ((this.options.cvrsearcher && this.options.cvrsearcher.enabled) || (this.options.plansearcher && this.options.plansearcher.enabled)){
         	var searchIndexTokenParamName = 's4.searchchindex.token';
-        	searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+        	searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
         	if (searchIndexToken === searchIndexTokenParamName){
         		//getParam returns paramName if param isn't defined
         		searchIndexToken = null;

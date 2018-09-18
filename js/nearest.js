@@ -5,11 +5,11 @@
 				searchers: searchers,
 				distanceFilter: 'all',
 				limit: options.limit ? options.limit : 3,
-				title: options.title ? options.title : cbInfo.getString('s4.nearest.caption'),
-	    		selectButtonCaption: cbInfo.getString('s4.showinmap.caption'),
+				title: options.title ? options.title : cbKort.getSession().getString('s4.nearest.caption'),
+	    		selectButtonCaption: cbKort.getSession().getString('s4.showinmap.caption'),
 	    		header: {
 	   				button: {
-	   					buttonText: cbInfo.getString('s4.sq.header.text'),
+	   					buttonText: cbKort.getSession().getString('s4.sq.header.text'),
 	   					buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
 	   					callBack: function(sqInfo){
 	   						if (sqInfo.hitResults.length > 0){
@@ -35,8 +35,8 @@
 	    		},
 	   			noResults:{
 	   				icon: Septima.Search.icons.infoRed,
-	    			caption: cbInfo.getString('s4.sq.noresults.caption'),
-	    			text:  cbInfo.getString('s4.sq.noresults.text')
+	    			caption: cbKort.getSession().getString('s4.sq.noresults.caption'),
+	    			text:  cbKort.getSession().getString('s4.sq.noresults.text')
 	   			},
 				imageUri: _s4Params.indexsearcher.searcher.iconsMapPointGrey
     		}
@@ -64,7 +64,7 @@
     		
 			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder(sqDetailsHandlerBuilderOptions);
 			if (options.showRoute){
-				var routeApiKey = cbInfo.getParam("module.route.token");
+				var routeApiKey = cbKort.getSession().getParam("module.route.token");
 				if (routeApiKey !== "module.route.token"){
 					var routeProfile = "car";
 					if (options.routeProfile){

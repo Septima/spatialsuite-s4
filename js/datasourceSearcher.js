@@ -92,7 +92,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
                     var description = thisHit['description'] || "";
                     if (thisHit['url']){
                         if (typeof this.hyperLinkLabel === 'undefined'){
-                            this.hyperLinkLabel = cbInfo.getString('s4.DatasourceSearcher.hyperLinkLabel');
+                            this.hyperLinkLabel = cbKort.getSession().getString('s4.DatasourceSearcher.hyperLinkLabel');
                         }
                     	description = description + " " + "<a href='" + thisHit['url'] + "' target='blank'>" + this.hyperLinkLabel + "</a>";
                     }

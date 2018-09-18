@@ -159,7 +159,7 @@
                 });
                 
             	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
-            		"buttonText":  cbInfo.getString('s4.themesearcher.themes'),
+            		"buttonText":  cbKort.getSession().getString('s4.themesearcher.themes'),
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,
             		"handler": Septima.bind(function(result, detailsContent){
 					    var promise = new Promise(function(resolve, reject){
@@ -213,7 +213,7 @@
             			return themesResults.length > 0;
             		}, this),
             		getbuttonText: function(result){
-            			var text = cbInfo.getString('s4.themesearcher.themesrelated');
+            			var text = cbKort.getSession().getString('s4.themesearcher.themesrelated');
             			return text + " " + result.title;
             		}
             	});

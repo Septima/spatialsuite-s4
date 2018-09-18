@@ -46,7 +46,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
                 success:  Septima.bind(function(data, textStatus,  jqXHR){
                 	var a= jQuery(data);
                 	//var entries = a.find('.helpEntry');
-                	var th = cbInfo.getString('standard.misc.themeselector');
+                	var th = cbKort.getSession().getString('standard.misc.themeselector');
                     var currentMenu = '';
                     var entries = [];
                     var themeSelectorCorrectEntry = a.find(".helpEntry .helpH3:contains('" + th + "')");

@@ -10,7 +10,7 @@
     [if: ModuleDefined("s4") ]
             if (_s4Params.themesearcher && _s4Params.themesearcher.enabled){
                 _s4Params.themesearcher.searcher.addDetailHandlerDef({
-                    "buttonText":  cbInfo.getString('s4.themesearcher.tools'),
+                    "buttonText":  cbKort.getSession().getString('s4.themesearcher.tools'),
                     "buttonImage": Septima.Search.s4Icons.themeSearcher.toolsIconURI,
                     "handler": Septima.bind(function(result){
                         var promise = new Promise(function(resolve, reject){

@@ -12,14 +12,14 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     
     initialize: function (options) {
         //Strings
-        this.visibleThemesPhrase = cbInfo.getString('s4.themesearcher.visiblethemes');
-        //this.toolsPhrase = cbInfo.getString('s4.themesearcher.tools');
-        this.themePhrase = cbInfo.getString('s4.themesearcher.theme');
-        this.themesPhrase = cbInfo.getString('s4.themesearcher.themes');
-        this.showPhrase = cbInfo.getString('s4.themesearcher.show');
-        this.hidePhrase = cbInfo.getString('s4.themesearcher.hide');
-        this.showLockedPhrase = cbInfo.getString('s4.themesearcher.show_locked');
-        this.hideLockedPhrase = cbInfo.getString('s4.themesearcher.hide_locked');
+        this.visibleThemesPhrase = cbKort.getSession().getString('s4.themesearcher.visiblethemes');
+        //this.toolsPhrase = cbKort.getSession().getString('s4.themesearcher.tools');
+        this.themePhrase = cbKort.getSession().getString('s4.themesearcher.theme');
+        this.themesPhrase = cbKort.getSession().getString('s4.themesearcher.themes');
+        this.showPhrase = cbKort.getSession().getString('s4.themesearcher.show');
+        this.hidePhrase = cbKort.getSession().getString('s4.themesearcher.hide');
+        this.showLockedPhrase = cbKort.getSession().getString('s4.themesearcher.show_locked');
+        this.hideLockedPhrase = cbKort.getSession().getString('s4.themesearcher.hide_locked');
         
         //Icons
         this.themeOffUri = Septima.Search.s4Icons.themeSearcher.themeOffUri;

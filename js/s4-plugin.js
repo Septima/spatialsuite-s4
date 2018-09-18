@@ -66,22 +66,22 @@ function s4_init (params){
             Septima.Log.trace({
                 eventCategory: 's4',
                 eventAction: 's4_init',
-                eventLabel: cbInfo.getParam("s4.version") + "@" + cbInfo.getParam("spatialmap.version")
+                eventLabel: cbKort.getSession().getParam("s4.version") + "@" + cbKort.getSession().getParam("spatialmap.version")
             });
         }
     			
        		_s4Params = params;
        		var s4Locale = {
-       		      "search": cbInfo.getString('s4.search.placeholder'),
-       		      "matches": cbInfo.getString('s4.search.matches'),
-       		      "close": cbInfo.getString('s4.search.close'),
-       		      "doDetails": cbInfo.getString('s4.search.dodetails')
+       		      "search": cbKort.getSession().getString('s4.search.placeholder'),
+       		      "matches": cbKort.getSession().getString('s4.search.matches'),
+       		      "close": cbKort.getSession().getString('s4.search.close'),
+       		      "doDetails": cbKort.getSession().getString('s4.search.dodetails')
        		};
        		
             if (typeof _s4Params.view.placeholder !== 'undefined'){
                 s4Locale.search = _s4Params.view.placeholder;
             }else{
-                var placeHolder = cbInfo.getParam("s4.search.placeholder");
+                var placeHolder = cbKort.getSession().getParam("s4.search.placeholder");
                 if (placeHolder !== "s4.search.placeholder"){
                     s4Locale.search = placeHolder;
                 }
@@ -106,10 +106,10 @@ function s4_init (params){
         	
         	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
             	var searchIndexTokenParamName = 's4.searchchindex.token';
-            	searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+            	searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
             	if (searchIndexToken === searchIndexTokenParamName){
             	    searchIndexTokenParamName = 's4.searchindex.token';
-                    searchIndexToken = cbInfo.getParam(searchIndexTokenParamName);
+                    searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
                     if (searchIndexToken === searchIndexTokenParamName){
                         //getParam returns paramName if param isn't defined
                         searchIndexToken = null;
@@ -312,7 +312,7 @@ function s4_init (params){
         	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit});
-	            controller.addSearcher({"title": cbInfo.getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
+	            controller.addSearcher({"title": cbKort.getSession().getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
                 _s4Params.themesearcher.searcher = themeSearcher;
             }
 
@@ -320,11 +320,11 @@ function s4_init (params){
             	var workspaceSearcher = new Septima.Search.workspaceSearcher({
         			host: "",
         			onSelect: workspaceHit,
-            		singular: cbInfo.getString('s4.workspacesearcher.workspace'),
-            		plural: cbInfo.getString('s4.workspacesearcher.workspaces'),
+            		singular: cbKort.getSession().getString('s4.workspacesearcher.workspace'),
+            		plural: cbKort.getSession().getString('s4.workspacesearcher.workspaces'),
             		sessionId: sessionId
         		});
-            	controller.addSearcher({title: cbInfo.getString('s4.workspacesearcher.workspaces'), searcher: workspaceSearcher});
+            	controller.addSearcher({title: cbKort.getSession().getString('s4.workspacesearcher.workspaces'), searcher: workspaceSearcher});
                 _s4Params.workspacesearcher.searcher = workspaceSearcher;
             }
 
@@ -332,11 +332,11 @@ function s4_init (params){
             	var profileSearcher = new Septima.Search.ProfileSearcher({
         			host: "",
         			onSelect: profileHit,
-            		singular: cbInfo.getString('s4.profilesearcher.profile'),
-            		plural: cbInfo.getString('s4.profilesearcher.profiles'),
+            		singular: cbKort.getSession().getString('s4.profilesearcher.profile'),
+            		plural: cbKort.getSession().getString('s4.profilesearcher.profiles'),
             		sessionId: sessionId
         		});
-            	controller.addSearcher({title: cbInfo.getString('s4.profilesearcher.profiles'), searcher: profileSearcher});
+            	controller.addSearcher({title: cbKort.getSession().getString('s4.profilesearcher.profiles'), searcher: profileSearcher});
                 _s4Params.profilesearcher.searcher = profileSearcher;
             }
             
@@ -344,11 +344,11 @@ function s4_init (params){
             	var favoriteSearcher = new Septima.Search.FavoriteSearcher({
         			host: "",
         			onSelect: favoriteHit,
-            		singular: cbInfo.getString('s4.favoritesearcher.favorite'),
-            		plural: cbInfo.getString('s4.favoritesearcher.favorites'),
+            		singular: cbKort.getSession().getString('s4.favoritesearcher.favorite'),
+            		plural: cbKort.getSession().getString('s4.favoritesearcher.favorites'),
             		sessionId: sessionId
         		});
-        		controller.addSearcher({title: cbInfo.getString('s4.favoritesearcher.favorites'), searcher: favoriteSearcher});
+        		controller.addSearcher({title: cbKort.getSession().getString('s4.favoritesearcher.favorites'), searcher: favoriteSearcher});
                 _s4Params.favoritesearcher.searcher = favoriteSearcher;
             }
 
@@ -542,7 +542,7 @@ function addS4SpatialMapTools(paramEntry){
 }
 
 function addInfoButtonToSearcher(searcher){
-    var s4InfoButtonCaption = cbInfo.getString('s4.infobutton.caption');
+    var s4InfoButtonCaption = cbKort.getSession().getString('s4.infobutton.caption');
     var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
     var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
     searcher.addCustomButtonDef(s4InfoButtonDef);
@@ -558,8 +558,8 @@ function addPrintButtonToSearcher(searcher){
 }
 
 function s4_getGstAuthParams(){
-	var login = cbInfo.getParam('s4.gst.login');
-	var password = cbInfo.getParam('s4.gst.password');
+	var login = cbKort.getSession().getParam('s4.gst.login');
+	var password = cbKort.getSession().getParam('s4.gst.password');
 	return {login: login, password: password};
 }
 
@@ -574,8 +574,8 @@ Searchlast2.prototype.createDialog = function()
 {
     if(!this.dialog)
     {
-    	this.defaultText = cbInfo.getString('spatialquery.lastdisplayed.hint');
-        this.dialog = new Dialog(cbInfo.getString('spatialquery.lastdisplayed.dialogtitle'));
+    	this.defaultText = cbKort.getSession().getString('spatialquery.lastdisplayed.hint');
+        this.dialog = new Dialog(cbKort.getSession().getString('spatialquery.lastdisplayed.dialogtitle'));
         var h = '<table class="divtable" style="width:100%">' +
                 '    <tr align="left">' +
                 '        <td colspan="2" id="Searchlast2_searchtext">'+this.defaultText+'</td>' +
@@ -586,7 +586,7 @@ Searchlast2.prototype.createDialog = function()
                 '    <tr style="height:5px"><td></td></tr>' +
                 '    <tr align="right">' +
                 '        <td colspan="2">' +
-                '            <button class="menubutton" onclick="searchlast2.search();">'+cbInfo.getString('standard.button.ok')+'</button>' +
+                '            <button class="menubutton" onclick="searchlast2.search();">'+cbKort.getSession().getString('standard.button.ok')+'</button>' +
                 '        </td>' +
                 '    </tr>' +
                 '</table>';
@@ -600,7 +600,7 @@ Searchlast2.prototype.showDialog = function(searchtext)
     
 	if (searchtext) {
 		this.searchText = searchtext;
-	    getElement('Searchlast2_searchtext').innerHTML = cbInfo.getString('spatialquery.show_info_about')+' '+this.searchText;
+	    getElement('Searchlast2_searchtext').innerHTML = cbKort.getSession().getString('spatialquery.show_info_about')+' '+this.searchText;
 	} else {
 		this.searchText = null;
 	    getElement('Searchlast2_searchtext').innerHTML = this.defaultText;
@@ -617,7 +617,7 @@ Searchlast2.prototype.closeDialog = function()
 Searchlast2.prototype.search = function()
 {
     try{
-        showWaitingBox(cbInfo.getString('standard.message.getting_data'));
+        showWaitingBox(cbKort.getSession().getString('standard.message.getting_data'));
     }catch (error){}
     
     this.closeDialog();
@@ -637,7 +637,7 @@ Searchlast2.prototype.search = function()
     }
     var url = cbKort.getUrl (params);
     
-    var searchtext = (this.searchText || cbInfo.getString('spatialquery.lastdisplayed.searchtext'));
+    var searchtext = (this.searchText || cbKort.getSession().getString('spatialquery.lastdisplayed.searchtext'));
     spatialquery_doQuery("userdatasource", url, searchtext, null);
     
     try{

@@ -16,7 +16,7 @@
     [if: ModuleDefined("s4") ]
            
         var clientNameParam = 's4.odeumClientName';
-        var clientName = cbInfo.getParam(clientNameParam);
+        var clientName = cbKort.getSession().getParam(clientNameParam);
         
         if (typeof clientName !== 'undefined' && clientName !== null && clientName !== clientNameParam && clientNameParam !== ''){
 	       	window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
