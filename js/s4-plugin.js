@@ -75,7 +75,8 @@ function s4_init (params){
        		      "search": cbKort.getSession().getString('s4.search.placeholder'),
        		      "matches": cbKort.getSession().getString('s4.search.matches'),
        		      "close": cbKort.getSession().getString('s4.search.close'),
-       		      "doDetails": cbKort.getSession().getString('s4.search.dodetails')
+       		      "doDetails": cbKort.getSession().getString('s4.search.dodetails'),
+                  "at_site": cbKort.getSession().getString('s4.search.at_site')
        		};
        		
             if (typeof _s4Params.view.placeholder !== 'undefined'){
