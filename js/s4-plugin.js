@@ -401,6 +401,7 @@ function s4_init (params){
         	}
             addS4SpatialMapTools(_s4Params.dawasearcher);
             addS4SpatialMapTools(_s4Params.geosearcher);
+            addS4SpatialMapTools(_s4Params.geostednavnesearcher);
             addS4SpatialMapTools(_s4Params.cvrsearcher);
             addS4SpatialMapTools(_s4Params.plansearcher);
             addS4SpatialMapTools(_s4Params.indexsearcher);
