@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+        [if: ModuleDefined("s4") ]
+            <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+        [endif]
+   </requires>
+    <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+
+            window["_s4Searchers"] = window["_s4Searchers"] || [];
+            var _s4Searchers = window["_s4Searchers"];
+            var boundaries = {
+			    firstLower: 430000,
+			    firstUpper: 950000,
+			    secondLower: 6000000,
+			    secondUpper: 6500000,
+			    description: cbKort.getSession().getString('s4.coordinatesearcher.boundaries.description')
+			}
+		    var coordinateSearcher = new Septima.Search.ClientSearcher({
+		      "singular": cbKort.getSession().getString('s4.coordinatesearcher.coordinate'),
+		      "plural": cbKort.getSession().getString('s4.coordinatesearcher.coordinates'),
+		      "isAsync": false,
+		      "usesGeoFunctions": true,
+		      onSelect: s4Hit,
+		      provider: new Septima.Search.CoordinateSearchProvider({'boundaries': boundaries})
+		    });
+		    
+            _s4Searchers.push({
+                searcher : coordinateSearcher, 
+                info: true, 
+                print: true 
+            });
+        [endif]
+    ]]>
+    
+    </src>
+    <jssrc></jssrc>
+</tool>

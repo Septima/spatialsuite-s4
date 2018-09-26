@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+        [if: ModuleDefined("s4") ]
+            <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+        [endif]
+   </requires>
+    <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+
+            window["_s4Searchers"] = window["_s4Searchers"] || [];
+            var _s4Searchers = window["_s4Searchers"];
+            var boundaries = {
+			    firstLower: 430000,
+			    firstUpper: 950000,
+			    secondLower: 6000000,
+			    secondUpper: 6500000,
+			    description: cbKort.getSession().getString('s4.coordinatesearcher.boundaries.description')
+			}
+		    var coordinateSearcher = new Septima.Search.ClientSearcher({
+		      "singular": cbKort.getSession().getString('s4.coordinatesearcher.coordinate'),
+		      "plural": cbKort.getSession().getString('s4.coordinatesearcher.coordinates'),
+		      "isAsync": false,
+		      "usesGeoFunctions": true,
+		      onSelect: s4Hit,
+		      provider: new Septima.Search.CoordinateSearchProvider({'boundaries': boundaries})
+		    });
+		    
+		    var searchers = [];
+		    if (typeof _s4Params.dawasearcher.searcher !== 'undefined'){
+		      searchers.push(_s4Params.dawasearcher.searcher);
+		    }
+            if (typeof _s4Params.geosearcher.searcher !== 'undefined'){
+              searchers.push(_s4Params.geosearcher.searcher);
+            }
+            if (typeof _s4Params.indexsearcher.searcher !== 'undefined'){
+              searchers.push(_s4Params.indexsearcher.searcher);
+            }
+            
+		    if (searchers.length > 0){
+            var sqDHB = new Septima.Search.SqDetailsHandlerBuilder({
+	            searchers: searchers,
+	            limit: 10,
+	            title: "Info om punktet",
+	            selectButtonCaption: cbKort.getSession().getString('s4.showinmap.caption'),
+	            header: {
+	                button: {
+	                    buttonText: cbKort.getSession().getString('s4.sq.header.text'),
+	                    buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
+	                    callBack: function(sqInfo){
+	                        if (sqInfo.hitResults.length > 0){
+	                            var geojson = new OpenLayers.Format.GeoJSON();
+	                            var components = [];
+	                            for (var i=0;i < sqInfo.hitResults.length;i++){
+	                                components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+	                            }
+	                            components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
+	                            var collection = new OpenLayers.Geometry.Collection(components);
+	                            collection.calculateBounds();
+	                            var bounds = collection.getBounds();
+	                            var extent = 
+	                            {  x1: bounds.left,
+	                               y2: bounds.top,
+	                               x2: bounds.right,
+	                               y1: bounds.bottom
+	                            };   
+	                            cbKort.mapObj.zoomToExtent(extent, 100);
+	                        }
+	                    }
+	                }
+	            },
+	            noResults:{
+	                icon: Septima.Search.icons.infoRed,
+	                caption: cbKort.getSession().getString('s4.sq.noresults.caption'),
+	                text:  cbKort.getSession().getString('s4.sq.noresults.text'),
+	                button: {
+	                    buttonText: cbKort.getSession().getString('s4.infobutton.caption'),
+	                    buttonImage: Septima.Search.s4Icons.infoIconUri,
+	                    callBack: function(sqInfo){s4DoInfo(sqInfo.mainResult);}
+	                }
+	            }
+            });
+            var handlerDef = sqDHB.buildHandlerDef();
+            coordinateSearcher.addDetailHandlerDef(handlerDef);
+		    }
+
+		    
+            _s4Searchers.push({
+                searcher : coordinateSearcher, 
+                info: true, 
+                print: true 
+            });
+        [endif]
+    ]]>
+    
+    </src>
+    <jssrc></jssrc>
+</tool>

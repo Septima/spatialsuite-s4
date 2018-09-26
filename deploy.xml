@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.9.4</version>
-   <param name="s4.version">2.9.4</param>
+   <version>2.9.5</version>
+   <param name="s4.version">2.9.5</param>
 
    <stoponerror>true</stoponerror>
   
@@ -19,8 +19,8 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/4.5.0/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/4.5.0/septimasearch.min.js</param>
+  <param name="s4.search.css">//search.cdn.septima.dk/4.5.1/css/defaultView.css</param>
+  <param name="s4.search.script">//search.cdn.septima.dk/4.5.1/septimasearch.min.js</param>
    
 <!-- aws -->
 <!--   <param name="s4.search.css">//search.cdn-aws.septima.dk/master/css/defaultView.css</param> -->
