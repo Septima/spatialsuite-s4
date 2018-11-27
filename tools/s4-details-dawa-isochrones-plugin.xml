@@ -13,11 +13,11 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-			    var isoChronSearcher = new Septima.Search.IsoChroneSearcher({onSelect: s4Hit, modetext: 'kørsel'});
+			    var isoChronSearcher = new Septima.Search.IsoChroneSearcher({onSelect: s4Hit, modetext: 'kørsel', cutoffSecs : [240, 360 , 480, 600]});
 			    var sqIsochronBuilder = new Septima.Search.SqDetailsHandlerBuilder({
 			      searchers: [isoChronSearcher],
 			      limit: 10,
-			      title: "Isokroner",
+			      title: cbKort.getSession().getString('s4.isochrones.captions'),
                           header: {
                             button: {
                                 buttonText: cbKort.getSession().getString('s4.sq.header.text'),
