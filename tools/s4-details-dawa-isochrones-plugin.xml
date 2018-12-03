@@ -24,22 +24,41 @@
                                 buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
                                 callBack: function(sqInfo){
                                     if (sqInfo.hitResults.length > 0){
-                                        var geojson = new OpenLayers.Format.GeoJSON();
-                                        var components = [];
-                                        for (var i=0;i < sqInfo.hitResults.length;i++){
-                                            components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+                                        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+									        var wktParser = Septima.Search.getWKTParser();
+                                            var wkt;
+                                            var feature;
+                                            var olGeom;
+                                            var olGeoms = [];
+                                            var mc = spm.getMapControl();
+	                                        for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                wkt = wktParser.convert(sqInfo.hitResults[i].geometry);
+									            feature = mc._wktFormatter.readFeature(wkt);
+									            olGeom = feature.getGeometry();
+									            olGeoms.push(olGeom);
+	                                        }
+                                            var g = new ol.geom.GeometryCollection(olGeoms);
+								            var mc = spm.getMapControl();
+								            mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                                        }else{
+	                                        var geojson = new OpenLayers.Format.GeoJSON();
+	                                        var components = [];
+	                                        for (var i=0;i < sqInfo.hitResults.length;i++){
+	                                            components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+	                                        }
+	                                        components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
+	                                        var collection = new OpenLayers.Geometry.Collection(components);
+	                                        collection.calculateBounds();
+	                                        var bounds = collection.getBounds();
+	                                        var extent = 
+	                                        {  x1: bounds.left,
+	                                           y2: bounds.top,
+	                                           x2: bounds.right,
+	                                           y1: bounds.bottom
+	                                        };   
+	                                        cbKort.mapObj.zoomToExtent(extent, 100);
+                                        
                                         }
-                                        components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
-                                        var collection = new OpenLayers.Geometry.Collection(components);
-                                        collection.calculateBounds();
-                                        var bounds = collection.getBounds();
-                                        var extent = 
-                                        {  x1: bounds.left,
-                                           y2: bounds.top,
-                                           x2: bounds.right,
-                                           y1: bounds.bottom
-                                        };   
-                                        cbKort.mapObj.zoomToExtent(extent, 100);
                                     }
                                 }
                             }
@@ -57,26 +76,45 @@
 		                    button: {
 		                        buttonText: cbKort.getSession().getString('s4.sq.header.text'),
 		                        buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
-		                        callBack: function(sqInfo){
-		                            if (sqInfo.hitResults.length > 0){
-		                                var geojson = new OpenLayers.Format.GeoJSON();
-		                                var components = [];
-		                                for (var i=0;i < sqInfo.hitResults.length;i++){
-		                                    components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
-		                                }
-		                                components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
-		                                var collection = new OpenLayers.Geometry.Collection(components);
-		                                collection.calculateBounds();
-		                                var bounds = collection.getBounds();
-		                                var extent = 
-		                                {  x1: bounds.left,
-		                                   y2: bounds.top,
-		                                   x2: bounds.right,
-		                                   y1: bounds.bottom
-		                                };   
-		                                cbKort.mapObj.zoomToExtent(extent, 100);
-		                            }
-		                        }
+                                callBack: function(sqInfo){
+                                    if (sqInfo.hitResults.length > 0){
+                                        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                                            var wktParser = Septima.Search.getWKTParser();
+                                            var wkt;
+                                            var feature;
+                                            var olGeom;
+                                            var olGeoms = [];
+                                            var mc = spm.getMapControl();
+                                            for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                wkt = wktParser.convert(sqInfo.hitResults[i].geometry);
+                                                feature = mc._wktFormatter.readFeature(wkt);
+                                                olGeom = feature.getGeometry();
+                                                olGeoms.push(olGeom);
+                                            }
+                                            var g = new ol.geom.GeometryCollection(olGeoms);
+                                            var mc = spm.getMapControl();
+                                            mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                                        }else{
+                                            var geojson = new OpenLayers.Format.GeoJSON();
+                                            var components = [];
+                                            for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+                                            }
+                                            components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
+                                            var collection = new OpenLayers.Geometry.Collection(components);
+                                            collection.calculateBounds();
+                                            var bounds = collection.getBounds();
+                                            var extent = 
+                                            {  x1: bounds.left,
+                                               y2: bounds.top,
+                                               x2: bounds.right,
+                                               y1: bounds.bottom
+                                            };   
+                                            cbKort.mapObj.zoomToExtent(extent, 100);
+                                        
+                                        }
+                                    }
+                                }
 		                    }
 			              }
 			                

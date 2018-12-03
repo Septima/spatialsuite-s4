@@ -26,60 +26,88 @@
 			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
 			_s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "cvrsearcher"});
 		}
-
+		
 		function s4DoEKnap(result){
 			if (result.geometry){
-				
-                var geojson = new OpenLayers.Format.GeoJSON();
-                
-				var pointGeom = null;
-				var polygonOlGeom = null
-				if (result.geometry.type.toLowerCase() === 'point'){
-				     pointGeom = result.geometry;			
-				}else{
-				     polygonOlGeom = geojson.read(result.geometry, 'Geometry');
-				     pointGeom = {"type":"Point","coordinates":[result.data.centroid_x, result.data.centroid_y]};
-				}
-				
-			    var pointOnSurfaceOlGeom = geojson.read(pointGeom, 'Geometry');
-		
-			    //Draw point in map
-			    var wkt = pointOnSurfaceOlGeom.toString();
-			    cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-		
-			    //Call handler
-			    if (typeof eknap_infoHandler !== 'undefined'){
-			    	//3.9-
-					eknap_infoHandler(pointOnSurfaceOlGeom);
-			    } else {
-			    	//3.9+
-			    	if (typeof eknapModule === 'undefined' || eknapModule === null){
-			    		//Adapted from eknap.xml
-						require(["[module.emdb.eknap.js]"], Septima.bind(function (pointOnSurfaceOlGeom) {
-							if ((typeof eknapModule === 'undefined' || eknapModule === null)) {
-								eknapModule = new Eknap();
-							} else {
-								eknapModule.initialize();
-							}
-					    	eknapModule.infoHandler(pointOnSurfaceOlGeom);
-							}, this, pointOnSurfaceOlGeom));
-			    	}else{
-				    	eknapModule.infoHandler(pointOnSurfaceOlGeom);
-			    	}
-			    }
-		
-				//Zoom to extent
-				if (polygonOlGeom !== null){
-	                var bounds = polygonOlGeom.getBounds();
-	                var extent = 
-	                {  x1: bounds.left,
-	                   y1: bounds.top,
-	                   x2: bounds.right,
-	                   y2: bounds.bottom
-	                };   
+			
+			    var wktParser = Septima.Search.getWKTParser();
+                var wkt = wktParser.convert(result.geometry);
+
+		        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                //SpS 4
+                    //Draw point in map
+		            var sGeom = new SpatialServer.Geometry({wkt: wkt});
+		            var mc = spm.getMapControl();
+		            mc.setMarkingGeometry(sGeom, false, false, 50);
+		            
+                    //Call handler
+                    if (typeof eknapModule === 'undefined'){
+                         //Adapted from eknap.xml
+                         require(["[module.emdb.eknap.js]","[module.emdb.horingsliste.js]","/js/standard/jquery/plugin/jqGrid-4.13.2/jquery.jqgrid.min.js"], Septima.bind(function (wkt) {
+		                    eknapModule = new Eknap();
+		                    eknapModule.infoHandler(wkt);
+		                 }, this, wkt));
+                     }else{
+                         eknapModule.infoHandler(wkt);
+                     }
+                    
+                    //Zoom to extent
+		            var feature = mc._wktFormatter.readFeature(wkt);
+		            var extent = feature.getGeometry().getExtent();
+		            mc.map.getView().fit(ol.extent.buffer(extent, 100));
+		            
+		        }else{
+	                var geojson = new OpenLayers.Format.GeoJSON();
 	                
-	                cbKort.mapObj.zoomToExtent(extent, 200);
-				}
+	                var pointGeom = null;
+	                var polygonOlGeom = null
+	                if (result.geometry.type.toLowerCase() === 'point'){
+	                     pointGeom = result.geometry;           
+	                }else{
+	                     polygonOlGeom = geojson.read(result.geometry, 'Geometry');
+	                     pointGeom = {"type":"Point","coordinates":[result.data.centroid_x, result.data.centroid_y]};
+	                }
+	                
+	                var pointOnSurfaceOlGeom = geojson.read(pointGeom, 'Geometry');
+	        
+	                //Draw point in map
+	                var wkt = pointOnSurfaceOlGeom.toString();
+	                cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+	        
+	                //Call handler
+	                if (typeof eknap_infoHandler !== 'undefined'){
+	                    //3.9-
+	                    eknap_infoHandler(pointOnSurfaceOlGeom);
+	                } else {
+	                    //3.9+
+	                    if (typeof eknapModule === 'undefined' || eknapModule === null){
+	                        //Adapted from eknap.xml
+	                        require(["[module.emdb.eknap.js]"], Septima.bind(function (pointOnSurfaceOlGeom) {
+	                            if ((typeof eknapModule === 'undefined' || eknapModule === null)) {
+	                                eknapModule = new Eknap();
+	                            } else {
+	                                eknapModule.initialize();
+	                            }
+	                            eknapModule.infoHandler(pointOnSurfaceOlGeom);
+	                            }, this, pointOnSurfaceOlGeom));
+	                    }else{
+	                        eknapModule.infoHandler(pointOnSurfaceOlGeom);
+	                    }
+	                }
+	        
+	                //Zoom to extent
+	                if (polygonOlGeom !== null){
+	                    var bounds = polygonOlGeom.getBounds();
+	                    var extent = 
+	                    {  x1: bounds.left,
+	                       y1: bounds.top,
+	                       x2: bounds.right,
+	                       y2: bounds.bottom
+	                    };   
+	                    
+	                    cbKort.mapObj.zoomToExtent(extent, 200);
+	                }
+		        }
 			}
 		    _s4View.blur();
 		}

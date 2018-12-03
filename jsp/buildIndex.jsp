@@ -36,8 +36,8 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	
 	<!-- Include common javascript libraries -->
-	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/septima.js"></script>
-	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script>
+<!-- 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/septima.js"></script> -->
+<!-- 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script> -->
 	
 	<!-- Include septimaSearch -->
 <!-- 	<script type="text/javascript" src="http://search.cdn.septima.dk/4.2.7/septimasearch.min.js"></script> -->

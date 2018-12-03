@@ -3,61 +3,116 @@ var _s4Params = null;
 var _s4HoverOLids = [];
 
 function s4_onPeak(result){
-    cbKort.mapObj.deleteFeature(_s4HoverOLids);
-    _s4HoverOLids = [];
-    if (result !== null){
-        var geojson = new OpenLayers.Format.GeoJSON();
-        var olGeom;
-        var wkt;
-        if (result.route){
-            olGeom = geojson.read(result.route.geometry, 'Geometry');
-            wkt = olGeom.toString();
-            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-            null,
-            {       styles: {
-                    strokeColor: '#0470bd',
-                    strokeWidth: 6,
-                    strokeOpacity: 0.45
+    var wktParser = Septima.Search.getWKTParser();
+    var wkt;
+    
+        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+            var hoverLayer = s4_getHoverLayer();
+            hoverLayer.clearFeatures();
+            if (result !== null && result.geometry){
+                wkt = wktParser.convert(result.geometry);
+                hoverLayer.addFeature({wkt: wkt});
+                if (result.route){
+                    wkt = wktParser.convert(result.route.geometry);
+                    hoverLayer.addFeature({wkt: wkt});
+                }
             }
-            }));
+        }else{
+            cbKort.mapObj.deleteFeature(_s4HoverOLids);
+            _s4HoverOLids = [];
+            if (result !== null && result.route){
+                wkt = wktParser.convert(result.route.geometry);
+                _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
+                null,
+                {       styles: {
+                        strokeColor: '#0470bd',
+                        strokeWidth: 6,
+                        strokeOpacity: 0.45
+                }
+                }));
+            }
+            if (result !== null && result.geometry){
+                wkt = wktParser.convert(result.geometry);
+                _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
+                null,
+                {       styles: {
+                        strokeColor: '#0470bd',
+                        fillColor: '#0470bd',
+                        fillOpacity: 0.5,
+                        select_pointRadius: 10,
+                        label: result.title
+                        }
+                }));
+            }
         }
-        if (result.geometry){
-            olGeom = geojson.read(result.geometry, 'Geometry');
-            wkt = olGeom.toString();
-            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-            null,
-            {       styles: {
-                    strokeColor: '#0470bd',
-                    fillColor: '#0470bd',
-                    fillOpacity: 0.5,
-                    select_pointRadius: 10,
-                    label: result.title
-                    }
-            }));
-        }
-    }
 }
 
 function s4_onInspect(result){
-    cbKort.mapObj.deleteFeature(_s4HoverOLids);
-    _s4HoverOLids = [];
-    var geojson = new OpenLayers.Format.GeoJSON();
-    var olGeom;
+    var wktParser = Septima.Search.getWKTParser();
     var wkt;
 
     if (result.geometry){
-        olGeom = geojson.read(result.geometry, 'Geometry');
-        wkt = olGeom.toString();
-        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+            var hoverLayer = s4_getHoverLayer();
+            hoverLayer.clearFeatures();
+            var cb;
+            if (typeof callback === 'undefined'){
+                cb = function(){};
+            }else{
+                cb = callback;
+            }
+              var mc = spm.getMapControl();
+              wkt = wktParser.convert(result.geometry);
+              mc.setMarkingGeometry(wkt, false, false, 50);
+              var feature;
+              if (result.route){
+                  wkt = wktParser.convert(result.geometry);
+                  feature = mc._wktFormatter.readFeature(wkt);
+                  hoverLayer.addFeature(feature);
+              }else{
+                  feature = mc._wktFormatter.readFeature(wkt);
+              }
+              var extent = feature.getGeometry().getExtent();
+              mc.map.getView().fit(ol.extent.buffer(extent, 100));
+          }else{
+              
+              cbKort.mapObj.deleteFeature(_s4HoverOLids);
+              _s4HoverOLids = [];
+              wkt = wktParser.convert(result.geometry);
+              cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
+              if (result.route){
+                  wkt = wktParser.convert(result.route.geometry);
+                  cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:false});
+              }
+              cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+          }
     }
-    
-    if (result.route){
-        olGeom = geojson.read(result.route.geometry, 'Geometry');
-        wkt = olGeom.toString();
-        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:false});
-    }
-    cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-    
+}
+
+
+function s4_getHoverLayer(){
+    if (typeof this.hoverLayer == 'undefined'){
+        var fill = new ol.style.Fill({
+            color: 'rgba(255,165,0,0.6)'
+        });
+        var stroke = new ol.style.Stroke({
+            color: 'rgba(255,165,0,0.8)',
+            width: 2
+        });
+        
+        this.hoverLayer = new MiniMap.Gui.Draw.DrawLayer({
+            minimap: spm,
+            features: [],
+            allowMultiGeometries:true,          
+            olLayerStyle: [
+                new ol.style.Style({
+                    fill: fill,
+                    stroke: stroke
+                })
+            ]
+        });
+   }
+    return this.hoverLayer;    
 }
 
 function s4_init (params){
@@ -473,70 +528,29 @@ function zoomToResultInMap(result){
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
 }
 
-function s4SetMarkingGeometry(wkt, zoomTo, hide, buffer, callback){
-    var mc = spm.getMapControl();
-//    if(!mc._layers.markingLayer){
-//        var markingLayer = mc._createImageVectorLayer();
-//        mc._addLayer(markingLayer, "markingLayer");
-//
-//        markingLayer.setZIndex(11000);
-//        markingLayer.setStyle(mc._getMarkingStyle());
-//    }
-
-    if (!wkt) {
-        mc._layers.markingLayer.getSource().clear();
-        return;
-    }
-    var feature = mc._wktFormatter.readFeature(wkt);
-    mc._layers.markingLayer.getSource().clear();
-    if (!hide)
-        mc._layers.markingLayer.getSource().addFeature(feature);
-
-    // zoom to fit
-    if (zoomTo){
-        var extent = feature.getGeometry().getExtent();
-        mc.map.getView().fit(buffer != null ? ol.extent.buffer(extent, buffer) : extent, callback);
-        mc._events.fireEvent("MARKING_CHANGED", wkt);
-    }
-}
-
 function showResultInMap(result, callback){
 	if (result.geometry){
 	    var wktParser = Septima.Search.getWKTParser();
 	    var wkt = wktParser.convert(result.geometry);
 	    
 	    if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-	        //SpS 4
-	        
           var cb;
           if (typeof callback === 'undefined'){
               cb = function(){};
           }else{
               cb = callback;
           }
-	        var sGeom = new SpatialServer.Geometry({wkt: wkt});
 	        var mc = spm.getMapControl();
-	        mc.setMarkingGeometry(sGeom, false, false, 50);
+	        mc.setMarkingGeometry(wkt, false, false, 50);
 	        var feature = mc._wktFormatter.readFeature(wkt);
 	        var extent = feature.getGeometry().getExtent();
 	        mc.map.getView().fit(ol.extent.buffer(extent, 100), {callback: cb});
-	        
-	        
-//	        s4SetMarkingGeometry(wkt, true, false, 50, cb)
-//	        spm.dynamicLayers.destroy('userdatasource');
-//	        spm.locateWKT ({dynamiclayer: 'userdatasource', wkt: wkt, buffer: 100, dontZoom:false});
-//	        spm.dynamicLayers.destroy('userdatasource');
-//	        spm.dynamicLayers.addWKT({
-//	            name: 'userdatasource',
-//	            wkt: wkt,
-//	            clear: true,
-//	            style:{}
-//	        });
-//	        spm.dynamicLayers.zoomTo('userdatasource', _s4Params.view.zoomBuffer);
-//	        spm.dynamicLayers.show("userdatasource");
 	    }else{
 	        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	        cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
+            if (typeof callback !== 'undefined'){
+              callback();
+            }
 	    }
 	}
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
@@ -585,17 +599,14 @@ function s4DoPrint(result){
 	}
     showResultInMap(result, function(){
         print_getConfig(_s4Params.view.printconfig);
-        }
-    );
-    //setTimeout(function(){print_getConfig(_s4Params.view.printconfig);}, 2000);
-	
-//	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
-//	if (freetext_print_input.length == 1){
-//		freetext_print_input.val(result.title);
-//	}else{
-//		setTimeout(function(){jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input').val(result.title);}, 500);
-//	}
-//	cbKort.events.fireEvent('S4', {type: 's4DoPrint', result: result});
+    });
+    
+	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
+	if (freetext_print_input.length == 1){
+		freetext_print_input.val(result.title);
+	}else{
+		setTimeout(function(){jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input').val(result.title);}, 500);
+	}
 }
 
 function addS4SpatialMapTools(paramEntry){
