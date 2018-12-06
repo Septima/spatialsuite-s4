@@ -232,7 +232,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     doIndexForGroup: function(group, parentGroup){
             var groupHasThemes = false;
             var groupDisplayName = this.getGroupDisplayName(group);
-            var groupInfo = {"group": group, "themes": [], "displayname": groupDisplayName}
+            var groupInfo = {"group": group, "themes": [], "name": group.name, "displayname": groupDisplayName}
             var groupElements = this.getThemeGroupElements(group);
             for (var j=0;j<groupElements.length;j++){
                 //Testing if SpS4
@@ -309,20 +309,29 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     
     getThemesForThemeGroup: function (themeGroup){
         var queryResult = this.createQueryResult();
-        for (var i=0; i<this.groups.length; i++){
-            var thisGroup = this.groups[i];
-            if (thisGroup.group.name === themeGroup.name){
-                for (var t=0; t<thisGroup.themes.length; t++){
-                    var indexedTheme = thisGroup.themes[t];
+                for (var t=0; t<themeGroup.themes.length; t++){
+                    var indexedTheme = themeGroup.themes[t];
                     var description = null;
                     if (typeof indexedTheme.description !== 'undefined' && indexedTheme.description !== null){
                         description = indexedTheme.description;
                     }
-                    var result = queryResult.addResult(this.source, thisGroup.displayname, indexedTheme.displayname, description, null, indexedTheme);
+                    var result = queryResult.addResult(this.source, themeGroup.displayname, indexedTheme.displayname, description, null, indexedTheme);
                     result.image = indexedTheme.image;
                 }
-            }
-        }
+//        for (var i=0; i<this.groups.length; i++){
+//            var thisGroup = this.groups[i];
+//            if (thisGroup.group.name === themeGroup.name){
+//                for (var t=0; t<thisGroup.themes.length; t++){
+//                    var indexedTheme = thisGroup.themes[t];
+//                    var description = null;
+//                    if (typeof indexedTheme.description !== 'undefined' && indexedTheme.description !== null){
+//                        description = indexedTheme.description;
+//                    }
+//                    var result = queryResult.addResult(this.source, thisGroup.displayname, indexedTheme.displayname, description, null, indexedTheme);
+//                    result.image = indexedTheme.image;
+//                }
+//            }
+//        }
         return queryResult;
     },
     
@@ -608,10 +617,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
     getCopyRightLink: function(result){
         var link = null;
-        if (result.data.theme.copyright !== 'undefined' && result.data.theme.copyright.length>1){
+        var theme = result.data.theme;
+        var themeConfig = theme;
+        if (typeof theme.initialConfig !== 'undefined'){
+            themeConfig = theme.initialConfig;
+        }
+
+        if (themeConfig.copyright !== 'undefined' && themeConfig.copyright.length>1){
             var text = null;
             var url = null;
-            var copyrightparts = result.data.theme.copyright; 
+            var copyrightparts = themeConfig.copyright; 
             for (var i=0;i<copyrightparts.length;i++){
                 var copyrightpart = copyrightparts[i];
                 if (copyrightpart.name == 'copyright-text'){

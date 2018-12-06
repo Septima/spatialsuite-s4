@@ -227,20 +227,8 @@ function s4_init (params){
             
 
             //Place inputcontainer according to the spacer
-            inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+//            inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
 
-            //Compensate for a delay in Chrome
-            setTimeout(Septima.bind(function (inputContainer) {
-                inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
-            }, this, inputContainer), 300);
-
-            //onResize: Place inputcontainer according to the spacer
-            jQuery(window).resize(Septima.bind(function (inputContainer) {
-                setTimeout(Septima.bind(function (inputContainer) {
-                    inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
-                }, this, inputContainer), 100);
-            }, this, inputContainer));
-            
             //Create controller
         	var blankBehavior = "search";
         	if (_s4Params.view.blankbehavior && _s4Params.view.blankbehavior == "none"){
@@ -440,21 +428,58 @@ function s4_init (params){
         		controller: controller});
         	
         	s4SetMaxHeight();
+            //Hide for a second until gui is settled
+            inputContainer.hide();
         	
-        	jQuery(window).resize(function() {
-        		s4SetMaxHeight();
-        	});
-        	
-        	if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+            
+            if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+                spm.getEvents().addListener("SPATIALMAP_READY", function() {
+                    setTimeout(function (inputContainer) {
+                        // Show inputcontainer again
+                        inputContainer.show();
+                        inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                    }.bind(this, inputContainer), 1000);
+                }.bind(this, inputContainer));
+                
                 spm.getEvents().addListener("MAP_CLICKED", function() {
                     _s4View.blur(_s4Params.view.forcedblurOnSelect);
                 });
-        	}else{
+
+            }else{
+                // Show inputcontainer again
+                setTimeout(Septima.bind(function (inputContainer) {
+                    inputContainer.show();
+                    inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                }, this, inputContainer), 100);
+                
                 cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
                     _s4View.blur(_s4Params.view.forcedblurOnSelect);
                 }, true);
-        	}
-			
+            }
+            
+            jQuery(window).resize(function (inputContainer) {
+                setTimeout(function (inputContainer) {
+                    //Place inputcontainer according to the spacer
+                    inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                    s4SetMaxHeight();
+                }.bind(this, inputContainer), 100);
+            }.bind(this, inputContainer));
+        	
+        	
+//        	jQuery(window).resize(function() {
+//        		s4SetMaxHeight();
+//        	});
+        	
+//        	if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+//                spm.getEvents().addListener("MAP_CLICKED", function() {
+//                    _s4View.blur(_s4Params.view.forcedblurOnSelect);
+//                });
+//        	}else{
+//                cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
+//                    _s4View.blur(_s4Params.view.forcedblurOnSelect);
+//                }, true);
+//        	}
+//			
         	if (_s4Params.view.autofocus){
                 setTimeout(Septima.bind(function (_s4View) {
             	_s4View.focus();
