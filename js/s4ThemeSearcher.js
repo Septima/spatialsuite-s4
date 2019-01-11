@@ -422,7 +422,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     cbKort.themeSelector.loadThemes(afterLoadFunction);
                 }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
                     cbKort.themeSelector.createThemeStore(afterLoadFunction);
-                }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
+                }else if (typeof cbKort.themeSelector._createThemeStore !== 'undefined'){
                     cbKort.themeSelector._createThemeStore(afterLoadFunction);
                 }else{
                     //Assume themes are already loaded

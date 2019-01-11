@@ -2,7 +2,7 @@ var _s4View = null;
 var _s4Params = null;
 var _s4HoverOLids = [];
 
-function s4_onPeak(result){
+function s4_onHover(result){
     var wktParser = Septima.Search.getWKTParser();
     var wkt;
     
@@ -47,7 +47,7 @@ function s4_onPeak(result){
         }
 }
 
-function s4_onInspect(result){
+function s4_onFocus(result){
     var wktParser = Septima.Search.getWKTParser();
     var wkt;
 
@@ -75,7 +75,6 @@ function s4_onInspect(result){
               var extent = feature.getGeometry().getExtent();
               mc.map.getView().fit(ol.extent.buffer(extent, 100));
           }else{
-              
               cbKort.mapObj.deleteFeature(_s4HoverOLids);
               _s4HoverOLids = [];
               wkt = wktParser.convert(result.geometry);
@@ -93,11 +92,16 @@ function s4_onInspect(result){
 function s4_getHoverLayer(){
     if (typeof this.hoverLayer == 'undefined'){
         var fill = new ol.style.Fill({
-            color: 'rgba(255,165,0,0.6)'
+            color: 'rgba(4,112,189,0.6)'
         });
         var stroke = new ol.style.Stroke({
-            color: 'rgba(255,165,0,0.8)',
+            color: 'rgba(4,112,189,0.8)',
             width: 2
+        });
+        var circle = new ol.style.Circle({
+            fill: fill,
+            stroke: stroke,
+            radius: 8 / 
         });
         
         this.hoverLayer = new MiniMap.Gui.Draw.DrawLayer({
@@ -107,7 +111,8 @@ function s4_getHoverLayer(){
             olLayerStyle: [
                 new ol.style.Style({
                     fill: fill,
-                    stroke: stroke
+                    stroke: stroke,
+                    image: circle
                 })
             ]
         });
@@ -236,8 +241,6 @@ function s4_init (params){
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
         	var controller = new Septima.Search.Controller([], controllerOptions);
-        	controller.addOnPeakHandler(s4_onPeak);
-            controller.addOnInspectHandler(s4_onInspect);
         	
         	//Set up the API
 			//Create array of "OnSelect" listeners if not already created
@@ -425,12 +428,13 @@ function s4_init (params){
         	_s4View = new Septima.Search.DefaultView({
         		input: inputContainer,
         		limit: _s4Params.view.limit,
-        		controller: controller});
+        		controller: controller,
+        		onHover: s4_onHover,
+        		onFocus: s4_onFocus});
         	
         	s4SetMaxHeight();
             //Hide for a second until gui is settled
             inputContainer.hide();
-        	
             
             if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
                 spm.getEvents().addListener("SPATIALMAP_READY", function() {
@@ -465,21 +469,6 @@ function s4_init (params){
                 }.bind(this, inputContainer), 100);
             }.bind(this, inputContainer));
         	
-        	
-//        	jQuery(window).resize(function() {
-//        		s4SetMaxHeight();
-//        	});
-        	
-//        	if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
-//                spm.getEvents().addListener("MAP_CLICKED", function() {
-//                    _s4View.blur(_s4Params.view.forcedblurOnSelect);
-//                });
-//        	}else{
-//                cbKort.mapObj.map.events.register("mousedown",cbKort.mapObj.map,function(e){
-//                    _s4View.blur(_s4Params.view.forcedblurOnSelect);
-//                }, true);
-//        	}
-//			
         	if (_s4Params.view.autofocus){
                 setTimeout(Septima.bind(function (_s4View) {
             	_s4View.focus();
