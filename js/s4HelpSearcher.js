@@ -132,7 +132,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
 	    				displayname += " (" + this.searchableData.singular + ")";
 	    			}
 	    			var description = hit.description;
-	    			var result = queryResult.addResult(this.source, this.type, hit.title, hit.description, " ", hit);
+	    			var result = queryResult.addResult(this.source, this.type, hit.title, hit.description, null, hit);
 	    			result.image = hit.iconUri;
 	    		}
 			}else{

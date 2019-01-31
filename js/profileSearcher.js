@@ -37,7 +37,7 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
     },
     
     getCustomButtonDefs: function(result){
-        if (typeof result.newquery !== 'undefined'){
+        if (result.isNewQuery()){
             return [];
         }else{
         	if (result.data.name === this.currentProfile){

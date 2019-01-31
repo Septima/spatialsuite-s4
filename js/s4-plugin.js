@@ -101,7 +101,7 @@ function s4_getHoverLayer(){
         var circle = new ol.style.Circle({
             fill: fill,
             stroke: stroke,
-            radius: 8 / 
+            radius: 8
         });
         
         this.hoverLayer = new MiniMap.Gui.Draw.DrawLayer({

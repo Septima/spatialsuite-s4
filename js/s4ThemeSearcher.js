@@ -449,7 +449,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var visibleIndexedThemes = this.getVisibleIndexedThemes();
             for (var i=0;i<visibleIndexedThemes.length;i++){
                 var indexedtheme = visibleIndexedThemes[i];
-                var result = queryResult.addResult(this.source, indexedtheme.group.displayname, indexedtheme.displayname, indexedtheme.description, " ", indexedtheme);
+                var result = queryResult.addResult(this.source, indexedtheme.group.displayname, indexedtheme.displayname, indexedtheme.description, null, indexedtheme);
                 result.image = indexedtheme.image;
             }
         }else{
@@ -481,9 +481,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         indexedTheme = indexedThemesToShow[j];
                         var result1;
                         if (query.hasTarget){
-                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, " ", indexedTheme);
+                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
                         }else{
-                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, " ", indexedTheme);
+                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
                         }
                         result1.image = indexedTheme.image;
                     }
@@ -503,9 +503,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                                     indexedTheme= group.themes[j];
                                     var result1;
                                     if (query.hasTarget){
-                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname, indexedTheme.description, " ", indexedTheme);
+                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
                                     }else{
-                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, " ", indexedTheme);
+                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
                                     }
                                     result1.image = indexedTheme.image;
                                 }
@@ -595,7 +595,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     getCustomButtonDefs: function(result){
-        if (typeof result.newquery !== 'undefined'){
+        if (result.isNewQuery()){
             return [];
         }else{
             var theme = result.data.theme;

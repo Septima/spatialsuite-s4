@@ -36,7 +36,7 @@
                         return promise;
                     }, this),
                     isApplicable: Septima.bind(function(result){
-                        if (typeof result.newquery !== 'undefined' || result.data.theme.actions == undefined || result.data.theme.actions.length == 0){
+                        if (result.isNewQuery() || typeof result.data.theme.actions == 'undefined' || result.data.theme.actions.length == 0){
                             return false;
                         }else{
                             return true;

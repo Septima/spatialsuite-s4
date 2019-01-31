@@ -24,58 +24,87 @@ Septima.Search.S4Control = Septima.Class ({
     	var searchIndexToken = null;
     	
     	if ((this.options.cvrsearcher && this.options.cvrsearcher.enabled) || (this.options.plansearcher && this.options.plansearcher.enabled)){
-        	var searchIndexTokenParamName = 's4.searchchindex.token';
+        	var searchIndexTokenParamName = 's4.searchindex.token';
         	searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
         	if (searchIndexToken === searchIndexTokenParamName){
-        		//getParam returns paramName if param isn't defined
         		searchIndexToken = null;
         	}
     	}
     	
-        if (this.options.geosearcher && this.options.geosearcher.enabled){
+    	var gstAuthParams = null;
+    	
+        if ((this.options.geosearcher && this.options.geosearcher.enabled) || (this.options.geostednavnesearcher && this.options.geostednavnesearcher.enabled)){
+            gstAuthParams = s4_getGstAuthParams();
+        }
+
+        if (this.options.dawasearcher && this.options.dawasearcher.enabled){
+            var dawaSearcherOptions = {onSelect: this.options.onSelect};
+            if (this.options.municipality != "*"){
+                var municipalities = this.options.municipality.split(' ');
+                dawaSearcherOptions.kommunekode = municipalities.join('|');
+            }
+            if (typeof this.options.dawasearcher.minimumShowCount !== 'undefined'){
+                dawaSearcherOptions.minimumShowCount = this.options.dawasearcher.minimumShowCount;
+            }
+            var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
+            searchers.push({"searcher" : dawaSearcher});
+        }
+    	
+    	
+        if (this.options.geosearcher && this.options.geosearcher.enabled && gstAuthParams != null){
         	var geoSearchOptions = {
         			targets: this.options.geosearcher.targets,
         			authParams: s4_getGstAuthParams(),
         		    onSelect: this.options.onSelect
         	    };
         	if (this.options.municipality != "*"){
-        		var municipalities = this.options.municipality.split(' ');
-        		for (var i=0;i<municipalities.length;i++){
-        			municipalities[i] = "muncode0" + municipalities[i]; 
-        		}
-        		geoSearchOptions.area = municipalities.join();
+        		geoSearchOptions.area = this.options.municipality;
         	}
         	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-        	searchers.push({"title": "", "searcher" : geoSearcher});
-        }
-        
-        if (this.options.cvrsearcher && this.options.cvrsearcher.enabled && searchIndexToken !== null){
-        	var cvr_enhedSearchOptions = {onSelect: this.options.onSelect, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
-        	if (this.options.municipality != "*"){
-        		var municipalities = this.options.municipality.split(' ');
-        		cvr_enhedSearchOptions.filter = { 'beliggenhedsadresse_kommune_kode' : municipalities };
-        	}
-        	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
-        	searchers.push({"title": "Virksomheder", "searcher" : se});
+        	searchers.push({"searcher" : geoSearcher});
         }
 
-        
-        if (this.options.plansearcher && this.options.plansearcher.enabled && searchIndexToken !== null){
-        	var planSearchOptions = {onSelect: this.options.onSelect, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
-        	if (this.options.municipality != "*"){
-        		var municipalities = this.options.municipality.split(' ');
-        		planSearchOptions.filter = { 'komnr' : municipalities };
-        	}
-        	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
-        	searchers.push({"title": "Lokalplaner", "searcher" : planSearcher});
+        if (this.options.geostednavnesearcher && this.options.geostednavnesearcher.enabled && gstAuthParams != null){
+            var geoStednavnSearchOptions = {
+                        authParams: s4_getGstAuthParams(),
+                        onSelect: this.options.onSelect
+                };
+            
+            if (this.options.municipality != "*"){
+                geoStednavnSearchOptions.kommunekode = this.options.municipality;
+            }
+            var geoStednavnSearcher = new Septima.Search.GeoStednavnSearcher(geoStednavnSearchOptions);
+            searchers.push({"searcher" : geoStednavnSearcher});
         }
         
         if (this.options.indexsearcher && this.options.indexsearcher.enabled){
         	var s4IndexSearcherOptions = {onSelect: this.options.onSelect, datasources: this.options.indexsearcher.datasources, matchesPhrase: matchPhrase, allowDetails: false};
         	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-        	searchers.push({title: "Objekter", searcher: s4IndexSearcher});
+        	searchers.push({searcher: s4IndexSearcher});
         }
     	
+        if (this.options.cvrsearcher && this.options.cvrsearcher.enabled && searchIndexToken !== null){
+            var cvr_enhedSearchOptions = {
+                    onSelect: this.options.onSelect,
+                    searchindexToken: searchIndexToken
+                   };
+            if (this.options.municipality != "*"){
+                cvr_enhedSearchOptions.kommunekode = this.options.municipality;
+            }
+            var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
+            searchers.push({"searcher" : se});
+        }
+
+        
+        if (this.options.plansearcher && this.options.plansearcher.enabled && searchIndexToken !== null){
+            var planSearchOptions = {onSelect: this.options.onSelect, matchesPhrase: matchPhrase, searchindexToken: searchIndexToken};
+            if (this.options.municipality != "*"){
+                planSearchOptions.kommunekode = this.options.municipality;
+            }
+            var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
+            searchers.push({"searcher" : planSearcher});
+        }
+        
     	var controllerOptions = {};
     	var controller = new Septima.Search.Controller(searchers, controllerOptions);
 
