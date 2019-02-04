@@ -17,14 +17,22 @@ Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
 		
     	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
 
-        cbKort.events.addListener ('FAVORITE_SAVED', Septima.bind(function(event, favorite){
-        	this.readFavorites();
-        }, this));
-        
-        cbKort.events.addListener ('FAVORITE_DELETED', Septima.bind(function(event, favorite){
-        	this.readFavorites();
-        }, this));
-        
+        if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+            spm.getEvents().addListener("FAVORITE_SAVED", Septima.bind(function(event, favorite){
+                this.readFavorites();
+            }, this));
+            spm.getEvents().addListener("FAVORITE_DELETED", Septima.bind(function(event, favorite){
+                this.readFavorites();
+            }, this));
+        }else{
+            cbKort.events.addListener ('FAVORITE_SAVED', Septima.bind(function(event, favorite){
+                this.readFavorites();
+            }, this));
+            cbKort.events.addListener ('FAVORITE_DELETED', Septima.bind(function(event, favorite){
+                this.readFavorites();
+            }, this));
+        }
+
     },
     
     

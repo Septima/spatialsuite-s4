@@ -223,8 +223,8 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }else{
             themeConfig = theme;
         }
-        if (theme.primarydatasource){
-            datasource = theme.primarydatasource;
+        if (themeConfig.primarydatasource){
+            datasource = themeConfig.primarydatasource;
         }
         return datasource;
     },
@@ -365,13 +365,23 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     
     toggleVisibility: function(theme){
         if (typeof theme.initialConfig !== 'undefined'){
-            theme.toggle();
+            if (theme.getInStore()){
+                theme.setInStore(false);
+                theme.toggle();
+                spm.themeSelector.rebuild()
+            }else{
+                theme.toggle();
+            }
         }else{
+            theme.setVisibility();
+            theme.redraw();
+            /*
             if (this.isVisible(theme)){
                 cbKort.setThemeVisibility(theme.name, false, true);
             }else{
                 cbKort.setThemeVisibility(theme.name, true, true);
             }
+            */
             if (typeof cbKort.themeSelector.setSpatialMapState !== 'undefined'){
                 cbKort.themeSelector.setSpatialMapState();
             }
