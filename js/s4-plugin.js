@@ -66,9 +66,9 @@ function s4_onFocus(result){
               mc.setMarkingGeometry(wkt, false, false, 50);
               var feature;
               if (result.route){
-                  wkt = wktParser.convert(result.geometry);
+                  wkt = wktParser.convert(result.route.geometry);
                   feature = mc._wktFormatter.readFeature(wkt);
-                  hoverLayer.addFeature(feature);
+                  hoverLayer.addFeature(feature); //Forkert: ikke hoverlayer, men marker
               }else{
                   feature = mc._wktFormatter.readFeature(wkt);
               }
