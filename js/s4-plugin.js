@@ -62,18 +62,15 @@ function s4_onFocus(result){
                 cb = callback;
             }
               var mc = spm.getMapControl();
-              wkt = wktParser.convert(result.geometry);
-              mc.setMarkingGeometry(wkt, false, false, 50);
-              var feature;
               if (result.route){
+                  wkt = wktParser.convert(result.geometry);
+                  mc.setMarkingGeometry(wkt, false, false, 50);
                   wkt = wktParser.convert(result.route.geometry);
-                  feature = mc._wktFormatter.readFeature(wkt);
-                  hoverLayer.addFeature(feature); //Forkert: ikke hoverlayer, men marker
+                  s4_addMarkingGeometry(wkt, true, false, 50);
               }else{
-                  feature = mc._wktFormatter.readFeature(wkt);
+                  wkt = wktParser.convert(result.geometry);
+                  mc.setMarkingGeometry(wkt, true, false, 50);
               }
-              var extent = feature.getGeometry().getExtent();
-              mc.map.getView().fit(ol.extent.buffer(extent, 100));
           }else{
               cbKort.mapObj.deleteFeature(_s4HoverOLids);
               _s4HoverOLids = [];
@@ -88,6 +85,20 @@ function s4_onFocus(result){
     }
 }
 
+function s4_addMarkingGeometry(wkt, zoomTo, hide, buffer){
+    var mc = spm.getMapControl();
+    var type = MiniMap.Gui.Draw.featureTypeFromWkt(wkt);
+    var theme = mc._widget.getTheme("user" + type);
+    theme.write({wkt: wkt});
+    theme.toggle(!hide);
+    if (zoomTo) {
+        var feature = mc._wktFormatter.readFeature(wkt);
+        if (typeof buffer === 'undefined' || buffer == null){
+            buffer = 50;
+        }
+        mc.zoomToExtent(feature.getGeometry().getExtent(), buffer);
+    }
+}
 
 function s4_getHoverLayer(){
     if (typeof this.hoverLayer == 'undefined'){
@@ -506,7 +517,6 @@ function s4DawaHit(result){
 }
 
 function s4Hit(result, geometryBehavior){
-	//geometryBehavior: ['zoom']
 	//cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
     for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
@@ -514,15 +524,11 @@ function s4Hit(result, geometryBehavior){
 		}
 	}
 	if (result.geometry){
-	    if (geometryBehavior !== 'undefined' && geometryBehavior == 'zoom'){
-	        zoomToResultInMap(result);
-	    }else{
-	        showResultInMap(result);
-	    }
+        showResultInMap(result);
 	}
 }
 
-function zoomToResultInMap(result){
+function zoomToResultInMap_delete(result){
 	if (result.geometry){
 		var geojson = new OpenLayers.Format.GeoJSON();
 	    var olGeom = geojson.read(result.geometry, 'Geometry');
@@ -555,10 +561,10 @@ function showResultInMap(result, callback){
               cb = callback;
           }
 	        var mc = spm.getMapControl();
-	        mc.setMarkingGeometry(wkt, false, false, 50);
-	        var feature = mc._wktFormatter.readFeature(wkt);
-	        var extent = feature.getGeometry().getExtent();
-	        mc.map.getView().fit(ol.extent.buffer(extent, 100), {callback: cb});
+	        mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
+	        //var feature = mc._wktFormatter.readFeature(wkt);
+	        //var extent = feature.getGeometry().getExtent();
+	        //mc.map.getView().fit(ol.extent.buffer(extent, 100), {callback: cb});
 	    }else{
 	        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	        cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
