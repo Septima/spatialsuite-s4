@@ -64,12 +64,12 @@ function s4_onFocus(result){
               var mc = spm.getMapControl();
               if (result.route){
                   wkt = wktParser.convert(result.geometry);
-                  mc.setMarkingGeometry(wkt, false, false, 50);
+                  mc.setMarkingGeometry(wkt, false, false, _s4Params.view.zoomBuffer);
                   wkt = wktParser.convert(result.route.geometry);
-                  s4_addMarkingGeometry(wkt, true, false, 50);
+                  s4_addMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
               }else{
                   wkt = wktParser.convert(result.geometry);
-                  mc.setMarkingGeometry(wkt, true, false, 50);
+                  mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
               }
           }else{
               cbKort.mapObj.deleteFeature(_s4HoverOLids);
@@ -94,7 +94,7 @@ function s4_addMarkingGeometry(wkt, zoomTo, hide, buffer){
     if (zoomTo) {
         var feature = mc._wktFormatter.readFeature(wkt);
         if (typeof buffer === 'undefined' || buffer == null){
-            buffer = 50;
+            buffer = _s4Params.view.zoomBuffer;
         }
         mc.zoomToExtent(feature.getGeometry().getExtent(), buffer);
     }
@@ -166,8 +166,10 @@ function s4_init (params){
        			_s4Params.view.forcedblurOnSelect = false;
        		}
     	
-       		if (typeof _s4Params.view.zoomBuffer === 'undefined'){
-       			_s4Params.view.zoomBuffer = '100';
+       		if (typeof _s4Params.view.zoomBuffer === 'undefined' || isNaN(parseInt(_s4Params.view.zoomBuffer))){
+       			_s4Params.view.zoomBuffer = 100;
+       		}else{
+       		 _s4Params.view.zoomBuffer = parseInt(_s4Params.view.zoomBuffer);
        		}
        		
        		if (typeof _s4Params.view.marginToBottom === 'undefined'){
@@ -561,10 +563,7 @@ function showResultInMap(result, callback){
               cb = callback;
           }
 	        var mc = spm.getMapControl();
-	        mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
-	        //var feature = mc._wktFormatter.readFeature(wkt);
-	        //var extent = feature.getGeometry().getExtent();
-	        //mc.map.getView().fit(ol.extent.buffer(extent, 100), {callback: cb});
+	        mc.setMarkingGeometry(wkt, true, false, 0 + _s4Params.view.zoomBuffer);
 	    }else{
 	        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	        cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);

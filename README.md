@@ -29,14 +29,14 @@ offered by Septima.
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013-2018  
+ Copyright:   (c) Septima P/S 2013-2019  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
               evaluation purposes free of charge.  
               
  Contact:     Septima P/S  
-              Frederiksberggade 29, 2.   
+              Frederiksberggade 19, 2.   
               1459 København K  
               www.septima.dk  
               kontakt@septima.dk  
@@ -46,7 +46,7 @@ offered by Septima.
 ### Download s4 module:
       
 Current version:  
-      2.9.10:   https://github.com/Septima/spatialsuite-s4/archive/2.9.10.zip  
+      2.9.11:   https://github.com/Septima/spatialsuite-s4/archive/2.9.11.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
