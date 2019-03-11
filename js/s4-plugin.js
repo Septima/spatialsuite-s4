@@ -552,25 +552,23 @@ function zoomToResultInMap_delete(result){
 
 function showResultInMap(result, callback){
 	if (result.geometry){
+        var cb;
+        if (typeof callback === 'undefined'){
+            cb = function(){};
+        }else{
+            cb = callback;
+        }
 	    var wktParser = Septima.Search.getWKTParser();
 	    var wkt = wktParser.convert(result.geometry);
 	    
 	    if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-          var cb;
-          if (typeof callback === 'undefined'){
-              cb = function(){};
-          }else{
-              cb = callback;
-          }
 	        var mc = spm.getMapControl();
 	        mc.setMarkingGeometry(wkt, true, false, 0 + _s4Params.view.zoomBuffer);
 	    }else{
 	        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
 	        cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-            if (typeof callback !== 'undefined'){
-              callback();
-            }
 	    }
+	    cb();
 	}
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
 }
@@ -642,7 +640,7 @@ function addS4SpatialMapTools(paramEntry){
 function addInfoButtonToSearcher(searcher){
     var s4InfoButtonCaption = cbKort.getSession().getString('s4.infobutton.caption');
     var _s4InfoUri = Septima.Search.s4Icons.infoIconUri;
-    var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo};
+    var s4InfoButtonDef = {"buttonText": s4InfoButtonCaption, "buttonImage": _s4InfoUri, "callBack": s4DoInfo, "isApplicable": function(result){return result.geometry !== null;}};
     searcher.addCustomButtonDef(s4InfoButtonDef);
 }
 
@@ -650,7 +648,7 @@ function addPrintButtonToSearcher(searcher){
     if (_s4Params.view.printconfig){
         var _s4PrintUri = Septima.Search.s4Icons.printIconUri;
         var s4PrintButtonCaption = "Print";
-        var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint};  
+        var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint, "isApplicable": function(result){return result.geometry !== null;}};  
         searcher.addCustomButtonDef(s4PrintButtonDef);
     }
 }
