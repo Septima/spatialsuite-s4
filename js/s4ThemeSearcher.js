@@ -64,6 +64,15 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 displayname
                 }
         */
+        if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+            spm.getEvents().addListener("THEMESELECTOR_THEMESTORE_INITIALIZED", Septima.bind(function(){
+                this.doIndex();
+            }, this));
+        }else{
+            cbKort.events.addListener ('THEMESELECTOR_THEMESTORE_INITIALIZED', Septima.bind(function(){
+                this.doIndex();
+            }, this));
+        }
         
         //Internal house keeping
         this.getLocalThemesDeferred = jQuery.Deferred();
@@ -88,6 +97,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     doIndex: function(){
+        if (this.indexDone){
+            return;
+        }
         var themeGroups = [];
         //Testing if SpS4
         if (typeof cbKort.themeContainer._elements !== 'undefined'){
