@@ -1,4 +1,4 @@
-Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
+Septima.Search.HelpSearcher = Septima.Class (Septima.Search.DataSearcher, {
 
     initialize: function (options) {
     	this.helpEntries =  [];
@@ -113,34 +113,5 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.Searcher, {
 
     },
 
-    fetchData: function (query, caller) {
-    	
-        var queryResult = this.createQueryResult();
-        
-        var hits = this.searchableData.query(query.queryString);
-        
-        var count = hits.length;
-
-        var listStrategy = this.getListStrategy(query, count)
-		if (count > 0) {
-			if (listStrategy.show){
-	    		for (var i=0;i<listStrategy.count;i++) {
-	    			var hit = hits[i].object;
-	    			//Hit: {title: topic, iconUri: imgUri, description: currentMenu + topic, text: text}
-	    			var displayname = hit.title;
-	    			if (listStrategy.isMixed){
-	    				displayname += " (" + this.searchableData.singular + ")";
-	    			}
-	    			var description = hit.description;
-	    			var result = queryResult.addResult(this.source, this.type, hit.title, hit.description, null, hit);
-	    			result.image = hit.iconUri;
-	    		}
-			}else{
-		        var result2 = queryResult.addNewQuery(this.source, this.type, this.searchableData.plural + " (" + count + ")", null, query.queryString, null, null);
-			}
-		}
-    	setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
-    },
     CLASS_NAME: 'Septima.Search.HelpSearcher'
-    
 });

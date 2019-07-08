@@ -648,7 +648,9 @@ function addPrintButtonToSearcher(searcher){
     if (_s4Params.view.printconfig){
         var _s4PrintUri = Septima.Search.s4Icons.printIconUri;
         var s4PrintButtonCaption = "Print";
-        var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint, "isApplicable": function(result){return result.geometry !== null;}};  
+        var s4PrintButtonDef = {"buttonText": s4PrintButtonCaption, "buttonImage": _s4PrintUri,"callBack": s4DoPrint, "isApplicable": function(result){
+            return result.geometry !== null;}
+        };  
         searcher.addCustomButtonDef(s4PrintButtonDef);
     }
 }
