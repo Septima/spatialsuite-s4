@@ -26,7 +26,7 @@
                    "buttonText": "Se CVR info på virk.dk",
                    "buttonImage": iconUri,
                    "callBack": function(result){
-                        window.open('http://datacvr.virk.dk/data/visenhed?enhedstype=produktionsenhed&id='+result.data.pnr[0], "_blank");
+                        window.open('http://datacvr.virk.dk/data/visenhed?enhedstype=produktionsenhed&id='+result.data.fields.pnr[0], "_blank");
                 }};
 
                 cvrsearcher.addCustomButtonDef(buttonDef);

@@ -274,7 +274,7 @@ function s4_init (params){
             		dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
             	}
             	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
-            	controller.addSearcher({"title": "Adresser", "searcher" : dawaSearcher});
+            	controller.addSearcher(dawaSearcher);
                 _s4Params.dawasearcher.searcher = dawaSearcher;
                 
                 _s4Params.adressSearcher = dawaSearcher;
@@ -312,7 +312,7 @@ function s4_init (params){
                 	s4IndexSearcherOptions.blankBehavior = _s4Params.indexsearcher.blankbehavior;
                 }
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
-            	controller.addSearcher({title: "webgis", searcher: s4IndexSearcher});
+            	controller.addSearcher( s4IndexSearcher );
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
             }
         	
@@ -328,7 +328,7 @@ function s4_init (params){
                 	    geoSearchOptions.kommunekode = _s4Params.municipality;
                 	}
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-                	controller.addSearcher({"title": "geosearch", "searcher" : geoSearcher});
+                	controller.addSearcher(geoSearcher);
                     _s4Params.geosearcher.searcher = geoSearcher;
             	}
             }
@@ -345,7 +345,7 @@ function s4_init (params){
                         geoStednavnSearchOptions.kommunekode = _s4Params.municipality;
                     }
                     var geoStednavnSearcher = new Septima.Search.GeoStednavnSearcher(geoStednavnSearchOptions);
-                    controller.addSearcher({"searcher" : geoStednavnSearcher});
+                    controller.addSearcher( geoStednavnSearcher);
                     _s4Params.geostednavnesearcher.searcher = geoStednavnSearcher;
                 }
             }
@@ -356,23 +356,28 @@ function s4_init (params){
             		planSearchOptions.kommunekode = _s4Params.municipality
             	}
             	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
-            	controller.addSearcher({"title": "Lokalplaner", "searcher" : planSearcher});
+            	controller.addSearcher(planSearcher);
                 _s4Params.plansearcher.searcher = planSearcher;
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
-            	var cvr_enhedSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
+            	var cvr_enhedSearchOptions = {
+            	        onSelect: s4Hit,
+            	        searchindexToken: searchIndexToken,
+            	        singular: "Virksomhed",
+            	        plural: "Virksomheder"
+            	};
                 if (_s4Params.municipality != "*"){
                     cvr_enhedSearchOptions.kommunekode = _s4Params.municipality
                 }
             	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
-            	controller.addSearcher({"title": "Virksomheder", "searcher" : se});
+            	controller.addSearcher(se);
                 _s4Params.cvrsearcher.searcher = se;
             }
         	
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit});
-	            controller.addSearcher({"title": cbKort.getSession().getString('s4.themesearcher.themes'), "searcher" : themeSearcher});
+	            controller.addSearcher(themeSearcher);
                 _s4Params.themesearcher.searcher = themeSearcher;
             }
 
@@ -384,7 +389,7 @@ function s4_init (params){
             		plural: cbKort.getSession().getString('s4.workspacesearcher.workspaces'),
             		sessionId: sessionId
         		});
-            	controller.addSearcher({title: cbKort.getSession().getString('s4.workspacesearcher.workspaces'), searcher: workspaceSearcher});
+            	controller.addSearcher( workspaceSearcher);
                 _s4Params.workspacesearcher.searcher = workspaceSearcher;
             }
 
@@ -396,7 +401,7 @@ function s4_init (params){
             		plural: cbKort.getSession().getString('s4.profilesearcher.profiles'),
             		sessionId: sessionId
         		});
-            	controller.addSearcher({title: cbKort.getSession().getString('s4.profilesearcher.profiles'), searcher: profileSearcher});
+            	controller.addSearcher(profileSearcher);
                 _s4Params.profilesearcher.searcher = profileSearcher;
             }
             
@@ -408,7 +413,7 @@ function s4_init (params){
             		plural: cbKort.getSession().getString('s4.favoritesearcher.favorites'),
             		sessionId: sessionId
         		});
-        		controller.addSearcher({title: cbKort.getSession().getString('s4.favoritesearcher.favorites'), searcher: favoriteSearcher});
+        		controller.addSearcher( favoriteSearcher);
                 _s4Params.favoritesearcher.searcher = favoriteSearcher;
             }
 

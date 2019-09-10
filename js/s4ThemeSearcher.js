@@ -474,67 +474,48 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 for (var i=0;i<matchingGroups.length;i++){
                     totalThemeCount += matchingGroups[i].themes.length;
                 }
-                if (query.type == "list.force"){
-                    var indexedThemesToShow = [];
-                    for (var i=0;i<matchingGroups.length;i++){
-                        if (matchingGroups[i].themes.length > 0 && !(groupName === '*' && query.queryString === '')){
+                
+                if (query.type == "list" || (query.type === "no-cut" && totalThemeCount <= query.limit) || (query.type === "no-cut" && matchingGroups.length <= query.limit)){
+                    if ((query.type === "list" && (groupName !=='*' || totalThemeCount <= query.limit)) || (query.type === "no-cut" && totalThemeCount <= query.limit)) {
+                        let indexedThemesToShow = []
+                        for (var i=0;i<matchingGroups.length;i++) {
                             indexedThemesToShow = indexedThemesToShow.concat(matchingGroups[i].themes);
-                        }else{
+                        }
+                        indexedThemesToShow.sort(function(a, b){
+                            if (a.score == b.score){
+                                return a.displayname.localeCompare(b.displayname)
+                            }else{
+                                return b.score - a.score;
+                            }
+                        });
+                        for (var j=0;j<indexedThemesToShow.length;j++){
+                            indexedTheme = indexedThemesToShow[j];
+                            var result1;
+                            if (query.hasTarget){
+                                result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
+                            }else{
+                                result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
+                            }
+                            result1.image = indexedTheme.image;
+                        }
+                    }else{
+                        for (var i=0;i<matchingGroups.length;i++){
                             var type = matchingGroups[i].displayname;
-                            var result3 = queryResult.addNewQuery(this.source, type, matchingGroups[i].displayname, null, "", null, null, null)
+                            var result3 = queryResult.addNewQuery(this.source, type, matchingGroups[i].displayname, null, query.queryString, null, null, null)
                             result3.image = this.themeGroupIconURI;
                         }
                     }
-                    indexedThemesToShow.sort(function(a, b){
-                        if (a.score == b.score){
-                            return a.displayname.localeCompare(b.displayname)
-                        }else{
-                            return b.score - a.score;
-                        }
-                    });
-                    for (var j=0;j<indexedThemesToShow.length;j++){
-                        indexedTheme = indexedThemesToShow[j];
-                        var result1;
-                        if (query.hasTarget){
-                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
-                        }else{
-                            result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
-                        }
-                        result1.image = indexedTheme.image;
+                } else if (query.type == "collapse" || ((query.type === "no-cut" && totalThemeCount > query.limit))){
+                    queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase + " (" + totalThemeCount + ")", null, query.queryString, null, null, null);
+                    
+                } else if (query.type == "cut"){
+                    for (var i=0;i<matchingGroups.length && i < query.limit;i++){
+                        var type = matchingGroups[i].displayname;
+                        var result3 = queryResult.addNewQuery(this.source, type, matchingGroups[i].displayname, null, "", null, null, null)
+                        result3.image = this.themeGroupIconURI;
                     }
-                }else if (query.type == "list"){
-                    var freeSlots = query.limit - matchingGroups.length;
-                    if (matchingGroups.length > freeSlots && !query.hasTarget){
+                    if (matchingGroups.length > query.limit) {
                         queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase + " (" + totalThemeCount + ")", null, query.queryString, null, null, null);
-                    }else{
-                        for (var i=0;i<matchingGroups.length;i++){
-                            var group = matchingGroups[i];
-                            var type = group.displayname;
-                            if (group.themes.length==0){
-                                var result3 = queryResult.addNewQuery(this.source, type, group.displayname, null, target + ":", null, null, null)
-                                result3.image = this.themeGroupIconURI;
-                            }else if (group.themes.length == 1 || group.themes.length < freeSlots){
-                                for (var j=0;j<group.themes.length;j++){
-                                    indexedTheme= group.themes[j];
-                                    var result1;
-                                    if (query.hasTarget){
-                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
-                                    }else{
-                                        result1 = queryResult.addResult(this.source, type, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
-                                    }
-                                    result1.image = indexedTheme.image;
-                                }
-                                freeSlots -= group.themes.length;
-                            }else{
-                                var count = group.themes.length;
-                                var groupDescription = "";
-                                for (var k=0;k<count;k++){
-                                    groupDescription += group.themes[k].displayname + ", ";
-                                }
-                                var result3 = queryResult.addNewQuery(this.source, type, group.displayname + " (" + count + " " + this.themesPhrase + ")", groupDescription, query.queryString, null, null, null)
-                                result3.image = this.themeGroupIconURI;
-                            }
-                        }
                     }
                 }
         }

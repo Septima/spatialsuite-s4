@@ -82,7 +82,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 			var query = data.query;
 	        var count = data.row[0].row.length;
 
-	        if (count <= query.limit || query.type == 'list.force') {
+	        if (count <= query.limit || query.type === 'list') {
 	            for (var i = 0; i < count; i++){
 	                var thisHit = data.row[0].row[i];
 	                var resultGeometry = null;
