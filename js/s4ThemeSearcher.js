@@ -41,6 +41,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         options.source = this.source;
         
         this.Searcher(options);
+        this.registerType(this.source, this.themesPhrase);
+        this.registerType(this.source, this.visibleThemesPhrase);
+        
 
         //Internal structures used to hold data
         
@@ -111,9 +114,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var themeGroup = themeGroups[i];
             this.doIndexForGroup(themeGroup, null);
         }
-        
-        this.registerType(this.source, this.themesPhrase);
-        this.registerType(this.source, this.visibleThemesPhrase);
         
         //Sort groups
         this.groups.sort(function(g1, g2){
@@ -387,13 +387,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }else{
             theme.setVisibility();
             theme.redraw();
-            /*
-            if (this.isVisible(theme)){
-                cbKort.setThemeVisibility(theme.name, false, true);
-            }else{
-                cbKort.setThemeVisibility(theme.name, true, true);
-            }
-            */
             if (typeof cbKort.themeSelector.setSpatialMapState !== 'undefined'){
                 cbKort.themeSelector.setSpatialMapState();
             }
