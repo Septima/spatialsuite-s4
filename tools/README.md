@@ -231,8 +231,8 @@ Sæt følgende parameter for at pluginnet virker:
 <!-- ========================================= -->
 <!-- S4 mod LIFAOIS -->
 <!-- ========================================= -->
-<param name="s4.lifaois.uid">kom175</param>
-<param name="s4.lifaois.pwd">8n(VFZFu</param>
+<param name="s4.lifaois.uid">xxx</param>
+<param name="s4.lifaois.pwd">xxx</param>
 ```  
 Linker til "https://xxx.filarkiv.dk  
 
