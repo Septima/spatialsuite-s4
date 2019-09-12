@@ -11,6 +11,8 @@ Tools relevant for Denmark only:
     * [s4-adresse-plugin](#s4-adresse-plugin)  
     * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
 
+* Link til SDFE skråfoto for adresser og matrikelnumre   
+    * [s4-sdfe-oblique-plugin](#s4-sdfe-oblique-plugin)  
  
 * Visning af- og søgning i vejmidter  
     * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
@@ -28,6 +30,12 @@ Tools relevant for Denmark only:
  
 * Vis E-Knap   
     * [s4-eknap-plugin](#s4-eknap-plugin)  
+  
+* Link til JO FilArkiv for adresser og matrikelnumre   
+    * [s4-jo-filarkiv-link-plugin](#s4-jo-filarkiv-link-plugin)  
+  
+* Link til LIFAOIS for adresser og matrikelnumre   
+    * [s4-lifa-webois-link-plugin](#s4-lifa-webois-link-plugin)  
   
 Tools using the details view function:  
 * [s4-details-nearest-plugin](#s4-details-nearest-plugin)  
@@ -91,6 +99,15 @@ Inkludér i profil:
 ```xml
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin" />
 ```  
+  
+### <a name="s4-sdfe-oblique-plugin"></a>s4-sdfe-oblique-plugin    
+Only relevant in Denmark  
+Viser link til SDFE skråfoto for adresser og matrikelnumre  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-sdfe-oblique-plugin" />
+```  
+  
   
 ### <a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
 Only relevant in Denmark  
@@ -185,6 +202,40 @@ hvor ordet "skole" korresponderer med _text.value_ i presentation:
 ```xml
 <text name="overskrift" value="Skole" plural="Skoler"/>
 ```  
+
+### <a name="s4-jo-filarkiv-link-plugin"></a>s4-jo-filarkiv-link-plugin  
+Only relevant in Denmark  
+Viser link til JO FilArkiv for adresser og matrikelnumre.  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-jo-filarkiv-link-plugin" />
+```  
+Sæt følgende parameter for at pluginnet virker:  
+```xml
+<!-- ========================================= -->
+<!-- S4 mod JO FilArkiv -->
+<!-- ========================================= -->
+<param name="s4.jo.filarkiv.kommunenavn">xxx</param>
+```  
+Linker til "https://xxx.filarkiv.dk  
+
+### <a name="s4-lifa-webois-link-plugin"></a>s4-lifa-webois-link-plugin  
+Only relevant in Denmark  
+Viser Link til LIFAOIS for adresser og matrikelnumre.  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-lifa-webois-link-plugin" />
+```  
+Sæt følgende parameter for at pluginnet virker:  
+```xml
+<!-- ========================================= -->
+<!-- S4 mod LIFAOIS -->
+<!-- ========================================= -->
+<param name="s4.lifaois.uid">kom175</param>
+<param name="s4.lifaois.pwd">8n(VFZFu</param>
+```  
+Linker til "https://xxx.filarkiv.dk  
+
 
 ### <a name="s4-cvr-virk-plugin"></a>s4-cvr-virk-plugin  
 Only relevant in Denmark  

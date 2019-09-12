@@ -57,13 +57,6 @@
                     }
                 });
             }
-            if (Septima.Log){
-                Septima.Log.trace({
-                    eventCategory: 's4',
-                    eventAction: 's4_details',
-                    eventLabel: 'themesRelated-plugin'
-                });
-            }
     [endif]
     ]]>
     </src>

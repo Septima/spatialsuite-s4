@@ -22,7 +22,6 @@
                                     for (var i=0; i<planResults.length; i++){
                                      var planResult = planResults[i];
                                      items.push({type: 'textarea', icon: Septima.Search.icons.searchers.planer.result, text: planResult.title});
-                                     //items.push({type: 'textarea', text: planResult.description});
                                      items.push({type: 'area', value: planResult.description, result: planResult, clickable: true, hoverable: true, isListItem: false});
                                     }
                                  }
@@ -37,13 +36,6 @@
                         });
                         return promise;
                     }, this)
-                });
-            }
-            if (Septima.Log){
-                Septima.Log.trace({
-                    eventCategory: 's4',
-                    eventAction: 's4_details',
-                    eventLabel: 'adressePlaner-plugin'
                 });
             }
     [endif]

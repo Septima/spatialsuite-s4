@@ -44,7 +44,7 @@
 <!-- 	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/4.2.7/css/defaultView.css"> -->
 	
     <link rel="stylesheet" type="text/css" href="<%=searchCss%>">
-    <script type="text/javascript" src="<%=searchScript%>"></script>
+    <script type="text/javascript" src="<%=searchScript%>" charset="UTF-8"></script>
     
 	<style type="text/css">
 		#inputcontainer {

@@ -6,7 +6,7 @@
 	    [endif]
 
 		<file type="css"    name="[s4.search.css]" />
-		<file type="script" name="[s4.search.script]"/>
+		<file type="script" name="[s4.search.script]" charset="utf-8"/>
 
         <file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
         
