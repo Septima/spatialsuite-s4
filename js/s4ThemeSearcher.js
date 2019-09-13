@@ -380,9 +380,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             if (theme.getInStore()){
                 theme.setInStore(false);
                 theme.toggle();
-                spm.themeSelector.rebuild()
+                //spm.themeSelector.rebuild()
             }else{
                 theme.toggle();
+                spm.themeSelector._flashAddedTheme(theme);
             }
         }else{
             theme.setVisibility();

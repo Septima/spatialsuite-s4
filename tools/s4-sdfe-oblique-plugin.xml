@@ -34,6 +34,7 @@
         }
         
         function s4SdfeObliqueConvert2582GeometryTowgs84LatLon (searcher, geometry) {
+            /*
             var wkt25832 = searcher.translateGeoJsonObjectToWkt(geometry);
 		    var mc = spm.getMapControl();
 		    var feature = mc._wktFormatter.readFeature(wkt25832);
@@ -41,6 +42,13 @@
 		    geometry.transform('EPSG:25832', 'EPSG:4326');
 		    var wktWgs84 = mc._wktFormatter.writeGeometry(geometry);
 		    var geoJsonWgs84 = searcher.translateWktToGeoJsonObject(wktWgs84);
+		    */
+		    
+		    var crss = {
+		      "EPSG:25832": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+		      "EPSG:4326": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+		    }
+		    var geoJsonWgs84 = Septima.Search.reproject.reproject(geometry, "EPSG:25832", "EPSG:4326", crss)
 		    return {lon: geoJsonWgs84.coordinates[0], lat: geoJsonWgs84.coordinates[1]};         
         }
 
