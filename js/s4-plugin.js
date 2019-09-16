@@ -270,8 +270,10 @@ function s4_init (params){
             		var municipalities = _s4Params.municipality.split(' ');
             		dawaSearcherOptions.kommunekode = municipalities.join('|');
             	}
-            	if (typeof _s4Params.dawasearcher.minimumShowCount !== 'undefined'){
-            		dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
+            	if (typeof _s4Params.dawasearcher.minimumShowCount === 'undefined'){
+                    dawaSearcherOptions.minimumShowCount = 3;
+            	}else {
+                    dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
             	}
             	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
             	controller.addSearcher(dawaSearcher);
