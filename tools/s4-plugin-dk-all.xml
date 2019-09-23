@@ -54,7 +54,7 @@
 	            
 				//Adressesøgning i DAWA
 				// minimumShowCount: How many adresses should always be shown
-	            dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
+	            dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: true},
 	            
 	            //Geodatastyrelsen-geosearch
 	            // Full set of geosearcher targets is: ['kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
