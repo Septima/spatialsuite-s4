@@ -46,7 +46,7 @@ offered by Septima.
 ### Download s4 module:
       
 Current version:  
-      2.10.3: https://github.com/Septima/spatialsuite-s4/archive/2.10.3.zip  
+      2.10.4: https://github.com/Septima/spatialsuite-s4/archive/2.10.4.zip  
 
 Latest version is always located at:  
       https://github.com/Septima/spatialsuite-s4/archive/master.zip  
@@ -153,7 +153,8 @@ view: {
 
 //Adressesøgning i DAWA
 // minimumShowCount: How many adresses should always be shown
-dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3},
+// showMinimumOnBlank: Should the minimum count also be shown on blank?
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: true},
 
 //Geodatastyrelsen-geosearch
 // Full set of geosearcher targets is: [kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse', 'sogne']
