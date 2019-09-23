@@ -270,11 +270,24 @@ function s4_init (params){
             		var municipalities = _s4Params.municipality.split(' ');
             		dawaSearcherOptions.kommunekode = municipalities.join('|');
             	}
+            	/*
             	if (typeof _s4Params.dawasearcher.minimumShowCount === 'undefined'){
                     dawaSearcherOptions.minimumShowCount = 3;
             	}else {
                     dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
             	}
+            	if (typeof _s4Params.dawasearcher.showMinimumOnBlank === 'undefined'){
+                    dawaSearcherOptions.showMinimumOnBlank = true;
+            	}else{
+                    dawaSearcherOptions.showMinimumOnBlank = _s4Params.dawasearcher.showMinimumOnBlank;
+            	}
+            	*/
+                if (typeof _s4Params.dawasearcher.minimumShowCount != 'undefined'){
+                    dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
+                }
+                if (typeof _s4Params.dawasearcher.showMinimumOnBlank != 'undefined'){
+                    dawaSearcherOptions.showMinimumOnBlank = _s4Params.dawasearcher.showMinimumOnBlank;
+                }
             	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
             	controller.addSearcher(dawaSearcher);
                 _s4Params.dawasearcher.searcher = dawaSearcher;
