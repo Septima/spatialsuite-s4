@@ -270,18 +270,6 @@ function s4_init (params){
             		var municipalities = _s4Params.municipality.split(' ');
             		dawaSearcherOptions.kommunekode = municipalities.join('|');
             	}
-            	/*
-            	if (typeof _s4Params.dawasearcher.minimumShowCount === 'undefined'){
-                    dawaSearcherOptions.minimumShowCount = 3;
-            	}else {
-                    dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
-            	}
-            	if (typeof _s4Params.dawasearcher.showMinimumOnBlank === 'undefined'){
-                    dawaSearcherOptions.showMinimumOnBlank = true;
-            	}else{
-                    dawaSearcherOptions.showMinimumOnBlank = _s4Params.dawasearcher.showMinimumOnBlank;
-            	}
-            	*/
                 if (typeof _s4Params.dawasearcher.minimumShowCount != 'undefined'){
                     dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
                 }
@@ -295,6 +283,18 @@ function s4_init (params){
                 _s4Params.adressSearcher = dawaSearcher;
             }
 			
+            if (_s4Params.s3searcher && _s4Params.s3searcher.enabled){
+                var s3SearcherOptions = {
+                        onSelect: s4Hit,
+                        host: _s4Params.s3searcher.host,
+                        service: _s4Params.s3searcher.service
+                    };
+                
+                var s3searcher = new Septima.Search.S3Searcher(s3SearcherOptions);
+                controller.addSearcher(s3searcher);
+                _s4Params.s3searcher.searcher = s3searcher;
+            }
+            
             //Collect searchers that have been pushed until now
             var _s4Searchers = window["_s4Searchers"];
             for (var i = 0;i<_s4Searchers.length;i++){
