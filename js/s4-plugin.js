@@ -197,16 +197,19 @@ function s4_init (params){
             var inputContainer = jQuery('<div id="s4box" class="inputcontainer"/>');
             var s4MenuItem = jQuery("li[id^=s4-plugin]");
         	if (jQuery("li[id^=s4-plugin]") && typeof params.panel !== 'undefined' && params.panel === 'tool' ){
+        	    // Place as tool
         	    s4MenuItem.empty();
         	    s4MenuItem.addClass("inputcontainer-spacer");
         	    s4MenuItem.append(inputContainer);
         	}else{
-                var panel = 'panel-brand';
-                if (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30) {
-                    panel = 'panel-middle';
-                }
+        	    //Place in correct panel
+                var panel = 'panel-middle'; //default
                 if (typeof params.panel !== 'undefined' && params.panel !== 'default') {
                     panel = params.panel;
+                    if (panel === 'panel-brand' && (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30)) {
+                        //remove from panel-brand if panel-brand is not visible or high enough
+                        panel = 'panel-middle';
+                    }
                 }
 
                 s4MenuItem.remove();
@@ -220,29 +223,18 @@ function s4_init (params){
                     //Add spacer
                     jQuery('#panel-middle > .inner.right > .midnav').append('<li class="inputcontainer-spacer"></li>');
                     jQuery('#panel-middle > .inner.right').append(inputContainer);
-                    
-                    if (cbKort.themeSelector && cbKort.themeSelector.panels) {
-                        var panel = cbKort.themeSelector.panels["panel-themes-headerleft"];
-                        if (panel) {
-                            var button = panel.getButton('theme_store_setting');
-                            button.element.click(function () {
-                                if (cbKort.themeSelector.editMode) {
-                                    jQuery('.inputcontainer').hide();
-                                } else {
-                                    jQuery('.inputcontainer').show();
-                                }
-                            });
-                        }
-                    }                        
                 } else if (panel === 'panel-top'){
                     jQuery('#panel-top > .inner.right > .topnav').append('<li class="inputcontainer-spacer"></li>');
                     jQuery('#panel-top > .inner.right').append(inputContainer);
                 } else if (panel === 'menu'){
                     jQuery('#panel-middle > .inner.left > .midnav').append('<li class="inputcontainer-spacer"></li>');
                     jQuery('#panel-middle > .inner.left').append(inputContainer);
+                } else if (panel === 'map-top-right'){
+                    jQuery('#mapcontainer_innerContenttopright').append('<li class="inputcontainer-spacer"></li>');
+                    jQuery('#mapcontainer_innerContenttopright').append(inputContainer);
                 }
         	}
-            
+        	
 
             //Place inputcontainer according to the spacer
 //            inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
@@ -501,6 +493,18 @@ function s4_init (params){
                     s4SetMaxHeight();
                 }.bind(this, inputContainer), 100);
             }.bind(this, inputContainer));
+            
+            var options = {
+                inputContainer: inputContainer,
+                left: jQuery('.inputcontainer-spacer').offset().left
+            };
+            setInterval(function (options) {
+                if (options.left !== jQuery('.inputcontainer-spacer').offset().left) {
+                    options.left = jQuery('.inputcontainer-spacer').offset();
+                    options.inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                    s4SetMaxHeight();
+                }
+            }.bind(this, options), 100);
         	
         	if (_s4Params.view.autofocus){
                 setTimeout(Septima.bind(function (_s4View) {

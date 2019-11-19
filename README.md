@@ -47,12 +47,6 @@ offered by Septima.
       
 Current version:  
       2.10.4: https://github.com/Septima/spatialsuite-s4/archive/2.10.4.zip  
-
-Latest version is always located at:  
-      https://github.com/Septima/spatialsuite-s4/archive/master.zip  
-      
-Development version (at your own risk) may be downloaded from:  
-      https://github.com/Septima/spatialsuite-s4/archive/development.zip  
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
@@ -119,17 +113,17 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 * set the __panel__ parameter.
 
 ```javascript  
-//Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'.   
-{municipality: '[your-municipality-code]',
+//Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
+municipality: '*',
 
-//Positioning of s4. Choose between
-//  'default': In panel-brand if possible, else in panel-middle (menu linie, right justified)
-//  'tool': Use the panel as specified in the profile
+//  'default': same as panel-middle
 //  'panel-brand': Force s4 to panel-brand 
+//  'menu': As the last menu in the menu line
+//  'tool': Use the panel as specified in the profile
 //  'panel-top': Force s4 to top menu
 //  'panel-middle': Force s4 to menu linie (right justified)
-//  'menu': As the last menu in the menu line
-panel: 'default',
+//  'map-top-right': SpS 4.1+ only
+panel: 'map-top-right',
 
 //Result presentation
 //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
@@ -148,19 +142,16 @@ view: {
   forcedblurOnSelect: 'false',
   zoomBuffer: '100',
   marginToBottom: 100,
-  placeholder: 'Søg' 
+  placeholder: "Søg" 
 },
 
 //Adressesøgning i DAWA
 // minimumShowCount: How many adresses should always be shown
-// showMinimumOnBlank: Should the minimum count also be shown on blank?
-dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: true},
+dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: false},
 
 //Geodatastyrelsen-geosearch
-// Full set of geosearcher targets is: [kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse', 'sogne']
-// Søg ikke i adresser i geosearch
-// geometrybehavior: "bbox", "centroid", or "zoom". Map behavior when selecting 'kommuner', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', or 'retskredse'.
-geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter'], streetNameHit: false},
+// Full set of geosearcher targets is: ['kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter']},
 
 //Geodatastyrelsen - Stednavne i geosearch
 geostednavnesearcher: {enabled: true, info: true, print: true},
@@ -187,6 +178,7 @@ favoritesearcher: {enabled: true},
 
 //Workspaces
 workspacesearcher: {enabled: true}
+
 
 
 ```
