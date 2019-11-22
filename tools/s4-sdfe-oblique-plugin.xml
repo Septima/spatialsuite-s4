@@ -6,44 +6,48 @@
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
     [endif]
    </requires>
-    <src/>
+    <src><![CDATA[
+	    [if: ModuleDefined("s4") ]
+	           
+	        window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+	        var _s4CustomButtons = window["_s4CustomButtons"];
+	        var mode = this.jsonConfig.mode ? this.jsonConfig.mode : "js";
+	
+	        var _s4SdfeKnapUri = Septima.Search.icons.exlink;
+	        
+	        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4DawaDoSdfeObliqueKnap.bind(this, mode), "searcher": "dawasearcher"});
+	        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4MatrikelDoSdfeObliqueKnap.bind(this, mode), "searcher": "geosearcher", "target": "matrikelnumre"});
+	
+	    [endif]
+    ]]>
+    </src>
     <jssrc><![CDATA[
-    [if: ModuleDefined("s4") ]
-           
-        window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-        var _s4CustomButtons = window["_s4CustomButtons"];
-
-        var _s4SdfeKnapUri = Septima.Search.icons.exlink;
-        
-        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4DawaDoSdfeObliqueKnap, "searcher": "dawasearcher"});
-        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4MatrikelDoSdfeObliqueKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-
-        function s4DawaDoSdfeObliqueKnap(result){
+        function s4DawaDoSdfeObliqueKnap(mode, result){
             _s4View.blur();
             var latLon = s4SdfeObliqueConvert2582GeometryTowgs84LatLon(result.searcher, result.geometry);
-            var url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            var url;
+            if (mode === "js") {
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            } else {
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            }
             window.open(url, "s4SdfeOblique");
         }
         
-        function s4MatrikelDoSdfeObliqueKnap(result){
+        function s4MatrikelDoSdfeObliqueKnap(mode, result){
             _s4View.blur();
             var geometry = {type: "Point", coordinates: [parseInt(result.data.centroid_x), parseInt(result.data.centroid_y)]};
             var latLon = s4SdfeObliqueConvert2582GeometryTowgs84LatLon(result.searcher, geometry);
-            var url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            var url;
+            if (mode === "js") {
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            } else {
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+            }
             window.open(url, "s4SdfeOblique");
         }
         
         function s4SdfeObliqueConvert2582GeometryTowgs84LatLon (searcher, geometry) {
-            /*
-            var wkt25832 = searcher.translateGeoJsonObjectToWkt(geometry);
-		    var mc = spm.getMapControl();
-		    var feature = mc._wktFormatter.readFeature(wkt25832);
-		    var geometry = feature.getGeometry();
-		    geometry.transform('EPSG:25832', 'EPSG:4326');
-		    var wktWgs84 = mc._wktFormatter.writeGeometry(geometry);
-		    var geoJsonWgs84 = searcher.translateWktToGeoJsonObject(wktWgs84);
-		    */
-		    
 		    var crss = {
 		      "EPSG:25832": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
 		      "EPSG:4326": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
@@ -52,7 +56,6 @@
 		    return {lon: geoJsonWgs84.coordinates[0], lat: geoJsonWgs84.coordinates[1]};         
         }
 
-    [endif]
     ]]>
     </jssrc>
 </tool>

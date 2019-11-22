@@ -201,12 +201,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
     getGroupDisplayName: function(group){
         var displayName;
-        if (typeof group.initialConfig !== 'undefined'){
-            displayName = group.initialConfig.displayname;
-        }else{
-            displayName = group.displayname;
+        try {
+            if (typeof group.initialConfig !== 'undefined'){
+                displayName = group.initialConfig.displayname;
+            }else{
+                displayName = group.displayname;
+            }
+            return displayName.replace(/:/g, "");
+        }catch (e) {
+            return null;
         }
-        return displayName.replace(/:/g, "");
     },
     
     getThemeImage: function(theme){
@@ -244,6 +248,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     doIndexForGroup: function(group, parentGroup){
             var groupHasThemes = false;
             var groupDisplayName = this.getGroupDisplayName(group);
+            if (groupDisplayName == null) {
+                return;
+            }
             var groupInfo = {"group": group, "themes": [], "name": group.name, "displayname": groupDisplayName}
             var groupElements = this.getThemeGroupElements(group);
             for (var j=0;j<groupElements.length;j++){

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("cowi-gadefoto") ]
+            <file type="script" name="/modules/cowi-gadefoto/js/cowi_gadefoto_tool.js" />
+	        
+	    [endif]
+    </requires>
+    <src><![CDATA[
+	    [if: ModuleDefined("cowi-gadefoto") ]
+            if (typeof cowiGadefoto !== "undefined") {
+	            window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+	            var _s4CustomButtons = window["_s4CustomButtons"];
+	    
+	            var buttonText = cbKort.getSession().getString('cowi-gadefoto.displayname');
+	            var buttonImage = Septima.Search.icons.exlink;
+	            
+	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "dawasearcher"});
+	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4MatrikelDoDdgKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
+            }
+	    [endif]
+    ]]>
+    </src>
+    <jssrc><![CDATA[
+        function s4DawaDoDdgKnap(result){
+            _s4View.blur();
+            var wktParser = Septima.Search.getWKTParser();
+            var wkt = wktParser.convert(result.geometry);
+            cowiGadefoto.clickHandler(wkt);
+        }
+        
+        function s4MatrikelDoDdgKnap(result){
+            _s4View.blur();
+            var geometry = {type: "Point", coordinates: [parseInt(result.data.centroid_x), parseInt(result.data.centroid_y)]};
+            var wktParser = Septima.Search.getWKTParser();
+            var wkt = wktParser.convert(geometry);
+            cowiGadefoto.clickHandler(wkt);
+        }
+
+    ]]>
+    </jssrc>
+</tool>

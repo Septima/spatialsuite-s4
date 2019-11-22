@@ -147,7 +147,8 @@ function s4_init (params){
        		      "matches": cbKort.getSession().getString('s4.search.matches'),
        		      "close": cbKort.getSession().getString('s4.search.close'),
        		      "doDetails": cbKort.getSession().getString('s4.search.dodetails'),
-                  "at_site": cbKort.getSession().getString('s4.search.at_site')
+                  "at_site": cbKort.getSession().getString('s4.search.at_site'),
+                  "noResults": cbKort.getSession().getString('s4.search.noresults')
        		};
        		
             if (typeof _s4Params.view.placeholder !== 'undefined'){

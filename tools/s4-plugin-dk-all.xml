@@ -22,14 +22,14 @@
                 //Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
                 municipality: '*',
                 
-                //  'default': same as panel-middle
                 //  'panel-brand': Force s4 to panel-brand 
                 //  'menu': As the last menu in the menu line
                 //  'tool': Use the panel as specified in the profile
                 //  'panel-top': Force s4 to top menu
+                //  'default': same as panel-middle
                 //  'panel-middle': Force s4 to menu linie (right justified)
                 //  'map-top-right': SpS 4.1+ only
-                panel: 'map-top-right',
+                panel: 'default',
 
                 //Result presentation
                 //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
