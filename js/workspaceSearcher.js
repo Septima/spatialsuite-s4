@@ -65,7 +65,7 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     			//Workspace version2
     			if (workspace_container === null) {
     				var workspacejs = cbKort.getSession().getParam('cbkort.module.workspace.js');
-    				if (workspacejs === ""){
+    				if (workspacejs === null || workspacejs === ""){
     					workspacejs = cbKort.getSession().getParam('module.workspace.js');
     				}
     	            require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {

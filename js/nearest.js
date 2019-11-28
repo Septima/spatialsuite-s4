@@ -84,7 +84,7 @@
 			var sqDHB = new Septima.Search.SqDetailsHandlerBuilder(sqDetailsHandlerBuilderOptions);
 			if (options.showRoute){
 				var routeApiKey = cbKort.getSession().getParam("module.route.token");
-				if (routeApiKey !== "module.route.token"){
+				if (routeApiKey !== null && routeApiKey !== "module.route.token"){
 					var routeProfile = "car";
 					if (options.routeProfile){
 						routeProfile = options.routeProfile;

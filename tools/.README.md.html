@@ -1,0 +1,985 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>C:\Users\kpc\git\spatialsuite-s4\tools\.README.md.html</title>
+
+
+<style type="text/css">
+body {
+	color: #333;
+	font: 13px/1.4 "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	background: transparent;
+	color: #4183c4;
+	text-decoration: none;
+}
+
+a:active,
+a:hover {
+	outline: 0 none;
+	text-decoration: underline;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+img {
+	border: 0 none;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 1em 40px;
+}
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace,monospace;
+	font-size: 1em;
+}
+
+pre {
+	overflow: auto;
+	font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.markdown-body {
+	padding: 30px;
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body .absent {
+	color: #c00;
+}
+
+.markdown-body .anchor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+	outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+	font-size: inherit;
+}
+
+.markdown-body h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.markdown-body h4 {
+	font-size: 1.25em;
+}
+
+.markdown-body h5 {
+	font-size: 1em;
+}
+
+.markdown-body h6 {
+	font-size: 1em;
+	color: #777;
+}
+
+.markdown-body p,.markdown-body blockquote,
+.markdown-body ul,.markdown-body ol,
+.markdown-body dl,.markdown-body table,
+.markdown-body pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body hr {
+	height: 4px;
+	padding: 0;
+	margin: 16px 0;
+	background-color: #e7e7e7;
+	border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+	padding-left: 2em;
+}
+
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body li>p {
+	margin-top: 16px;
+}
+
+.markdown-body dl {
+	padding: 0;
+}
+
+.markdown-body dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.markdown-body dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+	padding: 0 15px;
+	color: #777;
+	border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+	margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.markdown-body table th {
+	font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.markdown-body img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.markdown-body span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.markdown-body span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #333;
+}
+
+.markdown-body span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body code,.markdown-body tt {
+	padding: 0;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgba(0,0,0,0.04);
+	border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after,
+.markdown-body tt:before,
+.markdown-body tt:after {
+	letter-spacing: -0.2em;
+	content: "\00a0";
+}
+
+.markdown-body code br,
+.markdown-body tt br {
+	display: none;
+}
+
+.markdown-body del code {
+	text-decoration: inherit;
+}
+
+.markdown-body pre>code {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+.markdown-body pre {
+	word-wrap: normal;
+}
+
+.markdown-body pre code,
+.markdown-body pre tt {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after,
+.markdown-body pre tt:before,
+.markdown-body pre tt:after {
+	content: normal;
+}
+
+.highlight .pl-coc,
+.highlight .pl-entl,
+.highlight .pl-entm,
+.highlight .pl-eoa,
+.highlight .pl-mai .pl-sf,
+.highlight .pl-mm,
+.highlight .pl-pdv,
+.highlight .pl-sc,
+.highlight .pl-som,
+.highlight .pl-sr,
+.highlight .pl-v,
+.highlight .pl-vpf {
+	color: #0086b3;
+}
+.highlight .pl-eoac,
+.highlight .pl-mdht,
+.highlight .pl-mi1,
+.highlight .pl-mri,
+.highlight .pl-va,
+.highlight .pl-vpu {
+	color: #008080;
+}
+.highlight .pl-c,
+.highlight .pl-pdc {
+	color: #b4b7b4;
+	font-style: italic;
+}
+.highlight .pl-k,
+.highlight .pl-ko,
+.highlight .pl-kolp,
+.highlight .pl-mc,
+.highlight .pl-mr,
+.highlight .pl-ms,
+.highlight .pl-s,
+.highlight .pl-sok,
+.highlight .pl-st {
+	color: #6e5494;
+}
+.highlight .pl-ef,
+.highlight .pl-enf,
+.highlight .pl-enm,
+.highlight .pl-entc,
+.highlight .pl-eoi,
+.highlight .pl-sf,
+.highlight .pl-smc {
+	color: #d12089;
+}
+.highlight .pl-ens,
+.highlight .pl-eoai,
+.highlight .pl-kos,
+.highlight .pl-mh .pl-pdh,
+.highlight .pl-mp,
+.highlight .pl-pde,
+.highlight .pl-stp {
+	color: #458;
+}
+.highlight .pl-enti {
+	color: #d12089;
+	font-weight: bold;
+}
+.highlight .pl-cce,
+.highlight .pl-enc,
+.highlight .pl-kou,
+.highlight .pl-mq {
+	color: #f93;
+}
+.highlight .pl-mp1 .pl-sf {
+	color: #458;
+	font-weight: bold;
+}
+.highlight .pl-cos,
+.highlight .pl-ent,
+.highlight .pl-md,
+.highlight .pl-mdhf,
+.highlight .pl-ml,
+.highlight .pl-pdc1,
+.highlight .pl-pds,
+.highlight .pl-s1,
+.highlight .pl-scp,
+.highlight .pl-sol {
+	color: #df5000;
+}
+.highlight .pl-c1,
+.highlight .pl-cn,
+.highlight .pl-pse,
+.highlight .pl-pse .pl-s2,
+.highlight .pl-vi {
+	color: #a31515;
+}
+.highlight .pl-mb,
+.highlight .pl-pdb {
+	color: #df5000;
+	font-weight: bold;
+}
+.highlight .pl-mi,
+.highlight .pl-pdi {
+	color: #6e5494;
+	font-style: italic;
+}
+.highlight .pl-ms1 {
+	background-color: #f5f5f5;
+}
+.highlight .pl-mdh,
+.highlight .pl-mdi {
+	font-weight: bold;
+}
+.highlight .pl-mdr {
+	color: #0086b3;
+	font-weight: bold;
+}
+.highlight .pl-s2 {
+	color: #333;
+}
+.highlight .pl-ii {
+	background-color: #df5000;
+	color: #fff;
+}
+.highlight .pl-ib {
+	background-color: #f93;
+}
+.highlight .pl-id {
+	background-color: #a31515;
+	color: #fff;
+}
+.highlight .pl-iu {
+	background-color: #b4b7b4;
+}
+.highlight .pl-mo {
+	color: #969896;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getDocumentScrollTop() 
+{
+   var res = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0;
+   // alert(res);
+   return res;
+}
+
+function setDocumentScrollTop(ypos) 
+{
+	window.scrollTo(0, ypos);
+}
+
+</script>
+
+
+</head>
+<body class="markdown-body">
+<h1> <a id="s4---septima-search-for-spatialsuite" class="anchor" href="#s4---septima-search-for-spatialsuite" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>S4 - Septima Search for SpatialSuite</h1> 
+<h2> <a id="tools-included-in-s4" class="anchor" href="#tools-included-in-s4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tools included in s4</h2> 
+<p>Please read the <a href="..\..\...md.html#installation">general installation instructions</a> before reading this</p> 
+<p>The main tool:</p> 
+<ul> 
+ <li><a href="#s4-plugin-dk-all">s4-plugin-dk-all (s4-plugin-all)</a></li> 
+</ul> 
+<p>Tools relevant for Denmark only:</p> 
+<ul> 
+ <li> <p>Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler</p> 
+  <ul> 
+   <li><a href="#s4-matrikel-plugin">s4-matrikel-plugin</a></li> 
+   <li><a href="#s4-adresse-plugin">s4-adresse-plugin</a></li> 
+   <li> <a href="#s4-adresse-hgf-matrikel-plugin">s4-adresse-hgf-matrikel-plugin</a> linker til <em>Hvad g&aelig;lder for matriklen</em>.</li> 
+  </ul> </li> 
+ <li> <p>Link til SDFE skr&aring;foto for adresser og matrikelnumre</p> 
+  <ul> 
+   <li><a href="#s4-sdfe-oblique-plugin">s4-sdfe-oblique-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Visning af- og s&oslash;gning i vejmidter</p> 
+  <ul> 
+   <li><a href="#s4-vis-dawa-vejmidter-plugin">s4-vis-dawa-vejmidter-plugin</a></li> 
+   <li><a href="#s4-vis-egne-vejmidter-plugin">s4-vis-egne-vejmidter-plugin</a></li> 
+   <li><a href="#s4-soeg-egne-vejmidter-plugin">s4-soeg-egne-vejmidter-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Links vedr&oslash;rende lokalplaner</p> 
+  <ul> 
+   <li><a href="#s4-planSystem-plugin">s4-planSystem-plugin</a></li> 
+   <li><a href="#s4-odeum-plugin">s4-odeum-plugin</a></li> 
+   <li><a href="#s4-dkPlan-plugin">s4-dkPlan-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Link til cvr-info</p> 
+  <ul> 
+   <li><a href="#s4-cvr-virk-plugin">s4-cvr-virk-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Vis E-Knap</p> 
+  <ul> 
+   <li><a href="#s4-eknap-plugin">s4-eknap-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Link til JO FilArkiv for adresser og matrikelnumre</p> 
+  <ul> 
+   <li><a href="#s4-jo-filarkiv-link-plugin">s4-jo-filarkiv-link-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Link til LIFAOIS for adresser og matrikelnumre</p> 
+  <ul> 
+   <li><a href="#s4-lifa-webois-link-plugin">s4-lifa-webois-link-plugin</a></li> 
+  </ul> </li> 
+ <li> <p>Link til COWI gadefoto for adresser og matrikelnumre</p> 
+  <ul> 
+   <li><a href="#s4-cowi-gadefoto-plugin">s4-cowi-gadefoto-plugin</a></li> 
+  </ul> </li> 
+</ul> 
+<p>Tools using the details view function:</p> 
+<ul> 
+ <li> <p><a href="#s4-details-nearest-plugin">s4-details-nearest-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-spatialquery-plugin">s4-details-spatialquery-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-themesForIndex-plugin">s4-details-themesForIndex-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-s4index-plugin">s4-details-s4index-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-dawa-dagi-plugin">s4-details-dawa-dagi-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-dawa-planer-plugin">s4-details-dawa-planer-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-adresse-tinglysninger">s4-details-adresse-tinglysninger</a></p> </li> 
+ <li> <p><a href="#s4-details-themes-related-plugin">s4-details-themes-related-plugin</a></p> </li> 
+ <li> <p><a href="#s4-details-themes-tools-plugin">s4-details-themes-tools-plugin</a></p> </li> 
+ <li> <p>Experimental tools:</p> 
+  <ul> 
+   <li><a href="#s4-details-guides-plugin">s4-details-guides-plugin</a></li> 
+   <li><a href="#s4-details-help-plugin">s4-details-help-plugin</a></li> 
+  </ul> </li> 
+</ul> 
+<p>API documentation:</p> 
+<ul> 
+ <li><a href="#apidemo">s4ApiDemo</a></li> 
+</ul> 
+<h3> <a id="s4-plugin-dk-all-s4-plugin-all" class="anchor" href="#s4-plugin-dk-all-s4-plugin-all" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)</h3> 
+<p>The main tool.<br /> <a href="..\..\...md.html#customization-of-s4-tool">Customize the tool </a> and include to enable search in Spatial Map.</p> 
+<p><em>Please include this tool before any other s4 tool</em></p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-plugin-dk-all<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>S4 ships with two versions of the tool:</p> 
+<ul> 
+ <li> <em>s4-plugin-dk-all</em> includes searchers only relevant in Denmark</li> 
+ <li> <em>s4-plugin-all</em> is used outside of Denmark</li> 
+</ul> 
+<h3> <a id="s4-buttons-spatialmaptools-plugin" class="anchor" href="#s4-buttons-spatialmaptools-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin</h3> 
+<p>This tools creates icons for Spatial Map functions (Info and print).</p> 
+<p><em>Must</em> be included.</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-buttons-spatialMapTools-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-matrikel-plugin" class="anchor" href="#s4-matrikel-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-matrikel-plugin"></a>s4-matrikel-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for matrikler<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-matrikel-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-adresse-plugin" class="anchor" href="#s4-adresse-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-adresse-plugin"></a>s4-adresse-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-adresse-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-adresse-hgf-matrikel-plugin" class="anchor" href="#s4-adresse-hgf-matrikel-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikoner med links til BBR, SKAT, jordforureningsattest fra DAI samt <em>Hvad g&aelig;lder for matriklen</em> for adresse fra Dawa<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-adresse-hgf-matrikel-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-sdfe-oblique-plugin" class="anchor" href="#s4-sdfe-oblique-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-sdfe-oblique-plugin"></a>s4-sdfe-oblique-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser link til SDFE skr&aring;foto for adresser og matrikelnumre<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-sdfe-oblique-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>Simpel visning uden m&aring;lev&aelig;rkt&oslash;jer:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-sdfe-oblique-plugin<span class="pl-pds">&quot;</span></span>&gt;
+  &lt;<span class="pl-ent">jsonconfig</span>&gt;
+    {&quot;mode&quot;: &quot;simple&quot;} 
+  &lt;/<span class="pl-ent">jsonconfig</span>&gt;
+&lt;/<span class="pl-ent">tool</span>&gt;</pre>
+</div> 
+<p>hvor &quot;mode&quot; kan v&aelig;re &quot;js&quot; (Default) eller &quot;simple&quot; (Ingen m&aring;lev&aelig;rkt&oslash;jer)</p> 
+<h3> <a id="s4-soeg-egne-vejmidter-plugin" class="anchor" href="#s4-soeg-egne-vejmidter-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin</h3> 
+<p>Only relevant in Denmark<br /> Dette er et tool, som underst&oslash;tter s&oslash;gning i egne vejmidter. Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-soeg-egne-vejmidter-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>Forbered en datasource <em>ds_s4_vejmidte</em>:</p> 
+<p>s4-soeg-egne-vejmidter-plugin forventer, at der findes en datasource, som hedder <em>ds_s4_vejmidte</em> med f&oslash;lgende command:</p> 
+<ul> 
+ <li> <em>read_search</em>, som bliver kaldt med to parametre; [query] og [limit]. Skal returnere felterne heading og shape_wkt for veje uden husnumre. Return&eacute;r max [limit] veje.</li> 
+</ul> 
+<p>Eksempel:<br /> Dette er den datasource, bruges i Silkeborg.</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">datasource</span> <span class="pl-e">endpoint</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4_vejmidte<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>ds_s4_vejmidte<span class="pl-pds">&quot;</span></span>&gt;
+	<span class="pl-c"><span class="pl-c">&lt;!--</span> https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher <span class="pl-c">--&gt;</span></span>
+       &lt;<span class="pl-ent">table</span> <span class="pl-e">geometrycolumn</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>geom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>testdata.vejmidte_aggregeret<span class="pl-pds">&quot;</span></span> <span class="pl-e">pkcolumn</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>gid<span class="pl-pds">&quot;</span></span>/&gt;
+	&lt;<span class="pl-ent">sql</span> <span class="pl-e">command</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>read_search<span class="pl-pds">&quot;</span></span>&gt;select vejnavn as heading, st_astext(geom) as shape_wkt
+		from	testdata.vejmidte_aggregeret
+		where	vejnavn ilike '[query]%'
+				and adresselos  is null
+		order	by vejnavn
+		limit [limit];
+	&lt;/<span class="pl-ent">sql</span>&gt;
+&lt;/<span class="pl-ent">datasource</span>&gt;       </pre>
+</div> 
+<p>Silkeborg skriver:<br /> Vejmidtedata er genereret ud fra FOT Vejmidte brudt hvor GST har lagt CPR-Vejkode p&aring; de fleste vejmidter (der er stumper af sm&aring;veje der ikke er med). Vi har lavet et script i databasen, der aggregerer geometrien p&aring; baggrund af vejkoden og s&aelig;tter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script k&oslash;rer en gang i d&oslash;gnet, s&aring; rettelser i vejmidten og test mod adresserne altid er ajour. Scriptet deler vi selvf&oslash;lgeligt gerne, men det virker jo kun i SQL server.</p> 
+<h3> <a id="s4-vis-egne-vejmidter-plugin" class="anchor" href="#s4-vis-egne-vejmidter-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-vis-egne-vejmidter-plugin"></a>s4-vis-egne-vejmidter-plugin</h3> 
+<p>Only relevant in Denmark<br /> Dette er et tool, som underst&oslash;tter visning af vejgeometri n&aring;r en vej er valgt i geosearch. Se <a href="https://github.com/Septima/spatialsuite-s4/issues/45">https://github.com/Septima/spatialsuite-s4/issues/45</a>.<br /> OBS: Dawa-searcheren kan vise vejmidter fra dawa, hvis du istedet bruger toolet <a href="#s4-vis-dawa-vejmidter-plugin">s4-vis-dawa-vejmidter-plugin</a><br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-vis-egne-vejmidter-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>Forbered en datasource <em>ds_s4_vejmidte</em>:</p> 
+<p>s4-vejmidter-plugin forventer, at der findes en datasource, som hedder <em>ds_s4_vejmidte</em> med f&oslash;lgende command:</p> 
+<ul> 
+ <li> <em>read_geometry</em>, som bliver kaldt med parameteren [vejkode]. Skal returnere shape_wkt for vej.</li> 
+</ul> 
+<p>Eksempel:<br /> Dette er den datasource, bruges i Silkeborg.</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">datasource</span> <span class="pl-e">endpoint</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4_vejmidte<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>ds_s4_vejmidte<span class="pl-pds">&quot;</span></span>&gt;
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> https://github.com/Septima/spatialsuite-s4/wiki/Datasource-Searcher <span class="pl-c">--&gt;</span></span>
+       &lt;<span class="pl-ent">table</span> <span class="pl-e">geometrycolumn</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>geom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>testdata.vejmidte_aggregeret<span class="pl-pds">&quot;</span></span> <span class="pl-e">pkcolumn</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>gid<span class="pl-pds">&quot;</span></span>/&gt;
+    &lt;<span class="pl-ent">sql</span> <span class="pl-e">command</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>read_geometry<span class="pl-pds">&quot;</span></span>&gt;select st_astext(geom) as shape_wkt
+        from    testdata.vejmidte_aggregeret
+        where   cprvejkode = [vejkode];
+    &lt;/<span class="pl-ent">sql</span>&gt;
+&lt;/<span class="pl-ent">datasource</span>&gt;       </pre>
+</div> 
+<p>Silkeborg skriver:<br /> Vejmidtedata er genereret ud fra FOT Vejmidte brudt hvor GST har lagt CPR-Vejkode p&aring; de fleste vejmidter (der er stumper af sm&aring;veje der ikke er med). Vi har lavet et script i databasen, der aggregerer geometrien p&aring; baggrund af vejkoden og s&aelig;tter attributten adresselos ved at teste vejkoden op i mod vores BBR-adressetabel. Dette script k&oslash;rer en gang i d&oslash;gnet, s&aring; rettelser i vejmidten og test mod adresserne altid er ajour. Scriptet deler vi selvf&oslash;lgeligt gerne, men det virker jo kun i SQL server.</p> 
+<h3> <a id="4-vis-dawa-vejmidter-plugin" class="anchor" href="#4-vis-dawa-vejmidter-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-vis-dawa-vejmidter-plugin"></a>4-vis-dawa-vejmidter-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser vejmidter fra dawa n&aring;r en vej er valgt</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>4-vis-dawa-vejmidter-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-eknap-plugin" class="anchor" href="#s4-eknap-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-eknap-plugin"></a>s4-eknap-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser et E-Knap ikon for adresser og matrikler returneret fra geosearch, samt for virksomheder returneret fra cvr-s&oslash;geren.<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-eknap-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>Hvis du &oslash;nsker E-Knap for andre typer s&oslash;geresultater skal du kopiere toolet til tools/custom, tilpasse det, samt inkludere det i profil:<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-eknap-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>For tilf&oslash;je E-Knap for resultater fra dit lokale indeks skal du s&aelig;tte target til <em>entalsformen</em> af den presentation, der bruges i indekset. Eksempel:</p> 
+<div class="highlight highlight-source-js">
+ <pre><span class="pl-smi">_s4CustomButtons</span>.<span class="pl-c1">push</span>({<span class="pl-s"><span class="pl-pds">&quot;</span>buttonText<span class="pl-pds">&quot;</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Vis ejeroplysninger for skolen<span class="pl-pds">&quot;</span></span>, <span class="pl-s"><span class="pl-pds">&quot;</span>buttonImage<span class="pl-pds">&quot;</span></span><span class="pl-k">:</span> _s4eKnapUri, <span class="pl-s"><span class="pl-pds">&quot;</span>callBack<span class="pl-pds">&quot;</span></span><span class="pl-k">:</span> s4DoEKnap, <span class="pl-s"><span class="pl-pds">&quot;</span>searcher<span class="pl-pds">&quot;</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&quot;</span>indexsearcher<span class="pl-pds">&quot;</span></span>, <span class="pl-s"><span class="pl-pds">&quot;</span>target<span class="pl-pds">&quot;</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&quot;</span>skole<span class="pl-pds">&quot;</span></span>});</pre>
+</div> 
+<p>hvor ordet &quot;skole&quot; korresponderer med <em>text.value</em> i presentation:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">text</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>overskrift<span class="pl-pds">&quot;</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>Skole<span class="pl-pds">&quot;</span></span> <span class="pl-e">plural</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>Skoler<span class="pl-pds">&quot;</span></span>/&gt;</pre>
+</div> 
+<h3> <a id="s4-jo-filarkiv-link-plugin" class="anchor" href="#s4-jo-filarkiv-link-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-jo-filarkiv-link-plugin"></a>s4-jo-filarkiv-link-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser link til JO FilArkiv for adresser og matrikelnumre.<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-jo-filarkiv-link-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>S&aelig;t f&oslash;lgende parameter for at pluginnet virker:</p> 
+<div class="highlight highlight-text-xml">
+ <pre><span class="pl-c"><span class="pl-c">&lt;!--</span> ========================================= <span class="pl-c">--&gt;</span></span>
+<span class="pl-c"><span class="pl-c">&lt;!--</span> S4 mod JO FilArkiv <span class="pl-c">--&gt;</span></span>
+<span class="pl-c"><span class="pl-c">&lt;!--</span> ========================================= <span class="pl-c">--&gt;</span></span>
+&lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4.jo.filarkiv.kommunenavn<span class="pl-pds">&quot;</span></span>&gt;xxx&lt;/<span class="pl-ent">param</span>&gt;</pre>
+</div> 
+<p>Linker til &quot;<a href="https://xxx.filarkiv.dk" rel="nofollow">https://xxx.filarkiv.dk</a></p> 
+<h3> <a id="s4-lifa-webois-link-plugin" class="anchor" href="#s4-lifa-webois-link-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-lifa-webois-link-plugin"></a>s4-lifa-webois-link-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser Link til LIFAOIS for adresser og matrikelnumre.<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-lifa-webois-link-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>S&aelig;t f&oslash;lgende parameter for at pluginnet virker:</p> 
+<div class="highlight highlight-text-xml">
+ <pre><span class="pl-c"><span class="pl-c">&lt;!--</span> ========================================= <span class="pl-c">--&gt;</span></span>
+<span class="pl-c"><span class="pl-c">&lt;!--</span> S4 mod LIFAOIS <span class="pl-c">--&gt;</span></span>
+<span class="pl-c"><span class="pl-c">&lt;!--</span> ========================================= <span class="pl-c">--&gt;</span></span>
+&lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4.lifaois.uid<span class="pl-pds">&quot;</span></span>&gt;xxx&lt;/<span class="pl-ent">param</span>&gt;
+&lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4.lifaois.pwd<span class="pl-pds">&quot;</span></span>&gt;xxx&lt;/<span class="pl-ent">param</span>&gt;</pre>
+</div> 
+<p>Linker til &quot;<a href="https://xxx.filarkiv.dk" rel="nofollow">https://xxx.filarkiv.dk</a></p> 
+<h3> <a id="s4-cowi-gadefoto-plugin" class="anchor" href="#s4-cowi-gadefoto-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-cowi-gadefoto-plugin"></a>s4-cowi-gadefoto-plugin</h3> 
+<p>Only relevant in Denmark</p> 
+<p>COWI gadefoto for adresser og matrikelnumre</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-cowi-gadefoto-plugin<span class="pl-pds">&quot;</span></span>/&gt;</pre>
+</div> 
+<h3> <a id="s4-cvr-virk-plugin" class="anchor" href="#s4-cvr-virk-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-cvr-virk-plugin"></a>s4-cvr-virk-plugin</h3> 
+<p>Only relevant in Denmark</p> 
+<p>Link til cvr-info p&aring; virk.dk.</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-cvr-virk-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-plansystem-plugin" class="anchor" href="#s4-plansystem-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-planSystem-plugin"></a>s4-planSystem-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikon med link til plansystemets pdf for lokalplaner<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-planSystem-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-odeum-plugin" class="anchor" href="#s4-odeum-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-odeum-plugin"></a>s4-odeum-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikon med link til ODEUM for lokalplaner. (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-odeum-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>S&aelig;t f&oslash;lgende parameter for at pluginnet virker:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4.odeumClientName<span class="pl-pds">&quot;</span></span>&gt;odeumClientName&lt;/<span class="pl-ent">param</span>&gt;</pre>
+</div> 
+<p>, hvor <em>odeumClientName</em> er den del af urlen som bruges i ODEUM til din kommune. For url'en <em><a href="http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/__horsens__/lokalplaner.lpplandk2_join/xxx" rel="nofollow">http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/__horsens__/lokalplaner.lpplandk2_join/xxx</a></em> er det <em>horsens</em>.</p> 
+<h3> <a id="s4-dkplan-plugin" class="anchor" href="#s4-dkplan-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-s4-dkPlan-plugin"></a>s4-dkPlan-plugin</h3> 
+<p>Only relevant in Denmark<br /> Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr s&aring; hvis du klikker p&aring; en plan i en anden kommune s&aring; vises <em>din</em> plan med det plannr.)<br /> Inklud&eacute;r i profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-dkPlan-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>S&aelig;t f&oslash;lgende parameter for at pluginnet virker:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4.dkPlanClientName<span class="pl-pds">&quot;</span></span>&gt;dkPlanClientName&lt;/<span class="pl-ent">param</span>&gt;</pre>
+</div> 
+<p>, hvor <em>dkPlanClientName</em> er den del af urlen som bruges i din kommune. For url'en <em><a href="http://silkeborglokalplaner.viewer.dkplan.niras.dk/dkplan/dkplan.aspx?LokalplanNr=xxx" rel="nofollow">http://silkeborglokalplaner.viewer.dkplan.niras.dk/dkplan/dkplan.aspx?LokalplanNr=xxx</a></em> er det <em>silkeborglokalplaner</em>.</p> 
+<h3> <a id="s4apidemo" class="anchor" href="#s4apidemo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-apidemo"></a>s4ApiDemo</h3> 
+<p>Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [<a href="https://github.com/Septima/spatialsuite-s4/wiki/S4-API">https://github.com/Septima/spatialsuite-s4/wiki/S4-API</a>]</p> 
+<h3> <a id="s4-details-nearest-plugin" class="anchor" href="#s4-details-nearest-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-nearest-plugin"></a>s4-details-nearest-plugin</h3> 
+<p>For an address; show the nearest three features of each type in your s4 index.</p> 
+<p>To customize, copy to tools/custom and follow the instructions in the <em>Customize HERE</em> sections.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-nearest-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-spatialquery-plugin" class="anchor" href="#s4-details-spatialquery-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin</h3> 
+<p>Perform a standard Spatial Suite spatial query against your <em>local</em> datasources.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-spatialquery-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<p>To customize, copy to tools/custom and follow the instructions in the <em>Customize HERE</em> sections.</p> 
+<div class="highlight highlight-source-js">
+ <pre>   <span class="pl-k">var</span> s4SqSearcher <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Septima.Search.SqSearcher</span>({
+       <span class="pl-c"><span class="pl-c">//</span>Customize HERE</span>
+       layers<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">&quot;</span>theme_skole theme_park<span class="pl-pds">&quot;</span></span>,
+       profile<span class="pl-k">:</span> <span class="pl-smi">cbKort</span>.<span class="pl-en">getProfile</span>(),
+       profileQuery<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>info<span class="pl-pds">'</span></span>,
+       buffer<span class="pl-k">:</span> <span class="pl-c1">0</span>,
+       sessionId<span class="pl-k">:</span> <span class="pl-smi">cbKort</span>.<span class="pl-en">getSessionId</span>(),
+       allowDetails<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+       onSelect<span class="pl-k">:</span> s4Hit             
+   });
+</pre>
+</div> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-spatialquery-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-themesforindex-plugin" class="anchor" href="#s4-details-themesforindex-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin</h3> 
+<p>Show relevant themes for features from the s4 index.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-themesForIndex-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-s4index-plugin" class="anchor" href="#s4-details-s4index-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-s4index-plugin"></a>s4-details-s4index-plugin</h3> 
+<p>Show all columns from presentations used to build the s4 index.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-s4index-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-dawa-planer-plugin" class="anchor" href="#s4-details-dawa-planer-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-dawa-planer-plugin"></a>s4-details-dawa-planer-plugin</h3> 
+<p>Only relevant in Denmark.</p> 
+<p>Vis vedtaget lokalplan for adressen.</p> 
+<p>Inklud&eacute;r in profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-dawa-planer-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-dawa-dagi-plugin" class="anchor" href="#s4-details-dawa-dagi-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin</h3> 
+<p>Only relevant in Denmark.</p> 
+<p>Vis DAGI-information for adresse.</p> 
+<p>Inklud&eacute;r in profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-dawa-dagi-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-adresse-tinglysninger" class="anchor" href="#s4-details-adresse-tinglysninger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger</h3> 
+<p>Vis Link til Tingbogen for en adresse.</p> 
+<p>Inklud&eacute;r in profil:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-adresse-tinglysninger<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-themes-related-plugin" class="anchor" href="#s4-details-themes-related-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-themes-related-plugin"></a>s4-details-themes-related-plugin</h3> 
+<p>Show other themes belonging to the themegroup</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-themes-related-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-themes-tools-plugin" class="anchor" href="#s4-details-themes-tools-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-themes-tools-plugin"></a>s4-details-themes-tools-plugin</h3> 
+<p>Show tools (transparency, meetadat, copyright etc) for a theme.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-themes-tools-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-guides-plugin" class="anchor" href="#s4-details-guides-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-guides-plugin"></a>s4-details-guides-plugin</h3> 
+<p>Let your users search and discover your Spatial Map guides.</p> 
+<p>Copy the tool to tools/custom.</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">dir</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>custom<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-guides-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div> 
+<h3> <a id="s4-details-help-plugin" class="anchor" href="#s4-details-help-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-#s4-details-help-plugin"></a>s4-details-help-plugin</h3> 
+<p>Let your users search and the built-in Spatial Map on-line help</p> 
+<p>Include in profile:</p> 
+<div class="highlight highlight-text-xml">
+ <pre>&lt;<span class="pl-ent">tool</span> <span class="pl-e">module</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4<span class="pl-pds">&quot;</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>s4-details-help-plugin<span class="pl-pds">&quot;</span></span> /&gt;</pre>
+</div>
+</body>
+</html>

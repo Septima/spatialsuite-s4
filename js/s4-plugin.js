@@ -155,7 +155,7 @@ function s4_init (params){
                 s4Locale.search = _s4Params.view.placeholder;
             }else{
                 var placeHolder = cbKort.getSession().getParam("s4.search.placeholder");
-                if (placeHolder !== "s4.search.placeholder"){
+                if (placeHolder !== null && placeHolder !== "s4.search.placeholder"){
                     s4Locale.search = placeHolder;
                 }
             }
@@ -182,7 +182,7 @@ function s4_init (params){
         	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
             	var searchIndexTokenParamName = 's4.searchchindex.token';
             	searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
-            	if (searchIndexToken === searchIndexTokenParamName){
+            	if (searchIndexToken === null || searchIndexToken === searchIndexTokenParamName){
             	    searchIndexTokenParamName = 's4.searchindex.token';
                     searchIndexToken = cbKort.getSession().getParam(searchIndexTokenParamName);
                     if (searchIndexToken === searchIndexTokenParamName){
@@ -715,7 +715,8 @@ Searchlast2.prototype.createDialog = function()
                 '</table>';
         this.dialog.addContentHTML(h);
     }
-    getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
+    //getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
+    jQuery('#Searchlast2_options').html(spatialqueryoptions.getOptionDialogContent());
 }
 Searchlast2.prototype.showDialog = function(searchtext)
 {
@@ -723,10 +724,12 @@ Searchlast2.prototype.showDialog = function(searchtext)
     
 	if (searchtext) {
 		this.searchText = searchtext;
-	    getElement('Searchlast2_searchtext').innerHTML = cbKort.getSession().getString('spatialquery.show_info_about')+' '+this.searchText;
+        //getElement('Searchlast2_searchtext').innerHTML = cbKort.getSession().getString('spatialquery.show_info_about')+' '+this.searchText;
+		jQuery('#Searchlast2_searchtext').html(cbKort.getSession().getString('spatialquery.show_info_about') + ' ' + this.searchText);
 	} else {
 		this.searchText = null;
-	    getElement('Searchlast2_searchtext').innerHTML = this.defaultText;
+        //getElement('#Searchlast2_searchtext').innerHTML = this.defaultText;
+		jQuery('#Searchlast2_searchtext').html(this.defaultText);
 	}
         
     this.dialog.showDialog();

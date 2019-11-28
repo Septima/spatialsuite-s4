@@ -29,7 +29,7 @@
             if (mode === "js") {
                 url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
             } else {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjsoff/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
             }
             window.open(url, "s4SdfeOblique");
         }
@@ -42,7 +42,7 @@
             if (mode === "js") {
                 url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
             } else {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
+                url = "https://skraafoto.kortforsyningen.dk/oblivisionjsoff/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
             }
             window.open(url, "s4SdfeOblique");
         }

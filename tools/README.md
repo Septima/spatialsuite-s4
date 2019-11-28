@@ -36,6 +36,9 @@ Tools relevant for Denmark only:
   
 * Link til LIFAOIS for adresser og matrikelnumre   
     * [s4-lifa-webois-link-plugin](#s4-lifa-webois-link-plugin)  
+
+* Link til COWI gadefoto for adresser og matrikelnumre
+    * [s4-cowi-gadefoto-plugin](#s4-cowi-gadefoto-plugin)  
   
 Tools using the details view function:  
 * [s4-details-nearest-plugin](#s4-details-nearest-plugin)  
@@ -108,6 +111,15 @@ Inkludér i profil:
 <tool module="s4" name="s4-sdfe-oblique-plugin" />
 ```  
   
+Simpel visning uden måleværktøjer:
+```xml
+<tool module="s4" name="s4-sdfe-oblique-plugin">
+  <jsonconfig>
+    {"mode": "simple"} 
+  </jsonconfig>
+</tool>
+```    
+hvor "mode" kan være "js" (Default) eller "simple" (Ingen måleværktøjer)  
   
 ### <a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
 Only relevant in Denmark  
@@ -235,6 +247,16 @@ Sæt følgende parameter for at pluginnet virker:
 <param name="s4.lifaois.pwd">xxx</param>
 ```  
 Linker til "https://xxx.filarkiv.dk  
+
+
+### <a name="s4-cowi-gadefoto-plugin"></a>s4-cowi-gadefoto-plugin  
+Only relevant in Denmark  
+
+COWI gadefoto for adresser og matrikelnumre    
+
+```xml
+<tool module="s4" name="s4-cowi-gadefoto-plugin"/>
+```  
 
 
 ### <a name="s4-cvr-virk-plugin"></a>s4-cvr-virk-plugin  

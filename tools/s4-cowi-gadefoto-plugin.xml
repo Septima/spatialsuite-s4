@@ -4,7 +4,6 @@
     <requires>
 	    [if: ModuleDefined("cowi-gadefoto") ]
             <file type="script" name="/modules/cowi-gadefoto/js/cowi_gadefoto_tool.js" />
-	        
 	    [endif]
     </requires>
     <src><![CDATA[
