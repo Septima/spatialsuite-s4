@@ -18,7 +18,7 @@ offered by Septima.
   
 * S4 product page: http://www.septima.dk/p_s4  
 * Septima Search product page: http://www.septima.dk/p_search  
-* See a demo here: http://v3132c.sps-test.septima.dk/spatialmap  
+* See a demo here: http://sps.test.septima.dk  
 * Wiki: https://github.com/Septima/spatialsuite-s4/wiki  
 * Issues: https://github.com/Septima/spatialsuite-s4/issues  
   
