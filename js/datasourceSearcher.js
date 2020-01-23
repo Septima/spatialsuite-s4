@@ -6,6 +6,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 		}
 		
 		options.usesGeoFunctions = true;
+        Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
 		
 		if (typeof options.onSelect === 'undefined'){
 			options.onSelect = s4Hit;
@@ -27,7 +28,6 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
             this.type = options.type;
         }
 		
-		this.Searcher(options);
 		
         this.registerType(this.source, this.type);
         

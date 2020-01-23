@@ -11,6 +11,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     groups: [],
     
     initialize: function (options) {
+        Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
         //Strings
         this.visibleThemesPhrase = cbKort.getSession().getString('s4.themesearcher.visiblethemes');
         //this.toolsPhrase = cbKort.getSession().getString('s4.themesearcher.tools');
@@ -40,7 +41,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.source = this.themesPhrase;
         options.source = this.source;
         
-        this.Searcher(options);
         this.registerType(this.source, this.themesPhrase);
         this.registerType(this.source, this.visibleThemesPhrase);
         

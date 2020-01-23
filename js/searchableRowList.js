@@ -10,7 +10,11 @@
  * @param options.descriptionProperty {string} The name of the property in the data array that should be used as description
  * @param options.useAND {boolean} Use AND and not OR when multiple terms is added by the user. Default true
  */
-Septima.Search.SearchableRowList = Septima.Class (Septima.Search.SearchableData, /**  @lends Septima.Search.SearchableRowList# */{
+Septima.Search.SearchableRowList = Septima.Class (Septima.Search.SearchableData, {
+
+    initialize: function (options) {
+        Septima.Search.SearchableData.prototype.constructor.apply(this, [options]);
+    },
 	
     getData: function(){
     	return Septima.Search.SearchableData.prototype.getData.apply(this).row;

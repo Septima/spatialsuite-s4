@@ -12,7 +12,7 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		displaynameProperty: 'title',
        		descriptionProperty: 'description'
     	});
-        Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 		this.iconURI = Septima.Search.s4Icons.guideSearcher.iconURI;
     	this.addDetailHandlerDef({
     		"buttonText": options.singular,

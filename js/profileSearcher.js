@@ -10,7 +10,7 @@ Septima.Search.ProfileSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		searchProperties: ['name', 'displayname'],
     		displaynameProperty: 'displayname'
     	});
-    	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 		this.profileOnUri = Septima.Search.s4Icons.profileSearcher.profileOnUri;;
     	this.currentProfile = cbKort.getProfile();
 

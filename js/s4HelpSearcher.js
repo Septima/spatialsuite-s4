@@ -9,7 +9,7 @@ Septima.Search.HelpSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		searchProperties: ['title', 'description', 'tekst'],
     		displaynameProperty: 'title'
     	});
-        Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 		this.iconURI = Septima.Search.s4Icons.helpSearcher.iconURI;
 
 		this.registerType(options.plural, options.singular);

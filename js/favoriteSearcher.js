@@ -15,7 +15,7 @@ Septima.Search.FavoriteSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		descriptionProperty: 'description'
     	});
 		
-    	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 
         if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
             spm.getEvents().addListener("FAVORITE_SAVED", Septima.bind(function(event, favorite){

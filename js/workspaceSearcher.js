@@ -14,7 +14,7 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		getDisplayname: function (row){return row.name +' ('+ row.owner +')';}
     	});
 		
-    	Septima.Search.DataSearcher.prototype.initialize.apply(this, [options]);
+        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 
         cbKort.events.addListener ('WORKSPACE_CHANGED', Septima.bind(function(event, favorite){
         	this.readWorkspaces();
