@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Læs om s4's API her: -->
+<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
+
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <src/>
+    <jssrc><![CDATA[
+    [if: ModuleDefined("s4") ]
+           
+        window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
+        var _s4CustomButtons = window["_s4CustomButtons"];
+
+        var _s4SkatKnapUri = Septima.Search.s4Icons.matrikelPlugin.skatIconURI;         
+        var _s4BbrKnapUri = Septima.Search.s4Icons.matrikelPlugin.bbrIconUri; 
+        var _s4JordKnapUri = Septima.Search.icons.pdf;
+        var _s4HgfMatrikelKnapUri = Septima.Search.s4Icons.infoIconUri;
+                
+        _s4CustomButtons.push({"buttonText": "Se BBR-oplysninger", "buttonImage": _s4BbrKnapUri, "callBack": s4DawaDoBBRKnap, "searcher": "dawasearcher"});
+        _s4CustomButtons.push({"buttonText": "Se ejendomsvurdering", "buttonImage": _s4SkatKnapUri, "callBack": s4DawaDoVurderingKnap, "searcher": "dawasearcher"});
+        _s4CustomButtons.push({"buttonText": "Se jordforureningsattest", "buttonImage": _s4JordKnapUri, "callBack": s4DawaDoJordforureningKnap, "searcher": "dawasearcher"});
+        _s4CustomButtons.push({"buttonText": "Hvad gælder for matriklen", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher"});
+
+        function s4DawaDoBBRKnap(result){
+            _s4View.blur();
+            var komnr = result.data.properties.kommune.kode;
+            var ejdnr = result.data.properties.jordstykke.esrejendomsnr;
+            var url = "http://www.ois.dk/ui/linkpartner/linkpartner.aspx?CBKORT=TRUE&komnr=" + komnr + "&ejdnr=" + ejdnr;
+            window.open(url, "_s4DoBBRKnap");
+        }
+
+        function s4DawaDoVurderingKnap(result){
+            _s4View.blur();
+            var komnr = result.data.properties.kommune.kode.substr(1, 3);
+            var ejdnr = result.data.properties.jordstykke.esrejendomsnr;
+            var url = "http://www.vurdering.skat.dk/borger/ejendomsvurdering/Vis.do?KMNR=" + komnr + "&sideNavn=vstarte&EJDNR=" + ejdnr + "&POSTNR=&VEJKODE=&VEJNAVN="; 
+            window.open(url, "_s4DoVurderingKnap");
+        }
+
+        function s4DawaDoJordforureningKnap(result){
+            _s4View.blur();
+             var url = "http://jordrapport.miljoeportal.dk/?elav=" + result.data.properties.ejerlav.kode + "&matrnr="+ result.data.properties.jordstykke.matrikelnr;
+             window.open(url, "_s4DoJordforureningKnap");
+        }
+
+        function s4DawaHgfMatrikelKnap(result){
+	        jQuery.ajax({
+	            url: result.data.properties.jordstykke.href,
+	            data: {format: "geojson", srid: "25832"},
+	            success: Septima.bind(function(result, data){
+                    s4DoInfo({title: result.data.properties.jordstykke.matrikelnr, geometry: data.geometry, searcher: result.searcher});
+	            }, this, result)
+	        });
+        }
+
+    [endif]
+    ]]>
+    </jssrc>
+</tool>

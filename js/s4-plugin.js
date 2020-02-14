@@ -288,32 +288,6 @@ function s4_init (params){
                 _s4Params.s3searcher.searcher = s3searcher;
             }
             
-            //Collect searchers that have been pushed until now
-            var _s4Searchers = window["_s4Searchers"];
-            for (var i = 0;i<_s4Searchers.length;i++){
-                var searcherReg = _s4Searchers[i];
-                controller.addSearcher(searcherReg);
-                if (searcherReg.info){
-                    addInfoButtonToSearcher(searcherReg.searcher);
-                }
-                if (searcherReg.print){
-                    addPrintButtonToSearcher(searcherReg.searcher);
-                }
-            }
-            //Prepare for future pushes
-            window["_s4Searchers"] = {
-                    controller: controller,
-                    push: function (searcherReg) {
-                        this.controller.addSearcher(searcherReg);
-                        if (searcherReg.info){
-                            addInfoButtonToSearcher(searcherReg.searcher);
-                        }
-                        if (searcherReg.print){
-                            addPrintButtonToSearcher(searcherReg.searcher);
-                        }
-                    }
-            };
-            
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {onSelect: s4Hit, datasources: _s4Params.indexsearcher.datasources, allowDetails: _s4Params.indexsearcher.allowDetails};
                 if (_s4Params.indexsearcher.blankbehavior){
@@ -382,7 +356,33 @@ function s4_init (params){
             	controller.addSearcher(se);
                 _s4Params.cvrsearcher.searcher = se;
             }
-        	
+
+            //Collect searchers that have been pushed until now
+            var _s4Searchers = window["_s4Searchers"];
+            for (var i = 0;i<_s4Searchers.length;i++){
+                var searcherReg = _s4Searchers[i];
+                controller.addSearcher(searcherReg);
+                if (searcherReg.info){
+                    addInfoButtonToSearcher(searcherReg.searcher);
+                }
+                if (searcherReg.print){
+                    addPrintButtonToSearcher(searcherReg.searcher);
+                }
+            }
+            //Prepare for future pushes
+            window["_s4Searchers"] = {
+                    controller: controller,
+                    push: function (searcherReg) {
+                        this.controller.addSearcher(searcherReg);
+                        if (searcherReg.info){
+                            addInfoButtonToSearcher(searcherReg.searcher);
+                        }
+                        if (searcherReg.print){
+                            addPrintButtonToSearcher(searcherReg.searcher);
+                        }
+                    }
+            };
+            
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
 	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit});
 	            controller.addSearcher(themeSearcher);

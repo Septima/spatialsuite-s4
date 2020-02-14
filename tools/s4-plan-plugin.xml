@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
+                var options = {showPlansystemLink: true};
+                
+                var odeumClientNameParam = 's4.odeumClientName';
+                var odeumClientName = cbKort.getSession().getParam(odeumClientNameParam);
+                if (typeof odeumClientName !== 'undefined' && odeumClientName !== null && odeumClientName !== odeumClientNameParam && odeumClientName !== ''){
+                    options.odeumClientName = odeumClientName;
+                }
+                
+                var dkPlanClientNameParam = 's4.dkPlanClientName';
+                var dkPlanClientName = cbKort.getSession().getParam(dkPlanClientNameParam);
+        
+                if (typeof dkPlanClientName !== 'undefined' && dkPlanClientName !== null && dkPlanClientName !== dkPlanClientNameParam && dkPlanClientName !== ''){
+                    options.dkplanName = dkPlanClientName;
+                }
+                
+                _s4Params.plansearcher.searcher.addDetailHandlerDef(new Septima.Search.DokLinksForLokalplan(options));
+            }
+    [endif]
+    ]]>
+    </src>
+    <jssrc></jssrc>
+</tool>

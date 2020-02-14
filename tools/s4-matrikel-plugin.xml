@@ -1,61 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Læs om s4's API her: -->
-<!-- https://github.com/Septima/spatialsuite-s4/wiki/S4-API -->
 
 <tool type="plugin">
     <requires>
     [if: ModuleDefined("s4") ]
-    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-	[endif]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <file type="script" name="/modules/s4/js/offentligeLinksProvider.js?_=[s4.version]"/>
+    [endif]
    </requires>
-    <src/>
-    <jssrc><![CDATA[
+    <src><![CDATA[
     [if: ModuleDefined("s4") ]
-           
-       	window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-       	var _s4CustomButtons = window["_s4CustomButtons"];
-
-       	var _s4SkatKnapUri = Septima.Search.s4Icons.matrikelPlugin.skatIconURI;       	
-       	var _s4BbrKnapUri = Septima.Search.s4Icons.matrikelPlugin.bbrIconUri; 
-       	var _s4JordKnapUri = Septima.Search.icons.pdf;
-       	        
-        _s4CustomButtons.push({"buttonText": "Se BBR-oplysninger", "buttonImage": _s4BbrKnapUri, "callBack": s4DoBBRKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-        _s4CustomButtons.push({"buttonText": "Se ejendomsvurdering", "buttonImage": _s4SkatKnapUri, "callBack": s4DoVurderingKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-        _s4CustomButtons.push({"buttonText": "Se jordforureningsattest", "buttonImage": _s4JordKnapUri, "callBack": s4DoJordforureningKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-
-		function s4DoBBRKnap(result){
-		    _s4View.blur();
-			if (result.data.type == 'matrikelnummer' && result.data.esrejdnr){
-			    var komnr = result.data.esrejdnr.substring(0, 3);
-			    var ejdnr = result.data.esrejdnr.substring(3);
-        	    var url = "http://www.ois.dk/ui/linkpartner/linkpartner.aspx?CBKORT=TRUE&komnr=" + komnr + "&ejdnr=" + ejdnr;
-        	    window.open(url, "_s4DoBBRKnap");
-			}
-		}
-
-		function s4DoVurderingKnap(result){
-		    _s4View.blur();
-			if (result.data.type == 'matrikelnummer' && result.data.esrejdnr){
-			    var komnr = result.data.esrejdnr.substring(0, 3);
-			    var ejdnr = result.data.esrejdnr.substring(3);
-			    //var url = "http://www.vurdering.skat.dk/Ejendomsvurdering?KMNR=" + komnr + "&sideNavn=vstarte&EJDNR=" + ejdnr + "&POSTNR=&VEJKODE=&VEJNAVN="; 
-			    var url = "http://www.vurdering.skat.dk/borger/ejendomsvurdering/Vis.do?KMNR=" + komnr + "&sideNavn=vstarte&EJDNR=" + ejdnr + "&POSTNR=&VEJKODE=&VEJNAVN="; 
-        	    window.open(url, "_s4DoVurderingKnap");
-			}
-		}
-
-        function s4DoJordforureningKnap(result){
-            _s4View.blur();
-            if (result.data.type == 'matrikelnummer' && result.data.esrejdnr){
-                var komnr = result.data.esrejdnr.substring(0, 3);
-                var ejdnr = result.data.esrejdnr.substring(3);
-                //var url = "http://arealinformation.miljoeportal.dk/gis/SoilContamination.aspx?elav=" + result.data.elavskode + "&matrnr=" + result.data.matrnr;
-                var url = "http://jordrapport.miljoeportal.dk/?elav=" + result.data.elavskode + "&matrnr=" + result.data.matrnr;
-                window.open(url, "_s4DoJordforureningKnap");
+            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(new Septima.Search.offentligeLinksProvider());
             }
-        }
-
-	[endif]
+    [endif]
     ]]>
-    </jssrc>
+    </src>
+    <jssrc></jssrc>
 </tool>
