@@ -21,9 +21,7 @@ Tools relevant for Denmark only:
 
  
 * Links vedrørende lokalplaner
-    * [s4-planSystem-plugin](#s4-planSystem-plugin)  
-    * [s4-odeum-plugin](#s4-odeum-plugin)  
-    * [s4-dkPlan-plugin](#s4-dkPlan-plugin)  
+    * [s4-plan-plugin](#s4-plan-plugin)  
 
 * Link til cvr-info
     * [s4-cvr-virk-plugin](#s4-cvr-virk-plugin)
@@ -50,10 +48,6 @@ Tools using the details view function:
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
 * [s4-details-themes-related-plugin](#s4-details-themes-related-plugin)  
 * [s4-details-themes-tools-plugin](#s4-details-themes-tools-plugin)
- 
-* Experimental tools:  
-    * [s4-details-guides-plugin](#s4-details-guides-plugin)  
-    * [s4-details-help-plugin](#s4-details-help-plugin)  
  
 API documentation:  
 * [s4ApiDemo](#apidemo)  
@@ -268,39 +262,26 @@ Link til cvr-info på virk.dk.
 <tool module="s4" name="s4-cvr-virk-plugin" />
 ```  
 
-### <a name="s4-planSystem-plugin"></a>s4-planSystem-plugin  
+### <a name="s4-plan-plugin"></a>s4-plan-plugin  
 Only relevant in Denmark  
-Viser ikon med link til plansystemets pdf for lokalplaner  
+Viser ikon med link til plansystemets pdf for lokalplaner, kan konfigureres til også at vise links til Odeum og DKPlan  
 Inkludér i profil:  
 ```xml
-<tool module="s4" name="s4-planSystem-plugin" />
+<tool module="s4" name="s4-plan-plugin" />
 ```  
-  
-### <a name="s4-odeum-plugin"></a>s4-odeum-plugin  
-Only relevant in Denmark  
-Viser ikon med link til ODEUM for lokalplaner. (Du viderestilles til Plansystem.dk, hvis Odeum ikke har lokalplanen)  
-Inkludér i profil:  
-```xml
-<tool module="s4" name="s4-odeum-plugin" />
-```  
-Sæt følgende parameter for at pluginnet virker:  
+
+Sæt følgende parameter for at vise link til Odeum:  
 ```xml
 <param name="s4.odeumClientName">odeumClientName</param>
 ```  
 , hvor _odeumClientName_ er den del af urlen som bruges i ODEUM til din kommune. For url'en _http://plandk2.mapcentia.com/apps/custom/planurl/public/index.php/api/v1/url/__horsens__/lokalplaner.lpplandk2_join/xxx_ er det _horsens_.  
-  
-### <a name="s4-dkPlan-plugin"></a>s4-dkPlan-plugin  
-Only relevant in Denmark  
-Viser ikon med link til Niras' DKplan for lokalplaner. (OBS: Linket anvender plannr så hvis du klikker på en plan i en anden kommune så vises _din_ plan med det plannr.)  
-Inkludér i profil:  
-```xml
-<tool module="s4" name="s4-dkPlan-plugin" />
-```  
-Sæt følgende parameter for at pluginnet virker:  
+
+Sæt følgende parameter for at vise link til DKPlan:  
 ```xml
 <param name="s4.dkPlanClientName">dkPlanClientName</param>
 ```  
 , hvor _dkPlanClientName_ er den del af urlen som bruges i din kommune. For url'en _http://silkeborglokalplaner.viewer.dkplan.niras.dk/dkplan/dkplan.aspx?LokalplanNr=xxx_ er det _silkeborglokalplaner_.    
+  
   
 ### <a name="apidemo"></a>s4ApiDemo  
 Tool which demonstrates the use of the S4 API. It's shown how you attach custom searchers to s4 and how you can listen to onSelect events. Read more about the API [https://github.com/Septima/spatialsuite-s4/wiki/S4-API]  

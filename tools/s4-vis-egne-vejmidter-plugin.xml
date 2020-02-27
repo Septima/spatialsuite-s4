@@ -23,10 +23,10 @@
 				_s4OnSelect.push(function(result){
 					var intCode = null;
 					if (result.data && result.data.type && result.data.type == 'streetNameType'){
-						var streetCode = trim(result.data.streetCodes);
+						var streetCode = result.data.streetCodes.trim();
 						intCode = parseInt(streetCode);
 					}else if (result.data && result.data.type && result.data.type == 'vej'){
-						var streetCode = trim(result.data.vejkode);
+						var streetCode = result.data.vejkode.trim();
 						intCode = parseInt(streetCode);
 					}
 					if (intCode !== null){
@@ -43,8 +43,13 @@
 							success:  Septima.bind(function(data, textStatus,  jqXHR){
 								if (data.row[0]._class == 'rowlist'){
 									var wkt = data.row[0].row[0].shape_wkt;
-									cbKort.dynamicLayers.addWKT ({name: 'userdatasource', wkt:wkt, clear:true});
-									cbKort.dynamicLayers.zoomTo ('userdatasource', '100');
+									if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                                      var mc = spm.getMapControl();
+                                      mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
+									} else {
+	                                    cbKort.dynamicLayers.addWKT ({name: 'userdatasource', wkt:wkt, clear:true});
+	                                    cbKort.dynamicLayers.zoomTo ('userdatasource', _s4Params.view.zoomBuffer);
+									}
 								}
 						  }, this)
 						  });

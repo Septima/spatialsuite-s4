@@ -6,56 +6,20 @@
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
     [endif]
    </requires>
+    <jssrc><![CDATA[
+        ]]>
+    </jssrc>
     <src><![CDATA[
-	    [if: ModuleDefined("s4") ]
-	           
-	        window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-	        var _s4CustomButtons = window["_s4CustomButtons"];
-	        var mode = this.jsonConfig.mode ? this.jsonConfig.mode : "js";
-	
-	        var _s4SdfeKnapUri = Septima.Search.icons.exlink;
-	        
-	        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4DawaDoSdfeObliqueKnap.bind(this, mode), "searcher": "dawasearcher"});
-	        _s4CustomButtons.push({"buttonText": "Se skråfoto fra SDFE", "buttonImage": _s4SdfeKnapUri, "callBack": s4MatrikelDoSdfeObliqueKnap.bind(this, mode), "searcher": "geosearcher", "target": "matrikelnumre"});
-	
-	    [endif]
+        [if: ModuleDefined("s4") ]
+           var mode = this.jsonConfig.mode ? this.jsonConfig.mode : "js";
+           var handler = new Septima.Search.SdfeObliqueLinksForAdresseMatrikelHandler({mode: mode});
+           if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+               _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
+           }
+           if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+               _s4Params.geosearcher.searcher.addDetailHandlerDef(handler);
+           }
+        [endif]
     ]]>
     </src>
-    <jssrc><![CDATA[
-        function s4DawaDoSdfeObliqueKnap(mode, result){
-            _s4View.blur();
-            var latLon = s4SdfeObliqueConvert2582GeometryTowgs84LatLon(result.searcher, result.geometry);
-            var url;
-            if (mode === "js") {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
-            } else {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjsoff/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
-            }
-            window.open(url, "s4SdfeOblique");
-        }
-        
-        function s4MatrikelDoSdfeObliqueKnap(mode, result){
-            _s4View.blur();
-            var geometry = {type: "Point", coordinates: [parseInt(result.data.centroid_x), parseInt(result.data.centroid_y)]};
-            var latLon = s4SdfeObliqueConvert2582GeometryTowgs84LatLon(result.searcher, geometry);
-            var url;
-            if (mode === "js") {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjs/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
-            } else {
-                url = "https://skraafoto.kortforsyningen.dk/oblivisionjsoff/index.aspx?project=Denmark&lon=" +latLon.lon + "&lat=" +latLon.lat;
-            }
-            window.open(url, "s4SdfeOblique");
-        }
-        
-        function s4SdfeObliqueConvert2582GeometryTowgs84LatLon (searcher, geometry) {
-		    var crss = {
-		      "EPSG:25832": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
-		      "EPSG:4326": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
-		    }
-		    var geoJsonWgs84 = Septima.Search.reproject.reproject(geometry, "EPSG:25832", "EPSG:4326", crss)
-		    return {lon: geoJsonWgs84.coordinates[0], lat: geoJsonWgs84.coordinates[1]};         
-        }
-
-    ]]>
-    </jssrc>
 </tool>

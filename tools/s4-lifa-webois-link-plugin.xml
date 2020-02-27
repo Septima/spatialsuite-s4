@@ -7,41 +7,18 @@
     [endif]
    </requires>
     <jssrc><![CDATA[
-	    [if: ModuleDefined("s4") ]
-	    
-            window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-            var _s4CustomButtons = window["_s4CustomButtons"];
-    
-            var _s4LifaKnapUri = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTggMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQzLjIgKDM5MDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5MaWZhPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IkxpZmEiPgogICAgICAgICAgICA8aW1hZ2UgaWQ9IkJpdG1hcCIgeD0iMCIgeT0iMCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE1LjYiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBRXNBQUFCQkNBWUFBQUNaMVZtTUFBQUFCR2RCVFVFQUExdGVYUDhtZUFBQUJ2SkpSRUZVZUFIdFhGdHZHMFVVbnZXdTc3RWQyeHZidFhkOVNZamowRnpjK0pMUWtKS2thVXVSV2docFU1QUlpRklnYVIwbm9Za0lTWnRLQ0FrSktoWFMwditBa0JCOWdoY1FmWU1rVUI1NEFQR0FrbFMwbFNyVXRFQ2J4dDVoTmxWTmMvRmx2ZXZkdGNOS1Z1eVpPZWQ4NTlzejR6bXp4d0ZBUnBmVjJ4T2dRN0d2RUNSSWhmci9wc1B4OTRBWGFPUUNFWmNMRUwydHJjSG9xUHdVd21UTDdXdHpHSG9wRFk2bUZxTTY2THR6L2ZhWEFQeVpsQXRXaVhFMDZEM1JrVmtFQXE1L3VjTXg2SXJFM3BVWTRLcDVoUnhBMk91RGd4QW13cHRoV1ppN0FIQ2dpSlc3T2hvMzZ4ZXpUWEt5MUdTalg2VWpCeGRtejZmMUd6SUpzOEZlTzVGMmdFZ2RrcE5scFNKak1IblBtY25meFI4dUFreXA2aTMzZGoyYmFWeWgreVFseStydTZzSUp6ZEdyY3hleitna1Q5NEhPVW4zYURDcE5XUWVYM0FDMEpmQTJuN3lNL05xd3FLZHJjMGZRWXQ5NDdLUlVYRWdXV1hiOUMzMU1jbmtYRjhjWFppOEFRcVViMDNpaVBpNXlRbzJWaGl4OW5WMnR0a3hBeUhEMkE4bll6Y2JBTzV3RmkxV0FpZ3gvU0lXUDV6ejlrSjlyeHRLUitQMksybDVPVVNrRVY2SkhGdW5aMTRUMlZQMjVMT3BwSFdRU1NyV1duRXJiWDZBTzBjblNXcnhUT0lCbGZQeGh0eEk0UWV5dXFPNStsWThlV2N1YVBCMDlkSFNZemZIV1RLdDhQN3VqUTc4QVVHVVR5Mm54SXN0ZGJ6Ylk2aVlYWno0U3ppYVRxSEUyZG95VUhGbjI4aDBEQ2dCM0NPbll3dHduZ0ZEcjN6UTUyNXFFMUN1cExnUEsvN3pOSTljUkNFR20zM285N3ZEZ1o2Z05LN1NUd2sySkRFZ05WSGdpbVZpMlp4akNxd3ZEc0VQbGxVOTM4MUtTZzNEQnlUSzVXN29JUXZjeSt3MVdxQXNkR0FLOWlaNEVKR2tvbEEwUjlJYVVkSlJiL29kQTVUVlYyVU5DT3ZqNmFDR2RLbWhrMlFLUEhjVWd0L3d2WDJmWlEwSk1xUjdUbUFxWE54YU9MTDNYb1RYWXg5bmtWN3dMczVscGY4RU9DUXRHRnYzNGdWRzBsbmpGSXdvQTlyUlZwVFgza1lIRFQ0bHBsNWN0VTFWSHlCMFp1bzJVNUxYKzhKVnpoV0pmSXgyQ2J5VUtFbG1HOHNBcHlLeEk5czFFNEhoblJjMXpSM25kY1RHRUxkN2RSOXpOdzVKRTFLTVJpUjZ0L1FwMGRNYXpmYTU4Q0J0WmhvQlZhL1ZQc09mbFVsK1F1ZTkzK0hZTlNZMGpyWDFYOE5na3U5OUJBMlR4b3FNamY1bWNuZkxMR3cxazFFOUY0amZsUXRSREhGVG94T2ZvdlNDTHZXRFRVTzhNbkZMQXBCVUJrOVdsVUNpNlRaWDducGNOS0dkOWI1YzdFbWVmUHNoaStxM0g0VzBldlFKQWc1NHZZUUpFVmp1QnE4Z3A5SWhka0ZEbjY5Qm04a3p5YnRCWjN4VGJyRS9VTmx0Tno0QW5FcGRsUkNFaVVyZzhrYUViYWx1b2lnODUvQ0lMN1dQVUptcHNmbmFhRHdaUlpDRkkyaXkyMm5FK3huaVI1Zkx2SDhXWWhJOFBBTEZrMllSZXBURy9aSzNwN2hUTFpzcU9sZXBvcHFQeEpkU1FDdlZpZU84T3g3OEJlWlplNWh0WnVNNnhmV0p4WnRxWVlxOUkzbUFLMEVHcWV2cnlnWnNYV2FUL3lHRU1Bd2Z6TVNpMXpQek1OTkFZSGVNNnNwVnozc2lkTEdxN1JXZHhUb2g3cUNjc3hSaUVsVlpQSStmbmpaekpvcTFQSG9jcnkvWEN3aGRYMjJvbElhNDh3ZFpkY0xITWlTd0QyVnFERWFxM0N2bWtoZ3Q0UG1NWlprV3J0WGpPY05IQmlTeTl2WElTS0lDWml3RzVqbVdyZUJSSzdVRzIva0p3akxiYUYvZFEwZmdLVWx4VVc0VnNlTjNSNFNzVm9EMm5xcDRjSTZ1ZFVPcXRaNjdPVEJPQzN3V3BGY0pFVUZGSEQrWUNJeWV5YkxXV053Z0YzcHFMd21JYnczNnJhM1JrWEcwTVZtZkRucDBzYlJXdE1YaEg1MmMrenFhcmFQdlJFYlREN0F0bXpSdXprcld0dXUwa1lKYUxJdi9MOTI2dGxpNHB5L3BNdmoxNzg5VUJMSzcyRnJwbDVCK2tvS1FXOVhUK29LckV5OEFKZE9rSXl4UlpoR0ZiM2RUaWQrZTA2WVJMclIyRGlWMDI0NUcwZVdOYXNzeVZ6L1JDRE50ZmFvUms4Z2N5REZEcnJPTkFGOXFXYWR6YXZ2SmdPZnFweU0rb2NVdE12MGY5cEVQSG9TY3llSFl0SVE4K2JScFpEbC9UWUNKNWQvdG1BcVhleHFaeURJUURwcXE5b2ZXK2JpQ3J6TnBTcXlMS1JuZ1Y5YSszVW1TZk1RQjFlcU5udzQ4U05wTGxxa2EvaTJGS0l2L0w5eDZ4V3dsY3FUdGdjcmNkU3F2REZ1alpSNFVIMlVLRkxiZFdiZWF6SnpyOEV3bGFVOVZBLzBVV1JXazFCdWZwcTNQbmxXblozR0lkcUJpdlVWbm5qVDkwTzBWV1Jka1RyNkVTNlpMTS94NDZ5L1h2YWlXaDNoNVRXZXNEck93cVdWcExoTmFXMlZEK0ovL25mMXdkNWp1ZVNkeHoyRDJ0YjZmSU1ybURNUWloaDYvaVVwUi9jQVN0ZnNWVXRiOFRlQnI2TzUxTi9UZVFvLzh2NmhrNG9IZjBmNkZJRU5nSjlEOVdpdTc1bi9oUmpEV2dIMnBCTzZvVlNpMzA0b01vRW9zWTFDb0lYSDBKRmNZdEZ3bGs2V0JpK0R5K3BQcitSNE1xR0RYVE8vMUxmOHhJQjBiR2xsSDFOYmgzYS9FREhOd0NpVHMzRnI3VjJYeE9pMnNudFhSdGRzdWNYMlc3UDFUVEFHTjBOZjkrOTliOCt6ZC91M1R1WDFFYUdVTzQ5NTFIQUFBQUFFbEZUa1N1UW1DQyI+PC9pbWFnZT4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS00IiBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHg9IjYuNDgiIHk9IjEwLjMyIiB3aWR0aD0iMS4yIiBoZWlnaHQ9IjMuODQiPjwvcmVjdD4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yIiBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHg9IjMuODQiIHk9IjEzLjIiIHdpZHRoPSIyLjE2IiBoZWlnaHQ9IjEiPjwvcmVjdD4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yLUNvcHkiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMy42IiB5PSIxMi45NiIgd2lkdGg9IjIuNCIgaGVpZ2h0PSIxIj48L3JlY3Q+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtMi1Db3B5LTIiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iNC4zMiIgeT0iMTMuMiIgd2lkdGg9IjEuOTIiIGhlaWdodD0iMSI+PC9yZWN0PgogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTItQ29weS0zIiBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHg9IjguMTYiIHk9IjExLjA0IiB3aWR0aD0iMS4yIiBoZWlnaHQ9IjMuMTIiPjwvcmVjdD4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yLUNvcHktNCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJub256ZXJvIiB4PSI4LjE2IiB5PSIxMi4yNCIgd2lkdGg9IjIuODgiIGhlaWdodD0iMSI+PC9yZWN0PgogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTItQ29weS01IiBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHg9IjguMTYiIHk9IjEwLjMyIiB3aWR0aD0iMi44OCIgaGVpZ2h0PSIxIj48L3JlY3Q+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtMi1Db3B5LTYiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMTEuNTIiIHk9IjEwLjMyIiB3aWR0aD0iMi44OCIgaGVpZ2h0PSIxIj48L3JlY3Q+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtMi1Db3B5LTciIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMTEuMjgiIHk9IjExLjA0IiB3aWR0aD0iMS4yIiBoZWlnaHQ9IjMuMTIiPjwvcmVjdD4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yLUNvcHktOCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJub256ZXJvIiB4PSIxMy40NCIgeT0iMTAuOCIgd2lkdGg9IjEuMiIgaGVpZ2h0PSIzLjM2Ij48L3JlY3Q+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtMi1Db3B5LTkiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMTIiIHk9IjEyLjI0IiB3aWR0aD0iMi4xNiIgaGVpZ2h0PSIxIj48L3JlY3Q+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMy42IiB5PSIxMC41NiIgd2lkdGg9IjEiIGhlaWdodD0iMi44OCI+PC9yZWN0PgogICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTMiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgeD0iMy4zNiIgeT0iMTAuMzIiIHdpZHRoPSIxLjQ0IiBoZWlnaHQ9IjMuMTIiPjwvcmVjdD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==";
-            
-            _s4CustomButtons.push({"buttonText": "Se ejendommen i LIFAOIS", "buttonImage": _s4LifaKnapUri, "callBack": s4DawaDoLifaOisKnap, "searcher": "dawasearcher"});
-            _s4CustomButtons.push({"buttonText": "Se ejendommen i LIFAOIS", "buttonImage": _s4LifaKnapUri, "callBack": s4MatrikelDoLifaOisKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-	    [endif]
-	    
-        function s4DawaDoLifaOisKnap(result){
-            _s4View.blur();
-            var uid = "[s4.lifaois.uid]";
-            var pwd = "[s4.lifaois.pwd]";
-            var ejdnr = result.data.properties.jordstykke.esrejendomsnr;
-            var komnr = result.data.properties.kommune.kode;
-            
-            var url = "https://webois.lifa.dk/OIS/default.aspx?UID=" + uid + "&PWD=" + pwd + "&komnr=" + komnr + "&ejdnr=" + ejdnr
-            window.open(url, "_s4DawaDoJoFilarkivKnap");
-        }
-        
-        function s4MatrikelDoLifaOisKnap(result){
-            _s4View.blur();
-            var uid = "[s4.lifaois.uid]";
-            var pwd = "[s4.lifaois.pwd]";
-            var esrejdnr = result.data.esrejdnr;
-            var komnr = esrejdnr.substring(0, 3);
-            var ejdnr = esrejdnr.substring(3);            
-            var url = "https://webois.lifa.dk/OIS/default.aspx?UID=" + uid + "&PWD=" + pwd + "&komnr=" + komnr + "&ejdnr=" + ejdnr
-            window.open(url, "_s4DawaDoJoFilarkivKnap");
-        }
         ]]>
     </jssrc>
     <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+           var handler = new Septima.Search.LifaWebOisLinkForAdresseMatrikelHandler({brugernavn: "[s4.lifaois.uid]", passord: "[s4.lifaois.pwd]"});
+           if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+               _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
+           }
+           if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+               _s4Params.geosearcher.searcher.addDetailHandlerDef(handler);
+           }
+        [endif]
     ]]>
     </src>
 </tool>

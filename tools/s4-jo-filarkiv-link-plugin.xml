@@ -7,32 +7,18 @@
     [endif]
    </requires>
     <jssrc><![CDATA[
-	    [if: ModuleDefined("s4") ]
-            window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
-            var _s4CustomButtons = window["_s4CustomButtons"];
-    
-            var _s4JoKnapUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNkRpr/UAAAG6SURBVDhPrVQ9awJBEH33oacIUfFEME30YiCmsFAQBP+OpSBaWuQHaO1/ECz8DX6AhW20jJ0oJqfxNHqnl50VL2Ug3oNhZ2Zn380Ob0+wGeACHKJarcYTzWaTr3+hWq3ytdFo8BVExJJE9i+js7yZW0iuRhwic1yBwIxYb4ZD5PP5UCgUMBgMUCqV4PV60Wq1sNvtEAwGIUoSPLKMxWIBNRqFsTUQiURwx/aM7RYS43glIkrW63VEWVEmk0EgEEA6nUa/30ciqSEcDuM5/YKdYSAev6cjSKWeMJ/Psd/v4czodDphvV4jFouh2+2i3W5z0uve+XyG/qkjkdAgyxJMy+Q5VVVxPB4vRIIgwGBfoutI7AqiKHIj/wIBkijha7PBcrmApj3iZFmc6GO1gmkeIVNZpVJBLpfDdDrFcDhEuVyGxQo7nQ6noTGSVLyKgsnkDQ+JJCQ2L+pqNnu/lJAGQqGQXSwWbY/Hw3WRzWbtfD7v6IR1aiuKYvv8fiemWj+L2W1+daTrOnq9HmvRpBDj8Rij0Yj7BJrB4XDANxvqNaZaGjJ1ykHyvkXddJbg2qN17Tfi2ltziQj4ARTUDixARs2vAAAAAElFTkSuQmCC";
-            
-            _s4CustomButtons.push({"buttonText": "Søg på adresse i FilArkiv", "buttonImage": _s4JoKnapUri, "callBack": s4DawaDoJoFilarkivKnap, "searcher": "dawasearcher"});
-            _s4CustomButtons.push({"buttonText": "Søg på matrikelnummer i FilArkiv", "buttonImage": _s4JoKnapUri, "callBack": s4MatrikelDoJoFilarkivKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
-	    [endif]
-	    
-        function s4DawaDoJoFilarkivKnap(result){
-            _s4View.blur();
-            var komnavn = "[s4.jo.filarkiv.kommunenavn]";
-            var url = "https://" + komnavn + ".filarkiv.dk/Link/Search/Adresse/" + result.data.properties.vejstykke.kode + "-" + result.data.properties.husnr;
-            window.open(url, "_s4DawaDoJoFilarkivKnap");
-        }
-        
-        function s4MatrikelDoJoFilarkivKnap(result){
-            _s4View.blur();
-            var komnavn = "[s4.jo.filarkiv.kommunenavn]";
-            var url = "https://" + komnavn + ".filarkiv.dk/Link/Search/Matrikelnr/" + result.id
-            window.open(url, "_s4DawaDoJoFilarkivKnap");
-        }
         ]]>
     </jssrc>
     <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+           var handler = new Septima.Search.FilarkivLinkForAdresseMatrikelHandler({kommunenavn: "[s4.jo.filarkiv.kommunenavn]"});
+           if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+               _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
+           }
+           if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+               _s4Params.geosearcher.searcher.addDetailHandlerDef(handler);
+           }
+        [endif]
     ]]>
     </src>
 </tool>

@@ -13,17 +13,15 @@
 	            {title: "Guide 2", description:"Beskrivelse af guide 2", text: "Dette er den lange tekst, der beskriver hvad guide 2 omhandler", link: "http://www.cnn.com"}
             ];
             
-            var guideSearcher = new Septima.Search.GuideSearcher(
+            window["_s4Searchers"] = window["_s4Searchers"] || [];
+            var _s4Searchers = window["_s4Searchers"];
+            _s4Searchers.push(new Septima.Search.GuideSearcher(
               {
                 guides: guides,
                 singular: "Vejledning",
                 plural: "Vejledninger"
               }
-            );
-
-            window["_s4Searchers"] = window["_s4Searchers"] || [];
-            var _s4Searchers = window["_s4Searchers"];
-            _s4Searchers.push({searcher : guideSearcher});
+            ));
 
 		[endif]
     ]]>

@@ -13,11 +13,10 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
        		descriptionProperty: 'description'
     	});
         Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
-		this.iconURI = Septima.Search.s4Icons.guideSearcher.iconURI;
-    	this.addDetailHandlerDef({
-    		"buttonText": options.singular,
-    		"buttonImage": this.iconURI,
-    		"handler": function(result, detailsContent){
+		var guideDetailsHandler = new Septima.Search.DetailsHandlerDef({
+            "buttonText": options.singular,
+            "buttonImage": Septima.Search.s4Icons.guideSearcher.iconURI,
+            "handler": function(result, detailsContent){
                 var promise = new Promise(function(resolve, reject){
                     var items = [];
                     items.push({type: 'textarea', text: result.data.text});
@@ -31,9 +30,10 @@ Septima.Search.GuideSearcher = Septima.Class (Septima.Search.DataSearcher, {
                 });
                 return promise;
 
-    		},
-    		more: true
-    	});
+            },
+            more: true
+        });
+    	this.addDetailHandlerDef(guideDetailsHandler);
 
     },
     CLASS_NAME: 'Septima.Search.GuideSearcher'

@@ -23,8 +23,6 @@
  		<file type="script" name="/modules/s4/js/s4-plugin.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/searchableRowList.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/datasourceSearcher.js?_=[s4.version]"/>
-		<file type="script" name="/modules/s4/js/s4HelpSearcher.js?_=[s4.version]"/>
-		<file type="script" name="/modules/s4/js/s4GuideSearcher.js?_=[s4.version]"/>
 		<file type="script" name="/modules/s4/js/nearest.js?_=[s4.version]"/>
     </requires>
     <src/>
