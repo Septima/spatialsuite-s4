@@ -1,11 +1,6 @@
 Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
 
     initialize: function (options) {
-    	this.iconURI = Septima.Search.s4Icons.workspaceSearcher.iconURI;
-    	this.workspaceRowList = {row: []};
-    	this.lastUpdated = null;
-    	this.host = options.host;
-    	this.sessionId = options.sessionId;
 		options.searchableData =  new Septima.Search.SearchableRowList({
     		data: Septima.bind(function(){return this.workspaceRowList;}, this),
     		singular: options.singular,
@@ -15,6 +10,12 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     	});
 		
         Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
+
+        this.iconURI = Septima.Search.s4Icons.workspaceSearcher.iconURI;
+        this.workspaceRowList = {row: []};
+        this.lastUpdated = null;
+        this.host = options.host;
+        this.sessionId = options.sessionId;
 
         cbKort.events.addListener ('WORKSPACE_CHANGED', Septima.bind(function(event, favorite){
         	this.readWorkspaces();
