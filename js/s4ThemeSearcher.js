@@ -159,23 +159,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }
     },
     
-    isSelectable: function(theme){
-        if (typeof theme.initialConfig !== 'undefined'){
-            return theme.initialConfig.selectable === "true";
-        }else{
-            return theme.selectable === "true";
-        }
-    },
-
-    isVisible: function(theme){
-        if (typeof theme.initialConfig !== 'undefined'){
-            return theme.isVisible();
-        }else{
-            return theme.visible;
-        }
-    },
-    
-    
     getThemeDescription: function(theme){
         var copyright;
         if (typeof theme.initialConfig !== 'undefined'){
@@ -379,6 +362,22 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }else{
             var scale = cbKort.getState().map.scale;
             return (theme.maxscale != null && scale > theme.maxscale) || (theme.minscale != null && scale < theme.minscale);
+        }
+    },
+
+    isSelectable: function(theme){
+        if (typeof theme.initialConfig !== 'undefined'){
+            return theme.initialConfig.selectable === "true";
+        }else{
+            return theme.selectable === "true";
+        }
+    },
+
+    isVisible: function(theme){
+        if (typeof theme.initialConfig !== 'undefined'){
+            return theme.isVisible();
+        }else{
+            return theme.visible;
         }
     },
     
