@@ -640,7 +640,9 @@ function s4DoPrint(result){
 		printObject.closeHandler();
 	}
     showResultInMap(result, function(){
-        print_getConfig(_s4Params.view.printconfig);
+        spm.getTool("print_rotated").loadLazyRequires(function () {
+            print_getConfig(_s4Params.view.printconfig);
+        });
     });
     
 	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
