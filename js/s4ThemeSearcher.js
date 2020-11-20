@@ -384,12 +384,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     toggleVisibility: function(theme){
         if (typeof theme.initialConfig !== 'undefined'){
             if (theme.getInStore()){
-                theme.setInStore(false);
-                theme.toggle();
-                //spm.themeSelector.rebuild()
+                theme.setInStore(false, function (response) {
+                    if (response && response.exception)
+                        toastr.spmException(response.exception);
+                    else
+                        theme.show();
+                });                
+                return true;
             }else{
                 theme.toggle();
-                spm.themeSelector._flashAddedTheme(theme);
+                return this.isVisible(theme);
             }
         }else{
             theme.setVisibility();
@@ -397,13 +401,14 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             if (typeof cbKort.themeSelector.setSpatialMapState !== 'undefined'){
                 cbKort.themeSelector.setSpatialMapState();
             }
+            return this.isVisible(theme);
         }
     },
     
     toggleTheme: function(result){
         var theme = result.data.theme;
-        this.toggleVisibility(theme);
-        if (this.isVisible(theme)){
+        var visisible = this.toggleVisibility(theme);
+        if (visisible){
             if (this.isLocked(theme)) {
                 return this.onLockCustomButtonDef[0];
             }else{
@@ -414,6 +419,27 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 return this.offLockCustomButtonDef[0];
             }else{
                 return this.offCustomButtonDef[0];
+            }
+        }
+    },
+
+    getCustomButtonDefs: function(result){
+        if (result.isNewQuery()){
+            return [];
+        }else{
+            var theme = result.data.theme;
+            if (this.isVisible(theme)){
+                if (this.isLocked(theme)) {
+                    return this.onLockCustomButtonDef;
+                }else{
+                    return this.onCustomButtonDef;
+                }
+            }else{
+                if (this.isLocked(theme)) {
+                    return this.offLockCustomButtonDef;
+                }else{
+                    return this.offCustomButtonDef;
+                }
             }
         }
     },
@@ -597,27 +623,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         return false;
     },
     
-    getCustomButtonDefs: function(result){
-        if (result.isNewQuery()){
-            return [];
-        }else{
-            var theme = result.data.theme;
-            if (this.isVisible(theme)){
-                if (this.isLocked(theme)) {
-                    return this.onLockCustomButtonDef;
-                }else{
-                    return this.onCustomButtonDef;
-                }
-            }else{
-                if (this.isLocked(theme)) {
-                    return this.offLockCustomButtonDef;
-                }else{
-                    return this.offCustomButtonDef;
-                }
-            }
-        }
-    },
-
     getCopyRightLink: function(result){
         var link = null;
         var theme = result.data.theme;
