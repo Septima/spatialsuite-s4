@@ -640,9 +640,14 @@ function s4DoPrint(result){
 		printObject.closeHandler();
 	}
     showResultInMap(result, function(){
-        spm.getTool("print_rotated").loadLazyRequires(function () {
+        if (typeof spm.getTool === 'undefined') {
             print_getConfig(_s4Params.view.printconfig);
-        });
+            
+        } else {
+            spm.getTool("print_rotated").loadLazyRequires(function () {
+                print_getConfig(_s4Params.view.printconfig);
+            });
+        }
     });
     
 	var freetext_print_input = jQuery('#' + _s4Params.view.printconfig + '_freetext_print_input');
