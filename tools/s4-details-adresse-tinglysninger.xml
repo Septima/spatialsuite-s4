@@ -12,7 +12,8 @@
     <jssrc/>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
-            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+            //Disabled https://github.com/Septima/spatialsuite-s4/issues/352
+            if (false && _s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
               _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.TinglysningerForAdresseHandler());
             }
     [endif]
