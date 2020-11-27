@@ -644,8 +644,10 @@ function s4DoPrint(result){
             print_getConfig(_s4Params.view.printconfig);
             
         } else {
-            spm.getTool("print_rotated").loadLazyRequires(function () {
-                print_getConfig(_s4Params.view.printconfig);
+            let tryTool = "print_" + _s4Params.view.printconfig.replace("rotatet", "rotated")
+            spm.getTool(tryTool).loadLazyRequires(function () {
+                let tryConfig = _s4Params.view.printconfig.replace("rotated", "rotatet")
+                print_getConfig(tryConfig);
             });
         }
     });
