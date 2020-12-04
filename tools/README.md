@@ -361,6 +361,17 @@ Inkludér in profil:
 <tool module="s4" name="s4-details-dawa-dagi-plugin" />
 ```    
   
+Hvis du vil se links til dawa's json for de enkelte objekter
+
+```xml
+<tool module="s4" name="s4-details-dawa-dagi-plugin" >
+  <jsonconfig>
+    {"showLinks": true}
+  </jsonconfig>
+</tool>
+
+```
+  
 ### <a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
 Vis Link til Tingbogen for en adresse.  
 
