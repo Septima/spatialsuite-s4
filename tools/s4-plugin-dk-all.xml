@@ -44,7 +44,7 @@
 	              autofocus: false,
 	              dynamiclayer: 'userdatasource',
 	              infoprofilequery: 'userdatasource',
-	              printconfig: 'rotatet',
+	              printconfig: 'rotated_contact',
 	              forcedblurOnSelect: 'false',
 	              zoomBuffer: '100',
 	              marginToBottom: 100,
