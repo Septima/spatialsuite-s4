@@ -1,4 +1,57 @@
-Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
+function s4CreateWorkspaceSearcher(options) {
+    
+    s4LoadWorkspaceRowList(options.sessionId);
+    
+    options.searchableData =  new Septima.Search.SearchableData({
+        data: S4GetWorkspaceRowList,
+        singular: options.singular,
+        plural: options.plural,
+        searchProperties: ['owner','name'],
+        getDisplayname: function (row){return row.name +' ('+ row.owner +')';}
+    });
+
+    if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
+        spm.getEvents().addListener('WORKSPACE_CHANGED', s4LoadWorkspaceRowList.bind(this, options.sessionId));
+    }else{
+        cbKort.events.addListener ('WORKSPACE_CHANGED', s4LoadWorkspaceRowList.bind(this, options.sessionId));
+    }
+    
+    var workspaceSearcher = new Septima.Search.DataSearcher(options);
+    
+    return workspaceSearcher;
+
+}
+
+S4WorkspaceRowList = {row: []};
+
+function S4GetWorkspaceRowList() {
+    return S4WorkspaceRowList.row;
+}
+
+function s4LoadWorkspaceRowList(sessionId) {
+    jQuery.ajax({
+        url: '/cbkort?page=workspace.getlist&outputformat=json',
+        jsonp: 'json.callback',
+        data:{sessionId: this.sessionId},
+        dataType: 'jsonp',
+        crossDomain : true,
+        async:true,
+        cache : false,
+        timeout : 4000,
+        success:  function(data, textStatus,  jqXHR){
+            if (data.row[0]._class == 'rowlist'){
+                var workspaceRowList = data.row[0];
+                S4WorkspaceRowList = workspaceRowList;
+            }else{
+                this.workspaceRowList = {row: []};
+            }
+      }
+      });
+}
+
+
+
+Septima.Search.workspaceSearcher_org = Septima.Class (Septima.Search.DataSearcher, {
 
     initialize: function (options) {
 		options.searchableData =  new Septima.Search.SearchableRowList({
@@ -9,7 +62,8 @@ Septima.Search.workspaceSearcher = Septima.Class (Septima.Search.DataSearcher, {
     		getDisplayname: function (row){return row.name +' ('+ row.owner +')';}
     	});
 		
-        Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
+        this.constructor.prototype.constructor.apply(this, [options]);
+        //Septima.Search.DataSearcher.prototype.constructor.apply(this, [options]);
 
         this.iconURI = Septima.Search.s4Icons.workspaceSearcher.iconURI;
         this.workspaceRowList = {row: []};

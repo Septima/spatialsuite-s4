@@ -11,7 +11,8 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
             options.onSelect = s4Hit;
         }
         
-        Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
+        //Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
+		this.constructor.prototype.constructor.apply(this, [options]);
 		
         this.datasource = options.datasource;
         

@@ -390,37 +390,42 @@ function s4_init (params){
             }
 
             if (_s4Params.workspacesearcher && _s4Params.workspacesearcher.enabled && typeof workspace_init !== 'undefined'){
-            	var workspaceSearcher = new Septima.Search.workspaceSearcher({
-        			host: "",
-        			onSelect: workspaceHit,
-            		singular: cbKort.getSession().getString('s4.workspacesearcher.workspace'),
-            		plural: cbKort.getSession().getString('s4.workspacesearcher.workspaces'),
-            		sessionId: sessionId
-        		});
+                var workspaceSearcher = s4CreateWorkspaceSearcher({
+                    host: "",
+                    onSelect: workspaceHit,
+                    singular: cbKort.getSession().getString('s4.workspacesearcher.workspace'),
+                    plural: cbKort.getSession().getString('s4.workspacesearcher.workspaces'),
+                    sessionId: sessionId
+                });
+                
             	controller.addSearcher( workspaceSearcher);
                 _s4Params.workspacesearcher.searcher = workspaceSearcher;
             }
 
             if (typeof(ProfileSelector) != 'undefined' && _s4Params.profilesearcher && _s4Params.profilesearcher.enabled){
-            	var profileSearcher = new Septima.Search.ProfileSearcher({
-        			host: "",
-        			onSelect: profileHit,
-            		singular: cbKort.getSession().getString('s4.profilesearcher.profile'),
-            		plural: cbKort.getSession().getString('s4.profilesearcher.profiles'),
-            		sessionId: sessionId
-        		});
+                
+                var profileSearcher = s4CreateProfileSearcher({
+                    host: "",
+                    onSelect: profileHit,
+                    singular: cbKort.getSession().getString('s4.profilesearcher.profile'),
+                    plural: cbKort.getSession().getString('s4.profilesearcher.profiles'),
+                    sessionId: sessionId
+                });
+                
             	controller.addSearcher(profileSearcher);
                 _s4Params.profilesearcher.searcher = profileSearcher;
             }
             
             if (typeof(Favorites) != 'undefined' && _s4Params.favoritesearcher && _s4Params.favoritesearcher.enabled){
-            	var favoriteSearcher = new Septima.Search.FavoriteSearcher({
-        			host: "",
-        			onSelect: favoriteHit,
-            		singular: cbKort.getSession().getString('s4.favoritesearcher.favorite'),
-            		plural: cbKort.getSession().getString('s4.favoritesearcher.favorites'),
-            		sessionId: sessionId
-        		});
+                
+                var favoriteSearcher = s4CreateFavoriteSearcher({
+                    host: "",
+                    onSelect: favoriteHit,
+                    singular: cbKort.getSession().getString('s4.favoritesearcher.favorite'),
+                    plural: cbKort.getSession().getString('s4.favoritesearcher.favorites'),
+                    sessionId: sessionId
+                });
+                
         		controller.addSearcher( favoriteSearcher);
                 _s4Params.favoritesearcher.searcher = favoriteSearcher;
             }
@@ -452,7 +457,7 @@ function s4_init (params){
         	
             //Create view 
         	_s4View = new Septima.Search.DefaultView({
-        		input: inputContainer,
+        		input: inputContainer[0],
         		limit: _s4Params.view.limit,
         		controller: controller,
         		onHover: s4_onHover,
