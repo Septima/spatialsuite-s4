@@ -1,0 +1,1 @@
+s4-matrikel-plugin udvidet med flere links - kan konfigureres. Erstatter s4-sdfe-oblique-plugin, som nu bliver udfaset

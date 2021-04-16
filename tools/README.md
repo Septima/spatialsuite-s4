@@ -75,12 +75,23 @@ This tools creates icons for Spatial Map functions (Info and print).
   
 ### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin    
 Only relevant in Denmark  
-Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for matrikler  
+Viser ikoner med links til offentlige sites for jordstykker  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-matrikel-plugin" />
 ```  
-  
+
+Hvilke links, der vises kan styres således:  
+```xml
+<tool module="s4" name="s4-matrikel-plugin">
+  <jsonconfig>
+    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto_js", "sdfekort"]}
+  </jsonconfig>
+</tool>
+```  
+Fjern de links du ikke ønsker at se
+
+
 ### <a name="s4-adresse-plugin"></a>s4-adresse-plugin  
 Only relevant in Denmark  
 Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  

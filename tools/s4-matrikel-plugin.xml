@@ -4,13 +4,13 @@
     <requires>
     [if: ModuleDefined("s4") ]
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-        <file type="script" name="/modules/s4/js/offentligeLinksProvider.js?_=[s4.version]"/>
     [endif]
    </requires>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(new Septima.Search.offentligeLinksProvider());
+                var links = this.jsonConfig.links ? this.jsonConfig.links : "*";
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
             }
     [endif]
     ]]>
