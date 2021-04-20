@@ -1,1 +1,13 @@
-s4-matrikel-plugin udvidet med flere links - kan konfigureres. Erstatter s4-sdfe-oblique-plugin, som nu bliver udfaset
+s4-matrikel-plugin udvidet med flere links - kan konfigureres.
+s4-adresse-plugin udvidet med flere links - kan konfigureres.
+s4-adresse-hgf-matrikelplugin udvidet med flere links - kan konfigureres.
+
+s4-sdfe-oblique-plugin - udgået erstattes af s4-matrikel-plugin og s4-adresse-plugin, som viser offentlige links, herunder links til skråfoto hos sdfe
+
+NY: s4-details-cvr-virksomheder-paa-adresse
+
+Ny: s4-lifa-links-plugin links til webois, ejdexplorer og tlexplorer
+
+s4-lifa-webois-link-plugin - udgået
+
+Ny: s4-details-planinfo-plugin

@@ -335,9 +335,14 @@ function s4_init (params){
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
             	var planSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
             	if (_s4Params.municipality != "*"){
-            		planSearchOptions.kommunekode = _s4Params.municipality
+            		planSearchOptions.kommunekode = _s4Params.municipality;
             	}
-            	var planSearcher = new Septima.Search.PlanSearcher(planSearchOptions);
+            	if (_s4Params.plansearcher.targets) {
+            	    planSearchOptions.targets = _s4Params.plansearcher.targets; 
+            	} else {
+                    planSearchOptions.targets = ['vedtagetlokalplan']; 
+            	}
+            	var planSearcher = new Septima.Search.PlanSystemSearcher(planSearchOptions);
             	controller.addSearcher(planSearcher);
                 _s4Params.plansearcher.searcher = planSearcher;
             }

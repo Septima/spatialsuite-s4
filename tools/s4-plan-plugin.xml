@@ -9,7 +9,7 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
-                var options = {showPlansystemLink: true};
+                var options = {more: true, showPlansystemLink: true};
                 
                 var odeumClientNameParam = 's4.odeumClientName';
                 var odeumClientName = cbKort.getSession().getParam(odeumClientNameParam);

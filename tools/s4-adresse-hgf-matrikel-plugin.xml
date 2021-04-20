@@ -10,7 +10,8 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
         if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-            _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.offentligeLinksProvider());
+                var links = this.jsonConfig.links ? this.jsonConfig.links : "*";
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
         }
         var _s4HgfMatrikelKnapUri = Septima.Search.s4Icons.infoIconUri;
         _s4CustomButtons.push({"buttonText": "Hvad gælder for matriklen", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher"});
@@ -23,9 +24,9 @@
             jQuery.ajax({
                 url: result.data.properties.jordstykke.href,
                 data: {format: "geojson", srid: "25832"},
-                success: Septima.bind(function(result, data){
+                success: function(result, data){
                     s4DoInfo({title: result.data.properties.jordstykke.matrikelnr, geometry: data.geometry, searcher: result.searcher});
-                }, this, result)
+                }.bind( this, result)
             });
         }
     [endif]

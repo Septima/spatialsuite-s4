@@ -11,9 +11,6 @@ Tools relevant for Denmark only:
     * [s4-adresse-plugin](#s4-adresse-plugin)  
     * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
 
-* Link til SDFE skråfoto for adresser og matrikelnumre   
-    * [s4-sdfe-oblique-plugin](#s4-sdfe-oblique-plugin)  
- 
 * Visning af- og søgning i vejmidter  
     * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
     * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
@@ -32,8 +29,8 @@ Tools relevant for Denmark only:
 * Link til JO FilArkiv for adresser og matrikelnumre   
     * [s4-jo-filarkiv-link-plugin](#s4-jo-filarkiv-link-plugin)  
   
-* Link til LIFAOIS for adresser og matrikelnumre   
-    * [s4-lifa-webois-link-plugin](#s4-lifa-webois-link-plugin)  
+* Link til LIFAOIS, tlExplorer og ejdExplorer for adresser og matrikelnumre   
+    * [s4-lifa-links-plugin](#s4-lifa-links-plugin)  
 
 * Link til COWI gadefoto for adresser og matrikelnumre
     * [s4-cowi-gadefoto-plugin](#s4-cowi-gadefoto-plugin)  
@@ -110,21 +107,7 @@ Inkludér i profil:
   
 ### <a name="s4-sdfe-oblique-plugin"></a>s4-sdfe-oblique-plugin    
 Only relevant in Denmark  
-Viser link til SDFE skråfoto for adresser og matrikelnumre  
-Inkludér i profil:  
-```xml
-<tool module="s4" name="s4-sdfe-oblique-plugin" />
-```  
-  
-Simpel visning uden måleværktøjer:
-```xml
-<tool module="s4" name="s4-sdfe-oblique-plugin">
-  <jsonconfig>
-    {"mode": "simple"} 
-  </jsonconfig>
-</tool>
-```    
-hvor "mode" kan være "js" (Default) eller "simple" (Ingen måleværktøjer)  
+Udgået - erstattet af hhv [s4-matrikel-plugin](#s4-matrikel-plugin) og [s4-adresse-plugin](#s4-adresse-plugin)  
   
 ### <a name="s4-soeg-egne-vejmidter-plugin"></a>s4-soeg-egne-vejmidter-plugin  
 Only relevant in Denmark  
@@ -236,12 +219,12 @@ Sæt følgende parameter for at pluginnet virker:
 ```  
 Linker til "https://xxx.filarkiv.dk  
 
-### <a name="s4-lifa-webois-link-plugin"></a>s4-lifa-webois-link-plugin  
+### <a name="s4-lifa-links-plugin"></a>s4-lifa-links-plugin  
 Only relevant in Denmark  
-Viser Link til LIFAOIS for adresser og matrikelnumre.  
+Viser links til LIFAOIS, tlExplorer og ejdExplorer for adresser og matrikelnumre  
 Inkludér i profil:  
 ```xml
-<tool module="s4" name="s4-lifa-webois-link-plugin" />
+<tool module="s4" name="s4-lifa-links-plugin" />
 ```  
 Sæt følgende parameter for at pluginnet virker:  
 ```xml
@@ -251,11 +234,14 @@ Sæt følgende parameter for at pluginnet virker:
 <param name="s4.lifaois.uid">xxx</param>
 <param name="s4.lifaois.pwd">xxx</param>
 ```  
-Linker til "https://xxx.filarkiv.dk  
+
+????: Linker til "https://xxx.filarkiv.dk  
 
 
 ### <a name="s4-cowi-gadefoto-plugin"></a>s4-cowi-gadefoto-plugin  
 Only relevant in Denmark  
+
+Hvis modulet cowi-gadefoto findes i profilen vil det kunne aktiveres direkte fra s4 for adresser og matrikelnumre  
 
 COWI gadefoto for adresser og matrikelnumre    
 

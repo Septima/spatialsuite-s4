@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+   </requires>
+    <jssrc><![CDATA[
+        ]]>
+    </jssrc>
+    <src><![CDATA[
+        [if: ModuleDefined("s4") ]
+	        if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled || _s4Params.geosearcher && _s4Params.geosearcher.enabled){
+	        
+	           var s4LifaLinkOptions = {brugernavn: "[s4.lifaois.uid]", passord: "[s4.lifaois.pwd]"}
+	           if (this.jsonConfig && this.jsonConfig.links) {
+	               s4LifaLinkOptions.links = this.jsonConfig.links
+	           }
+	            
+	           var handler = new Septima.Search.LifaLinkForAdresseMatrikelHandler(s4LifaLinkOptions);
+	           if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+	               _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
+	           }
+	           if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+	               _s4Params.geosearcher.searcher.addDetailHandlerDef(handler);
+	           }
+	        }
+        [endif]
+    ]]>
+    </src>
+</tool>
