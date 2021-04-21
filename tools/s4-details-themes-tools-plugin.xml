@@ -16,12 +16,21 @@
                         var promise = new Promise(function(resolve, reject){
 	                    var buttons = jQuery("<ul style='list-style: none'/>");
 	                    for (var i=0;i<result.data.theme.actions.length;i++){
-	                        var button = result.data.theme.actions[i].getGuiButton(result.data.theme);
-	                        button.element.css("float", "left");
-	                        button.element.css("list-style", "none");
-	                        button.element.css("padding", "2px");
-	                        button.element.css("margin", "1px");
-	                        buttons.append(button.element);
+	                        var guiButton = result.data.theme.actions[i].getGuiButton(result.data.theme);
+	                        
+	                        var jButton = jQuery(guiButton.element).clone(true, true);
+	                        
+	                        jButton[0].addEventListener('click', function(action, theme, button) {
+	                            action.fire(theme, button);
+                            }.bind(this, result.data.theme.actions[i], result.data.theme, guiButton));
+                            
+                            //jButton.attr("id", jButton.attr("id") + "abekat");
+	                        jButton.css("float", "left");
+	                        jButton.css("list-style", "none");
+	                        jButton.css("padding", "2px");
+	                        jButton.css("margin", "1px");
+	                        jButton.css({"cursor":"pointer"});
+	                        buttons.append(jButton);
 	                    }
 	                    var copyRightLink = result.searcher.getCopyRightLink(result);
 	                    if (copyRightLink !== null){
@@ -31,7 +40,7 @@
 	                        copyRightLink.css("margin", "1px");
 	                        buttons.append(copyRightLink);
 	                    }
-	                    resolve([{type: 'jquery-dom-object', object: buttons}]);
+	                    resolve([{type: 'dom-object', object: buttons[0]}]);
                         });
                         return promise;
                     }, this),
@@ -42,13 +51,6 @@
                             return true;
                         }
                     }, this)
-                });
-            }
-            if (Septima.Log){
-                Septima.Log.trace({
-                    eventCategory: 's4',
-                    eventAction: 's4_details',
-                    eventLabel: 'themesTools-plugin'
                 });
             }
     [endif]

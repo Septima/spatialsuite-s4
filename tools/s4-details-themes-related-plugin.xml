@@ -16,19 +16,23 @@
                         var promise = new Promise(function(resolve, reject){
                             var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(result);
                             var items = [];
-                            var indentThemes = themeGroupsForTheme.length > 1;
                             for (var g=0; g<themeGroupsForTheme.length; g++){
-                                var thisThemeGroup = themeGroupsForTheme[g];
-                                if (indentThemes){
-                                    items.push({type: "listheader", icon: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI, title: thisThemeGroup.displayname});
-                                }
-                                var themesForThemeGroup = _s4Params.themesearcher.searcher.getThemesForThemeGroup(thisThemeGroup).getResults();
-                                for (var t=0; t<themesForThemeGroup.length; t++){
-                                    var thisTheme = themesForThemeGroup[t];
-                                    var themeIcon = jQuery("<img src='" + thisTheme.image + "'/>");
-                                    var title = jQuery("<span>" + thisTheme.title + "</span>");
-                                    items.push({type: 'area', icon: themeIcon, value: title, result: thisTheme, clickable: true, isListItem: indentThemes});
-                                }
+                              var thisThemeGroup = themeGroupsForTheme[g];
+                              var detailItemsList = new Septima.Search.DetailItemsList({
+                                  itemType: 'result',
+                                  header: thisThemeGroup.displayname,
+                                  image: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI
+                              }); 
+
+                              var themesForThemeGroup = _s4Params.themesearcher.searcher.getThemesForThemeGroup(thisThemeGroup).getResults();
+                              for (var t=0; t<themesForThemeGroup.length; t++){
+                                  var thisTheme = themesForThemeGroup[t];
+                                  detailItemsList.append({
+                                     type: 'result',
+                                     result: thisTheme
+                                  });
+                              }
+                              items.push(detailItemsList.asItem());
                             }
                             resolve(items);
                         });
@@ -37,24 +41,7 @@
                     isApplicable: Septima.bind(function(result){
                         var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(result);
                         return themeGroupsForTheme.length > 0;
-                    }, this),
-                    getbuttonText: function(result){
-                        var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(result);
-                        var text = cbKort.getSession().getString('s4.themesearcher.relatedthemes');
-                        if (themeGroupsForTheme.length === 1){
-                            var thisThemeGroup = themeGroupsForTheme[0];
-                            text = "Temagruppe " + thisThemeGroup.displayname;
-                        }
-                        return text;
-                    },
-                    getbuttonImage: function(result){
-                        var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(result);
-                        var img = Septima.Search.s4Icons.layersIconUri;
-                        if (themeGroupsForTheme.length === 1){
-                            img = Septima.Search.s4Icons.themeSearcher.themeGroupIconURI;
-                        }
-                        return img;
-                    }
+                    }, this)
                 });
             }
     [endif]

@@ -4,7 +4,6 @@
     <requires>
     [if: ModuleDefined("s4") ]
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-        <file type="script" name="/modules/s4/js/offentligeLinksProvider.js?_=[s4.version]"/>
     [endif]
    </requires>
     <src><![CDATA[

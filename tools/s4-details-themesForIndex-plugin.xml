@@ -9,206 +9,46 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled && _s4Params.themesearcher && _s4Params.themesearcher.enabled){
-            
-                //If themeToShow is off
-                _s4Params.indexsearcher.searcher.addCustomButtonDef({
-                      "buttonText": '',
-                      "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOffUri,
-                      "callBack": function(result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            var themeId = row.value;
-                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                            if (themeResult !== null){
-                                _s4Params.themesearcher.searcher.toggleTheme(themeResult);
-                                var newButtonText;
-                                var newButtonImage;
-	                            if (caption !== ''){
-	                               newButtonText = caption;
-	                            } else{
-	                                if (themeResult.data.theme.visible){
-                                       newButtonText = _s4Params.themesearcher.searcher.hidePhrase + " " + themeResult.title;
-	                                }else{
-                                       newButtonText = _s4Params.themesearcher.searcher.showPhrase + " " + themeResult.title;
-	                                }
-	                            }
-                                if (themeResult.data.theme.visible){
-                                   newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOnUri;
-                                   if (result.geometry && result.geometry.type.toLowerCase() === 'polygon'){
-                                        cbKort.dynamicLayers.removeAll();
-                                   }
-                                }else{
-                                   newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOffUri;
-                                }
-                                return{"buttonText": newButtonText, "buttonImage": newButtonImage};
-                            }
-                          }
-                        }
-                      },
-                      isApplicable: function (result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            var themeId = row.value;
-                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                            if (themeResult !== null && !themeResult.data.theme.visible){
-                                return true;
-                            }
-                          }
-                        }
-                        return false;
-                      },
-                      getbuttonText: function(result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            if (caption !== ''){
-                                return caption;
-                            } else{
-                                var themeId = row.value;
-	                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                                if (themeResult !== null){
-                                    return _s4Params.themesearcher.searcher.showPhrase + " " + themeResult.title;
-                                }
-                            }
-                          }
-                        }
-                        return _s4Params.themesearcher.searcher.showPhrase;
-                    }
-                });
-
-                //If themeToShow is off
-                _s4Params.indexsearcher.searcher.addCustomButtonDef({
-                      "buttonText": '',
-                      "buttonImage": Septima.Search.s4Icons.themeSearcher.themeOnUri,
-                      "callBack": function(result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            var themeId = row.value;
-                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                            if (themeResult !== null){
-                                _s4Params.themesearcher.searcher.toggleTheme(themeResult);
-                                var newButtonText;
-                                var newButtonImage;
-                                if (caption !== ''){
-                                   newButtonText = caption;
-                                } else{
-                                    if (themeResult.data.theme.visible){
-                                       newButtonText = _s4Params.themesearcher.searcher.hidePhrase + " " + themeResult.title;
-                                    }else{
-                                       newButtonText = _s4Params.themesearcher.searcher.showPhrase + " " + themeResult.title;
-                                    }
-                                }
-                                if (themeResult.data.theme.visible){
-                                   newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOnUri;
-                                   if (result.geometry && result.geometry.type.toLowerCase() === 'polygon'){
-                                        cbKort.dynamicLayers.removeAll();
-                                   }
-                                }else{
-                                   newButtonImage = Septima.Search.s4Icons.themeSearcher.themeOffUri;
-                                }
-                                return{"buttonText": newButtonText, "buttonImage": newButtonImage};
-                            }
-                          }
-                        }
-                      },
-                      isApplicable: function (result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            var themeId = row.value;
-                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                            if (themeResult !== null && themeResult.data.theme.visible){
-                                return true;
-                            }
-                          }
-                        }
-                        return false;
-                      },
-                    getbuttonText: function(result){
-                        var feature = result.data;
-                        for (var i = 0; i < feature.pcol.row.length; i++) {
-                          var row = feature.pcol.row[i];
-                          if (typeof row.format !== 'undefined' && row.format === 'themeToShow'){
-                            var caption = row.label;
-                            if (caption !== ''){
-                                return caption;
-                            } else{
-	                            var themeId = row.value;
-	                            var themeResult = _s4Params.themesearcher.searcher.getThemeFromId(themeId);
-                                if (themeResult !== null){
-                                    return _s4Params.themesearcher.searcher.hidePhrase + " " + themeResult.title;
-	                            }
-                            }
-                          }
-                        }
-                        return _s4Params.themesearcher.searcher.hidePhrase;
-                    }
-                });
                 
             	_s4Params.indexsearcher.searcher.addDetailHandlerDef({
             		"buttonText":  cbKort.getSession().getString('s4.themesearcher.themes'),
             		"buttonImage": Septima.Search.s4Icons.layersIconUri,
-            		"handler": Septima.bind(function(result, detailsContent){
+            		"handler": Septima.bind(function(result){
 					    var promise = new Promise(function(resolve, reject){
 	                        var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
 	                        var items = [];
 	                        for (var i=0;i<themesResults.length;i++){
-	                            var themeResult = themesResults[i];
-	                        
-	                        /*
-	                            var clickFunction = Septima.bind(function(result){
-	                                result.searcher.toggleTheme(result);
-	                                if (!result.data.theme.visible){
-	                                    cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
-	                                }
-	                                //detailsContent.selectResult(result);
-	                            }, this, themeResult) 
-	                        */
-	                            var themeIcon = jQuery("<img src='" + themeResult.image + "'/>");
-	                            //themeIcon.click(clickFunction);
-	                            var title = jQuery("<span>" + themeResult.title + "</span>");
-	                            //title.click(clickFunction);
-	                            
-	                            //var detailsIcon = jQuery('<img src="' + Septima.Search.icons.list.detailsIcon + '">');
-	                            //detailsIcon.click(clickFunction);
-	                            
-	                            //items.push({type: 'area', icon: themeIcon, value: title, fixedIcons: [detailsIcon], hoverable: true, clickable: true});
-                                items.push({type: 'area', icon: themeIcon, value: title, result: themeResult, clickable: true});
+	                           items.push({
+	                               type: 'result',
+	                               result: themesResults[i]
+	                           });
 	                        }
                             for (var i=0;i<themesResults.length;i++){
                                 var themeGroupsForTheme = _s4Params.themesearcher.searcher.getThemeGroupsForTheme(themesResults[i]);
                                 for (var g=0; g<themeGroupsForTheme.length; g++){
                                     var thisThemeGroup = themeGroupsForTheme[g];
-                                    items.push({type: "listheader", icon: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI, title: thisThemeGroup.displayname});
+                                    var detailItemsList = new Septima.Search.DetailItemsList({
+                                        itemType: 'result',
+                                        header: thisThemeGroup.displayname,
+                                        image: Septima.Search.s4Icons.themeSearcher.themeGroupIconURI
+                                    }); 
+
                                     var themesForThemeGroup = _s4Params.themesearcher.searcher.getThemesForThemeGroup(thisThemeGroup).getResults();
                                     for (var t=0; t<themesForThemeGroup.length; t++){
                                         var thisTheme = themesForThemeGroup[t];
-		                                var themeIcon = jQuery("<img src='" + thisTheme.image + "'/>");
-		                                var title = jQuery("<span>" + thisTheme.title + "</span>");
-                                        items.push({type: 'area', icon: themeIcon, value: title, result: thisTheme, clickable: true, isListItem: true});
+                                        detailItemsList.append({
+		                                   type: 'result',
+		                                   result: thisTheme
+                                        });
                                     }
+                                    items.push(detailItemsList.asItem());
                                 }
                             }
                             resolve(items);
-	                        //resolve(detailsContent.formatItems(items));
 					    });
 					    return promise;
             		}, this),
             		isApplicable: Septima.bind(function(result){
-            		    //return false;
             			var themesResults = _s4Params.themesearcher.searcher.getThemesForDatasource(result.data.datasource).getResults();
             			return themesResults.length > 0;
             		}, this),
@@ -217,13 +57,6 @@
             			return text + " " + result.title;
             		}
             	});
-            }
-            if (Septima.Log){
-		        Septima.Log.trace({
-		            eventCategory: 's4',
-		            eventAction: 's4_details',
-		            eventLabel: 'themesForindex-plugin'
-		        });
             }
     
 	[endif]
