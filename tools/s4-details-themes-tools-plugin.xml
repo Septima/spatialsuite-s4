@@ -16,21 +16,23 @@
                         var promise = new Promise(function(resolve, reject){
 	                    var buttons = jQuery("<ul style='list-style: none'/>");
 	                    for (var i=0;i<result.data.theme.actions.length;i++){
-	                        var guiButton = result.data.theme.actions[i].getGuiButton(result.data.theme);
-	                        
-	                        var jButton = jQuery(guiButton.element).clone(true, true);
-	                        
-	                        jButton[0].addEventListener('click', function(action, theme, button) {
-	                            action.fire(theme, button);
-                            }.bind(this, result.data.theme.actions[i], result.data.theme, guiButton));
                             
-                            //jButton.attr("id", jButton.attr("id") + "abekat");
-	                        jButton.css("float", "left");
-	                        jButton.css("list-style", "none");
-	                        jButton.css("padding", "2px");
-	                        jButton.css("margin", "1px");
-	                        jButton.css({"cursor":"pointer"});
-	                        buttons.append(jButton);
+                            var guiButton = result.data.theme.actions[i].getGuiButton(result.data.theme);
+                            var jButton = jQuery(guiButton.element).clone(true, true);
+
+                            if (jButton.attr("id").indexOf('themeinfoAction') == -1) {
+	                            
+	                            jButton[0].addEventListener('click', function(action, theme, button) {
+	                                action.fire(theme, button);
+	                            }.bind(this, result.data.theme.actions[i], result.data.theme, guiButton));
+	                            
+	                            jButton.css("float", "left");
+	                            jButton.css("list-style", "none");
+	                            jButton.css("padding", "2px");
+	                            jButton.css("margin", "1px");
+	                            jButton.css({"cursor":"pointer"});
+	                            buttons.append(jButton);
+                            }
 	                    }
 	                    var copyRightLink = result.searcher.getCopyRightLink(result);
 	                    if (copyRightLink !== null){

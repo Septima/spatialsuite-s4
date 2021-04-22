@@ -1,4 +1,4 @@
-     	var s4NearestHoverOLids = [];
+    	var s4NearestHoverOLids = [];
     	
     	function createNearestHandlerDef(searchers, options){
     		var sqDetailsHandlerBuilderOptions = {

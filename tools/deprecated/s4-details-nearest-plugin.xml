@@ -34,6 +34,9 @@
 			
 			var handlerOptions = {
 				proxySearcher: useProxySearcher ? proxySearcher : null,
+				showRoute: false,
+				//'car', 'bus', 'bicycle', 'foot'
+				//routeProfile: "bicycle", 
 				//limit: 10,
 				//title: "Nærmeste skoler i distriktet"
 			};
@@ -51,7 +54,6 @@
 			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
 			//	_s4Params.geosearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
-			
 			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
 				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
 			}
