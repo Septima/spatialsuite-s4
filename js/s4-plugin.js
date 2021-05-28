@@ -466,7 +466,9 @@ function s4_init (params){
         		limit: _s4Params.view.limit,
         		controller: controller,
         		onHover: s4_onHover,
-        		onFocus: s4_onFocus});
+        		onFocus: s4_onFocus,
+        		focusIcon: Septima.Search.icons.globe
+        		});
         	
         	s4SetMaxHeight();
             //Hide for a second until gui is settled

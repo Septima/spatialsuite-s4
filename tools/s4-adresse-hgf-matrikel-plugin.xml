@@ -13,7 +13,7 @@
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
         }
         var _s4HgfMatrikelKnapUri = Septima.Search.s4Icons.infoIconUri;
-        _s4CustomButtons.push({"buttonText": "Hvad gælder for matriklen", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher"});
+        _s4CustomButtons.push({"buttonText": "Hvad gælder for matrikelnummeret", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher"});
     [endif]
     ]]>
     </src>
@@ -24,7 +24,7 @@
                 url: result.data.properties.jordstykke.href,
                 data: {format: "geojson", srid: "25832"},
                 success: function(result, data){
-                    s4DoInfo({title: result.data.properties.jordstykke.matrikelnr, geometry: data.geometry, searcher: result.searcher});
+                    s4DoInfo({title: data.properties.matrikelnr + ", " + data.properties.ejerlavnavn, geometry: data.geometry, searcher: result.searcher});
                 }.bind( this, result)
             });
         }

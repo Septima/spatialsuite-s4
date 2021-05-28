@@ -15,50 +15,26 @@
     [if: ModuleDefined("s4") ]
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
     	
-    		var targetSearcher = new Septima.Search.S4IndexSearcher({
-				//Customize HERE (What to search for)
-				datasources: _s4Params.indexsearcher.datasources,
-				//Example:
-				//datasources: "ds_esbjerg-skoler",
-				allowDetails: true,
-				onSelect: s4Hit
-			})
-			
-			var useProxySearcher = false;
-     		var proxySearcher = new Septima.Search.S4IndexSearcher({
- 				//Customize HERE (What to use in search instead of selected Result (First result is used))
- 				//datasources: _s4Params.indexsearcher.datasources,
- 				//Example:
- 				datasources: "ds_esbjerg-skoledistrikter"
- 			})
-			
-			var handlerOptions = {
-				proxySearcher: useProxySearcher ? proxySearcher : null,
-				//limit: 10,
-				//title: "Nærmeste skoler i distriktet"
-			};
-			
-			var handlerDef = createNearestHandlerDef([targetSearcher], handlerOptions);
-
-			//Customize HERE (When to search)
+    	  var nearestHandler = new Septima.Search.S4NearestHandler({
+            // datasources: "ds_buf_kgb_skoler",
+		    s4IndexSearcher: _s4Params.indexsearcher.searcher,
+		    buttonText: "Nærmeste"
+		  })
 			
 			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-				_s4Params.dawasearcher.searcher.addDetailHandlerDef(handlerDef);
+				_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
 			}
 			
-			//_s4Params.indexsearcher.searcher.addDetailHandlerDef(handlerDef);
+			//_s4Params.indexsearcher.searcher.addDetailHandlerDef(nearestHandler);
 			
 			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-			//	_s4Params.geosearcher.searcher.addDetailHandlerDef(handlerDef);
+			//	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
 			}
 			
 			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(handlerDef);
+				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(nearestHandler);
 			}
 		}
-			if (typeof addS4SpatialMapTools !== 'undefined'){
-				addS4SpatialMapTools({info: true, print: true, searcher: targetSearcher});
-			}
 		
 	[endif]
     ]]>
