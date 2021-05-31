@@ -15,25 +15,38 @@
     [if: ModuleDefined("s4") ]
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
     	
+    	  // Tilret datasources så der kun vises de  nærmeste typer som du ønsker
     	  var nearestHandler = new Septima.Search.S4NearestHandler({
             // datasources: "ds_buf_kgb_skoler",
 		    s4IndexSearcher: _s4Params.indexsearcher.searcher,
 		    buttonText: "Nærmeste"
 		  })
+		  
+		  var token = cbKort.getSession().getParam("module.route.token")
+		  //Ret til så det passer dig
+		  var routeProvider = new Septima.Search.RouteProvider({
+		    fields: ["route.distance", "route.geometry", "route.time"],
+		    routeApiKey: token,
+		    routeProfile: "bicycle"
+		  })
+		  
+		  //Indkommentér følgende linie hvis du vil have rute til det fundne
+		  //OBS: Der findes kun rute mellem punkter
+		  //nearestHandler.addDetailHandlerDef(routeProvider)
 			
-			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-				_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
-			}
+		  if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+			_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
+		  }
 			
-			//_s4Params.indexsearcher.searcher.addDetailHandlerDef(nearestHandler);
+		  //_s4Params.indexsearcher.searcher.addDetailHandlerDef(nearestHandler);
 			
-			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-			//	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
-			}
+		  if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+		  //	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
+		  }
 			
-			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(nearestHandler);
-			}
+		  if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
+	       _s4Params.cvrsearcher.searcher.addDetailHandlerDef(nearestHandler);
+		  }
 		}
 		
 	[endif]

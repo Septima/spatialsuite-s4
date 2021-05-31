@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Creates a Find nearest section in detail view -->
+
+<!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
+<!-- Look for Customize HERE -->
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+    
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+        //Skal der bruges en proxy?
+        
+        var proxySearcher = new Septima.Search.S4IndexSearcher(
+          {
+		    datasources: "ds_buf_kgb_skoledistrikt"
+		  }
+        )
+          
+        var s4_details_intersects_handler = new Septima.Search.SqDetailsHandler(
+          {
+		    buttonText: "Institutioner i adressens skoledistrikt",
+		    proxySearcher: proxySearcher
+		  });
+        
+    
+        //Hvornår skal der søges?
+        //_s4Params.indexsearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
+        _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
+        
+        //Hvad skal der søges i?
+        var s4InstitutionsSearcher = new Septima.Search.S4IndexSearcher({
+		    datasources: "ds_buf_kgb_daginstitutioner"}
+		  )
+        s4InstitutionsSearcher.addDetailHandlerDef(new Septima.Search.S4InfoHandler())
+		  
+        if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+            s4_details_intersects_handler.addSearcher(s4InstitutionsSearcher)
+        }
+        
+        //Skal der vises rute?
+          var token = cbKort.getSession().getParam("module.route.token")
+          //Ret til så det passer dig
+          var routeProvider = new Septima.Search.RouteProvider({
+            fields: ["route.distance", "route.geometry", "route.time"],
+            routeApiKey: token,
+            routeProfile: "bicycle"
+          })
+          
+          //Indkommentér følgende linie hvis du vil have rute til det fundne
+          //OBS: Der findes kun rute mellem punkter
+          s4_details_intersects_handler.addDetailHandlerDef(routeProvider)
+        
+    [endif]
+    ]]>
+    </src>
+</tool>

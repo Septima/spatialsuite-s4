@@ -65,8 +65,9 @@
 	            //Septima CVR-index
 	            cvrsearcher: {enabled: true, info: true, print: true},
 	            
-	            //Septima lokalplan-index
-	            plansearcher: {enabled: true, info: true, print: true},
+                //Plansystem
+                //Full set of targets is ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+                plansearcher: {enabled: true, info: true, print: true, targets: ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
 	            
 	            //Local SpatialSuite-datasources
 	            //  datasources: "*" for all, or space separated names of datasources

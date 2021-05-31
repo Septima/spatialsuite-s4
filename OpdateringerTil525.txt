@@ -4,10 +4,36 @@ s4-adresse-hgf-matrikelplugin udvidet med flere links - kan konfigureres.
 
 s4-sdfe-oblique-plugin - udgået erstattes af s4-matrikel-plugin og s4-adresse-plugin, som viser offentlige links, herunder links til skråfoto hos sdfe
 
+Tinglysninger udgået
+
+
+s4-details-spatialquery-plugin Udgået 
+
 NY: s4-details-cvr-virksomheder-paa-adresse
 
 Ny: s4-lifa-links-plugin links til webois, ejdexplorer og tlexplorer
 
 s4-lifa-webois-link-plugin - udgået
 
+opdateret: plansearcher tager targets
+ - ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+
 Ny: s4-details-planinfo-plugin
+
+Ændret: s4-details-nearest-plugin kan nu også vise rute (kræver rute-abonnement på Septima's rute-service)
+
+Ny: s4-details-intersects-plugin
+  Viser features indenfor en polygon
+  - området kan være en hvilken som helst polygon (f.eks. sogn eller skoledistrikt)
+  - de viste features kan være fra s4's index (jeres egne data),
+    planer fra plansearcher eller
+    adresser
+    
+  Der kan anvendes en proxy
+  - dvs en adresse kan finde et skoledistrikt og så bliver skoledistriktet brugt som forespørgselspolygon
+  
+  Kan vise rute (kræver rute-abonnement på Septima's rute-service)
+  
+  Dette er et kompliceret tool som det kan tage noget tid at tilpasse og sætte op
+  
+    
