@@ -13,18 +13,21 @@
     <jssrc/>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
+    
         //Skal der bruges en proxy?
         
         var proxySearcher = new Septima.Search.S4IndexSearcher(
           {
-		    datasources: "ds_buf_kgb_skoledistrikt"
+		    datasources: "ds_buf_kgb_skoledistrikt",
+		    onSelect: s4Hit
 		  }
         )
           
         var s4_details_intersects_handler = new Septima.Search.SqDetailsHandler(
           {
 		    buttonText: "Institutioner i adressens skoledistrikt",
-		    proxySearcher: proxySearcher
+		    proxySearcher: proxySearcher,
+		    showProxy: true
 		  });
         
     
@@ -34,7 +37,9 @@
         
         //Hvad skal der søges i?
         var s4InstitutionsSearcher = new Septima.Search.S4IndexSearcher({
-		    datasources: "ds_buf_kgb_daginstitutioner"}
+		    datasources: "ds_buf_kgb_daginstitutioner",
+            onSelect: s4Hit
+            }
 		  )
         s4InstitutionsSearcher.addDetailHandlerDef(new Septima.Search.S4InfoHandler())
 		  
