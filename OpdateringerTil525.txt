@@ -20,7 +20,7 @@ opdateret: plansearcher tager targets
 
 Ny: s4-details-planinfo-plugin
 
-Ændret: s4-details-nearest-plugin kan nu også vise rute (kræver rute-abonnement på Septima's rute-service)
+Ændret: s4-details-nearest-plugin er blevet forenklet og kan nu også vise rute (kræver rute-abonnement på Septima's rute-service)
 
 Ny: s4-details-intersects-plugin
   Viser features indenfor en polygon
@@ -37,3 +37,5 @@ Ny: s4-details-intersects-plugin
   Dette er et kompliceret tool som det kan tage noget tid at tilpasse og sætte op
   
     
+Ny: s4-details-cvr-info
+Feltern kan konfigureres

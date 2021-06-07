@@ -15,13 +15,15 @@
     [if: ModuleDefined("s4") ]
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
     	
+       // Hvad skal der søges i?   
     	  // Tilret datasources så der kun vises de  nærmeste typer som du ønsker
     	  var nearestHandler = new Septima.Search.S4NearestHandler({
             // datasources: "ds_buf_kgb_skoler",
 		    s4IndexSearcher: _s4Params.indexsearcher.searcher,
 		    buttonText: "Nærmeste"
 		  })
-		  
+
+        //Skal der vises rute?
 		  var token = cbKort.getSession().getParam("module.route.token")
 		  //Ret til så det passer dig
 		  var routeProvider = new Septima.Search.RouteProvider({
@@ -34,6 +36,7 @@
 		  //OBS: Der findes kun rute mellem punkter
 		  //nearestHandler.addDetailHandlerDef(routeProvider)
 			
+        //Hvornår skal der søges?
 		  if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
 			_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
 		  }
