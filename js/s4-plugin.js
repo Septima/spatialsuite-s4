@@ -91,9 +91,7 @@ function s4_filterGeoInfoItems(infoItems) {
     let geoInfoItems = [];
     for (var i = 0; i < infoItems.length; i++) {
         infoItem = infoItems[i];
-        if (infoItem.valueformat && infoItem.valueformat == 'geometry') {
-            geoInfoItems.push(infoItem);
-        }
+        
     }
     return geoInfoItems;
 }
@@ -547,6 +545,63 @@ function s4_init (params){
 			        return orgDetailItem
 			      }
 			    }
+			  
+			  var onDetailHeader = function (result, detailItems) {
+			      //return extrahHeader = { icon, text, onClick, onHover}
+                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                      var geoDetailItems = {
+                              results: [],
+                              items: []
+                      };
+                      for (var i = 0; i < detailItems.length; i++) {
+                          var detailItem = detailItems[i];
+                          if (detailItem.type == 'result' && detailItem.result.geometry)
+                              geoDetailItems.results.push(detailItem.result)
+                          if (detailItem.valueformat && detailItem.valueformat == 'geometry') {
+                              geoDetailItems.items.push(detailItem);
+                          }
+                      }
+                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0)
+                          return {
+                            icon: Septima.Search.s4Icons.zoomToExtentIcon,
+                            text: cbKort.getSession().getString('s4.sq.header.text'),
+                            onHover: hoverGeoDetailItems.bind(this, geoDetailItems),
+                            onClick: zoomToGeoDetailItems.bind(this, geoDetailItems)
+                          }
+                      else
+                          return {}
+                  }
+                  return null
+
+			  }
+			  
+			  var zoomToGeoDetailItems(geoDetailItems) {
+                  if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
+                      if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                          var wktParser = Septima.Search.getWKTParser();
+                          var olGeoms = [];
+                          var mc = spm.getMapControl();
+                          for (var i=0;i < geoDetailItems.results.length;i++){
+                              var wkt = wktParser.convert(geoDetailItems.results[i].geometry);
+                              var feature = mc._wktFormatter.readFeature(wkt);
+                              var olGeom = feature.getGeometry();
+                              olGeoms.push(olGeom);
+                          }
+                          for (var i=0;i < geoDetailItems.items.length;i++){
+                              var wkt = wktParser.convert(geoDetailItems.items[i].value);
+                              var feature = mc._wktFormatter.readFeature(wkt);
+                              var olGeom = feature.getGeometry();
+                              olGeoms.push(olGeom);
+                          }
+                          var g = new ol.geom.GeometryCollection(olGeoms);
+                          mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                      }
+                  }
+			  }
+			  
+			  var hoverGeoDetailItems(geoDetailItems) {
+			      OBS: denne her skal kodes
+			  }
 			    
 			
         	_s4View = new Septima.Search.DefaultView({
@@ -556,7 +611,8 @@ function s4_init (params){
         		onHover: s4_onResultHover,
         		onFocus: s4_onResultFocus,
         		focusIcon: Septima.Search.icons.globe,
-        	    onDetailItem: onDetailItem
+        	    onDetailItem: onDetailItem,
+                onDetailHeader: onDetailHeader
         		});
         	
         	s4SetMaxHeight();
