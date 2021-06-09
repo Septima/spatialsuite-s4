@@ -56,34 +56,42 @@ function s4_onResultHover(result, infoItems){
     s4_clearHoverLayer();
     
     if (result !== null && result.geometry) {
-        var wktParser = Septima.Search.getWKTParser();
-        var wkt = wktParser.convert(result.geometry);
         
         if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-            var hoverLayer = s4_getHoverLayer();
-            var feature = {wkt: wkt, attributes: {type: 'result', geometryType: result.geometry.type}};
-            if (result.title)
-                feature.attributes.label = result.title;
-            hoverLayer.addFeature(feature);
+            s4_addResultToHoverLayer(result);
             if (infoItems) {
                 let geoInfoItems = s4_filterGeoInfoItems(infoItems);
                 for (var i = 0; i < geoInfoItems.length; i++ ) {
-                    var geoInfoItem = geoInfoItems[i]
+                    var geoInfoItem = geoInfoItems[i];
                     s4_addDetailItemToHoverLayer(geoInfoItem);
                 }
             }
         }else{
-                _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-                null,
-                {       styles: {
-                        strokeColor: '#0470bd',
-                        fillColor: '#0470bd',
-                        fillOpacity: 0.5,
-                        select_pointRadius: 10,
-                        label: result.title
-                        }
-                }));
+            var wktParser = Septima.Search.getWKTParser();
+            var wkt = wktParser.convert(result.geometry);
+            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
+            null,
+            {       styles: {
+                    strokeColor: '#0470bd',
+                    fillColor: '#0470bd',
+                    fillOpacity: 0.5,
+                    select_pointRadius: 10,
+                    label: result.title
+                    }
+            }));
         }
+    }
+}
+
+function s4_addResultToHoverLayer(result) {
+    if (result.geometry) {
+        var wktParser = Septima.Search.getWKTParser();
+        var wkt = wktParser.convert(result.geometry);
+        var hoverLayer = s4_getHoverLayer();
+        var feature = {wkt: wkt, attributes: {type: 'result', geometryType: result.geometry.type}};
+        if (result.title)
+            feature.attributes.label = result.title;
+        hoverLayer.addFeature(feature);
     }
 }
 
@@ -91,7 +99,8 @@ function s4_filterGeoInfoItems(infoItems) {
     let geoInfoItems = [];
     for (var i = 0; i < infoItems.length; i++) {
         infoItem = infoItems[i];
-        
+        if (infoItem.valueformat == 'geometry' && infoItem.value)
+            geoInfoItems.push(infoItem)
     }
     return geoInfoItems;
 }
@@ -575,32 +584,61 @@ function s4_init (params){
 
 			  }
 			  
-			  var zoomToGeoDetailItems(geoDetailItems) {
-                  if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
-                      if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-                          var wktParser = Septima.Search.getWKTParser();
-                          var olGeoms = [];
+			  var zoomToGeoDetailItems = function (geoDetailItems, result, detailItems) {
+                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
                           var mc = spm.getMapControl();
-                          for (var i=0;i < geoDetailItems.results.length;i++){
-                              var wkt = wktParser.convert(geoDetailItems.results[i].geometry);
-                              var feature = mc._wktFormatter.readFeature(wkt);
-                              var olGeom = feature.getGeometry();
-                              olGeoms.push(olGeom);
+                          if (geoDetailItems.extent) {
+                              mc.map.getView().fit(geoDetailItems.extent);
+                          } else {
+                              var wktParser = Septima.Search.getWKTParser();
+                              var olGeoms = [];
+                              if (result) {
+                                  var wkt = wktParser.convert(result.geometry);
+                                  var feature = mc._wktFormatter.readFeature(wkt);
+                                  var olGeom = feature.getGeometry();
+                                  olGeoms.push(olGeom);
+                              }
+                              for (var i=0;i < geoDetailItems.results.length;i++){
+                                  var wkt = wktParser.convert(geoDetailItems.results[i].geometry);
+                                  var feature = mc._wktFormatter.readFeature(wkt);
+                                  var olGeom = feature.getGeometry();
+                                  olGeoms.push(olGeom);
+                              }
+                              for (var i=0;i < geoDetailItems.items.length;i++){
+                                  var wkt = wktParser.convert(geoDetailItems.items[i].value);
+                                  var feature = mc._wktFormatter.readFeature(wkt);
+                                  var olGeom = feature.getGeometry();
+                                  olGeoms.push(olGeom);
+                              }
+                              var g = new ol.geom.GeometryCollection(olGeoms);
+                              var extent = ol.extent.buffer(g.getExtent(), 100);
+                              geoDetailItems.extent = extent
+                              mc.map.getView().fit(extent);
                           }
-                          for (var i=0;i < geoDetailItems.items.length;i++){
-                              var wkt = wktParser.convert(geoDetailItems.items[i].value);
-                              var feature = mc._wktFormatter.readFeature(wkt);
-                              var olGeom = feature.getGeometry();
-                              olGeoms.push(olGeom);
-                          }
-                          var g = new ol.geom.GeometryCollection(olGeoms);
-                          mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                          
                       }
                   }
 			  }
 			  
-			  var hoverGeoDetailItems(geoDetailItems) {
-			      OBS: denne her skal kodes
+			  var hoverGeoDetailItems = function (geoDetailItems, result, detailItems) {
+			      if (detailItems) {
+	                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+	                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
+	                          var mc = spm.getMapControl();
+	                          var wktParser = Septima.Search.getWKTParser();
+	                          var olGeoms = [];
+	                          for (var i=0;i < geoDetailItems.results.length;i++){
+	                              s4_addResultToHoverLayer(geoDetailItems.results[i]);
+	                          }
+	                          for (var i=0;i < geoDetailItems.items.length;i++){
+	                              s4_addDetailItemToHoverLayer(geoDetailItems.items[i]);
+	                          }
+	                      }
+	                  }
+			      } else {
+			          s4_clearHoverLayer();
+			      }
 			  }
 			    
 			
