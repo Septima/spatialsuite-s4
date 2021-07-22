@@ -2,53 +2,20 @@ var _s4View = null;
 var _s4Params = null;
 var _s4HoverOLids = [];
 
-function s4_onDetailHover(detailItem){
+function s4_onDetailItemHover(detailItem){
     s4_clearHoverLayer();
 
-    s4_addDetailItemToHoverLayer(detailItem);
-}
-
-function s4_addDetailItemToHoverLayer(detailItem) {
     if (detailItem !== null && detailItem.valueformat == 'geometry' && detailItem.value) {
-        var wktParser = Septima.Search.getWKTParser();
-        var wkt = wktParser.convert(detailItem.value);
-        
-        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-            var hoverLayer = s4_getHoverLayer();
-            var feature = {wkt: wkt, attributes: {}};
-            if (detailItem.type == 'labelvalue' && detailItem.label)
-                feature.attributes.label = detailItem.label;
-            hoverLayer.addFeature(feature);
-        }else{
-            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-            null,
-            {       styles: {
-                    strokeColor: '#FFFF00',
-                    fillColor: '#FFFF00',
-                    fillOpacity: 0.5,
-                    select_pointRadius: 10,
-                    label: result.title
-                    }
-            }));
-        }
+        s4_addDetailItemToHoverLayer(detailItem);
     }
 }
 
 
-function s4_onDetailFocus(detailItem){
+function s4_onDetailItemFocus(detailItem){
     s4_clearHoverLayer();
 
     if (detailItem !== null && detailItem.valueformat == 'geometry' && detailItem.value) {
-        var wktParser = Septima.Search.getWKTParser();
-        var wkt = wktParser.convert(detailItem.value);
-
-        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-            var mc = spm.getMapControl();
-            mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
-          }else{
-              cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-              cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-          }
+        s4_setMarkingGeometry(detailItem.value);
     }
 }
 
@@ -56,30 +23,36 @@ function s4_onResultHover(result, infoItems){
     s4_clearHoverLayer();
     
     if (result !== null && result.geometry) {
-        
-        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-            s4_addResultToHoverLayer(result);
-            if (infoItems) {
-                let geoInfoItems = s4_filterGeoInfoItems(infoItems);
-                for (var i = 0; i < geoInfoItems.length; i++ ) {
-                    var geoInfoItem = geoInfoItems[i];
-                    s4_addDetailItemToHoverLayer(geoInfoItem);
-                }
+        s4_addResultToHoverLayer(result);
+        if (infoItems) {
+            let itemsWithGeometry = s4_getItemsWithGeometry(infoItems);
+            for (var i = 0; i < itemsWithGeometry.length; i++ ) {
+                var itemWithGeometry = itemsWithGeometry[i];
+                s4_addDetailItemToHoverLayer(itemWithGeometry);
             }
-        }else{
-            var wktParser = Septima.Search.getWKTParser();
-            var wkt = wktParser.convert(result.geometry);
-            _s4HoverOLids.push(cbKort.mapObj.drawWKT(wkt,
-            null,
-            {       styles: {
-                    strokeColor: '#0470bd',
-                    fillColor: '#0470bd',
-                    fillOpacity: 0.5,
-                    select_pointRadius: 10,
-                    label: result.title
-                    }
-            }));
         }
+    }
+}
+
+function s4_getItemsWithGeometry(infoItems) {
+    let itemsWithGeometry = [];
+    for (var i = 0; i < infoItems.length; i++) {
+        infoItem = infoItems[i];
+        if (infoItem.valueformat == 'geometry' && infoItem.value)
+            itemsWithGeometry.push(infoItem)
+    }
+    return itemsWithGeometry;
+}
+
+function s4_addDetailItemToHoverLayer(detailItem) {
+    if (detailItem !== null && detailItem.valueformat == 'geometry' && detailItem.value) {
+        var wktParser = Septima.Search.getWKTParser();
+        var wkt = wktParser.convert(detailItem.value);
+        
+        var feature = {wkt: wkt, attributes: {}};
+        if (detailItem.type == 'labelvalue' && detailItem.label)
+            feature.attributes.label = detailItem.label;
+        s4_getHoverLayer().addFeature(feature);
     }
 }
 
@@ -95,40 +68,52 @@ function s4_addResultToHoverLayer(result) {
     }
 }
 
-function s4_filterGeoInfoItems(infoItems) {
-    let geoInfoItems = [];
-    for (var i = 0; i < infoItems.length; i++) {
-        infoItem = infoItems[i];
-        if (infoItem.valueformat == 'geometry' && infoItem.value)
-            geoInfoItems.push(infoItem)
-    }
-    return geoInfoItems;
-}
-
 function s4_onResultFocus(result){
     s4_clearHoverLayer();
 
-    if (result !== null && result.geometry) {
-        var wktParser = Septima.Search.getWKTParser();
-        var wkt = wktParser.convert(result.geometry);
+    if (result !== null) {
+        s4_setMarkingGeometry(result.geometry);
+    }
+}
 
-        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-            var mc = spm.getMapControl();
-            mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
-          }else{
-              cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-              cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-          }
+function s4_processDetailItem(orgDetailItem) {
+    if (orgDetailItem.valueformat == "geometry") {
+      return {
+        type: "labelvalue",
+        label: orgDetailItem.label,
+        value: orgDetailItem.label,
+        onHover: s4_onDetailItemHover,
+        onFocus: s4_onDetailItemFocus,
+        focusIcon: Septima.Search.icons.globe
+      }
+    } else {
+      return orgDetailItem
     }
 }
 
 function s4_clearHoverLayer() {
-    if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-        var hoverLayer = s4_getHoverLayer();
-        hoverLayer.clearFeatures();
-    } else {
-        cbKort.mapObj.deleteFeature(_s4HoverOLids);
-        _s4HoverOLids = [];
+    var hoverLayer = s4_getHoverLayer();
+    hoverLayer.clearFeatures();
+}
+
+function showResultInMap(result, callback){
+    if (result.geometry){
+        s4_setMarkingGeometry(result.geometry);
+        if (typeof callback != 'undefined'){
+            callback();
+        }
+    }
+    _s4View.blur(_s4Params.view.forcedblurOnSelect);
+}
+
+
+//Tegnefunktioner
+function s4_setMarkingGeometry(geometry) {
+    if (geometry) {
+        var wktParser = Septima.Search.getWKTParser();
+        var wkt = wktParser.convert(geometry);
+        var mc = spm.getMapControl();
+        mc.setMarkingGeometry(wkt, true, false, _s4Params.view.zoomBuffer);
     }
 }
 
@@ -164,50 +149,127 @@ function s4_getHoverLayer(){
             features: [],
             allowMultiGeometries:true
         });
+        
         this.hoverLayer.olSetStyle(
             function (feature){
-                var styles = [];
-                if (feature && feature.attributes && feature.attributes.type && feature.attributes.type === 'result'){
-                    var styleDef = {
-                            fill: resultFill,
-                            stroke: resultStroke,
-                            image: resultCircle
+                var styleDef = {
+                        fill: otherFill,
+                        stroke: otherStroke,
+                        image: otherCircle};
+                
+                if (feature && feature.attributes){
+                    if (feature.attributes.type && feature.attributes.type === 'result'){
+                        styleDef = {
+                                fill: resultFill,
+                                stroke: resultStroke,
+                                image: resultCircle};
+                    }
+                    if (feature.attributes.label){
+                        var labelStyleDef = {
+                            font: 'bold 14px sans-serif',
+                            offsetY: -20,
+                            offsetX: -20,
+                            text: feature.attributes.label,
+                            fill: new ol.style.Fill({
+                                color: 'rgba(255,150,0,1)'})
                         };
-                }else{
-                    var styleDef = {
-                            fill: otherFill,
-                            stroke: otherStroke,
-                            image: otherCircle
-                        };
-                }
-                if (feature && feature.attributes && feature.attributes.label){
-                    var labelStyleDef = {
-                        font: 'bold 14px sans-serif',
-                        offsetY: -20,
-                        offsetX: -20,
-                        text: feature.attributes.label,
-                        fill: new ol.style.Fill({
-                            color: 'rgba(255,150,0,1)'
-                        })
-                    };
-                    if (feature && feature.attributes && feature.attributes.type && feature.attributes.type === 'result' && feature.attributes.geometryType && feature.attributes.geometryType.indexOf('Polygon') == -1){
-                        labelStyleDef.fill = new ol.style.Fill({color: 'rgba(0,81,162,1)'});
-                    } else {
-                        labelStyleDef.fill = new ol.style.Fill({color: 'rgba(255,150,0,1)'});
+                        if (feature.attributes.type && feature.attributes.type === 'result' && feature.attributes.geometryType && feature.attributes.geometryType.indexOf('Polygon') == -1){
+                            labelStyleDef.fill = new ol.style.Fill({color: 'rgba(0,81,162,1)'});
+                        } else {
+                            labelStyleDef.fill = new ol.style.Fill({color: 'rgba(255,150,0,1)'});
+                        }
+                        
+                        styleDef.text = new ol.style.Text(labelStyleDef);
                     }
                     
-                    styleDef.text = new ol.style.Text(labelStyleDef);
                 }
 
-                styles = [
-                    new ol.style.Style(styleDef)
-                ];  
-                return styles;
+                return [ new ol.style.Style(styleDef) ];
             }
         );
     
     }
     return this.hoverLayer;    
+}
+
+
+//Detail Header
+function s4_getZoomToDetailsButton(result, detailItems) {
+    //return extrahHeader = { icon, text, onClick, onHover}
+    var geoDetailItems = {
+            results: [],
+            items: []
+    };
+    for (var i = 0; i < detailItems.length; i++) {
+        var detailItem = detailItems[i];
+        if (detailItem.type == 'result' && detailItem.result.geometry)
+            geoDetailItems.results.push(detailItem.result)
+        if (detailItem.valueformat && detailItem.valueformat == 'geometry') {
+            geoDetailItems.items.push(detailItem);
+        }
+    }
+    if (geoDetailItems.results.length + geoDetailItems.items.length > 0)
+        return {
+          icon: Septima.Search.s4Icons.zoomToExtentIcon,
+          text: cbKort.getSession().getString('s4.sq.header.text'),
+          onHover: s4_onZoomToDetailsButtonHover.bind(this, geoDetailItems),
+          onClick: s4_zoomToDetailItems.bind(this, geoDetailItems)
+        }
+    else
+        return {}
+}
+
+function s4_zoomToDetailItems(geoDetailItems, result, detailItems) {
+    if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
+        var mc = spm.getMapControl();
+        if (geoDetailItems.extent) {
+            mc.map.getView().fit(geoDetailItems.extent);
+        } else {
+            var wktParser = Septima.Search.getWKTParser();
+            var olGeoms = [];
+            if (result) {
+                var wkt = wktParser.convert(result.geometry);
+                var feature = mc._wktFormatter.readFeature(wkt);
+                var olGeom = feature.getGeometry();
+                olGeoms.push(olGeom);
+            }
+            for (var i=0;i < geoDetailItems.results.length;i++){
+                var wkt = wktParser.convert(geoDetailItems.results[i].geometry);
+                var feature = mc._wktFormatter.readFeature(wkt);
+                var olGeom = feature.getGeometry();
+                olGeoms.push(olGeom);
+            }
+            for (var i=0;i < geoDetailItems.items.length;i++){
+                var wkt = wktParser.convert(geoDetailItems.items[i].value);
+                var feature = mc._wktFormatter.readFeature(wkt);
+                var olGeom = feature.getGeometry();
+                olGeoms.push(olGeom);
+            }
+            var g = new ol.geom.GeometryCollection(olGeoms);
+            var extent = ol.extent.buffer(g.getExtent(), 100);
+            geoDetailItems.extent = extent
+            mc.map.getView().fit(extent);
+        }
+        
+    }
+}
+
+function s4_onZoomToDetailsButtonHover(geoDetailItems, result, detailItems) {
+    if (detailItems) {
+        if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
+            var mc = spm.getMapControl();
+            var wktParser = Septima.Search.getWKTParser();
+            var olGeoms = [];
+            for (var i=0;i < geoDetailItems.results.length;i++){
+                s4_addResultToHoverLayer(geoDetailItems.results[i]);
+            }
+            for (var i=0;i < geoDetailItems.items.length;i++){
+                s4_addDetailItemToHoverLayer(geoDetailItems.items[i]);
+            }
+        }
+    } else {
+        s4_clearHoverLayer();
+    }
 }
 
 function s4_init (params){
@@ -540,108 +602,6 @@ function s4_init (params){
 			};
         	
             //Create view
-			  var onDetailItem = function(orgDetailItem) {
-			      if (orgDetailItem.valueformat == "geometry") {
-			        return {
-			          type: "labelvalue",
-			          label: orgDetailItem.label,
-			          value: orgDetailItem.label,
-		              onHover: s4_onDetailHover,
-		              onFocus: s4_onDetailFocus,
-   	                  focusIcon: Septima.Search.icons.globe
-			        }
-			      } else {
-			        return orgDetailItem
-			      }
-			    }
-			  
-			  var onDetailHeader = function (result, detailItems) {
-			      //return extrahHeader = { icon, text, onClick, onHover}
-                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-                      var geoDetailItems = {
-                              results: [],
-                              items: []
-                      };
-                      for (var i = 0; i < detailItems.length; i++) {
-                          var detailItem = detailItems[i];
-                          if (detailItem.type == 'result' && detailItem.result.geometry)
-                              geoDetailItems.results.push(detailItem.result)
-                          if (detailItem.valueformat && detailItem.valueformat == 'geometry') {
-                              geoDetailItems.items.push(detailItem);
-                          }
-                      }
-                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0)
-                          return {
-                            icon: Septima.Search.s4Icons.zoomToExtentIcon,
-                            text: cbKort.getSession().getString('s4.sq.header.text'),
-                            onHover: hoverGeoDetailItems.bind(this, geoDetailItems),
-                            onClick: zoomToGeoDetailItems.bind(this, geoDetailItems)
-                          }
-                      else
-                          return {}
-                  }
-                  return null
-
-			  }
-			  
-			  var zoomToGeoDetailItems = function (geoDetailItems, result, detailItems) {
-                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
-                          var mc = spm.getMapControl();
-                          if (geoDetailItems.extent) {
-                              mc.map.getView().fit(geoDetailItems.extent);
-                          } else {
-                              var wktParser = Septima.Search.getWKTParser();
-                              var olGeoms = [];
-                              if (result) {
-                                  var wkt = wktParser.convert(result.geometry);
-                                  var feature = mc._wktFormatter.readFeature(wkt);
-                                  var olGeom = feature.getGeometry();
-                                  olGeoms.push(olGeom);
-                              }
-                              for (var i=0;i < geoDetailItems.results.length;i++){
-                                  var wkt = wktParser.convert(geoDetailItems.results[i].geometry);
-                                  var feature = mc._wktFormatter.readFeature(wkt);
-                                  var olGeom = feature.getGeometry();
-                                  olGeoms.push(olGeom);
-                              }
-                              for (var i=0;i < geoDetailItems.items.length;i++){
-                                  var wkt = wktParser.convert(geoDetailItems.items[i].value);
-                                  var feature = mc._wktFormatter.readFeature(wkt);
-                                  var olGeom = feature.getGeometry();
-                                  olGeoms.push(olGeom);
-                              }
-                              var g = new ol.geom.GeometryCollection(olGeoms);
-                              var extent = ol.extent.buffer(g.getExtent(), 100);
-                              geoDetailItems.extent = extent
-                              mc.map.getView().fit(extent);
-                          }
-                          
-                      }
-                  }
-			  }
-			  
-			  var hoverGeoDetailItems = function (geoDetailItems, result, detailItems) {
-			      if (detailItems) {
-	                  if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-	                      if (geoDetailItems.results.length + geoDetailItems.items.length > 0){
-	                          var mc = spm.getMapControl();
-	                          var wktParser = Septima.Search.getWKTParser();
-	                          var olGeoms = [];
-	                          for (var i=0;i < geoDetailItems.results.length;i++){
-	                              s4_addResultToHoverLayer(geoDetailItems.results[i]);
-	                          }
-	                          for (var i=0;i < geoDetailItems.items.length;i++){
-	                              s4_addDetailItemToHoverLayer(geoDetailItems.items[i]);
-	                          }
-	                      }
-	                  }
-			      } else {
-			          s4_clearHoverLayer();
-			      }
-			  }
-			    
-			
         	_s4View = new Septima.Search.DefaultView({
         		input: inputContainer[0],
         		limit: _s4Params.view.limit,
@@ -649,8 +609,8 @@ function s4_init (params){
         		onHover: s4_onResultHover,
         		onFocus: s4_onResultFocus,
         		focusIcon: Septima.Search.icons.globe,
-        	    onDetailItem: onDetailItem,
-                onDetailHeader: onDetailHeader
+        	    onDetailItem: s4_processDetailItem,
+                onDetailHeader: s4_getZoomToDetailsButton
         		});
         	
         	s4SetMaxHeight();
@@ -748,45 +708,6 @@ function s4Hit(result, geometryBehavior){
 	if (result.geometry){
         showResultInMap(result);
 	}
-}
-
-function zoomToResultInMap_delete(result){
-	if (result.geometry){
-		var geojson = new OpenLayers.Format.GeoJSON();
-	    var olGeom = geojson.read(result.geometry, 'Geometry');
-
-	    cbKort.dynamicLayers.removeAll();
-	    
-	    var bounds = olGeom.getBounds();
-	    var extent = 
-        {  x1: bounds.left,
-           y1: bounds.top,
-           x2: bounds.right,
-           y2: bounds.bottom
-        };   
-		
-		cbKort.mapObj.zoomToExtent(extent, 100);
-	}
-    _s4View.blur(_s4Params.view.forcedblurOnSelect);
-}
-
-function showResultInMap(result, callback){
-	if (result.geometry){
-	    var wktParser = Septima.Search.getWKTParser();
-	    var wkt = wktParser.convert(result.geometry);
-	    
-	    if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
-	        var mc = spm.getMapControl();
-	        mc.setMarkingGeometry(wkt, true, false, 0 + _s4Params.view.zoomBuffer);
-	    }else{
-	        cbKort.dynamicLayers.addWKT ({name: _s4Params.view.dynamiclayer, wkt:wkt, clear:true});
-	        cbKort.dynamicLayers.zoomTo (_s4Params.view.dynamiclayer, _s4Params.view.zoomBuffer);
-	    }
-        if (typeof callback != 'undefined'){
-            callback();
-        }
-	}
-    _s4View.blur(_s4Params.view.forcedblurOnSelect);
 }
 
 function themeHit(result){
@@ -924,11 +845,9 @@ Searchlast2.prototype.showDialog = function(searchtext)
     
 	if (searchtext) {
 		this.searchText = searchtext;
-        //getElement('Searchlast2_searchtext').innerHTML = cbKort.getSession().getString('spatialquery.show_info_about')+' '+this.searchText;
 		jQuery('#Searchlast2_searchtext').html(cbKort.getSession().getString('spatialquery.show_info_about') + ' ' + this.searchText);
 	} else {
 		this.searchText = null;
-        //getElement('#Searchlast2_searchtext').innerHTML = this.defaultText;
 		jQuery('#Searchlast2_searchtext').html(this.defaultText);
 	}
         

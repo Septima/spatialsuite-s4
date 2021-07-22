@@ -38,4 +38,11 @@ Ny: s4-details-intersects-plugin
   
     
 Ny: s4-details-cvr-info
-Feltern kan konfigureres
+Felterne kan konfigureres
+
+
+S4 understøtter
+ - SpS 4+, dvs v. 3.x er ikke længere understøttet
+ - SpS 4.3 er testet 
+
+S4's søgninger i arbejdsområder understøtter nu workspace3. De tidligere workspace-moduler er ikke længere understøttet

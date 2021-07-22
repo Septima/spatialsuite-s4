@@ -16,7 +16,48 @@ function s4CreateWorkspaceSearcher(options) {
         cbKort.events.addListener ('WORKSPACE_CHANGED', s4LoadWorkspaceRowList.bind(this, options.sessionId));
     }
     
+    var showWorkSpace3 = function (workspaceId){
+        var options = {id: workspaceId};
+        if (jQuery.isFunction( workspace_init )){
+            options.hideDialog = false;
+        }else{
+            options.hideDialog = true;
+        }
+        workspace_container.startDrawing (options);
+    }
+    
     var workspaceSearcher = new Septima.Search.DataSearcher(options);
+    workspaceSearcher.showWorkSpace = function(result){
+        var workspaceId = result.data.wrkspcid;
+        if (typeof workspace_init !== 'undefined' ){
+            if (typeof workspace_controls == 'undefined' ){
+                //Workspace version2
+                if (workspace_container === null) {
+                    var workspacejs = cbKort.getSession().getParam('cbkort.module.workspace.js');
+                    if (workspacejs === null || workspacejs === ""){
+                        workspacejs = cbKort.getSession().getParam('module.workspace.js');
+                    }
+                    require([workspacejs,'/js/standard/color.js'], Septima.bind(function(workspaceId) {
+                        workspace_container = new Workspace ({name:'standard'});
+                        this.showWorkSpace2(workspaceId);
+                    }, this, workspaceId));
+                }else{
+                    this.showWorkSpace2(workspaceId);
+                }
+            }else{
+                //Workspace version3
+                if (typeof workspace_container === 'undefined' || workspace_container === null) {
+                    var workspacejs = cbKort.getSession().getParam('module.workspace.js');
+                    require(['/modules/workspace/js/workspace.js'], Septima.bind(function(workspaceId) {
+                        workspace_container = new Workspace ({name:'standard', controlList: workspace_controls});
+                        showWorkSpace3(workspaceId);
+                    }, this, workspaceId));
+                } else {
+                    showWorkSpace3(workspaceId);
+                }
+            }
+        }
+    };
     
     return workspaceSearcher;
 

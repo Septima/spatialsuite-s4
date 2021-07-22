@@ -35,4 +35,6 @@
   
   <param name="s4.color" ignore="IsDefined(s4.color)">Blue</param>
   
+  <param name="module.s4.index.utf8behaviour">noconvert</param>
+  
 </deploy>
