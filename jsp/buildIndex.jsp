@@ -8,8 +8,8 @@
  <%
  	try{
  	 	String configDir = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.config.dir");
-        String searchCss = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.css");
-        String searchScript = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.script");
+        String searchCss = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.version") + "/css/defaultView.css";
+        String searchScript = GlobalRessources.getInstance().getCBInfoParam().getLocalStringValue("s4.search.version") + "/septimasearch.min.js";
  	 	if (configDir == null || configDir.equalsIgnoreCase("")){
  	 		throw new Exception ("The cbInfo parameter s4.config.dir is not defined. Please see https://github.com/Septima/spatialsuite-s4#readme");
  	 	}else{
@@ -34,14 +34,6 @@
 	 <!-- Include jquery -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	
-	<!-- Include common javascript libraries -->
-<!-- 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/septima.js"></script> -->
-<!-- 	<script type="text/javascript" src="http://common.cdn.septima.dk/latest/js/json2.js"></script> -->
-	
-	<!-- Include septimaSearch -->
-<!-- 	<script type="text/javascript" src="http://search.cdn.septima.dk/4.2.7/septimasearch.min.js"></script> -->
-<!-- 	<link rel="stylesheet" type="text/css" href="http://search.cdn.septima.dk/4.2.7/css/defaultView.css"> -->
 	
     <link rel="stylesheet" type="text/css" href="<%=searchCss%>">
     <script type="text/javascript" src="<%=searchScript%>" charset="UTF-8"></script>

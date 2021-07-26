@@ -46,3 +46,5 @@ S4 understøtter
  - SpS 4.3 er testet 
 
 S4's søgninger i arbejdsområder understøtter nu workspace3. De tidligere workspace-moduler er ikke længere understøttet
+
+Farver - grey, orange, green
