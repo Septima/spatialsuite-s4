@@ -19,13 +19,12 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.css">//search.cdn.septima.dk/5.25.19/css/defaultView.css</param>
-  <param name="s4.search.script">//search.cdn.septima.dk/5.25.19/septimasearch.min.js</param>
+<!--   <param name="s4.search.css">//search.cdn.septima.dk/5.25.24-crsb2/css/defaultView.css</param> -->
+<!--   <param name="s4.search.script">//search.cdn.septima.dk/5.25.24-crsb2/septimasearch.min.js</param> -->
    
 <!-- Dev -->
-<!--   <param name="s4.search.script">http://localhost:7001/septimasearch.debug.js</param> -->
-<!--   <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param> -->
-<!--   <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param> -->
+  <param name="s4.search.css">http://localhost:7001/css/defaultView.css</param>
+  <param name="s4.search.script">http://localhost:7001/septimasearch.min.js</param>
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>
