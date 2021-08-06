@@ -327,6 +327,7 @@ function s4_init (params){
        			_s4Params.view.marginToBottom = 100;
        		}
        		
+       		// setup searchIndexToken
         	var searchIndexToken = null;
         	
         	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
@@ -584,6 +585,30 @@ function s4_init (params){
         		controller.addSearcher( favoriteSearcher);
                 _s4Params.favoritesearcher.searcher = favoriteSearcher;
             }
+            
+            
+            if (_s4Params.historysearcher && _s4Params.historysearcher.enabled){
+                var store;
+                var storeOptions = {source: "historik"};
+                if (_s4Params.historysearcher.persist && _s4Params.historysearcher.persist == true)
+                    store = new Septima.Search.CookieResultStore(storeOptions);
+                else
+                    store = new Septima.Search.MemoryResultStore(storeOptions);
+                
+                var resultType = new Septima.Search.ResultType({id: "historik", singular: "Historik", plural: "Historik"});
+                
+                var searcherOptions = {
+                        resultType: resultType,
+                        store: store,
+                        controller: controller
+                };
+                
+                var historySearcher = new Septima.Search.HistorySearcher(searcherOptions);
+                    
+                controller.addSearcher( historySearcher);
+                _s4Params.historysearcher.searcher = historySearcher;
+                
+            }
 
             //Collect custom buttons that have been pushed until now
 			var _s4CustomButtons = window["_s4CustomButtons"];
@@ -623,6 +648,7 @@ function s4_init (params){
         		});
         	
         	s4SetMaxHeight();
+        	
             //Hide for a second until gui is settled
             inputContainer.hide();
             
@@ -632,6 +658,11 @@ function s4_init (params){
                         // Show inputcontainer again
                         inputContainer.show();
                         inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
+                        if (_s4Params.historysearcher.searcher && _s4Params.historysearcher.promote) {
+                            setTimeout(Septima.bind(function (_s4View) {
+                                _s4View.promote("historik", "historik");
+                                }, this, _s4View), 500);
+                        }
                     }.bind(this, inputContainer), 1000);
                 }.bind(this, inputContainer));
                 
@@ -659,18 +690,21 @@ function s4_init (params){
                 }.bind(this, inputContainer), 100);
             }.bind(this, inputContainer));
             
+
             var options = {
                 inputContainer: inputContainer,
                 left: jQuery('.inputcontainer-spacer').offset().left
             };
+            
             setInterval(function (options) {
                 if (options.left !== jQuery('.inputcontainer-spacer').offset().left) {
-                    options.left = jQuery('.inputcontainer-spacer').offset();
+                    options.left = jQuery('.inputcontainer-spacer').offset().left;
                     options.inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
                     s4SetMaxHeight();
                 }
             }.bind(this, options), 100);
         	
+            
         	if (_s4Params.view.autofocus){
                 setTimeout(Septima.bind(function (_s4View) {
             	_s4View.focus();

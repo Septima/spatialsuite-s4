@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tool type="plugin">
     <requires>
-	    [if: not isDefined("module.s4.log.disable") ]
-	        <file type="script"    name="//common.cdn.septima.dk/1.0.7/js/log.js" />
-	    [endif]
 
 		<file type="css"    name="[s4.search.version]/css/defaultView.css" />
 		<file type="script" name="[s4.search.version]/septimasearch.min.js" charset="utf-8"/>
