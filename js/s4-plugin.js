@@ -2,7 +2,7 @@ var _s4View = null;
 var _s4Params = null;
 var _s4HoverOLids = [];
 var _s4WktParser = null;
-var _s4_projection_epsg_code = "epsg:4326";
+var _s4_projection_epsg_code = "epsg:25832";
 
 function s4_onDetailItemHover(detailItem){
     s4_clearHoverLayer();
@@ -303,10 +303,18 @@ function s4_init (params){
        		Septima.Search.setLocale(s4Locale);
        		
        		//Projection
-       		_s4_projection_epsg_code = "cbinfo.map.srs" + spm.getSession().getParam("cbinfo.map.srs");
        		if (typeof _s4Params.projection_epsg !== 'undefined') {
                 Septima.Search.reproject.registerCrs(_s4Params.projection_epsg.code, _s4Params.projection_epsg.def);
                 _s4_projection_epsg_code = _s4Params.projection_epsg.code;
+       		} else {
+                var cbInfoMapCrs = spm.getSession().getParam("cbinfo.map.srs");
+                if (cbInfoMapCrs == '25832') {
+                    _s4_projection_epsg_code = "epsg:25832";
+                    Septima.Search.reproject.registerCrs("epsg:25832", "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+                } else {
+                    throw "S4 projection_epsg could not be found. Please define projection_epsg in your custom tool";
+                }
+       		    
        		}
        		 
        		//Set global vars

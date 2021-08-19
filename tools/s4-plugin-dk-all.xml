@@ -9,12 +9,6 @@
         <file type="script" name="/modules/s4/js/profileSearcher.js?_=[s4.version]"/>
         <file type="script" name="/modules/s4/js/favoriteSearcher.js?_=[s4.version]"/>
         
-        <!-- Include custom css if you need to customize styles -->
-        <!-- <file type="css" name="/css/custom/s4.css" /> -->
-        
-        <!-- Include custom colors css if you need to customize colors -->
-        <!-- <file type="css" name="/css/custom/s4Color.css" /> -->
-
     </requires>
     <displayname>s4Plugin</displayname>
     <src><![CDATA[
@@ -66,8 +60,8 @@
 	            cvrsearcher: {enabled: true, info: true, print: true},
 	            
                 //Plansystem
-                //Full set of targets is ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
-                plansearcher: {enabled: true, info: true, print: true, targets: ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
+                //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+                plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
 	            
 	            //Local SpatialSuite-datasources
 	            //  datasources: "*" for all, or space separated names of datasources
@@ -84,7 +78,16 @@
 	            favoritesearcher: {enabled: true},
 	            
 	            //Workspaces
-	            workspacesearcher: {enabled: true}
+	            workspacesearcher: {enabled: true},
+                
+                //History
+                //Promote: show history icon in search input
+                //persist: Remember history between sessions
+                historysearcher: {enabled: false, promote: true, persist: true},
+
+                //SpS projection
+                //Any other projection than epsg:25832 MUST be defined here
+                projection_epsg: {code: "epsg:25832", def: "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"}
 	            
             });
     ]]></src>

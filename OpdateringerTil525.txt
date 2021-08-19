@@ -1,26 +1,48 @@
-s4-matrikel-plugin udvidet med flere links - kan konfigureres.
-s4-adresse-plugin udvidet med flere links - kan konfigureres.
-s4-adresse-hgf-matrikelplugin udvidet med flere links - kan konfigureres.
+Ny version
 
-s4-sdfe-oblique-plugin - udgået erstattes af s4-matrikel-plugin og s4-adresse-plugin, som viser offentlige links, herunder links til skråfoto hos sdfe
+S4 understøtter
+ - SpS 4+, dvs v. 3.x er ikke længere understøttet
+ - SpS 4.3 er testet
 
-Tinglysninger udgået
+S4's søgninger i arbejdsområder understøtter nu kun workspace3. De tidligere workspace-moduler er ikke længere understøttet
 
+Farver - grey, orange, green
+    <!-- s4.color: Default blue -->
+    <!-- orange, green or grey -->
+    <param name="s4.color">green</param>
 
-s4-details-spatialquery-plugin Udgået 
+Historik
+                //Promote: show history icon in search input
+                //persist: Remember history between sessions
+                historysearcher: {enabled: true, promote: true, persist: true},
 
-NY: s4-details-cvr-virksomheder-paa-adresse
+projection_epsg
 
-Ny: s4-lifa-links-plugin links til webois, ejdexplorer og tlexplorer
+Detaljevisning
 
-s4-lifa-webois-link-plugin - udgået
+  - grafik
+  - zoom til geometrier
+  
+Ændringer
 
 opdateret: plansearcher tager targets
  - ['kommuneplanramme','vedtagetlokalplan', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
 
-Ny: s4-details-planinfo-plugin
+s4-details-dawa-planer-plugin
+s4-matrikel-plugin udvidet med flere links - kan konfigureres.
+s4-adresse-plugin udvidet med flere links - kan konfigureres.
+s4-adresse-hgf-matrikelplugin udvidet med flere links - kan konfigureres.
 
 Ændret: s4-details-nearest-plugin er blevet forenklet og kan nu også vise rute (kræver rute-abonnement på Septima's rute-service)
+
+
+Nye
+
+NY: s4-details-cvr-virksomheder-paa-adresse
+Ny: s4-lifa-links-plugin links til webois, ejdexplorer og tlexplorer
+Ny: s4-details-planinfo-plugin
+Ny: s4-details-cvr-info
+Felterne kan konfigureres
 
 Ny: s4-details-intersects-plugin
   Viser features indenfor en polygon
@@ -35,22 +57,22 @@ Ny: s4-details-intersects-plugin
   Kan vise rute (kræver rute-abonnement på Septima's rute-service)
   
   Dette er et kompliceret tool som det kan tage noget tid at tilpasse og sætte op
+
+
+Udgået
+
+Tinglysninger udgået
+s4-details-spatialquery-plugin Udgået 
+s4-lifa-webois-link-plugin - udgået
+s4-sdfe-oblique-plugin - udgået erstattes af s4-matrikel-plugin og s4-adresse-plugin, som viser offentlige links, herunder links til skråfoto hos sdfe
+
+
+
   
     
-Ny: s4-details-cvr-info
-Felterne kan konfigureres
 
 
-S4 understøtter
- - SpS 4+, dvs v. 3.x er ikke længere understøttet
- - SpS 4.3 er testet 
 
-S4's søgninger i arbejdsområder understøtter nu workspace3. De tidligere workspace-moduler er ikke længere understøttet
-
-Farver - grey, orange, green
-
-
-Historik
 
 
 Ændringer i custom tool:
@@ -59,6 +81,3 @@ Historik
  
  
  
- Detaljevisning
-  - grafik
-  - zoom til geometrier
