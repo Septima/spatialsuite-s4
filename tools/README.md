@@ -2,11 +2,11 @@
 ## Tools included in s4  
 Please read the [general installation instructions](../../../#installation) before reading this  
   
-The main tool:    
+### The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
   
-Tools relevant for Denmark only:  
-* Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresser og matrikler  
+### Tools relevant for Denmark only:  
+* Viser offentlige links til for adresser og matrikelnumre  
     * [s4-matrikel-plugin](#s4-matrikel-plugin)  
     * [s4-adresse-plugin](#s4-adresse-plugin)  
     * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
@@ -15,7 +15,6 @@ Tools relevant for Denmark only:
     * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
     * [s4-vis-egne-vejmidter-plugin](#s4-vis-egne-vejmidter-plugin)  
     * [s4-soeg-egne-vejmidter-plugin](#s4-soeg-egne-vejmidter-plugin)  
-
  
 * Links vedrørende lokalplaner
     * [s4-plan-plugin](#s4-plan-plugin)  
@@ -35,7 +34,7 @@ Tools relevant for Denmark only:
 * Link til COWI gadefoto for adresser og matrikelnumre
     * [s4-cowi-gadefoto-plugin](#s4-cowi-gadefoto-plugin)  
   
-Tools using the details view function:  
+#### Tools using the details view function:  
 * [s4-details-nearest-plugin](#s4-details-nearest-plugin)  
 * [s4-details-spatialquery-plugin](#s4-details-spatialquery-plugin)  
 * [s4-details-themesForIndex-plugin](#s4-details-themesForIndex-plugin)
@@ -62,14 +61,6 @@ S4 ships with two versions of the tool:
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used outside of Denmark  
   
-### <a name="s4-buttons-spatialMapTools-plugin"></a>s4-buttons-spatialMapTools-plugin    
-This tools creates icons for Spatial Map functions (Info and print).  
-  
-  _Must_ be included.    
-```xml
-<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
-```    
-  
 ### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin    
 Only relevant in Denmark  
 Viser ikoner med links til offentlige sites for jordstykker  
@@ -77,33 +68,52 @@ Inkludér i profil:
 ```xml
 <tool module="s4" name="s4-matrikel-plugin" />
 ```  
-
+Links kan konfigureres:  
 Hvilke links, der vises kan styres således:  
 ```xml
 <tool module="s4" name="s4-matrikel-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto_js", "sdfekort"]}
+    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
 Fjern de links du ikke ønsker at se
 
-
 ### <a name="s4-adresse-plugin"></a>s4-adresse-plugin  
 Only relevant in Denmark  
-Viser ikoner med links til BBR, SKAT og jordforureningsattest fra DAI for adresse fra Dawa  
+Viser ikoner med links til offentlige sites for husnumre  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-adresse-plugin" />
 ```  
+Links kan konfigureres:  
+Hvilke links, der vises kan styres således:  
+```xml
+<tool module="s4" name="s4-adresse-plugin">
+  <jsonconfig>
+    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+  </jsonconfig>
+</tool>
+```  
+Fjern de links du ikke ønsker at se
   
 ### <a name="s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin  
 Only relevant in Denmark  
-Viser ikoner med links til BBR, SKAT, jordforureningsattest fra DAI samt _Hvad gælder for matriklen_ for adresse fra Dawa  
+Viser ikoner med links til offentlige sites for jordstykker, __samt__ _Hvad gælder for matriklen_ for husnummer  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin" />
 ```  
+Links kan konfigureres:  
+Hvilke links, der vises kan styres således:  
+```xml
+<tool module="s4" name="s4-adresse-hgf-matrikel-plugin">
+  <jsonconfig>
+    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+  </jsonconfig>
+</tool>
+```  
+Fjern de links du ikke ønsker at se
   
 ### <a name="s4-sdfe-oblique-plugin"></a>s4-sdfe-oblique-plugin    
 Only relevant in Denmark  
@@ -294,34 +304,6 @@ Include in profile:
 <tool module="s4" name="s4-details-nearest-plugin" />
 ```    
 
-### <a name="#s4-details-spatialquery-plugin"></a>s4-details-spatialquery-plugin        
-Perform a standard Spatial Suite spatial query against your _local_ datasources.  
-  
-Include in profile:  
-```xml
-<tool module="s4" name="s4-details-spatialquery-plugin" />
-```    
-To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
-  
-```javascript
-   var s4SqSearcher = new Septima.Search.SqSearcher({
-       //Customize HERE
-       layers: "theme_skole theme_park",
-       profile: cbKort.getProfile(),
-       profileQuery: 'info',
-       buffer: 0,
-       sessionId: cbKort.getSessionId(),
-       allowDetails: true,
-       onSelect: s4Hit             
-   });
-
-```    
-Include in profile:  
-
-```xml
-<tool dir="custom" name="s4-details-spatialquery-plugin" />
-```    
-
 ### <a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
 Show relevant themes for features from the s4 index.  
 
@@ -341,7 +323,7 @@ Include in profile:
 ### <a name="#s4-details-dawa-planer-plugin"></a>s4-details-dawa-planer-plugin  
 Only relevant in Denmark.  
 
-Vis vedtaget lokalplan for adressen.  
+Vis planer for adressen.  
 
 Inkludér in profil:  
 ```xml
@@ -351,32 +333,15 @@ Inkludér in profil:
 ### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
 Only relevant in Denmark.  
   
-Vis DAGI-information for adresse.  
+Vis DAGI-information d.v.s. kommune, opstillingskreds, politikreds, postdistrikt, region, retskreds og sogn for en adresse  
 
 Inkludér in profil:  
 ```xml
 <tool module="s4" name="s4-details-dawa-dagi-plugin" />
 ```    
-  
-Hvis du vil se links til dawa's json for de enkelte objekter
 
-```xml
-<tool module="s4" name="s4-details-dawa-dagi-plugin" >
-  <jsonconfig>
-    {"showLinks": true}
-  </jsonconfig>
-</tool>
-
-```
-  
-### <a name="#s4-details-adresse-tinglysninger"></a>s4-details-adresse-tinglysninger  
-Vis Link til Tingbogen for en adresse.  
-
-Inkludér in profil:  
-```xml
-<tool module="s4" name="s4-details-adresse-tinglysninger" />
-```    
-  
+Kopiér toolet til tools/custom, hvis du vil tilpasse det. 
+ 
 ### <a name="#s4-details-themes-related-plugin"></a>s4-details-themes-related-plugin    
 Show other themes belonging to the themegroup  
 
@@ -386,29 +351,11 @@ Include in profile:
 ```    
   
 ### <a name="#s4-details-themes-tools-plugin"></a>s4-details-themes-tools-plugin  
-Show tools (transparency, meetadat, copyright etc) for a theme.  
+Show tools (transparency, meetadata, copyright etc) for a theme.  
 
 Include in profile:  
 ```xml
 <tool dir="custom" name="s4-details-themes-tools-plugin" />
 ```    
-  
-### <a name="#s4-details-guides-plugin"></a>s4-details-guides-plugin  
-Let your users search and discover your Spatial Map guides.  
-  
-Copy the tool to tools/custom.
-
-Include in profile:  
-```xml
-<tool dir="custom" name="s4-details-guides-plugin" />
-```    
-    
-### <a name="#s4-details-help-plugin"></a>s4-details-help-plugin    
-Let your users search and the built-in Spatial Map on-line help  
-  
-Include in profile:  
-```xml
-<tool module="s4" name="s4-details-help-plugin" />
-```   
 
 

@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Creates a Spatial Query section in detail view -->
-
-<!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
-<!-- Look for Customize HERE -->
 <tool type="plugin">
     <requires>
-    [if: ModuleDefined("s4") ]
-    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
-	[endif]
    </requires>
     <jssrc/>
-    <src><![CDATA[
-
-    ]]>
+    <src>
     </src>
 </tool>
