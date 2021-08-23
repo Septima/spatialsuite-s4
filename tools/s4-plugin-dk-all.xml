@@ -20,7 +20,7 @@
                 //  'menu': As the last menu in the menu line
                 //  'tool': Use the panel as specified in the profile
                 //  'panel-top': Force s4 to top menu
-                //  'default': same as panel-middle
+                //  'default': same as map-top-right
                 //  'panel-middle': Force s4 to menu linie (right justified)
                 //  'map-top-right': SpS 4.1+ only
                 panel: 'default',

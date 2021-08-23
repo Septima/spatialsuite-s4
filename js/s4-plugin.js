@@ -363,12 +363,12 @@ function s4_init (params){
         	    s4MenuItem.append(inputContainer);
         	}else{
         	    //Place in correct panel
-                var panel = 'panel-middle'; //default
+                var panel = 'map-top-right'; //default
                 if (typeof params.panel !== 'undefined' && params.panel !== 'default') {
                     panel = params.panel;
                     if (panel === 'panel-brand' && (jQuery("#panel-brand").is(":visible") === false || jQuery("#panel-brand").height()<30)) {
                         //remove from panel-brand if panel-brand is not visible or high enough
-                        panel = 'panel-middle';
+                        panel = 'map-top-right';
                     }
                 }
 

@@ -59,14 +59,34 @@ Current version:
   
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
+[cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml, where the name MUST start with _s4-plugin_  
+    
+Add the customized tool to your profile:  
+```xml
+<tool dir="custom" name="s4-plugin-[your-municipality-code]-all"/>
+```
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml   
-(It's important that the name starts with _s4-plugin_)  
+The tool will now search all of Denmark. You will need to set the _municipality_ parameter in your tool (See below)  
+  
+  
+#### Outside Denmark:    
+Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
+[cbinfo.config.dir]/tools/custom/s4-plugin-all.xml, where the name MUST start with _s4-plugin_  
     
 Add the customized tool to your profile (_panel_ is optional):  
 ```xml
-<tool dir="custom" name="s4-plugin-[your-municipality-code]-all" [panel="xxx"]/>
+<tool dir="custom" name="s4-plugin-all" [panel="xxx"]/>
 ```
+  
+S4 will now search themes, profiles, and workspaces. In order to search your local data please see [Search Spatial Suite data](#local)    
+  
+
+## <a name="s4customization"></a>Customization of s4 tool
+
+#### In Denmark:  
+
+##### Restrict searches to your municipality  
+Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
 
 ##### Update cbinfo.xml (In Denmark):  
 In order to search the danish Plansystem and cvr data, please include the following parameter in your relevant cbinfo.xml:    
@@ -77,36 +97,8 @@ In order to search the danish Plansystem and cvr data, please include the follow
 <param name="s4.searchchindex.token">aaaaAAAA-00000000</param>
 ```  
 where aaaaAAAA-00000000 is a special token provided to you by Septima.  
-  
-The tool will now search all of Denmark. You will need to set the _municipality_ parameter in your tool (See below)  
-  
-  
-#### Outside Denmark:    
-Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-all.xml to:
 
-    [cbinfo.config.dir]/tools/custom/s4-plugin-all.xml    
-(It's important that the name starts with _s4-plugin_)  
-    
-Add the customized tool to your profile (_panel_ is optional):  
-```xml
-<tool dir="custom" name="s4-plugin-all" [panel="xxx"]/>
-```
-  
-S4 will now search themes, profiles, and workspaces. In order to search your local data please see [Search Spatial Suite data](#local)    
-  
-#### More tools:    
-To enable the info and print icons, please incklude the following tool:  
-```xml
-<tool module="s4" name="s4-buttons-spatialMapTools-plugin" />
-```    
-  
-
-## <a name="s4customization"></a>Customization of s4 tool
-
-##### Restrict searches to your municipality  
-Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
-
-##### General options  
+#### General options  
 * Set the __printconfig__ parameter. The default is *rotatet*  
 * Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
 * Set the __autofocus__ parameter. If set, the search input field will get focus immediately meaning the user may start searching right away. Default is *false*  
@@ -116,7 +108,7 @@ Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]
 //Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
 municipality: '*',
 
-//  'default': same as panel-middle
+//  'default': same as map-top-right
 //  'panel-brand': Force s4 to panel-brand 
 //  'menu': As the last menu in the menu line
 //  'tool': Use the panel as specified in the profile
@@ -159,8 +151,9 @@ geostednavnesearcher: {enabled: true, info: true, print: true},
 //Septima CVR-index
 cvrsearcher: {enabled: true, info: true, print: true},
 
-//Septima lokalplan-index
-plansearcher: {enabled: true, info: true, print: true},
+//Plansystem
+//Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
 
 //Local SpatialSuite-datasources
 //  datasources: "*" for all, or space separated names of datasources
@@ -178,9 +171,6 @@ favoritesearcher: {enabled: true},
 
 //Workspaces
 workspacesearcher: {enabled: true}
-
-
-
 ```
 
 ### Searcher options
@@ -190,13 +180,15 @@ For each searcher a number of parameters may be set:
 * __Info__ determines whether the user can do a spatial query with a selected feature; info: *true* or *false*  
 * __print__ determines whether it should be possible to open the print dialog; print: *true* or *false*    
 
+#### Geosearcher  
 The targets in the geosearcher are changed by editing the *targets* property.
 
 ```javascript
-geosearcher:{enabled: true, info: true, print: true, targets: ['stednavne_v2', 'matrikelnumre']},
+geosearcher:{enabled: true, info: true, print: true, targets: ['matrikelnumre', 'postdistrikter']},
 ```
 
-Another useful option is to choose which local datasources the tool will search in (See [Search Spatial Suite data](#local)). This is controlled in the datasources key in the indexsearcher:
+#### Indexsearcher  
+Another useful option is to select the datasources in which the tool will search (See [Search Spatial Suite data](#local)). This is controlled in the *datasources* key in the indexsearcher:
 
 To search all local datasources:
 
@@ -209,6 +201,15 @@ To search specific datasources:
 ```javascript
 indexsearcher:{enabled: true, info: true, print: true, datasources: "ds_skoler ds_boligforeninger"}
 ```
+
+#### Plansearcher  
+The targets in the plansearcher are set by editing the *targets* property.
+
+Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', ```javascript
+'zonestatus']
+plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
+```
+
 
 ### Create profile specific search tools
 
@@ -225,7 +226,7 @@ Finished, now try out your profile and the customized search tool
 
 ## <a name="tools"></a> Included tools  
 
-S4 comes a number of included tools. 
+S4 comes a number of tools included. 
 All included tools must be included in the profile _after_ the main tool.  
 Please see [the tools section](./tools#tools-included-in-s4)  
 
