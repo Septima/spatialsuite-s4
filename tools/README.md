@@ -47,6 +47,7 @@ Please read the [general installation instructions](../../../#installation) befo
 * [s4-details-cvr-info](#s4-details-cvr-info)
 * [s4-details-cvr-virksomheder-paa-adresse](#s4-details-cvr-virksomheder-paa-adresse)
 * [s4-details-intersects-plugin](#s4-details-intersects-plugin)
+* [s4-details-planinfo-plugin](#s4-details-planinfo-plugin)
 
 API documentation:  
 * [s4ApiDemo](#apidemo)  
@@ -59,7 +60,7 @@ _Please include this tool before any other s4 tool_
 ```xml
 <tool dir="custom" name="s4-plugin-dk-all" />
 ```  
-  
+
 S4 ships with two versions of the tool:  
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used outside of Denmark  
@@ -350,7 +351,16 @@ Inkludér in profil:
 ```xml
 <tool module="s4" name="s4-details-dawa-planer-plugin" />
 ```    
-  
+
+### <a name="s4-details-planinfo-plugin"></a>s4-details-planinfo-plugin    
+Only relevant in Denmark  
+
+Viser info om planer fra plansystemet
+
+```xml
+<tool module="s4" name="s4-details-planinfo-plugin" />
+```  
+
 ### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
 Only relevant in Denmark.  
   
@@ -384,7 +394,6 @@ This tool will list intersections of a result with other searchers - it may use 
 
 The version shipped with s4 will not work in your setup - To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
   
-
 This tool is a very flexible tool - you might need assistance to set it up      
 
 
