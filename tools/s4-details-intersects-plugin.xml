@@ -15,7 +15,7 @@
     [if: ModuleDefined("s4") ]
     
         //Skal der bruges en proxy?
-        
+        //Customize HERE
         var proxySearcher = new Septima.Search.S4IndexSearcher(
           {
 		    datasources: "ds_buf_kgb_skoledistrikt",
@@ -24,6 +24,7 @@
         )
          
        // Hvad skal der søges i?   
+        //Customize HERE
         var s4_details_intersects_handler = new Septima.Search.SqDetailsHandler(
           {
 		    buttonText: "Institutioner i adressens skoledistrikt",
@@ -33,6 +34,7 @@
         
     
         //Hvornår skal der søges?
+        //Customize HERE
         //_s4Params.indexsearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
         _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
         
@@ -49,6 +51,7 @@
         }
         
         //Skal der vises rute?
+        //Customize HERE
           var token = cbKort.getSession().getParam("module.route.token")
           //Ret til så det passer dig
           var routeProvider = new Septima.Search.RouteProvider({

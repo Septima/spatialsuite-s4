@@ -44,7 +44,10 @@ Please read the [general installation instructions](../../../#installation) befo
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
 * [s4-details-themes-related-plugin](#s4-details-themes-related-plugin)  
 * [s4-details-themes-tools-plugin](#s4-details-themes-tools-plugin)
- 
+* [s4-details-cvr-info](#s4-details-cvr-info)
+* [s4-details-cvr-virksomheder-paa-adresse](#s4-details-cvr-virksomheder-paa-adresse)
+* [s4-details-intersects-plugin](#s4-details-intersects-plugin)
+
 API documentation:  
 * [s4ApiDemo](#apidemo)  
     
@@ -269,6 +272,24 @@ Link til cvr-info på virk.dk.
 <tool module="s4" name="s4-cvr-virk-plugin" />
 ```  
 
+### <a name="s4-details-cvr-info"></a>s4-details-cvr-info  
+Only relevant in Denmark  
+
+Viser mange detaljer for produktionsenheder  
+
+```xml
+<tool module="s4" name="s4-details-cvr-info" />
+```  
+
+### <a name="s4-details-cvr-virksomheder-paa-adresse"></a>s4-details-cvr-virksomheder-paa-adresse    
+Only relevant in Denmark
+
+Viser alle produktionsenheder på et husnummer  
+
+```xml
+<tool module="s4" name="s4-details-cvr-virksomheder-paa-adresse" />
+```  
+
 ### <a name="s4-plan-plugin"></a>s4-plan-plugin  
 Only relevant in Denmark  
 Viser ikon med link til plansystemets pdf for lokalplaner, kan konfigureres til også at vise links til Odeum og DKPlan  
@@ -357,5 +378,13 @@ Include in profile:
 ```xml
 <tool dir="custom" name="s4-details-themes-tools-plugin" />
 ```    
+
+### <a name="s4-details-intersects-plugin"></a>s4-details-intersects-plugin  
+This tool will list intersections of a result with other searchers - it may use a proxy as intersect geometry. Can also show route between points  
+
+The version shipped with s4 will not work in your setup - To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
+  
+
+This tool is a very flexible tool - you might need assistance to set it up      
 
 

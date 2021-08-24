@@ -108,6 +108,7 @@ where aaaaAAAA-00000000 is a special token provided to you by Septima.
 //Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
 municipality: '*',
 
+//Position
 //  'default': same as map-top-right
 //  'panel-brand': Force s4 to panel-brand 
 //  'menu': As the last menu in the menu line
@@ -152,7 +153,7 @@ geostednavnesearcher: {enabled: true, info: true, print: true},
 cvrsearcher: {enabled: true, info: true, print: true},
 
 //Plansystem
-//Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+// Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
 plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
 
 //Local SpatialSuite-datasources
@@ -170,7 +171,17 @@ profilesearcher: {enabled: true},
 favoritesearcher: {enabled: true},
 
 //Workspaces
-workspacesearcher: {enabled: true}
+workspacesearcher: {enabled: true},
+                
+//History
+// Promote: show history icon in search input
+// persist: Remember history between sessions
+historysearcher: {enabled: false, promote: true, persist: true},
+
+//SpS projection
+// Any other projection than epsg:25832 MUST be defined here
+projection_epsg: {code: "epsg:25832", def: "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"}
+
 ```
 
 ### Searcher options
