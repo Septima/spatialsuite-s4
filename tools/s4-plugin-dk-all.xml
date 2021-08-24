@@ -2,7 +2,7 @@
 <!-- Do not customise this tool. Make copy of module and create your own tool -->
 <tool>
     <requires>
-		<include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
         <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
         <file type="script" name="/modules/s4/js/s4ThemeSearcher.js?_=[s4.version]"/>
         <file type="script" name="/modules/s4/js/workspaceSearcher.js?_=[s4.version]"/>
@@ -56,29 +56,29 @@
                 //Geodatastyrelsen - Stednavne i geosearch
                 geostednavnesearcher: {enabled: true, info: true, print: true},
                 
-	            //Septima CVR-index
+                //Septima CVR-index
 	            cvrsearcher: {enabled: true, info: true, print: true},
 	            
                 //Plansystem
                 //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
                 plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
 	            
-	            //Local SpatialSuite-datasources
-	            //  datasources: "*" for all, or space separated names of datasources
-	            //  blankbehavior: search or none
-	            indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
+                //Local SpatialSuite-datasources
+                //  datasources: "*" for all, or space separated names of datasources
+                //  blankbehavior: search or none
+                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
 	            
-	            //Themes in profile
-	            themesearcher: {enabled: true},
+                //Themes in profile
+                themesearcher: {enabled: true},
 	            
-	            //Profiles
-	            profilesearcher: {enabled: true},
+                //Profiles
+                profilesearcher: {enabled: true},
 	            
-	            //Favorites
-	            favoritesearcher: {enabled: true},
+                //Favorites
+                favoritesearcher: {enabled: true},
 	            
-	            //Workspaces
-	            workspacesearcher: {enabled: true},
+                //Workspaces
+                workspacesearcher: {enabled: true},
                 
                 //History
                 //Promote: show history icon in search input
