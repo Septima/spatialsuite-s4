@@ -666,7 +666,7 @@ function s4_init (params){
                         // Show inputcontainer again
                         inputContainer.show();
                         inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
-                        if (_s4Params.historysearcher.searcher && _s4Params.historysearcher.promote) {
+                        if (_s4Params.historysearcher && _s4Params.historysearcher.searcher && _s4Params.historysearcher.promote) {
                             setTimeout(Septima.bind(function (_s4View) {
                                 _s4View.promote("historik", "historik");
                                 }, this, _s4View), 500);
