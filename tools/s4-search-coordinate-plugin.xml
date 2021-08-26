@@ -15,7 +15,8 @@
 			    firstUpper: 950000,
 			    secondLower: 6000000,
 			    secondUpper: 6500000,
-			    description: cbKort.getSession().getString('s4.coordinatesearcher.boundaries.description')
+			    description: cbKort.getSession().getString('s4.coordinatesearcher.boundaries.description'),
+                projection: cbKort.getSession().getString('s4.coordinatesearcher.boundaries.projection')
 			}
 		    var coordinateSearcher = new Septima.Search.ClientSearcher({
 		      "singular": cbKort.getSession().getString('s4.coordinatesearcher.coordinate'),
@@ -23,7 +24,7 @@
 		      "isAsync": false,
 		      "usesGeoFunctions": true,
 		      onSelect: s4Hit,
-		      provider: new Septima.Search.CoordinateSearchProvider({'boundaries': boundaries})
+		      provider: new Septima.Search.GeometrySearchProvider({'boundaries': boundaries})
 		    });
 		    
             _s4Searchers.push({

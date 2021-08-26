@@ -57,7 +57,7 @@
                 geostednavnesearcher: {enabled: true, info: true, print: true},
                 
                 //Septima CVR-index
-	            cvrsearcher: {enabled: true, info: true, print: true},
+                cvrsearcher: {enabled: true, info: true, print: true},
 	            
                 //Plansystem
                 //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']

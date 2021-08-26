@@ -23,7 +23,6 @@
 		  }
         )
          
-       // Hvad skal der søges i?   
         //Customize HERE
         var s4_details_intersects_handler = new Septima.Search.SqDetailsHandler(
           {

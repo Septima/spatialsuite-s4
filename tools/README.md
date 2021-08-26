@@ -248,8 +248,7 @@ Sæt følgende parameter for at pluginnet virker:
 <param name="s4.lifaois.uid">xxx</param>
 <param name="s4.lifaois.pwd">xxx</param>
 ```  
-
-????: Linker til "https://xxx.filarkiv.dk  
+Linker til "https://xxx.filarkiv.dk  
 
 
 ### <a name="s4-cowi-gadefoto-plugin"></a>s4-cowi-gadefoto-plugin  
