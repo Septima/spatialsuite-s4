@@ -29,7 +29,7 @@ offered by Septima.
  Author:      klavs(AT)septima.dk
   
  Created:     03-05-2013  
- Copyright:   (c) Septima P/S 2013-2020  
+ Copyright:   (c) Septima P/S  
  License:     Commercially licensed product. Please contact Septima to obtain
               a valid license.
               You are granted the right to download and install this module for
@@ -48,7 +48,10 @@ offered by Septima.
 Current version:  
       ||Opdatér ikke før nyhedsbrev 2.14.0 udkommer med instruktioner||  
       2.14.0: https://github.com/Septima/spatialsuite-s4/archive/2.14.0.zip   
-      
+      Nyhedsbrev:
+      - Seneste:  
+      - [Oversigt og tilmelding](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
+            
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
 ##### Update modules.xml:
