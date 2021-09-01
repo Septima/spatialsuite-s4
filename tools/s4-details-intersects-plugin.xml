@@ -15,7 +15,7 @@
     [if: ModuleDefined("s4") ]
     
         //Skal der bruges en proxy?
-        // Brug Septima.Search.S4IndexSearcher til datasources, osm er indekserede i s4
+        // Brug Septima.Search.S4IndexSearcher til datasources, som er indekserede i s4
         //Customize HERE
         var proxySearcher = new Septima.Search.S4IndexSearcher(
           {
@@ -53,6 +53,8 @@
         
         //Skal der vises rute?
         //Customize HERE
+        var showRoute = false;
+        if(showRoute) {
           var token = cbKort.getSession().getParam("module.route.token")
           //Ret til så det passer dig
           var routeProvider = new Septima.Search.RouteProvider({
@@ -64,6 +66,8 @@
           //Indkommentér følgende linie hvis du vil have rute til det fundne
           //OBS: Der findes kun rute mellem punkter
           s4_details_intersects_handler.addDetailHandlerDef(routeProvider)
+        }
+        
         
     [endif]
     ]]>
