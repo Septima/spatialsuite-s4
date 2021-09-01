@@ -47,7 +47,7 @@ offered by Septima.
       
 Current version:  
       ||Opdatér ikke før nyhedsbrev 2.14.0 udkommer med instruktioner||  
-      2.14.0: https://github.com/Septima/spatialsuite-s4/archive/2.14.0.zip   
+      2.14.1: https://github.com/Septima/spatialsuite-s4/archive/2.14.1.zip   
       Nyhedsbrev:
       - Seneste:  
       - [Tidligere nyhedsbreve og tilmelding](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
