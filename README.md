@@ -46,10 +46,9 @@ offered by Septima.
 ### Download s4 module:
       
 Current version:  
-      ||Opdatér ikke før nyhedsbrev 2.14.0 udkommer med instruktioner||  
       2.14.1: https://github.com/Septima/spatialsuite-s4/archive/2.14.1.zip   
-      Nyhedsbrev:
-      - Seneste:  
+      Nyhedsbrev:  
+      - [Seneste](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=77bba3e961)  
       - [Tidligere nyhedsbreve og tilmelding](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
             
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
