@@ -15,6 +15,7 @@
     [if: ModuleDefined("s4") ]
     
         //Skal der bruges en proxy?
+        // Brug Septima.Search.S4IndexSearcher til datasources, osm er indekserede i s4
         //Customize HERE
         var proxySearcher = new Septima.Search.S4IndexSearcher(
           {
@@ -38,6 +39,7 @@
         _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
         
         //Hvad skal der søges i?
+        // Brug Septima.Search.S4IndexSearcher til datasources, osm er indekserede i s4
         var s4InstitutionsSearcher = new Septima.Search.S4IndexSearcher({
 		    datasources: "ds_buf_kgb_daginstitutioner",
             onSelect: s4Hit

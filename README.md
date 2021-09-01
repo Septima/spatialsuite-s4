@@ -50,7 +50,7 @@ Current version:
       2.14.0: https://github.com/Septima/spatialsuite-s4/archive/2.14.0.zip   
       Nyhedsbrev:
       - Seneste:  
-      - [Oversigt og tilmelding](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
+      - [Tidligere nyhedsbreve og tilmelding](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
             
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
