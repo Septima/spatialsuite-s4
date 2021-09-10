@@ -23,18 +23,20 @@
 		    buttonText: "Nærmeste"
 		  })
 
-        //Skal der vises rute?
+          //Skal der vises rute?
+          //OBS: Der findes kun rute mellem punkter
 		  var token = cbKort.getSession().getParam("module.route.token")
-		  //Ret til så det passer dig
-		  var routeProvider = new Septima.Search.RouteProvider({
-		    fields: ["route.distance", "route.geometry", "route.time"],
-		    routeApiKey: token,
-		    routeProfile: "bicycle"
-		  })
-		  
-		  //Indkommentér følgende linie hvis du vil have rute til det fundne
-		  //OBS: Der findes kun rute mellem punkter
-		  //nearestHandler.addDetailHandlerDef(routeProvider)
+		  if (token) {
+	          //Ret til så det passer dig
+	          //Customize HERE
+	          var routeProvider = new Septima.Search.RouteProvider({
+	            fields: ["route.distance", "route.geometry", "route.time"],
+	            routeApiKey: token,
+	            routeProfile: "bicycle"
+	          })
+	          
+	          nearestHandler.addDetailHandlerDef(routeProvider)
+		  }
 			
         //Hvornår skal der søges?
 		  if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){

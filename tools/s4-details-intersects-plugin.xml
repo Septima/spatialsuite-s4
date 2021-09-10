@@ -52,19 +52,17 @@
         }
         
         //Skal der vises rute?
-        //Customize HERE
-        var showRoute = false;
-        if(showRoute) {
-          var token = cbKort.getSession().getParam("module.route.token")
+        //OBS: Der findes kun rute mellem punkter
+        var token = cbKort.getSession().getParam("module.route.token")
+        if(token) {
           //Ret til så det passer dig
+          //Customize HERE
           var routeProvider = new Septima.Search.RouteProvider({
             fields: ["route.distance", "route.geometry", "route.time"],
             routeApiKey: token,
             routeProfile: "bicycle"
           })
           
-          //Indkommentér følgende linie hvis du vil have rute til det fundne
-          //OBS: Der findes kun rute mellem punkter
           s4_details_intersects_handler.addDetailHandlerDef(routeProvider)
         }
         

@@ -19,7 +19,7 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
-  <param name="s4.search.version">//search.cdn.septima.dk/5.26.7</param>
+  <param name="s4.search.version">//search.cdn.septima.dk/5.27.0</param>
    
 <!-- Dev -->
 <!--   <param name="s4.search.version">http://localhost:7001</param> -->
