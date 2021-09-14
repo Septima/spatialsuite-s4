@@ -64,7 +64,7 @@ function s4_addResultToHoverLayer(result) {
         if (result.title)
             feature.attributes.label = result.title;
         
-        s4_getHoverLayer().addFeature(feature);
+        s4_getHoverLayer().addFeature(feature, true, true);
     }
 }
 
@@ -222,6 +222,8 @@ function s4_SSGeomToWkt(ssGeom) {
 }
 
 function s4_SSGeomToFeature(ssGeom) {
+    //var olGeom = s4_SSGeomToOlGeom(result.geometry);
+    //olGeom.
     var wkt = s4_SSGeomToWkt(ssGeom);
     return {wkt: wkt, attributes: {}};
 }
@@ -240,7 +242,7 @@ function s4_zoomToDetailItems(geoDetailItems, result, detailItems) {
         } else {
             var olGeoms = [];
             if (result) {
-                var olGeom = s4_SSGeomToOlGeom(result.geometry)                
+                var olGeom = s4_SSGeomToOlGeom(result.geometry);                
                 olGeoms.push(olGeom);
             }
             for (var i=0;i < geoDetailItems.results.length;i++){
