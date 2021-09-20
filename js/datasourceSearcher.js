@@ -89,7 +89,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	                var thisHit = data.row[0].row[i];
 	                var resultGeometry = null;
 	                if (thisHit.shape_wkt){
-	                    resultGeometry = this.translateWktToGeoJsonObject(thisHit.shape_wkt);
+	                    resultGeometry = this.translateWktToGeoJsonObject(thisHit.shape_wkt, "25832");
 	                }
                     var description = thisHit['description'] || "";
                     if (thisHit['url']){
