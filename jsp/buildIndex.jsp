@@ -72,7 +72,7 @@
 			_controller.addSearcher({"title": "", "searcher" : indexSearcher});
 			
             _view = new Septima.Search.DefaultView({
-                input:jQuery("#inputcontainer"),
+                input:jQuery("#inputcontainer")[0],
                 placeholder:"Test index",
                 controller: _controller});
 		}
