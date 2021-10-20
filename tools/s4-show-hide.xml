@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool default="true">
+    <cbinfo-metadata>
+        <param name="tool.help.text">toggleS4: param name="tool.help.text"</param>
+    </cbinfo-metadata>
+    <onclick><![CDATA[
+        this.toggleS4(this, button);
+    ]]></onclick>
+    <displayname>toggleS4: displayname</displayname>
+    <tooltip>toggleS4: tooltip</tooltip>
+    <jssrc>
+        var toggleS4HadFirstCall = false;
+        var toggleS4Name;
+    </jssrc>
+    <src><![CDATA[
+        this.toggleS4 = function (tool) {
+
+            var procesFirstCall = function () {
+                toggleS4HadFirstCall = true;
+                toggleS4Name = Septima.Search.getString("search");
+                if (tool.jsonConfig && tool.jsonConfig.hideFromStart)
+                    setVisible(false);
+                else
+                    setVisible(true);
+            }
+            
+            var setVisible = function (visible) {
+                s4_setVisible(visible);
+                if (visible) {
+                    tool.button.setDisplayname("Skjul " + toggleS4Name);
+                    tool.button.setToolTip("Skjul " + toggleS4Name);
+                } else {
+                    tool.button.setDisplayname("Vis " + toggleS4Name);
+                    tool.button.setToolTip("Vis " + toggleS4Name);
+                }
+            }
+            
+            if (toggleS4HadFirstCall) {
+	            if (s4_getVisible())
+	               setVisible(false);
+	            else
+                   setVisible(true);
+            } else {
+                procesFirstCall();
+            }
+        };
+    ]]></src>
+</tool>

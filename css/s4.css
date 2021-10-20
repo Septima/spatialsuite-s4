@@ -27,6 +27,10 @@
     width: 100%;
 }
 
+.septimasearch.inputcontainer.s4Hidden {
+    visibility: hidden;
+}
+
 #legendcontainer.legendcontainer{
     z-index: 8;
 }
