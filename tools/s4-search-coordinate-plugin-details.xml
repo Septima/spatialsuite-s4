@@ -40,7 +40,7 @@
                 var geoSearchOptions = {
                         targets: ['matrikelnumre'],
                         authParams: gstAuthParams,
-                        onSelect: s4GeoHit
+                        onSelect: s4Hit
                 };
                 if (_s4Params.municipality != "*"){
                     geoSearchOptions.kommunekode = _s4Params.municipality;

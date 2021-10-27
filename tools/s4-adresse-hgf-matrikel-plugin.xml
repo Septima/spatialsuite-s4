@@ -13,7 +13,7 @@
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
         }
         var _s4HgfMatrikelKnapUri = Septima.Search.s4Icons.infoIconUri;
-        _s4CustomButtons.push({"buttonText": "Hvad gælder for matrikelnummeret", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher"});
+        _s4CustomButtons.push({"buttonText": "Hvad gælder for matrikelnummeret", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher", "target": "adresse"});
     [endif]
     ]]>
     </src>

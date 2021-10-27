@@ -15,7 +15,7 @@
 	            var buttonText = cbKort.getSession().getString('cowi-gadefoto.displayname');
 	            var buttonImage = Septima.Search.icons.exlink;
 	            
-	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "dawasearcher"});
+	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "dawasearcher", "target": "adresse"});
 	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4MatrikelDoDdgKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
             }
 	    [endif]

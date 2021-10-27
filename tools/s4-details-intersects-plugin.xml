@@ -36,7 +36,7 @@
         //Hvornår skal der søges?
         //Customize HERE
         //_s4Params.indexsearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
-        _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler)
+        _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4_details_intersects_handler, "adresse")
         
         //Hvad skal der søges i?
         // Brug Septima.Search.S4IndexSearcher til datasources, osm er indekserede i s4

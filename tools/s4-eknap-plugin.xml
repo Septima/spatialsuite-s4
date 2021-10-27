@@ -20,7 +20,7 @@
         
             var _s4eKnapUri = Septima.Search.s4Icons.eKnapPlugin.iconURI;
             
-            _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "dawasearcher"});
+            _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "dawasearcher", "target": "adresse"});
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "cvrsearcher"});
         }

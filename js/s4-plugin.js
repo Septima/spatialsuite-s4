@@ -455,6 +455,9 @@ function s4_init (params){
                         host: _s4Params.s3searcher.host,
                         service: _s4Params.s3searcher.service
                     };
+                if (_s4Params.s3searcher.token) {
+                    s3SearcherOptions.authorization = {Bearer: {token: _s4Params.s3searcher.token} };
+                }
                 
                 var s3searcher = new Septima.Search.S3Searcher(s3SearcherOptions);
                 controller.addSearcher(s3searcher);
@@ -481,7 +484,7 @@ function s4_init (params){
                 	var geoSearchOptions = {
                 			targets: _s4Params.geosearcher.targets,
                 			authParams: gstAuthParams,
-                		    onSelect: s4GeoHit
+                		    onSelect: s4Hit
                 	};
                 	if (_s4Params.municipality != "*"){
                 	    geoSearchOptions.kommunekode = _s4Params.municipality;
@@ -498,7 +501,7 @@ function s4_init (params){
                 if (gstAuthParams != null){
                     geoStednavnSearchOptions = {
                             authParams: gstAuthParams,
-                            onSelect: s4GeoHit
+                            onSelect: s4Hit
                     };
                     if (_s4Params.municipality != "*"){
                         geoStednavnSearchOptions.kommunekode = _s4Params.municipality;
@@ -751,14 +754,6 @@ function s4SetMaxHeight(){
 	}
 }
 
-function s4GeoHit(result){
-    if (result.data && result.data.type){
-        if (result.data.type != 'streetNameType' || (result.data.type == 'streetNameType' && _s4Params.streetNameHit)){
-            s4Hit(result);
-        }
-    }
-}
-
 function s4DawaHit(result){
     if (result.data && result.data.type){
         if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.streetNameHit)){
@@ -768,7 +763,6 @@ function s4DawaHit(result){
 }
 
 function s4Hit(result, geometryBehavior){
-	//cbKort.events.fireEvent('S4', {type: 's4Hit', result: result});
     for (var i = 0; i < _s4OnSelect.length;i++){
 		if (!_s4OnSelect[i](result)){
 			return;

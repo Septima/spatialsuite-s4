@@ -10,7 +10,7 @@
     [if: ModuleDefined("s4") ]
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
                 var links = this.jsonConfig.links ? this.jsonConfig.links : "*";
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}), "adresse");
             }
     [endif]
     ]]>

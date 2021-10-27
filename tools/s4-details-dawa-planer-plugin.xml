@@ -16,7 +16,7 @@
                                                                                 label: "Der er ikke fundet nogen planer på adressen"}
                                                                            });
                 sqDetailsHandler.addSearcher(_s4Params.plansearcher.searcher);                        
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(sqDetailsHandler);
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(sqDetailsHandler, "adresse");
             }
     [endif]
     ]]>
