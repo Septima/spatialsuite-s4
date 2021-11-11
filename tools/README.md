@@ -6,7 +6,7 @@ Please read the [general installation instructions](../../../#installation) befo
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
 
 #### Show/Hide search box:    
-* [s4-show-hide] (#s4-show-hide)  
+* [s4-show-hide](#s4-show-hide)  
   
 ### Tools relevant for Denmark only:  
 * Viser offentlige links til for adresser og matrikelnumre  
