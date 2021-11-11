@@ -68,9 +68,20 @@ S4 ships with two versions of the tool:
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used outside of Denmark  
 
-### <a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
-
-  
+### <a name="s4-show-hide"></a>Show/Hide search box  
+This tools gives the user a menu item which shows/hides the search box  
+Include in profile:  
+```xml
+<tool module="s4" name="s4-show-hide" panel="middle-right">
+```  
+To hide the search box from the start:    
+```xml
+<tool module="s4" name="s4-show-hide" panel="middle-right">
+  <jsonconfig>
+    {"hideFromStart": true}
+  </jsonconfig>
+</tool>
+```   
 ### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin    
 Only relevant in Denmark  
 Viser ikoner med links til offentlige sites for jordstykker  
