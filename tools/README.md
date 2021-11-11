@@ -76,7 +76,8 @@ Include in profile:
 ```  
 
 Use panel attribute to control placement. Eg. ```panel="middle-right"``` or ```panel="top-right"```  
-To hide the search box from the start:    
+
+To hide the search box from the start:      
 ```xml
 <tool module="s4" name="s4-show-hide" panel="middle-right">
   <jsonconfig>

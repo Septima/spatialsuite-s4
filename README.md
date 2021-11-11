@@ -18,7 +18,7 @@ offered by Septima.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: (v 2.14.5)  
+- Latest: [(v 2.14.5)](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)  
 - Previous: [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9), [v 2.14.1](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=77bba3e961)  
 - [All news letters](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
   
