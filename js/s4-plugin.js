@@ -618,13 +618,20 @@ function s4_init (params){
             
             if (_s4Params.historysearcher && _s4Params.historysearcher.enabled){
                 var store;
-                var storeOptions = {source: "historik"};
+                var storeOptions = {
+                        source: "historik",
+                        sortMode: "filter",
+                        maxLength: 20};
+                
                 if (_s4Params.historysearcher.persist && _s4Params.historysearcher.persist == true)
-                    store = new Septima.Search.CookieResultStore(storeOptions);
+                    store = new Septima.Search.LocalstorageResultStore(storeOptions);
                 else
                     store = new Septima.Search.MemoryResultStore(storeOptions);
                 
-                var resultType = new Septima.Search.ResultType({id: "historik", singular: "Historik", plural: "Historik"});
+                var resultType = new Septima.Search.ResultType({
+                    id: "historik",
+                    singular: "Historik",
+                    plural: "Historik"});
                 
                 var searcherOptions = {
                         resultType: resultType,

@@ -4,6 +4,9 @@ Please read the [general installation instructions](../../../#installation) befo
   
 ### The main tool:    
 * [s4-plugin-dk-all (s4-plugin-all)](#s4-plugin-dk-all)  
+
+#### Show/Hide search box:    
+* [s4-show-hide] (#s4-show-hide)  
   
 ### Tools relevant for Denmark only:  
 * Viser offentlige links til for adresser og matrikelnumre  
@@ -64,6 +67,9 @@ _Please include this tool before any other s4 tool_
 S4 ships with two versions of the tool:  
 * _s4-plugin-dk-all_ includes searchers only relevant in Denmark  
 * _s4-plugin-all_ is used outside of Denmark  
+
+### <a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
+
   
 ### <a name="s4-matrikel-plugin"></a>s4-matrikel-plugin    
 Only relevant in Denmark  
