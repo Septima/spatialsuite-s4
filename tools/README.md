@@ -72,8 +72,10 @@ S4 ships with two versions of the tool:
 This tools gives the user a menu item which shows/hides the search box  
 Include in profile:  
 ```xml
-<tool module="s4" name="s4-show-hide" panel="middle-right">
+<tool module="s4" name="s4-show-hide" panel="middle-right"/>
 ```  
+
+Use panel attribute to control placement. Eg. ```panel="middle-right"``` or ```panel="top-right"```
 To hide the search box from the start:    
 ```xml
 <tool module="s4" name="s4-show-hide" panel="middle-right">
