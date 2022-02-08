@@ -49,6 +49,8 @@
 .septimasearch .ssSearchBackground input.ssInput,
 .septimasearch .ssSearchBackground .ssSearchIcon,
 .septimasearch .ssSearchBackground .ssCloseButton,
+.septimasearch .ssSearchHeader .ssPromotes,
+.septimasearch .ssSearchHeader .ssPromotes .ssPromotedIcon,
 .septimasearch .ssSearchBackground .ssSpinner {
     height: 36px;
     line-height: 36px;
