@@ -13,9 +13,6 @@
     <displayname>s4Plugin</displayname>
     <src><![CDATA[
             s4_init({
-                //Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
-                municipality: '*',
-                
                 //  'panel-brand': Force s4 to panel-brand 
                 //  'menu': As the last menu in the menu line
                 //  'tool': Use the panel as specified in the profile
@@ -50,8 +47,9 @@
                     enabled: true,
                     info: true,
                     print: true,
-                    host: "http://s3.test.septima.dk",
-                    service: "/api/v1/organisations/septima/configurations/complex"},
+                    host: "http://onedoor.test.septima.dk",
+                    service: "/api/v1/organisations/septima/configurations/demo",
+					authorization: {Bearer: {token: "xxxxxxxxx"} }},
 
                 //Themes in profile
                 themesearcher: {enabled: true},

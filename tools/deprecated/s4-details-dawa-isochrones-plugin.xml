@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
+<!-- Look for Customize HERE -->
+<tool type="plugin">
+    <requires>
+    [if: ModuleDefined("s4") ]
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+    [endif]
+    
+   </requires>
+    <jssrc/>
+    <src><![CDATA[
+    [if: ModuleDefined("s4") ]
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+			    var isoChronSearcher = new Septima.Search.IsoChroneSearcher({onSelect: s4Hit, modetext: 'kørsel', cutoffSecs : [240, 360 , 480, 600]});
+			    var sqIsochronBuilder = new Septima.Search.SqDetailsHandlerBuilder({
+			      searchers: [isoChronSearcher],
+			      limit: 10,
+			      title: cbKort.getSession().getString('s4.isochrones.captions'),
+                          header: {
+                            button: {
+                                buttonText: cbKort.getSession().getString('s4.sq.header.text'),
+                                buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
+                                callBack: function(sqInfo){
+                                    if (sqInfo.hitResults.length > 0){
+                                        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+									        var wktParser = Septima.Search.getWKTParser();
+                                            var wkt;
+                                            var feature;
+                                            var olGeom;
+                                            var olGeoms = [];
+                                            var mc = spm.getMapControl();
+	                                        for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                wkt = wktParser.convert(sqInfo.hitResults[i].geometry);
+									            feature = mc._wktFormatter.readFeature(wkt);
+									            olGeom = feature.getGeometry();
+									            olGeoms.push(olGeom);
+	                                        }
+                                            var g = new ol.geom.GeometryCollection(olGeoms);
+								            var mc = spm.getMapControl();
+								            mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                                        }else{
+	                                        var geojson = new OpenLayers.Format.GeoJSON();
+	                                        var components = [];
+	                                        for (var i=0;i < sqInfo.hitResults.length;i++){
+	                                            components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+	                                        }
+	                                        components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
+	                                        var collection = new OpenLayers.Geometry.Collection(components);
+	                                        collection.calculateBounds();
+	                                        var bounds = collection.getBounds();
+	                                        var extent = 
+	                                        {  x1: bounds.left,
+	                                           y2: bounds.top,
+	                                           x2: bounds.right,
+	                                           y1: bounds.bottom
+	                                        };   
+	                                        cbKort.mapObj.zoomToExtent(extent, 100);
+                                        
+                                        }
+                                    }
+                                }
+                            }
+                          }
+			    });
+			    var sqIsochronhandlerDef = sqIsochronBuilder.buildHandlerDef();
+			    _s4Params.dawasearcher.searcher.addDetailHandlerDef(sqIsochronhandlerDef);
+
+	            if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
+	                    var sqIndexBuilder = new Septima.Search.SqDetailsHandlerBuilder({
+	                      searchers: [_s4Params.indexsearcher.searcher],
+	                      limit: 10,
+	                      title: "Information",
+			              header: {
+		                    button: {
+		                        buttonText: cbKort.getSession().getString('s4.sq.header.text'),
+		                        buttonImage: Septima.Search.s4Icons.zoomToExtentIcon,
+                                callBack: function(sqInfo){
+                                    if (sqInfo.hitResults.length > 0){
+                                        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
+                                            var wktParser = Septima.Search.getWKTParser();
+                                            var wkt;
+                                            var feature;
+                                            var olGeom;
+                                            var olGeoms = [];
+                                            var mc = spm.getMapControl();
+                                            for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                wkt = wktParser.convert(sqInfo.hitResults[i].geometry);
+                                                feature = mc._wktFormatter.readFeature(wkt);
+                                                olGeom = feature.getGeometry();
+                                                olGeoms.push(olGeom);
+                                            }
+                                            var g = new ol.geom.GeometryCollection(olGeoms);
+                                            var mc = spm.getMapControl();
+                                            mc.map.getView().fit(ol.extent.buffer(g.getExtent(), 100));
+                                        }else{
+                                            var geojson = new OpenLayers.Format.GeoJSON();
+                                            var components = [];
+                                            for (var i=0;i < sqInfo.hitResults.length;i++){
+                                                components.push(geojson.read(sqInfo.hitResults[i].geometry, 'Geometry'));
+                                            }
+                                            components.push(geojson.read(sqInfo.mainResult.geometry, 'Geometry'));
+                                            var collection = new OpenLayers.Geometry.Collection(components);
+                                            collection.calculateBounds();
+                                            var bounds = collection.getBounds();
+                                            var extent = 
+                                            {  x1: bounds.left,
+                                               y2: bounds.top,
+                                               x2: bounds.right,
+                                               y1: bounds.bottom
+                                            };   
+                                            cbKort.mapObj.zoomToExtent(extent, 100);
+                                        
+                                        }
+                                    }
+                                }
+		                    }
+			              }
+			                
+	                    });
+	                    var sqIndexhandlerDef = sqIndexBuilder.buildHandlerDef();
+	                    sqIndexhandlerDef.more = true;
+	                    isoChronSearcher.addDetailHandlerDef(sqIndexhandlerDef);
+	            }
+			    
+	            if (typeof addS4SpatialMapTools !== 'undefined'){
+	                addS4SpatialMapTools({info: true, print: true, searcher: isoChronSearcher});
+	            }
+            }
+        
+    [endif]
+    ]]>
+    </src>
+</tool>

@@ -234,9 +234,81 @@ Add the customized tool to your profile:
 
 Finished, now try out your profile and the customized search tool
 
+
+## <a name="s4OneDoorcustomization"></a>Customization of s4 OneDoor tool  
+
+Customization of this tool is very similar to the [standard tool](#s4customization)  
+The only specific entry is `s3searcher` which takes these three parameters: 
+* host (mandatory)
+* service (mandatory)
+* authorization (optional)
+
+Speak to your OneDoor admin to obtain the correct values  
+
+```javascript  
+//  'panel-brand': Force s4 to panel-brand 
+//  'menu': As the last menu in the menu line
+//  'tool': Use the panel as specified in the profile
+//  'panel-top': Force s4 to top menu
+//  'default': same as map-top-right
+//  'panel-middle': Force s4 to menu linie (right justified)
+//  'map-top-right': SpS 4.1+ only
+panel: 'default',
+
+//Result presentation
+//  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
+//  blankbehavior: search or none  
+//  autofocus: true or false. Default is false
+//  forcedblurOnSelect: Force close of result list. Default is false
+//  zoomBuffer: Buffer when result is shown in map. Default is '100'
+//  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
+view: {
+  limit: 20,
+  blankbehavior: "search",
+  autofocus: false,
+  dynamiclayer: 'userdatasource',
+  infoprofilequery: 'userdatasource',
+  printconfig: 'rotated_contact',
+  forcedblurOnSelect: 'false',
+  zoomBuffer: '100',
+  marginToBottom: 100,
+  placeholder: "Søg" 
+},
+                
+//Septima Search Server
+s3searcher: {
+  enabled: true,
+  info: true,
+  print: true,
+  host: "http://onedoor.test.septima.dk",
+  service: "/api/v1/organisations/septima/configurations/demo",
+  authorization: {Bearer: {token: "xxxxxxxxx"} }},
+
+//Themes in profile
+themesearcher: {enabled: true},
+	            
+//Profiles
+profilesearcher: {enabled: true},
+	            
+//Favorites
+favoritesearcher: {enabled: true},
+	            
+//Workspaces
+workspacesearcher: {enabled: true},
+                
+//History
+//Promote: show history icon in search input
+//persist: Remember history between sessions
+historysearcher: {enabled: false, promote: true, persist: true},
+
+//SpS projection
+//Any other projection than epsg:25832 MUST be defined here
+projection_epsg: {code: "epsg:25832", def: "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"}
+```  
+
 ## <a name="tools"></a> Included tools  
 
-S4 comes a number of tools included. 
+S4 comes with a number of tools included. 
 All included tools must be included in the profile _after_ the main tool.  
 Please see [the tools section](./tools#tools-included-in-s4)  
 
