@@ -7,7 +7,7 @@ Please read the [general installation instructions](../../../#installation) befo
   Main tool meant for use in DK (takes dk municipality as parameter) May be supplemented with additional tools to extend behavior (see tools below)
 * [s4-plugin-all](#s4-plugin-dk-all)  
   A s4 meant for SpS outside dk. The tool doesn't include any dk specific searchers  
-* [s4-plugin-onedoor)](#s4-plugin-onedoor)  
+* [s4-plugin-onedoor](#s4-plugin-onedoor)  
   Shows OneDoor results and details i Spatial Suite. This tool cannot be configured with extra tools (all configuration is done in OneDoor)
 
 #### Show/Hide search box:    
@@ -78,7 +78,7 @@ S4 ships with two versions of the tool:
 ### <a name="s4-plugin-onedoor"></a>s4-plugin-onedoor  
 Show OneDoor results and details in Spatial Suite  
 
-Copy the tool to your tools/custom folder and [Customize ](../../../#Customization of s4 OneDoor tool) to enable search in Spatial Map  
+Copy the tool to your tools/custom folder and [Customize](../../../#Customization of s4 OneDoor tool) to enable search in Spatial Map  
       
 _Do not include any other other s4 tools as all configuration is done in OneDoor_    
 ```xml
