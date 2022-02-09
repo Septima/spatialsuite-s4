@@ -12,7 +12,7 @@ offered by Septima.
 [Customization](#s4customization)  
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
-[CBInfo-parametre](#cbinfoparametre)  
+[CBInfo parameters](#cbinfoparametre)  
 [FAQ and Issues](#problems)  
   
 ### Issue tracker:
@@ -473,7 +473,7 @@ In these situations you might want to index In an external database. You may use
 
 ## <a name="cbinfoparametre"></a> CBInfo-parameters  
 
-These are the general CBInfo paramters - Tools make take more params as described in their documentation  
+These are s4's general CBInfo parameters - Tools make take more params as described in their documentation  
 ### Index Search  
 
 These params must be set if you index your own datasources (See [Search Spatial Suite data](#local))
