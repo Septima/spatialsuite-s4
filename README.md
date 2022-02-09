@@ -471,7 +471,7 @@ Why use an external database?
 In these situations you might want to index In an external database. You may use either postgres og sql server. Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database    
 
 
-## <a name="#cbinfoparametre"></a> CBInfo-parameters  
+## <a name="cbinfoparametre"></a> CBInfo-parameters  
 
 These are the general CBInfo paramters - Tools make take more params as described in their documentation  
 ### Index Search  
