@@ -78,7 +78,7 @@ S4 ships with two versions of the tool:
 ### <a name="s4-plugin-onedoor"></a>s4-plugin-onedoor  
 Show OneDoor results and details in Spatial Suite  
 
-Copy the tool to your tools/custom folder and [Customize](../../../#Customization of s4 OneDoor tool) to enable search in Spatial Map  
+Copy the tool to your tools/custom folder and [Customize](../../../#Customization-of-s4-OneDoor-tool) to enable search in Spatial Map  
       
 _Do not include any other other s4 tools as all configuration is done in OneDoor_    
 ```xml
