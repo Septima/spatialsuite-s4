@@ -12,6 +12,7 @@ offered by Septima.
 [Customization](#s4customization)  
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
+[CBInfo-parametre](#cbinfoparametre)  
 [FAQ and Issues](#problems)  
   
 ### Issue tracker:
@@ -468,7 +469,45 @@ Why use an external database?
 * Your index is too big for the embedded database. An external database will hold indices of any size  
   
 In these situations you might want to index In an external database. You may use either postgres og sql server. Please see https://github.com/Septima/spatialsuite-s4/wiki/How-to-use-an-external-database    
-  
+
+
+## <a name="#cbinfoparametre"></a> CBInfo-parameters  
+
+These are the general CBInfo paramters - Tools make take more params as described in their documentation  
+### Index Search  
+
+These params must be set if you index your own datasources (See [Search Spatial Suite data](#local))
+
+```xml
+<!-- Config folder -->
+ <param name="s4.config.dir">[cbinfo.misc.dir]/custom/s4</param>
+
+<!-- Index database -->
+ <param name="module.s4.index.externdb.type">postgis</param>
+ <param name="module.s4.index.externdb.connect">localhost:5432/data</param>
+ <param name="module.s4.index.externdb.user">postgres</param>
+ <param name="module.s4.index.externdb.pwd">postgres</param>
+ <param name="module.s4.index.externdb.srid">[cbinfo.mapserver.epsg]</param>
+```
+### Layout  
+
+These params are optional
+
+```xml
+<!-- s4.color: Default blue -->
+<!-- orange, green or grey -->
+ <param name="s4.color">orange</param>
+```
+
+```xml
+<!-- Make detail header small -->
+ <param name="s4.header.small">true</param>
+```
+```xml
+<!-- Adjust to top bar -->
+ <param name="s4.input.topbar">True</param>
+```
+
 ## <a name="problems"></a> FAQ and Issues  
 <a name="problems.encoding"><a name="problems.localdata"></a><a name="problems.css"></a>
 If you have any questions please consult the s4 wiki at https://github.com/Septima/spatialsuite-s4/wiki  
