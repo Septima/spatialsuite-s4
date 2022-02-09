@@ -503,6 +503,7 @@ These params are optional
 <!-- Make detail header small -->
  <param name="s4.header.small">true</param>
 ```
+
 ```xml
 <!-- Adjust to top bar -->
  <param name="s4.input.topbar">True</param>
