@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.14.5</version>
-   <param name="s4.version">2.14.5</param>
+   <version>2.14.6</version>
+   <param name="s4.version">2.14.6</param>
 
    <stoponerror>true</stoponerror>
   

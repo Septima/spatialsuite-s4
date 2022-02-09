@@ -19,8 +19,11 @@ offered by Septima.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: [(v 2.14.5)](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)  
-- Previous: [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9), [v 2.14.1](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=77bba3e961)  
+- Latest: v 2.14.6 (TBA)
+- Previous:
+  - [v 2.14.5](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)
+  - [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9)
+  - [v 2.14.1](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=77bba3e961)  (Big release)
 - [All news letters](https://us15.campaign-archive.com/home/?u=4765ed85ec81b390bd936ae90&id=ed20681715)  
   
 ## <a name="license"></a>License
@@ -47,7 +50,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.14.5: https://github.com/Septima/spatialsuite-s4/archive/2.14.5.zip   
+      2.14.6: https://github.com/Septima/spatialsuite-s4/archive/2.14.6.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
