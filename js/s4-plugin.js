@@ -752,6 +752,7 @@ function s4_init (params){
             addS4SpatialMapTools(_s4Params.cvrsearcher);
             addS4SpatialMapTools(_s4Params.plansearcher);
             addS4SpatialMapTools(_s4Params.indexsearcher);
+            addS4SpatialMapTools(_s4Params.s3searcher);
     }
 }
 

@@ -17,6 +17,9 @@
 	            
 	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "dawasearcher", "target": "adresse"});
 	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4MatrikelDoDdgKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
+
+                _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "s3searcher", "target": "adresse"});
+                _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4MatrikelDoDdgKnap, "searcher": "s3searcher", "target": "matrikelnumre"});
             }
 	    [endif]
     ]]>

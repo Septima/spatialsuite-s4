@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.14.6</version>
-   <param name="s4.version">2.14.6</param>
+   <version>2.14.7</version>
+   <param name="s4.version">2.14.7</param>
 
    <stoponerror>true</stoponerror>
   
@@ -19,7 +19,7 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
- <param name="s4.search.version">//search.cdn.septima.dk/5.30.33</param>
+ <param name="s4.search.version">//search.cdn.septima.dk/5.30.35</param>
    
 <!-- Dev -->
 <!-- <param name="s4.search.version">http://localhost:7001</param> -->
