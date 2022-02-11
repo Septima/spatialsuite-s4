@@ -19,7 +19,7 @@ offered by Septima.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: v 2.14.7 (TBA)
+- Latest: v 2.15.0 (TBA)
 - Previous:
   - [v 2.14.5](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)
   - [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9)
@@ -50,7 +50,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.14.7: https://github.com/Septima/spatialsuite-s4/archive/2.14.7.zip   
+      2.15.0: https://github.com/Septima/spatialsuite-s4/archive/2.15.0.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
