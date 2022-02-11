@@ -47,9 +47,15 @@
                     enabled: true,
                     info: true,
                     print: true,
-                    host: "http://onedoor.test.septima.dk",
+                    showLinkToWeb: false,
+                    //Host or organisation/service
+                    host: "https://onedoor.test.septima.dk",
+                    //Or
+                    //organisation: "septima",
+                    //configuration: "demo",
                     service: "/api/v1/organisations/septima/configurations/demo",
-					authorization: {Bearer: {token: "xxxxxxxxx"} }},
+					authorization: {Bearer: {token: "xxxxxxxxx"} } // optional
+                },
 
                 //Themes in profile
                 themesearcher: {enabled: true},

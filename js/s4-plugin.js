@@ -453,7 +453,10 @@ function s4_init (params){
                 var s3SearcherOptions = {
                         onSelect: s4Hit,
                         host: _s4Params.s3searcher.host,
-                        service: _s4Params.s3searcher.service
+                        organisation: _s4Params.s3searcher.organisation,
+                        configuration: _s4Params.s3searcher.configuration,
+                        service: _s4Params.s3searcher.service,
+                        showLinkToWeb: _s4Params.s3searcher.showLinkToWeb
                     };
                 if (_s4Params.s3searcher.token) {
                     s3SearcherOptions.authorization = {Bearer: {token: _s4Params.s3searcher.token} };
