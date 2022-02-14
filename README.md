@@ -22,7 +22,7 @@ offered by Septima.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: v 2.15.1 (TBA)
+- Latest: [v 2.15.1](https://mailchi.mp/f9b63272b7c1/version-2151-af-septima-search-til-spatial-suite-s4-20150217)
 - Previous:
   - [v 2.14.5](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)
   - [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9)
