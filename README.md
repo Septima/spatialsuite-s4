@@ -50,7 +50,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.15.0: https://github.com/Septima/spatialsuite-s4/archive/2.15.0.zip   
+      2.15.1: https://github.com/Septima/spatialsuite-s4/archive/2.15.1.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
