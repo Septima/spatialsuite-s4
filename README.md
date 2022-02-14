@@ -243,8 +243,12 @@ Finished, now try out your profile and the customized search tool
 
 Customization of this tool is very similar to the [standard tool](#s4customization)  
 The only specific entry is `s3searcher` which takes these three parameters: 
+### Connection parameters
 * host (mandatory)
-* service (mandatory)
+* organisation (mandatory)
+* configuration (mandatory)
+* service (deprecated, organisation and configuration in one parameter)
+* showLinkToWeb (optional default: false)
 * authorization (optional)
 
 Speak to your OneDoor admin to obtain the correct values  
@@ -284,9 +288,15 @@ s3searcher: {
   enabled: true,
   info: true,
   print: true,
-  host: "http://onedoor.test.septima.dk",
-  service: "/api/v1/organisations/septima/configurations/demo",
-  authorization: {Bearer: {token: "xxxxxxxxx"} }},
+  showLinkToWeb: false,  // optional default false
+  host: "https://onedoor.test.septima.dk",
+  //organisation/service
+  organisation: "septima",
+  configuration: "demo",
+  //Or service
+  //service: "/api/v1/organisations/septima/configurations/demo", // deprecated organisation and configuration in one parameter
+  authorization: {Bearer: {token: "xxxxxxxxx"} } // optional
+},
 
 //Themes in profile
 themesearcher: {enabled: true},
