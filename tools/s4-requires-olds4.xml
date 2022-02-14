@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+
+		<file type="css"    name="//search.cdn.septima.dk/5.11.2/css/defaultView.css" />
+		<file type="script" name="//search.cdn.septima.dk/5.11.2/septimasearch.min.js" charset="utf-8"/>
+
+        <file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
+        
+		<file type="script" name="/modules/s4/js/icons.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/s4-control.js?_=[s4.version]"/>
+ 		<file type="script" name="/modules/s4/js/s4-plugin-olds4.js?_=[s4.version]"/>
+		<file type="script" name="/modules/s4/js/datasourceSearcher.js?_=[s4.version]"/>
+    </requires>
+    <src/>
+    <jssrc/>
+</tool>

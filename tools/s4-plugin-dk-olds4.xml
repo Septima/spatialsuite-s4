@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not customize this tool. Make copy of module and create your own tool -->
+<tool>
+    <requires>
+	   <include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
+       <include src="[module:s4.dir]/tools/s4-requires-olds4.xml" nodes="/tool/requires/*" mustexist="true"/>
+       <file type="script" name="/modules/s4/js/s4ThemeSearcher.js"/>
+       <file type="script" name="/modules/s4/js/workspaceSearcher.js"/>
+       <file type="script" name="/modules/s4/js/profileSearcher.js"/>
+       <file type="script" name="/modules/s4/js/favoriteSearcher.js"/>
+        
+    </requires>
+    <displayname>s4Plugin</displayname>
+    <src><![CDATA[
+            s4_init({
+
+				//Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
+                 //municipality: '746',
+                 //Køge 259
+                 //municipality: '259',
+                 //municipality: '183 187',
+                 //municipality: '561 563',
+                 //municipality: '540',
+                 //municipality: '657',
+                 //municipality: '157',
+                 //municipality: '740',
+                 //municipality: '101 259',
+                 municipality: '*',
+                
+                //Positioning of s4. Choose between
+                //  'default': same as map-top-right
+                //  'panel-brand': Force s4 to panel-brand 
+                //  'menu': As the last menu in the menu line
+                //  'tool': Use the panel as specified in the profile
+                //  'panel-top': Force s4 to top menu
+                //  'panel-middle': Force s4 to menu linie (right justified)
+                //  'map-top-right':
+                panel: 'panel-middle',
+
+	            //Result presentation
+	            //  blankbehavior: search or none  
+	            //  autofocus: true or false. Default is false 
+	            //  forcedblurOnSelect: Force close of result list. Default is false
+	            //  zoomBuffer: Buffer when result is shown in map. Default is '100'
+	            //  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
+	            //  printconfig: standard, full, rotated, rotated_contact or html
+	            view: {
+	              limit: 20,
+	              blankbehavior: "search",
+	              autofocus: false,
+	              dynamiclayer: 'userdatasource',
+	              infoprofilequery: 'userdatasource',
+	              forcedblurOnSelect: false,
+	              zoomBuffer: '100',
+	              marginToBottom: 100,  
+	              printconfig: 'rotated_contact',
+	              placeholder: 'Søg'
+	            },
+	            
+				//Adressesøgning i DAWA
+	            dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: false},
+	            
+	            //Geodatastyrelsen-geosearch
+	            // Full set of geosearcher targets is: [kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+	            geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter', 'sogne']},
+	            
+                //Geodatastyrelsen - Stednavne i geosearch
+                geostednavnesearcher: {enabled: true, info: true, print: true},
+                
+	            //Septima CVR-index
+	            cvrsearcher: {enabled: true, info: true, print: true},
+	            
+	            //Plansystem
+	            //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+	            plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
+	            
+	            //Local SpatialSuite-datasources
+	            //  datasources: "*" for all, or space separated names of datasources
+	            //  blankbehavior: search or none
+	            indexsearcher: {enabled: true, info: true, print: true, datasources: "*", blankbehavior: "search"},
+	            
+	            //Themes in profile
+	            themesearcher: {enabled: false},
+	            
+	            //Profiles
+	            profilesearcher: {enabled: false},
+	            
+	            //Favorites
+	            favoritesearcher: {enabled: false},
+	            
+	            //Workspaces
+	            workspacesearcher: {enabled: false},
+	            
+                //History
+                //Promote: show history icon in search input
+                //persist: Remember history between sessions
+                historysearcher: {enabled: false, promote: true, persist: true},
+
+	            //SpS projection
+	            //Any other projection than EPSG:4326 must be defined here
+	            projection_epsg: {code: "epsg:25832", def: "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"}
+	            
+            });
+    ]]></src>
+</tool>
