@@ -489,7 +489,7 @@ In these situations you might want to index In an external database. You may use
 
 ## <a name="cbinfoparametre"></a> CBInfo-parameters  
 
-These are s4's general CBInfo parameters - Tools make take more params as described in their documentation  
+These are s4's general CBInfo parameters - Tools may take more params as described in their documentation  
 ### Index Search  
 
 These params must be set if you index your own datasources (See [Search Spatial Suite data](#local))
