@@ -11,7 +11,8 @@ offered by Septima.
 [Basic installation and test](#installation)  
 [Customization](#s4customization)  
 - [Standard tool](#s4customization)
-- [OneDoor tool](#s4OneDoorcustomization)
+- [OneDoor tool](#s4OneDoorcustomization)  
+
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
 [CBInfo parameters](#cbinfoparametre)  
