@@ -4,6 +4,15 @@ var _s4HoverOLids = [];
 var _s4WktParser = null;
 var _s4InputContainer
 var _s4_projection_epsg_code = "epsg:25832";
+var _s4Controller
+
+function s4_getResult(source, type, id) {
+    return _s4Controller.get(source, type, id)
+}
+
+function s4_showResult(result) {
+    _s4Controller.onSelect(result, _s4View);
+}
 
 function s4_getVisible() {
     return !_s4InputContainer.hasClass("s4Hidden");
@@ -419,7 +428,8 @@ function s4_init (params){
         		blankBehavior = "none";
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
-        	var controller = new Septima.Search.Controller([], controllerOptions);
+        	_s4Controller = new Septima.Search.Controller([], controllerOptions);
+            var controller = _s4Controller
         	
         	//Set up the API
 			//Create array of "OnSelect" listeners if not already created

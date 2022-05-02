@@ -19,10 +19,10 @@
   <copydir fromdir="[module:s4.dir]/js" todir="[cbinfo.wwwroot.dir]/modules/s4/js" replacetext="true"/>
 
 <!-- production -->
- <param name="s4.search.version">//search.cdn.septima.dk/5.30.38</param>
+ <param name="s4.search.version">//search.cdn.septima.dk/5.30.73</param>
    
 <!-- Dev -->
-<!-- <param name="s4.search.version">http://localhost:7001</param> -->
+<!--param name="s4.search.version">http://localhost:7001</param-->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
   <param name="s4.gst.password" ignore="Not IsDefined(module.gst.password)">[module.gst.password]</param>

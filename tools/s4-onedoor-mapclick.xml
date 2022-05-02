@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool>
+    <requires>
+        [if: ModuleDefined("s4") ]
+            <file type="script" name="/modules/s4/js/MapHandler.js?_=[s4.version]"/>
+        [endif]
+   </requires>
+
+    <displayname>Vis punkt i OneDoor</displayname>
+    <tooltip>Klik i kortet - vis info i OneDoor</tooltip>
+    <onclick>S4MapHandler.activatePointDrawer("link");</onclick>
+
+</tool>
