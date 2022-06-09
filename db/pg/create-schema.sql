@@ -4,7 +4,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET escape_string_warning = off;
 
-CREATE SCHEMA s4;
+CREATE SCHEMA if not exists s4;
 
 SET search_path = s4, pg_catalog;
 

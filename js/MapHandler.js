@@ -1,8 +1,19 @@
 S4MapHandler = {
-    activatePointDrawer: function (mode) {
+    activatePointDrawer: function (options) {
         this.mode = "search";
-        if (mode)
-            this.mode = mode;
+        this.source = "Geometries";
+        this.type = "Geometry";
+        if (options) {
+            if (options.mode)
+            this.mode = options.mode;
+
+            if (options.source)
+                this.source = options.source;
+
+            if (options.type)
+                this.type = options.type;
+        }
+
         this.getDrawToolBox().activateControl("drawFeaturePoint");
     },
 
@@ -25,7 +36,7 @@ S4MapHandler = {
     },
 
     doAction: function(wkt, mode) {
-        s4_getResult("Geometries", "Geometry", wkt).then(function(result) {
+        s4_getResult(this.source, this.type, wkt).then(function(result) {
             if (mode == "search") {
                 s4_showResult(result);
             } else {

@@ -8,15 +8,23 @@
 
     <src><![CDATA[
         [if: ModuleDefined("s4") ]
-            var s4MapHandlerMode = "search";
-            if (tool.jsonConfig && tool.jsonConfig.mode)
-                s4MapHandlerMode = tool.jsonConfig.mode;
+            var mode = "search";
+            var source = "Geometries";
+            var type = "Geometry";
+            if (tool.jsonConfig) {
+                if (tool.jsonConfig.mode)
+                    mode = tool.jsonConfig.mode;
+                if (tool.jsonConfig.source)
+                    source = tool.jsonConfig.source;
+                if (tool.jsonConfig.type)
+                    type = tool.jsonConfig.type;
+            }
 
           _s4View.createButton(
               "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgdmVyc2lvbj0iMS4xIgogICB3aWR0aD0iMjQiCiAgIGhlaWdodD0iMjQiCiAgIHZpZXdCb3g9IjAgMCAyNCAyNCIKICAgaWQ9InN2ZzE5IgogICBzb2RpcG9kaTpkb2NuYW1lPSJpbmZvcm1hdGlvbi1vdXRsaW5lLnN2ZyIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS4xLjIgKGI4ZTI1YmU4MzMsIDIwMjItMDItMDUpIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyMyIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzIxIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjQ4LjY2NjY2NyIKICAgICBpbmtzY2FwZTpjeD0iMTEuOTg5NzI2IgogICAgIGlua3NjYXBlOmN5PSIxMS44MTUwNjgiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIyNTYwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEzNzciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8cGF0aAogICAgIGQ9Ik0gMTcuNzI1MzQzLDQuMTg5NzI2IEggMTguODUgViAzLjAyMzk3MjYgaCAtMS4xMjQ2NTcgbSAwLjU2MjMyOCw3LjU3NzM5NzQgYyAtMi40Nzk4NywwIC00LjQ5ODYzLC0yLjA5MjUyNzYgLTQuNDk4NjMsLTQuNjYzMDEzOSAwLC0yLjU3MDQ4NjMgMi4wMTg3NiwtNC42NjMwMTM3IDQuNDk4NjMsLTQuNjYzMDEzNyAyLjQ3OTg3LDAgNC40OTg2MywyLjA5MjUyNzQgNC40OTg2Myw0LjY2MzAxMzcgMCwyLjU3MDQ4NjMgLTIuMDE4NzYsNC42NjMwMTM5IC00LjQ5ODYzLDQuNjYzMDEzOSBtIDAsLTEwLjQ5MTc4MDk2IEEgNS42MjMyODc3LDUuODI4NzY3MSAwIDAgMCAxMi42NjQzODQsNS45MzgzNTYxIDUuNjIzMjg3Nyw1LjgyODc2NzEgMCAwIDAgMTguMjg3NjcxLDExLjc2NzEyMyA1LjYyMzI4NzcsNS44Mjg3NjcxIDAgMCAwIDIzLjkxMDk1OSw1LjkzODM1NjEgNS42MjMyODc3LDUuODI4NzY3MSAwIDAgMCAxOC4yODc2NzEsMC4xMDk1ODkwNCBNIDE3LjcyNTM0Myw4Ljg1MjczOTcgSCAxOC44NSBWIDUuMzU1NDc5NCBoIC0xLjEyNDY1NyB6IgogICAgIGlkPSJwYXRoMTciCiAgICAgc3R5bGU9ImZpbGw6I2ZmN2EwZTtzdHJva2Utd2lkdGg6MC41NzI1MTEiIC8+CiAgPGcKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjEiCiAgICAgaW5rc2NhcGU6bGFiZWw9IkxheWVyIDEiPgogICAgPHJlY3QKICAgICAgIHN0eWxlPSJmaWxsOiNmZjdhMGU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLXdpZHRoOjIuNDIyMjMiCiAgICAgICBpZD0icmVjdDE0NyIKICAgICAgIHdpZHRoPSIxLjkyODk2MTUiCiAgICAgICBoZWlnaHQ9IjIzLjM0MjQ2NiIKICAgICAgIHg9IjEwLjg1MTg2MSIKICAgICAgIHk9IjAuMzQ5MzE1MDgiIC8+CiAgICA8cmVjdAogICAgICAgc3R5bGU9ImZpbGw6I2ZmN2EwZTtmaWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2Utd2lkdGg6Mi4xNTI3NiIKICAgICAgIGlkPSJyZWN0MTQ5IgogICAgICAgd2lkdGg9IjIzLjcxMjMyOCIKICAgICAgIGhlaWdodD0iMS43MTQwODEiCiAgICAgICB4PSIwLjE0MzgzNTYyIgogICAgICAgeT0iMTEuMTkwMDI4IiAvPgogIDwvZz4KPC9zdmc+Cg==",
               "Klik i kortet - vis info i OneDoor",
               function () {
-                S4MapHandler.activatePointDrawer(s4MapHandlerMode);
+                S4MapHandler.activatePointDrawer({ "mode": mode, "source": source, "type": type});
               }
           )
 

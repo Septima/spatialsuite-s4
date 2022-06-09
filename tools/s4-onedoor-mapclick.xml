@@ -8,6 +8,29 @@
 
     <displayname>Vis punkt i OneDoor</displayname>
     <tooltip>Klik i kortet - vis info i OneDoor</tooltip>
-    <onclick>S4MapHandler.activatePointDrawer("link");</onclick>
+    <onclick><![CDATA[
+    this.activateDrawer();
+    ]]></onclick>
+    <src>
+        <![CDATA[
+        if (tool.jsonConfig) {
+            var mode = "link";
+            var source = "Geometries";
+            var type = "Geometry";
+            if (tool.jsonConfig) {
+                if (tool.jsonConfig.mode)
+                    mode = tool.jsonConfig.mode;
+                if (tool.jsonConfig.source)
+                    source = tool.jsonConfig.source;
+                if (tool.jsonConfig.type)
+                    type = tool.jsonConfig.type;
+            }
+
+        }
+        this.activateDrawer = function() {
+            S4MapHandler.activatePointDrawer({ "mode": mode, "source": source, "type": type});
+        }
+        ]]>
+    </src>
 
 </tool>
