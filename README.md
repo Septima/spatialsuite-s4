@@ -10,7 +10,7 @@ Septima Search for Spatial Suite (s4) is a search tool.
 [Basic installation and test](#installation)  
 [Customization](#s4customization)  
 - [Standard tool](#s4customization) (Configure everything)  
-- [OneDoor tool](./onedoor#Shows OneDoor results and details in Spatial Map (all configuration is done in OneDoor)) (Use OneDoor Server)  
+- [OneDoor tool](./onedoor#shows-onedoor-results-and-details-in-spatial-map-all-configuration-is-done-in-onedoor) (Use OneDoor Server)  
 
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
