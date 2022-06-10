@@ -23,31 +23,31 @@ Include in profile
 - s4-onedoor-mapclick - create a menu item i Spatial Map - Open result in OneDoor Web  
 
 ## Profile example:
-```json  
-  <tool module="s4" name="s4-eknap-plugin" />
-  <tool module="s4" name="s4-cowi-gadefoto-plugin"/>
-  <tool module="s4" name="s4-show-hide" panel="top-right">
-        <jsonconfig>
-          {"hideFromStart": false}
-        </jsonconfig>
-  </tool>
-  <tool module="s4" name="s4-details-themes-related-plugin" />
-  <tool module="s4" name="s4-onedoor-mapclick-plugin">
-    <jsonconfig>
-    <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: search/Geometries/Geometry-->
-        {"mode": "search",
-        "source": "Geometries",
-        "type": "Geometry"}
-    </jsonconfig>
-  </tool>
-  <tool module="s4" name="s4-onedoor-mapclick">
-    <jsonconfig>
-    <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: link/Geometries/Geometry-->
-        {"mode": "link",
-        "source": "Geometries",
-        "type": "Geometry"}
-    </jsonconfig>
-  </tool>
+```javascript  
+<tool module="s4" name="s4-eknap-plugin" />
+<tool module="s4" name="s4-cowi-gadefoto-plugin"/>
+<tool module="s4" name="s4-show-hide" panel="top-right">
+      <jsonconfig>
+        {"hideFromStart": false}
+      </jsonconfig>
+</tool>
+<tool module="s4" name="s4-details-themes-related-plugin" />
+<tool module="s4" name="s4-onedoor-mapclick-plugin">
+  <jsonconfig>
+  <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: search/Geometries/Geometry-->
+      {"mode": "search",
+      "source": "Geometries",
+      "type": "Geometry"}
+  </jsonconfig>
+</tool>
+<tool module="s4" name="s4-onedoor-mapclick">
+  <jsonconfig>
+  <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: link/Geometries/Geometry-->
+      {"mode": "link",
+      "source": "Geometries",
+      "type": "Geometry"}
+  </jsonconfig>
+</tool>
 ```
 
 ## <a name="s4OneDoorcustomization"></a>Customization of s4 OneDoor tool  
