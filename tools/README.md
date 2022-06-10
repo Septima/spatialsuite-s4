@@ -114,7 +114,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-matrikel-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","bbrejendom","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
@@ -132,7 +132,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-adresse-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
@@ -140,7 +140,7 @@ Fjern de links du ikke ønsker at se
   
 ### <a name="s4-adresse-hgf-matrikel-plugin"></a>s4-adresse-hgf-matrikel-plugin  
 Only relevant in Denmark  
-Viser ikoner med links til offentlige sites for jordstykker, __samt__ _Hvad gælder for matriklen_ for husnummer  
+Viser ikoner med links til offentlige sites for husnumre, __samt__ _Hvad gælder for matriklen_ for husnummer  
 Inkludér i profil:  
 ```xml
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin" />
@@ -150,7 +150,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","ejendomsinfo.dk","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
