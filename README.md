@@ -2,16 +2,15 @@
   
 Septima Search for Spatial Suite (s4) is a search tool.  
   
-* The user can search [dawa/aws](http://dawa.aws.dk), [smartAddress](https://smartadresse.dk/), kortforsyningens [GeoSearch] (http://www.kortforsyningen.dk/dokumentation/geonoeglergeosearch) and cvr and plan services
-offered by Septima.
-* S4 will also search local Spatial Suite data as well as themes, workspaces and favorites.  
+* The user can search a wide range of public data  
+* S4 will also search local Spatial Suite data as well as themes, workspaces, profiles, and favorites  
 
 ### Contents:  
 [License](#license)  
 [Basic installation and test](#installation)  
 [Customization](#s4customization)  
-- [Standard tool](#s4customization)
-- [OneDoor tool](./onedoor)  
+- [Standard tool](#s4customization) (Configure everything)  
+- [OneDoor tool](./onedoor) (Use OneDoor server)  
 
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
@@ -22,8 +21,9 @@ offered by Septima.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: [v 2.15.1](https://mailchi.mp/f9b63272b7c1/version-2151-af-septima-search-til-spatial-suite-s4-20150217)
+- Latest: [v 2.15.2]()
 - Previous:
+  - [v 2.15.1](https://mailchi.mp/f9b63272b7c1/version-2151-af-septima-search-til-spatial-suite-s4-20150217)
   - [v 2.14.5](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=57288af1b2)
   - [v 2.14.4](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=c93e0e3ab9)
   - [v 2.14.1](https://us15.campaign-archive.com/?u=4765ed85ec81b390bd936ae90&id=77bba3e961)  (Big release)
@@ -53,7 +53,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.15.1: https://github.com/Septima/spatialsuite-s4/archive/2.15.1.zip   
+      2.15.2: https://github.com/Septima/spatialsuite-s4/archive/2.15.2.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
@@ -62,8 +62,9 @@ Current version:
 <module name="s4" dir="thirdparty/septima/s4" permissionlevel="public"/>
 ```
 
-### Include tools in profile(s):
-  
+### Include tools in profile(s):  
+This describes the standard s4 tool. If you want to show OneDoor results please go to [OneDoor tool](./onedoor)  
+ 
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml, where the name MUST start with _s4-plugin_  

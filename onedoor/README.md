@@ -1,12 +1,63 @@
+## Shows OneDoor results and details in Spatial Map (all configuration is done in OneDoor)  
+
+Copy the tool `.../modules/custom/thirdparty/s4/tools/s4-plugin-onedoor.xml`  
+to `.../tools/custom/s4-plugin-onedoor.xml`  
+
+Include in profile
+```xml
+<tool dir="custom" name="s4-plugin-onedoor" />
+```  
+
+[Customize](#Customization-of-s4-OneDoor-tool) to your needs
+
+### Detail plugins  
+
+#### These standard s4 plugins may be used with s4-plugin-onedoor  
+- [s4-eknap-plugin](../tools/#s4-eknap-plugin)
+- [s4-cowi-gadefoto-plugin](../tools/#s4-cowi-gadefoto-plugin)
+- [s4-show-hide](../tools/#s4-show-hide)
+- [s4-details-themes-related-plugin](..tools/#s4-details-themes-related-plugin)
+
+#### These tools are specifically for use with s4-plugin-onedoor  
+s4-onedoor-mapclick-plugin - create a cross hair icon in search box. Show results in s4  
+s4-onedoor-mapclick - create a menu iten i Spatial Map - Open result in OneDoor Web  
+
+## Profile example:
+```json  
+          <tool module="s4" name="s4-eknap-plugin" />
+          <tool module="s4" name="s4-cowi-gadefoto-plugin"/>
+          <tool module="s4" name="s4-show-hide" panel="top-right">
+               <jsonconfig>
+                  {"hideFromStart": false}
+               </jsonconfig>
+          </tool>
+          <tool module="s4" name="s4-details-themes-related-plugin" />
+          <tool module="s4" name="s4-onedoor-mapclick-plugin">
+            <jsonconfig>
+            <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: search/Geometries/Geometry-->
+               {"mode": "search",
+                "source": "Geometries",
+                "type": "Geometry"}
+            </jsonconfig>
+          </tool>
+          <tool module="s4" name="s4-onedoor-mapclick">
+            <jsonconfig>
+            <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: link/Geometries/Geometry-->
+               {"mode": "link",
+                "source": "Geometries",
+                "type": "Geometry"}
+            </jsonconfig>
+          </tool>
+```
+
 ## <a name="s4OneDoorcustomization"></a>Customization of s4 OneDoor tool  
 
-Customization of this tool is very similar to the [standard tool](#s4customization)  
+Customization of this tool is very similar to the [standard tool](../#s4customization)  
 The only specific entry is `s3searcher` which takes these three parameters: 
 ### Connection parameters
 * host (mandatory)
 * organisation (mandatory)
 * configuration (mandatory)
-* service (deprecated, organisation and configuration in one parameter)
 * showLinkToWeb (optional default: false)
 * authorization (optional)
 
@@ -49,11 +100,8 @@ s3searcher: {
   print: true,
   showLinkToWeb: false,  // optional default false
   host: "https://onedoor.test.septima.dk",
-  //organisation/service
   organisation: "septima",
   configuration: "demo",
-  //Or service
-  //service: "/api/v1/organisations/septima/configurations/demo", // deprecated organisation and configuration in one parameter
   authorization: {Bearer: {token: "xxxxxxxxx"} } // optional
 },
 
