@@ -10,7 +10,7 @@ Septima Search for Spatial Suite (s4) is a search tool.
 [Basic installation and test](#installation)  
 [Customization](#s4customization)  
 - [Standard tool](#s4customization) (Configure everything)  
-- [OneDoor tool](./onedoor) (Use OneDoor server)  
+- [OneDoor tool](./onedoor) (Use OneDoor Server)  
 
 [Included tools](./tools#tools-included-in-s4)   
 [Search Spatial Suite data](#local)  
@@ -64,7 +64,7 @@ Current version:
 
 ### Include tools in profile(s):  
 This describes the standard s4 tool. If you want to show OneDoor results please go to [OneDoor tool](./onedoor)  
- 
+
 #### In Denmark:  
 Copy the standard tool [cbinfo.config.dir]/modules/custom/thirdparty/s4/tools/s4-plugin-dk-all.xml to:
 [cbinfo.config.dir]/tools/custom/s4-plugin-[your-municipality-code]-all.xml, where the name MUST start with _s4-plugin_  

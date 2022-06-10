@@ -16,38 +16,38 @@ Include in profile
 - [s4-eknap-plugin](../tools/#s4-eknap-plugin)
 - [s4-cowi-gadefoto-plugin](../tools/#s4-cowi-gadefoto-plugin)
 - [s4-show-hide](../tools/#s4-show-hide)
-- [s4-details-themes-related-plugin](..tools/#s4-details-themes-related-plugin)
+- [s4-details-themes-related-plugin](../tools/#s4-details-themes-related-plugin)
 
 #### These tools are specifically for use with s4-plugin-onedoor  
-s4-onedoor-mapclick-plugin - create a cross hair icon in search box. Show results in s4  
-s4-onedoor-mapclick - create a menu iten i Spatial Map - Open result in OneDoor Web  
+- s4-onedoor-mapclick-plugin - create a cross hair icon in search box. Show results in s4  
+- s4-onedoor-mapclick - create a menu item i Spatial Map - Open result in OneDoor Web  
 
 ## Profile example:
 ```json  
-          <tool module="s4" name="s4-eknap-plugin" />
-          <tool module="s4" name="s4-cowi-gadefoto-plugin"/>
-          <tool module="s4" name="s4-show-hide" panel="top-right">
-               <jsonconfig>
-                  {"hideFromStart": false}
-               </jsonconfig>
-          </tool>
-          <tool module="s4" name="s4-details-themes-related-plugin" />
-          <tool module="s4" name="s4-onedoor-mapclick-plugin">
-            <jsonconfig>
-            <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: search/Geometries/Geometry-->
-               {"mode": "search",
-                "source": "Geometries",
-                "type": "Geometry"}
-            </jsonconfig>
-          </tool>
-          <tool module="s4" name="s4-onedoor-mapclick">
-            <jsonconfig>
-            <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: link/Geometries/Geometry-->
-               {"mode": "link",
-                "source": "Geometries",
-                "type": "Geometry"}
-            </jsonconfig>
-          </tool>
+  <tool module="s4" name="s4-eknap-plugin" />
+  <tool module="s4" name="s4-cowi-gadefoto-plugin"/>
+  <tool module="s4" name="s4-show-hide" panel="top-right">
+        <jsonconfig>
+          {"hideFromStart": false}
+        </jsonconfig>
+  </tool>
+  <tool module="s4" name="s4-details-themes-related-plugin" />
+  <tool module="s4" name="s4-onedoor-mapclick-plugin">
+    <jsonconfig>
+    <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: search/Geometries/Geometry-->
+        {"mode": "search",
+        "source": "Geometries",
+        "type": "Geometry"}
+    </jsonconfig>
+  </tool>
+  <tool module="s4" name="s4-onedoor-mapclick">
+    <jsonconfig>
+    <!-- jsonconfig er kun nødvendig, hvis man vil ændre defaults: link/Geometries/Geometry-->
+        {"mode": "link",
+        "source": "Geometries",
+        "type": "Geometry"}
+    </jsonconfig>
+  </tool>
 ```
 
 ## <a name="s4OneDoorcustomization"></a>Customization of s4 OneDoor tool  
