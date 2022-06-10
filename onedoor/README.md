@@ -52,7 +52,7 @@ Include in profile
 
 ## <a name="s4OneDoorcustomization"></a>Customization of s4 OneDoor tool  
 
-Customization of this tool is very similar to the [standard tool](./#s4customization)  
+Customization of this tool is very similar to the standard tool
 The only specific entry is `s3searcher` which takes these three parameters: 
 ### Connection parameters
 * host (mandatory)
