@@ -44,17 +44,15 @@
                 
                 //Septima Search Server
                 s3searcher: {
-                enabled: true,
-                info: true,
-                print: true,
-                showLinkToWeb: false,  // optional default false
-                host: "https://onedoor.test.septima.dk",
-                //organisation/service
-                organisation: "septima",
-                configuration: "demo",
-                //Or service
-                //service: "/api/v1/organisations/septima/configurations/demo", // deprecated organisation and configuration in one parameter
-                authorization: {Bearer: {token: "xxxxxxxxx"} } // optional
+                    enabled: true,
+                    info: true,
+                    print: true,
+                    showLinkToWeb: false,  // optional default false
+                    host: "https://onedoor.test.septima.dk",
+                    //organisation/service
+                    organisation: "septima",
+                    configuration: "demo",
+                    authorization: {Bearer: {token: "xxxxxxxxx"} } // Include if OneDoor server has been secured
                 },
 
                 //Themes in profile
