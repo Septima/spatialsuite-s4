@@ -8,8 +8,8 @@
    </requires>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
-            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && _s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.CvrVirksomhederForAdresseProvider({cvr_enhedSearcher: _s4Params.cvrsearcher.searcher}));
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && _s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.DataApi.CvrRegistreringerForHusnummer({cvrSearcher: _s4Params.cvrsearcher.searcher}));
             }
     [endif]
     ]]>

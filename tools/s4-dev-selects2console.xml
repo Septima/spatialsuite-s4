@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <jssrc><![CDATA[
+	    [if: ModuleDefined("s4") ]
+	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
+           	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
+            _s4OnSelect.push(function(result){ 
+                var summary = result.summary();
+                console.log("S4.select: " + summary.title + " (" + summary.typeId + ")"); 
+                return true; 
+            }); 
+		[endif]
+    ]]>
+    </jssrc>
+</tool>

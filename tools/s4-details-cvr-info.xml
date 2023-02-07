@@ -9,7 +9,7 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-                _s4Params.cvrsearcher.searcher.addDetailHandlerDef(new Septima.Search.CvrInfoProvider({}));
+                _s4Params.cvrsearcher.searcher.addDetailHandlerDef(new Septima.Search.DataApi.CvrInfoProvider({dawaSearcher: _s4Params.dawasearcher.searcher}));
             }
     [endif]
     ]]>

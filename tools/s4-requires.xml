@@ -3,7 +3,8 @@
     <requires>
 
 		<file type="css"    name="[s4.search.version]/css/defaultView.css" />
-		<file type="script" name="[s4.search.version]/septimasearch.min.js" charset="utf-8"/>
+		<file type="script" name="[s4.search.version]/[s4.search.build]" charset="utf-8"/>
+        
 
         <file type="css"    name="/modules/s4/css/s4.css?_=[s4.version]" />
         

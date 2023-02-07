@@ -12,6 +12,7 @@
                 _s4Params.themesearcher.searcher.addDetailHandlerDef({
                     "buttonText":  cbKort.getSession().getString('s4.themesearcher.tools'),
                     "buttonImage": Septima.Search.s4Icons.themeSearcher.toolsIconURI,
+                    "more": true,
                     "handler": Septima.bind(function(result){
                         var promise = new Promise(function(resolve, reject){
 	                    var buttons = jQuery("<ul style='list-style: none'/>");

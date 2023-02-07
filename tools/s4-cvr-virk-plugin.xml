@@ -9,7 +9,7 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-                _s4Params.cvrsearcher.searcher.addDetailHandlerDef(new Septima.Search.CvrLinkHandler({more: true}));
+                _s4Params.cvrsearcher.searcher.addDetailHandlerDef(new Septima.Search.DataApi.CvrInfoProvider({more: true, fields_produktionsenhed: ["cvrlink"]}));
             }
     [endif]
     ]]>

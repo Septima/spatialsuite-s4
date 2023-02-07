@@ -361,7 +361,7 @@ function s4_init (params){
        		// setup searchIndexToken
         	var searchIndexToken = null;
         	
-        	if ((_s4Params.plansearcher && _s4Params.plansearcher.enabled) || (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled)){
+        	if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
             	var searchIndexTokenParamName = 's4.searchchindex.token';
             	searchIndexToken = spm.getSession().getParam(searchIndexTokenParamName);
             	if (searchIndexToken === null || searchIndexToken === searchIndexTokenParamName){
@@ -541,16 +541,17 @@ function s4_init (params){
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
-            	var cvr_enhedSearchOptions = {
+            	var cvrSearcherOptions = {
             	        onSelect: s4Hit,
-            	        searchindexToken: searchIndexToken,
+            	        fetcher: new Septima.Search.DataApi.Fetcher(),
+                        goal: "produktionsenhed",
             	        singular: "Virksomhed",
             	        plural: "Virksomheder"
             	};
                 if (_s4Params.municipality != "*"){
-                    cvr_enhedSearchOptions.kommunekode = _s4Params.municipality
+                    cvrSearcherOptions.kommunekode = _s4Params.municipality
                 }
-            	var se = new Septima.Search.CVR_enhedSearcher(cvr_enhedSearchOptions);
+            	var se = new Septima.Search.DataApi.CvrSearcher(cvrSearcherOptions);
             	controller.addSearcher(se);
                 _s4Params.cvrsearcher.searcher = se;
             }
