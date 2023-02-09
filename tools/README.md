@@ -101,7 +101,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-matrikel-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","bbrejendom","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","bbrejendom","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_dataforsyningen", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
@@ -119,7 +119,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-adresse-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_dataforsyningen", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
@@ -137,7 +137,7 @@ Hvilke links, der vises kan styres således:
 ```xml
 <tool module="s4" name="s4-adresse-hgf-matrikel-plugin">
   <jsonconfig>
-    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_js", "sdfekort", "plankort"]}
+    {"links": ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "geokoder", "retbbr", "skraafoto", "skraafoto_dataforsyningen", "sdfekort", "plankort"]}
   </jsonconfig>
 </tool>
 ```  
