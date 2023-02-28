@@ -417,10 +417,8 @@ function s4_init (params){
                     jQuery('#mapcontainer_innerContenttopright').append(_s4InputContainer);
                 }
         	}
-        	
 
             //Place inputcontainer according to the spacer
-//            inputContainer.offset(jQuery('.inputcontainer-spacer').offset());
 
             //Create controller
         	var blankBehavior = "search";
@@ -439,7 +437,12 @@ function s4_init (params){
 			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
 
-			
+            var offentlige_kortlinks = ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
+            if (_s4Params.offentlige_kortlinks)
+                offentlige_kortlinks = _s4Params.offentlige_kortlinks
+
+            var offentligeKortLinksProvider = new Septima.Search.OffentligeLinksProvider({more: false, links: offentlige_kortlinks, buttonText: "Offentlige kort", buttonImage: Septima.Search.icons.exlink});
+
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
             	var dawaSearcherOptions = {onSelect: s4DawaHit};
             	if (_s4Params.municipality != "*"){
@@ -489,7 +492,9 @@ function s4_init (params){
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	controller.addSearcher( s4IndexSearcher );
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
-            }
+                if (_s4Params.indexsearcher.offentligelinks)
+                    s4IndexSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
+    }
         	
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
             	var gstAuthParams= s4_getGstAuthParams();
@@ -522,6 +527,9 @@ function s4_init (params){
                     var geoStednavnSearcher = new Septima.Search.GeoStednavnSearcher(geoStednavnSearchOptions);
                     controller.addSearcher( geoStednavnSearcher);
                     _s4Params.geostednavnesearcher.searcher = geoStednavnSearcher;
+
+                    if (_s4Params.geostednavnesearcher.offentligelinks)
+                        geoStednavnSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
                 }
             }
             
@@ -545,15 +553,20 @@ function s4_init (params){
             	        onSelect: s4Hit,
             	        fetcher: new Septima.Search.DataApi.Fetcher(),
                         goal: "produktionsenhed",
-            	        singular: "Virksomhed",
-            	        plural: "Virksomheder"
+            	        resultTypes: {
+                            produktionsenhed: {
+                            "singular": "Virksomhed",
+                            plural: "Virksomheder"}
+                        }
             	};
                 if (_s4Params.municipality != "*"){
                     cvrSearcherOptions.kommunekode = _s4Params.municipality
                 }
-            	var se = new Septima.Search.DataApi.CvrSearcher(cvrSearcherOptions);
-            	controller.addSearcher(se);
-                _s4Params.cvrsearcher.searcher = se;
+            	var cvrsearcher = new Septima.Search.DataApi.CvrSearcher(cvrSearcherOptions);
+            	controller.addSearcher(cvrsearcher);
+                _s4Params.cvrsearcher.searcher = cvrsearcher;
+                if (_s4Params.cvrsearcher.offentligelinks)
+                    cvrsearcher.addDetailHandlerDef(offentligeKortLinksProvider);
             }
 
             //Collect searchers that have been pushed until now

@@ -54,10 +54,10 @@
                 geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter']},
 	            
                 //Geodatastyrelsen - Stednavne i geosearch
-                geostednavnesearcher: {enabled: true, info: true, print: true},
+                geostednavnesearcher: {enabled: true, info: true, print: true, offentligelinks: true},
                 
                 //Septima CVR-index
-                cvrsearcher: {enabled: true, info: true, print: true},
+                cvrsearcher: {enabled: true, info: true, print: true, offentligelinks: true},
 	            
                 //Plansystem
                 //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
@@ -66,7 +66,7 @@
                 //Local SpatialSuite-datasources
                 //  datasources: "*" for all, or space separated names of datasources
                 //  blankbehavior: search or none
-                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
+                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search", offentligelinks: true},
 	            
                 //Themes in profile
                 themesearcher: {enabled: true},
@@ -79,7 +79,12 @@
 	            
                 //Workspaces
                 workspacesearcher: {enabled: true},
-                
+
+				//Offentlige kort-links
+				//Styrer hvilke links, detr skal vise, hvis offentligelinks er true
+				//Muligheder : ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
+				offentlige_kortlinks : ["skraafoto_dataforsyningen", "plankort"],
+	            
                 //History
                 //Promote: show history icon in search input
                 //persist: Remember history between sessions
