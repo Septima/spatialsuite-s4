@@ -43,6 +43,7 @@
 	            },
                 
                 //Septima Search Server
+                /*
                 s3searcher: {
                     enabled: true,
                     info: true,
@@ -53,6 +54,18 @@
                     organisation: "septima",
                     configuration: "demo",
                     authorization: {Bearer: {token: "xxxxxxxxx"} } // Include if OneDoor server has been secured
+                },
+
+                */
+                s3searcher: {
+                    enabled: true,
+                    info: true,
+                    print: true,
+                    showLinkToWeb: false,  // optional default false
+                    host: "http://localhost:3000",
+                    //organisation/service
+                    organisation: "kbh",
+                    configuration: "demo"
                 },
 
                 //Themes in profile

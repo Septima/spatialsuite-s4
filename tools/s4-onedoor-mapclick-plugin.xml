@@ -9,8 +9,8 @@
     <src><![CDATA[
         [if: ModuleDefined("s4") ]
             var mode = "search";
-            var source = "Geometries";
-            var type = "Geometry";
+            var source = "Punkter";
+            var type = "Punkt";
             if (tool.jsonConfig) {
                 if (tool.jsonConfig.mode)
                     mode = tool.jsonConfig.mode;
