@@ -342,20 +342,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     result.image = indexedTheme.image;
                     result.id = indexedTheme.theme.name;
                 }
-//        for (var i=0; i<this.groups.length; i++){
-//            var thisGroup = this.groups[i];
-//            if (thisGroup.group.name === themeGroup.name){
-//                for (var t=0; t<thisGroup.themes.length; t++){
-//                    var indexedTheme = thisGroup.themes[t];
-//                    var description = null;
-//                    if (typeof indexedTheme.description !== 'undefined' && indexedTheme.description !== null){
-//                        description = indexedTheme.description;
-//                    }
-//                    var result = queryResult.addResult(this.source, thisGroup.displayname, indexedTheme.displayname, description, null, indexedTheme);
-//                    result.image = indexedTheme.image;
-//                }
-//            }
-//        }
         return queryResult;
     },
     
@@ -509,27 +495,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         } else {
             if (!this.loadStarted){
                 this.loadStarted = true;
-                /*
-                var callDoIndexAfterDelay = Septima.bind(function(){
-                    setTimeout(Septima.bind(function () {
-                        this.doIndex();
-                    }, this), 100);
-                }, this);
-    
-                setTimeout(Septima.bind(function(afterLoadFunction){
-                    if (typeof cbKort.themeSelector.loadThemes !== 'undefined'){
-                        cbKort.themeSelector.loadThemes(afterLoadFunction);
-                    }else if (typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
-                        cbKort.themeSelector.createThemeStore(afterLoadFunction);
-                    }else if (typeof cbKort.themeSelector._createThemeStore !== 'undefined'){
-                        cbKort.themeSelector._createThemeStore(afterLoadFunction);
-                    }else{
-                        //Assume themes are already loaded
-                        afterLoadFunction();
-                    }
-                }, this, callDoIndexAfterDelay), 100);
-                */
-    
                 this.loadThemesAndDoIndexPromise = new Promise(function(resolve, reject) {
                     var afterLoadFunction = this.doIndex.bind(this)
                     if (typeof cbKort.themeSelector.loadThemes !== 'undefined'){
