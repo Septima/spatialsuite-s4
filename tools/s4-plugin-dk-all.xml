@@ -47,26 +47,26 @@
 	            
                 //Adressesøgning i DAWA
                 // minimumShowCount: How many adresses should always be shown
-                dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: false},
+                dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: false, skraafoto: true},
 	            
                 //Geodatastyrelsen-geosearch
                 // Full set of geosearcher targets is: ['kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
-                geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+                geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter'], skraafoto: true},
 	            
                 //Geodatastyrelsen - Stednavne i geosearch
-                geostednavnesearcher: {enabled: true, info: true, print: true, offentligelinks: true},
+                geostednavnesearcher: {enabled: true, info: true, print: true, offentligelinks: true, skraafoto: true},
                 
                 //Septima CVR-index
-                cvrsearcher: {enabled: true, info: true, print: true, offentligelinks: true},
+                cvrsearcher: {enabled: true, info: true, print: true, offentligelinks: true, skraafoto: true},
 	            
                 //Plansystem
                 //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
-                plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']},
+                plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus'], skraafoto: true},
 	            
                 //Local SpatialSuite-datasources
                 //  datasources: "*" for all, or space separated names of datasources
                 //  blankbehavior: search or none
-                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search", offentligelinks: true},
+                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search", offentligelinks: true, skraafoto: true},
 	            
                 //Themes in profile
                 themesearcher: {enabled: true},
@@ -84,6 +84,10 @@
 				//Styrer hvilke links, detr skal vise, hvis offentligelinks er true
 				//Muligheder : ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
 				offentlige_kortlinks : ["skraafoto_dataforsyningen", "plankort"],
+
+				//Skråfoto-token
+				//Kontakt Septima - skal angives for at se skråfotos (skraafoto: true)
+				skraafototoken: "XXXXX-XXXXX",
 	            
                 //History
                 //Promote: show history icon in search input

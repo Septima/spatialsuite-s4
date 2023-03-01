@@ -437,12 +437,17 @@ function s4_init (params){
 			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
 
+            //Etablér offentligeKortLinksProvider
             var offentlige_kortlinks = ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
             if (_s4Params.offentlige_kortlinks)
                 offentlige_kortlinks = _s4Params.offentlige_kortlinks
-
             var offentligeKortLinksProvider = new Septima.Search.OffentligeLinksProvider({more: false, links: offentlige_kortlinks, buttonText: "Offentlige kort", buttonImage: Septima.Search.icons.exlink});
 
+            //Etablér skraaFotoProvider
+            var skraaFotoProvider
+            if (_s4Params.skraafototoken)
+                skraaFotoProvider = new Septima.Search.SkraafotoProvider({token: _s4Params.skraafototoken})
+    
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
             	var dawaSearcherOptions = {onSelect: s4DawaHit};
             	if (_s4Params.municipality != "*"){
@@ -458,8 +463,9 @@ function s4_init (params){
             	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
             	controller.addSearcher(dawaSearcher);
                 _s4Params.dawasearcher.searcher = dawaSearcher;
-                
                 _s4Params.adressSearcher = dawaSearcher;
+                if (skraaFotoProvider && _s4Params.dawasearcher.skraafoto)
+                    dawaSearcher.addDetailHandlerDef(skraaFotoProvider);
             }
 			
             if (_s4Params.s3searcher && _s4Params.s3searcher.enabled){
@@ -494,7 +500,9 @@ function s4_init (params){
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
                 if (_s4Params.indexsearcher.offentligelinks)
                     s4IndexSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
-    }
+                if (skraaFotoProvider && _s4Params.indexsearcher.skraafoto)
+                    s4IndexSearcher.addDetailHandlerDef(skraaFotoProvider);
+            }
         	
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
             	var gstAuthParams= s4_getGstAuthParams();
@@ -510,7 +518,9 @@ function s4_init (params){
                 	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
                 	controller.addSearcher(geoSearcher);
                     _s4Params.geosearcher.searcher = geoSearcher;
-            	}
+                    if (skraaFotoProvider && _s4Params.geosearcher.skraafoto)
+                        geoSearcher.addDetailHandlerDef(skraaFotoProvider);
+                }
             }
 
             if (_s4Params.geostednavnesearcher && _s4Params.geostednavnesearcher.enabled){
@@ -530,6 +540,8 @@ function s4_init (params){
 
                     if (_s4Params.geostednavnesearcher.offentligelinks)
                         geoStednavnSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
+                    if (skraaFotoProvider && _s4Params.geostednavnesearcher.skraafoto)
+                        geoStednavnSearcher.addDetailHandlerDef(skraaFotoProvider); 
                 }
             }
             
@@ -546,6 +558,10 @@ function s4_init (params){
             	var planSearcher = new Septima.Search.PlanSystemSearcher(planSearchOptions);
             	controller.addSearcher(planSearcher);
                 _s4Params.plansearcher.searcher = planSearcher;
+
+                if (skraaFotoProvider && _s4Params.plansearcher.skraafoto)
+                    planSearcher.addDetailHandlerDef(skraaFotoProvider); 
+
             }
         	
             if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
@@ -567,6 +583,8 @@ function s4_init (params){
                 _s4Params.cvrsearcher.searcher = cvrsearcher;
                 if (_s4Params.cvrsearcher.offentligelinks)
                     cvrsearcher.addDetailHandlerDef(offentligeKortLinksProvider);
+                if (skraaFotoProvider && _s4Params.cvrsearcher.skraafoto)
+                    cvrsearcher.addDetailHandlerDef(skraaFotoProvider); 
             }
 
             //Collect searchers that have been pushed until now
