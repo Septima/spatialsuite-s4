@@ -426,6 +426,11 @@ function s4_init (params){
         		blankBehavior = "none";
         	}
         	var controllerOptions = {blankBehavior: blankBehavior};
+
+        	if (_s4Params.view.maxResults){
+        		controllerOptions.singleSourceResultsLimit = _s4Params.view.maxResults;
+        	}
+
         	_s4Controller = new Septima.Search.Controller([], controllerOptions);
             var controller = _s4Controller
         	

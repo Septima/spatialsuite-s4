@@ -34,6 +34,7 @@
                 //  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
                 view: {
 	              limit: 20,
+				  maxResults: 100,
 	              blankbehavior: "search",
 	              autofocus: false,
 	              dynamiclayer: 'userdatasource',
