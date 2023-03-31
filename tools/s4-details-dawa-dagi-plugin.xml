@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Deprecated - brug s4-details-dagi-plugin -->
+
 <tool type="plugin">
     <requires>
     [if: ModuleDefined("s4") ]
@@ -16,7 +19,6 @@
 	        
 	        var s4DagiInfoProvider = new Septima.Search.DagiInfoProvider(s4DagiInfoProviderOptions);
 	        _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4DagiInfoProvider);
-
         }
     [endif]
     ]]>

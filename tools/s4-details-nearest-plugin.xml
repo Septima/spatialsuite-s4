@@ -3,6 +3,9 @@
 
 <!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
 <!-- Look for Customize HERE -->
+
+<!-- Laves om til jsonconfig til at styre hvornår der skal søges https://github.com/Septima/spatialsuite-s4/issues/404 -->
+
 <tool type="plugin">
     <requires>
     [if: ModuleDefined("s4") ]
@@ -46,7 +49,7 @@
 		  //_s4Params.indexsearcher.searcher.addDetailHandlerDef(nearestHandler);
 			
 		  if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-		  //	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
+		  	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
 		  }
 			
 		  if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
