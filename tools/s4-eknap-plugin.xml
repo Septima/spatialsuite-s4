@@ -43,22 +43,24 @@
 
 		        if (typeof spm !== 'undefined' && typeof spm.dynamicLayers !== 'undefined'){
                 //SpS 4
-                    //Draw point in map
-		            var sGeom = new SpatialServer.Geometry({wkt: wkt});
-		            var mc = spm.getMapControl();
-		            mc.setMarkingGeometry(sGeom, false, false, 50);
 		            
                     //Call handler
+					var pointWkt = wktParser.getInteriorPoint(wkt);
                     if (typeof eknapModule === 'undefined'){
                          //Adapted from eknap.xml
                          require(["[module.emdb.eknap.js]","[module.emdb.horingsliste.js]","/js/standard/jquery/plugin/jqGrid-4.13.2/jquery.jqgrid.min.js"], Septima.bind(function (wkt) {
 		                    eknapModule = new Eknap();
-		                    eknapModule.infoHandler(wkt);
+		                    eknapModule.infoHandler(pointWkt);
 		                 }, this, wkt));
                      }else{
-                         eknapModule.infoHandler(wkt);
+                         eknapModule.infoHandler(pointWkt);
                      }
                     
+                    //Draw geometry in map
+		            var sGeom = new SpatialServer.Geometry({wkt: wkt});
+		            var mc = spm.getMapControl();
+		            mc.setMarkingGeometry(sGeom, false, false, 50);
+
                     //Zoom to extent
 		            var feature = mc._wktFormatter.readFeature(wkt);
 		            var extent = feature.getGeometry().getExtent();

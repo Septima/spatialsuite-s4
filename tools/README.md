@@ -45,8 +45,8 @@ Please read the [general installation instructions](../../../#installation) befo
 * [s4-details-spatialquery-plugin](#s4-details-spatialquery-plugin)  
 * [s4-details-themesForIndex-plugin](#s4-details-themesForIndex-plugin)
 * [s4-details-s4index-plugin](#s4-details-s4index-plugin)  
-* [s4-details-dawa-dagi-plugin](#s4-details-dawa-dagi-plugin)  
-* [s4-details-dawa-planer-plugin](#s4-details-dawa-planer-plugin)
+* [s4-details-dawa-dagi-plugin](#s4-details-dagi-plugin)  
+* [s4-details-dawa-planer-plugin](#s4-details-planer-plugin)
 * [s4-details-adresse-tinglysninger](#s4-details-adresse-tinglysninger)  
 * [s4-details-themes-related-plugin](#s4-details-themes-related-plugin)  
 * [s4-details-themes-tools-plugin](#s4-details-themes-tools-plugin)
@@ -341,13 +341,22 @@ Tool which demonstrates the use of the S4 API. It's shown how you attach custom 
 
 ### <a name="#s4-details-nearest-plugin"></a>s4-details-nearest-plugin    
 For an address; show the nearest three features of each type in your s4 index.  
-  
-To customize, copy to tools/custom and follow the instructions in the _Customize HERE_ sections.
 
 Include in profile:  
 ```xml
 <tool module="s4" name="s4-details-nearest-plugin" />
 ```    
+**_Valgfrit_**: Man kan angive hvornår toolet skal være aktivt og hvilke datasources, der skal søges i. Her vist med default-værdierne:
+
+```xml
+ <tool module="s4" name="s4-details-nearest-plugin">
+     <jsonconfig>
+        { "targets": ["husnummer", "matrikelnummer", "virksomhed"],
+          "datasources": "*"}
+     </jsonconfig>
+ </tool>
+
+```
 
 ### <a name="#s4-details-themesForIndex-plugin"></a>s4-details-themesForIndex-plugin      
 Show relevant themes for features from the s4 index.  
@@ -365,16 +374,26 @@ Include in profile:
 <tool module="s4" name="s4-details-s4index-plugin" />
 ```    
   
-### <a name="#s4-details-dawa-planer-plugin"></a>s4-details-dawa-planer-plugin  
+### <a name="#s4-details-planer-plugin"></a>s4-details-planer-plugin  
 Only relevant in Denmark.  
 
-Vis planer for adressen.  
+Vis planer for hus- og matrikelnumre.  
 
 Inkludér in profil:  
 ```xml
-<tool module="s4" name="s4-details-dawa-planer-plugin" />
+<tool module="s4" name="s4-details-planer-plugin" />
 ```    
+**_Valgfrit_**: Man kan angive hvornår toolet skal være aktivt. Her vist med default-værdierne:
 
+```xml
+<tool module="s4" name="s4-details-planer-plugin">
+  <jsonconfig>
+    {"targets": ["husnummer", "matrikelnummer"]}
+  </jsonconfig>
+</tool>
+```
+
+**_OBS_**: Der søges med INTERSECTS mod plansystemet. Planer som grænser op til matrikelnummeret, men ikke overlapper, (kanter mødes) bliver fundet
 ### <a name="s4-details-planinfo-plugin"></a>s4-details-planinfo-plugin    
 Only relevant in Denmark  
 
@@ -384,17 +403,26 @@ Viser info om planer fra plansystemet
 <tool module="s4" name="s4-details-planinfo-plugin" />
 ```  
 
-### <a name="#s4-details-dawa-dagi-plugin"></a>s4-details-dawa-dagi-plugin  
+### <a name="#s4-details-dagi-plugin"></a>s4-details-dagi-plugin  
 Only relevant in Denmark.  
   
-Vis DAGI-information d.v.s. kommune, opstillingskreds, politikreds, postdistrikt, region, retskreds og sogn for en adresse  
+Vis DAGI-information d.v.s. kommune, opstillingskreds, politikreds, postdistrikt, region, retskreds og sogn for hus- og matrikelnumre  
 
 Inkludér in profil:  
 ```xml
-<tool module="s4" name="s4-details-dawa-dagi-plugin" />
+<tool module="s4" name="s4-details-dagi-plugin" />
 ```    
-
-Kopiér toolet til tools/custom, hvis du vil tilpasse det. 
+_**Valgfrit**_: Man kan angive hvornår toolet skal være aktivt og hvilke resultater, der skal vises. Her vist med default-værdierne:
+```xml
+<tool module="s4" name="s4-details-dagi-plugin">
+  <jsonconfig>
+    {
+      "targets": ["husnummer", "matrikelnummer"],
+      "fields":  ["kommuner_result", "opstillingskredse_result", "politikredse_result", "postdistrikter_result", "regioner_result", "retskredse_result", "sogne_result"]
+    }
+   </jsonconfig>
+</tool>
+```
  
 ### <a name="#s4-details-themes-related-plugin"></a>s4-details-themes-related-plugin    
 Show other themes belonging to the themegroup  

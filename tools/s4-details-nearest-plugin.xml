@@ -4,8 +4,6 @@
 <!-- Do not customize this tool. Make a copy of the tool and create your own tool -->
 <!-- Look for Customize HERE -->
 
-<!-- Laves om til jsonconfig til at styre hvornår der skal søges https://github.com/Septima/spatialsuite-s4/issues/404 -->
-
 <tool type="plugin">
     <requires>
     [if: ModuleDefined("s4") ]
@@ -17,44 +15,48 @@
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
     	if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
-    	
-       // Hvad skal der søges i?   
-    	  // Tilret datasources så der kun vises de  nærmeste typer som du ønsker
-    	  var nearestHandler = new Septima.Search.S4NearestHandler({
-            // datasources: "ds_buf_kgb_skoler",
-		    s4IndexSearcher: _s4Params.indexsearcher.searcher,
-		    buttonText: "Nærmeste"
-		  })
 
-          //Skal der vises rute?
-          //OBS: Der findes kun rute mellem punkter
-		  var token = cbKort.getSession().getParam("module.route.token")
-		  if (token) {
-	          //Ret til så det passer dig
-	          //Customize HERE
-	          var routeProvider = new Septima.Search.RouteProvider({
-	            fields: ["route.distance", "route.geometry", "route.time"],
-	            routeApiKey: token,
-	            routeProfile: "bicycle"
-	          })
+			var datasources = this.jsonConfig.datasources ? this.jsonConfig.datasources : "*";
+    	
+			// Hvad skal der søges i?   
+			// Tilret datasources så der kun vises de nærmeste typer som du ønsker
+    		var nearestHandler = new Septima.Search.S4NearestHandler({
+				datasources: datasources,
+				s4IndexSearcher: _s4Params.indexsearcher.searcher,
+				buttonText: "Nærmeste"
+			})
+
+			//Skal der vises rute?
+			//OBS: Der findes kun rute mellem punkter
+			var routeToken = this.jsonConfig.route && this.jsonConfig.route.token ? this.jsonConfig.route.token : cbKort.getSession().getParam("module.route.token");
+
+			if (routeToken) {
+				var routeProfile = this.jsonConfig.route && this.jsonConfig.route.profile ? this.jsonConfig.route.profile : "bicycle";
+				//'car','bicycle' eller 'foot'
+	        	var routeProvider = new Septima.Search.RouteProvider({
+					fields: ["route.distance", "route.geometry", "route.time"],
+					routeApiKey: routeToken,
+					routeProfile: routeProfile
+	        	})
 	          
-	          nearestHandler.addDetailHandlerDef(routeProvider)
-		  }
+	        	nearestHandler.addDetailHandlerDef(routeProvider)
+			}
 			
-        //Hvornår skal der søges?
-		  if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-			_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
-		  }
+        	//Hvornår skal der søges?
+			var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer", "virksomhed"];
+
+			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && targets.includes("husnummer")){
+				_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
+			}
 			
-		  //_s4Params.indexsearcher.searcher.addDetailHandlerDef(nearestHandler);
-			
-		  if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-		  	_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
-		  }
-			
-		  if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
-	       _s4Params.cvrsearcher.searcher.addDetailHandlerDef(nearestHandler);
-		  }
+			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){
+				_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
+			}
+
+			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && targets.includes("virksomhed")){
+				_s4Params.cvrsearcher.searcher.addDetailHandlerDef(nearestHandler);
+			}
+
 		}
 		
 	[endif]
