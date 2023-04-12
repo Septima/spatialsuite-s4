@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.15.6</version>
-   <param name="s4.version">2.15.6</param>
+   <version>2.15.6.patch1</version>
+   <param name="s4.version">2.15.6.patch1</param>
 
    <stoponerror>true</stoponerror>
   
@@ -20,7 +20,7 @@
 
 <!--production
 -->
-  <param name="s4.search.version">//search.cdn.septima.dk/5.55.17</param>
+  <param name="s4.search.version">//search.cdn.septima.dk/5.55.18</param>
   <param name="s4.search.build">septimasearch.min.ie11.js</param>
 
 <!-- Dev
