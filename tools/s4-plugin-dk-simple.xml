@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not customise this tool. Make copy of module and create your own tool -->
+<tool>
+    <requires>
+        <include ignore="not ModuleDefined('profileselector')" src="[module:profileselector.dir]/tools/profileselector.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+        <file type="script" name="/modules/s4/js/s4ThemeSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/workspaceSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/profileSearcher.js?_=[s4.version]"/>
+        <file type="script" name="/modules/s4/js/favoriteSearcher.js?_=[s4.version]"/>
+        
+    </requires>
+    <displayname>s4Plugin</displayname>
+    <src><![CDATA[
+            s4_init({
+                //Mellemrums-separeret liste af kommunenumre. '*' søger i alle kommuner. Ellers feks. '101' eller '101 253'. 
+                municipality: '*',
+                
+                //  'panel-brand': Force s4 to panel-brand 
+                //  'menu': As the last menu in the menu line
+                //  'tool': Use the panel as specified in the profile
+                //  'panel-top': Force s4 to top menu
+                //  'default': same as map-top-right
+                //  'panel-middle': Force s4 to menu linie (right justified)
+                //  'map-top-right': SpS 4.1+ only
+                panel: 'default',
+
+                //Result presentation
+                //  printconfig: standard, full_freetext, rotatet, rotatet_contact or html
+                //  blankbehavior: search or none  
+                //  autofocus: true or false. Default is false
+                //  forcedblurOnSelect: Force close of result list. Default is false
+	            //  zoomBuffer: Buffer when result is shown in map. Default is '100'
+                //  marginToBottom: Distance between bottom of resultlist and bottom af window. Default is 100
+                view: {
+	              limit: 20,
+				  maxResults: 100,
+	              blankbehavior: "search",
+	              autofocus: false,
+	              dynamiclayer: 'userdatasource',
+	              infoprofilequery: 'userdatasource',
+	              printconfig: 'rotated_contact',
+	              forcedblurOnSelect: 'false',
+	              zoomBuffer: '100',
+	              marginToBottom: 100,
+	              placeholder: "Søg" 
+	            },
+	            
+                //Adressesøgning i DAWA
+                // minimumShowCount: How many adresses should always be shown
+                dawasearcher: {enabled: true, info: true, print: true, minimumShowCount: 3, showMinimumOnBlank: false},
+	            
+                //Geodatastyrelsen-geosearch
+                // Full set of geosearcher targets is: ['kommuner', 'matrikelnumre', 'opstillingskredse', 'politikredse', 'postdistrikter', 'regioner', 'retskredse']
+                geosearcher: {enabled: true, info: true, print: true, targets: ['matrikelnumre', 'opstillingskredse', 'postdistrikter']},
+	            
+                //Geodatastyrelsen - Stednavne i geosearch
+                geostednavnesearcher: {enabled: true, info: true, print: true},
+                
+                //Septima CVR-index
+                cvrsearcher: {enabled: true, info: true, print: true},
+	            
+                //Plansystem
+                //Full set of targets is ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus']
+                plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalplan', 'kommuneplanramme', 'kommuneplantillaeg', 'lokalplanforslag', 'regionplan', 'byggefelt', 'delområde', 'vedtagetkloakopland', 'mulighedforudtraedenkloakopland', 'zonestatus'], skraafoto: true},
+	            
+                //Local SpatialSuite-datasources
+                //  datasources: "*" for all, or space separated names of datasources
+                //  blankbehavior: search or none
+                indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
+	            
+                //Themes in profile
+                themesearcher: {enabled: true},
+	            
+                //Profiles
+                profilesearcher: {enabled: true},
+	            
+                //Favorites
+                favoritesearcher: {enabled: true},
+	            
+                //Workspaces
+                workspacesearcher: {enabled: true},
+
+				//Offentlige kort-links
+				//Styrer hvilke links, detr skal vise, hvis offentligelinks er true
+				//Muligheder : ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
+				offentlige_kortlinks : ["skraafoto_dataforsyningen", "plankort"],
+
+				//Skråfoto-token
+				//Kontakt Septima - skal angives for at se skråfotos (skraafoto: true)
+				skraafototoken: "XXXXX-XXXXX",
+	            
+                //History
+                //Promote: show history icon in search input
+                //persist: Remember history between sessions
+                historysearcher: {enabled: false, promote: true, persist: true},
+
+                //SpS projection
+                //Any other projection than epsg:25832 MUST be defined here
+                projection_epsg: {code: "epsg:25832", def: "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"}
+	            
+            });
+    ]]></src>
+</tool>
