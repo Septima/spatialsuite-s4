@@ -533,9 +533,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (groupName == this.visibleThemesPhrase){
             var visibleIndexedThemes = this.getVisibleIndexedThemes();
             for (var i=0;i<visibleIndexedThemes.length;i++){
-                var indexedtheme = visibleIndexedThemes[i];
-                var result = queryResult.addResult(this.source, this.source, indexedtheme.displayname, indexedtheme.description, null, indexedtheme);
-                result.image = indexedtheme.image;
+                var indexedTheme = visibleIndexedThemes[i];
+                var result = queryResult.addResult(this.source, this.source, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
+                result.image = indexedTheme.image;
                 result.id = indexedTheme.theme.name;
             }
         }else{
