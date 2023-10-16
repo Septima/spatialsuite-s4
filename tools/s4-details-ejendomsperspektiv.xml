@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool type="plugin">
+    <requires>
+	    [if: ModuleDefined("s4") ]
+	    	<include src="[module:s4.dir]/tools/s4-requires.xml" nodes="/tool/requires/*" mustexist="true"/>
+		[endif]
+   </requires>
+    <src>
+    <![CDATA[
+	    [if: ModuleDefined("s4") ]
+			window["_s4Searchers"] = window["_s4Searchers"] || [];
+ 			var _s4Searchers = window["_s4Searchers"];
+            var fetcherOptions = {
+                username: "WJKYFPZASN",
+                password: "fgd4Septima"
+            };
+            var fetcher = new Septima.Search.Datafordeler.Fetcher(fetcherOptions);
+
+			var searcherOptions = {
+				fetcher: fetcher,
+				onSelect: s4Hit
+			};
+            var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(searcherOptions);
+            var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(searcherOptions);
+
+            //EjendomsInfoProvider
+            var EjendomsInfoProviderOptions = {
+                searcher: ejendomsSearcher,
+                bygningsSearcher: bygningsSearcher,
+                more: true
+            };
+            var ejendomsInfoProvider = new Septima.Search.Datafordeler.EjendomsInfoProvider(EjendomsInfoProviderOptions);
+            ejendomsSearcher.addDetailHandlerDef(ejendomsInfoProvider);
+
+            //JordstykkerForEjendom
+            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+                var jordstykkerForEjendomOptions = {
+                    geosearcher: _s4Params.geosearcher.searcher
+                };
+                var jordstykkerForEjendomProvider = new Septima.Search.Datafordeler.JordstykkerForEjendom(jordstykkerForEjendomOptions)
+                ejendomsSearcher.addDetailHandlerDef(jordstykkerForEjendomProvider);
+            }
+
+            //BygningerForEjendom
+            var bygningerForEjendomOptions = {
+                bygningssearcher: bygningsSearcher
+            };
+            var bygningerForEjendomProvider = new Septima.Search.Datafordeler.BygningerForEjendom(bygningerForEjendomOptions);
+            ejendomsSearcher.addDetailHandlerDef(bygningerForEjendomProvider);
+
+            //Septima.Search.Datafordeler.BygningsInfoProvider
+            var bygningsInfoProviderOptions = {
+				fetcher: fetcher,
+                ejendomsSearcher: ejendomsSearcher,
+                more: true
+            };
+            var bygningsInfoProvider = new Septima.Search.Datafordeler.BygningsInfoProvider(bygningsInfoProviderOptions);
+            bygningsSearcher.addDetailHandlerDef(bygningsInfoProvider);
+
+            //EjendomForJordstykkeDawa
+            var ejendomForJordstykkeDawaOptions = {
+                searcher: ejendomsSearcher,
+                more: true
+            };
+            var ejendomForJordstykkeDawaProvider = new Septima.Search.Datafordeler.EjendomForJordstykkeDawa(ejendomForJordstykkeDawaOptions);
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled) {
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
+            };
+            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled) {
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
+            };
+
+            //OffentligeLinks
+            var offentligeLinksOptions = {
+                links: ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "skraafoto_dataforsyningen", "plankort"]
+            };
+            var offentligeLinksProvider = new Septima.Search.Datafordeler.OffentligeLinks(offentligeLinksOptions);
+            ejendomsSearcher.addDetailHandlerDef(offentligeLinksProvider);
+
+            //SqDetailsHandler
+            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled) {
+                var sqDetailsHandlerOptions = {
+                    buttonText: "Planer",
+                    noResultsListItem: {
+                        type: "labelvalue",
+                        label: "Planer",
+                        value: "Ingen planer fundet"
+                    },
+                    searchers: [_s4Params.plansearcher.searcher]
+                };
+                var sqDetailsHandler = new Septima.Search.SqDetailsHandler(sqDetailsHandlerOptions);
+                ejendomsSearcher.addDetailHandlerDef(sqDetailsHandler);
+            }
+
+           	_s4Searchers.push({
+           		searcher : ejendomsSearcher,
+           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+           	});
+
+           	_s4Searchers.push({
+           		searcher : bygningsSearcher,
+           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+           	});
+
+
+
+		[endif]
+    ]]>
+    </src>
+    <jssrc>
+    </jssrc>
+</tool>
