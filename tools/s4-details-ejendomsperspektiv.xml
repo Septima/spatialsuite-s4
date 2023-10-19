@@ -77,7 +77,7 @@
             var offentligeLinksProvider = new Septima.Search.Datafordeler.OffentligeLinks(offentligeLinksOptions);
             ejendomsSearcher.addDetailHandlerDef(offentligeLinksProvider);
 
-            //SqDetailsHandler
+            //SqDetailsHandler (Planer)
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled) {
                 var sqDetailsHandlerOptions = {
                     buttonText: "Planer",
@@ -91,6 +91,10 @@
                 var sqDetailsHandler = new Septima.Search.SqDetailsHandler(sqDetailsHandlerOptions);
                 ejendomsSearcher.addDetailHandlerDef(sqDetailsHandler);
             }
+
+            //VurderingsHandler
+            var vurderingsHandler = new Septima.Search.Datafordeler.VurderingsHandler();
+            ejendomsSearcher.addDetailHandlerDef(vurderingsHandler);
 
            	_s4Searchers.push({
            		searcher : ejendomsSearcher,
