@@ -10,10 +10,22 @@
 	    [if: ModuleDefined("s4") ]
 			window["_s4Searchers"] = window["_s4Searchers"] || [];
  			var _s4Searchers = window["_s4Searchers"];
-            var fetcherOptions = {
-                username: "WJKYFPZASN",
-                password: "fgd4Septima"
-            };
+            var username;
+            var password;
+            var fetcherOptions;
+            var useVur = false;
+            if (this.jsonConfig.datafordeler) {
+                fetcherOptions = {
+                    username: this.jsonConfig.datafordeler.username,
+                    password: this.jsonConfig.datafordeler.password
+                };
+                useVur = this.jsonConfig.datafordeler.useVur;
+            } else {
+                fetcherOptions = {
+                    username: "NHDAOPLIVC",
+                    password: "Septima4You!!!"
+                };
+            }
             var fetcher = new Septima.Search.Datafordeler.Fetcher(fetcherOptions);
 
 			var searcherOptions = {
@@ -24,12 +36,18 @@
             var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(searcherOptions);
 
             //EjendomsInfoProvider
-            var EjendomsInfoProviderOptions = {
+            var ejendomsInfoProviderOptions = {
                 searcher: ejendomsSearcher,
                 bygningsSearcher: bygningsSearcher,
                 more: true
             };
-            var ejendomsInfoProvider = new Septima.Search.Datafordeler.EjendomsInfoProvider(EjendomsInfoProviderOptions);
+
+            if (useVur)
+                ejendomsInfoProviderOptions.sections=["bfe_beskrivelse", "bfe_vurdering", "bfe_forsyning", "bfe_bygninger", "ejl_hovedejendom", "energimaerke", "bfg_gremmedgrund"]
+            else
+                ejendomsInfoProviderOptions.sections=["bfe_beskrivelse", "bfe_forsyning", "bfe_bygninger", "ejl_hovedejendom", "energimaerke", "bfg_gremmedgrund"]
+
+            var ejendomsInfoProvider = new Septima.Search.Datafordeler.EjendomsInfoProvider(ejendomsInfoProviderOptions);
             ejendomsSearcher.addDetailHandlerDef(ejendomsInfoProvider);
 
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
@@ -110,12 +128,14 @@
                 ejendomsSearcher.addDetailHandlerDef(sqDetailsHandler);
             }
 
-            //VurderingsHandler
-            var vurderingsHandlerOptions = {
-                showSamvurderedeEjendomme: true
+            if (useVur) {
+                //VurderingsHandler
+                var vurderingsHandlerOptions = {
+                    showSamvurderedeEjendomme: true
+                }
+                var vurderingsHandler = new Septima.Search.Datafordeler.VurderingsHandler(vurderingsHandlerOptions);
+                ejendomsSearcher.addDetailHandlerDef(vurderingsHandler);
             }
-            var vurderingsHandler = new Septima.Search.Datafordeler.VurderingsHandler(vurderingsHandlerOptions);
-            ejendomsSearcher.addDetailHandlerDef(vurderingsHandler);
 
            	_s4Searchers.push({
            		searcher : ejendomsSearcher,
