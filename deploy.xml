@@ -20,7 +20,7 @@
 
 <!--production
 -->
-  <param name="s4.search.version">//search.cdn.septima.dk/5.56.6</param>
+  <param name="s4.search.version">//search.cdn.septima.dk/5.56.7</param>
   <param name="s4.search.build">septimasearch.min.ie11.js</param>
 
 <!-- Dev
