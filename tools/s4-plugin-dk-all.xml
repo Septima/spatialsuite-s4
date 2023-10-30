@@ -87,8 +87,8 @@
 				offentlige_kortlinks : ["skraafoto_dataforsyningen", "plankort"],
 
 				//Skråfoto-token
-				//Kontakt Septima - skal angives for at se skråfotos (skraafoto: true)
-				skraafototoken: "XXXXX-XXXXX",
+				//Skal angives for at se skråfotos (skraafoto: true)
+				skraafototoken: "931957e0-7937-4008-b2bb-5f937ea25ed3",
 	            
                 //History
                 //Promote: show history icon in search input

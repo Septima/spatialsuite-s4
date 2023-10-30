@@ -11,11 +11,12 @@ Please read the [general installation instructions](../../../#installation) befo
 #### Show/Hide search box:    
 * [s4-show-hide](#s4-show-hide)  
   
-### Tools relevant for Denmark only:  
+### Tools relevant to Danish sites:  
 * Viser offentlige links til for adresser og matrikelnumre  
     * [s4-matrikel-plugin](#s4-matrikel-plugin)  
     * [s4-adresse-plugin](#s4-adresse-plugin)  
     * [s4-adresse-hgf-matrikel-plugin](#s4-adresse-hgf-matrikel-plugin) linker til _Hvad gælder for matriklen_.  
+    * [s4-details-ejendomsperspektiv](#s4-details-ejendomsperspektiv)
 
 * Visning af- og søgning i vejmidter  
     * [s4-vis-dawa-vejmidter-plugin](#s4-vis-dawa-vejmidter-plugin)  
@@ -55,9 +56,10 @@ Please read the [general installation instructions](../../../#installation) befo
 * [s4-details-intersects-plugin](#s4-details-intersects-plugin)
 * [s4-details-planinfo-plugin](#s4-details-planinfo-plugin)
 
+
 API documentation:  
 * [s4ApiDemo](#apidemo)  
-    
+  
 ### <a name="s4-plugin-dk-all"></a>s4-plugin-dk-all (s4-plugin-all)  
 The main tool  
 
@@ -422,8 +424,38 @@ _**Valgfrit**_: Man kan angive hvornår toolet skal være aktivt og hvilke resul
     }
    </jsonconfig>
 </tool>
-```
- 
+```  
+  
+### <a name="s4-details-ejendomsperspektiv"></a>s4-details-ejendomsperspektiv     
+Virker kun i Danmark  
+Inkludér i profil:  
+```xml
+<tool module="s4" name="s4-details-ejendomsperspektiv"/>  
+```  
+Du kan nu  
+* Se ejendomsinfo for husnumre og Matrikelnumre
+* Søge på Bfe-nummer
+* Søge på Esr-nummer
+
+For at se vurderinger skal du bruge din egen tjeneste-bruger hos Dataforsyningen.    
+* Den får du her: https://datafordeler.dk/vejledning/brugeradgang/brugeroprettelse/  
+
+Og ansøge om at din bruger får adgang til VUR.  
+* Vejledning: https://datafordeler.dk/vejledning/brugeradgang/anmodning-om-adgang/ejendomsvurdering-vur/  
+
+Når du har en tjenestebruger med adgang skriver du sådan her i profilen:  
+
+```xml
+<tool module="s4" name="s4-details-ejendomsperspektiv">
+  <jsonconfig>
+    {"datafordeler": {"username": "BRUGERNAVN", "password": "PASSORD", "useVur": true}}
+  </jsonconfig>
+</tool>
+```  
+
+
+
+
 ### <a name="#s4-details-themes-related-plugin"></a>s4-details-themes-related-plugin    
 Show other themes belonging to the themegroup  
 

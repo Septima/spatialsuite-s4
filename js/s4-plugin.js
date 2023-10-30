@@ -358,22 +358,6 @@ function s4_init (params){
        			_s4Params.view.marginToBottom = 100;
        		}
        		
-       		// setup searchIndexToken
-        	var searchIndexToken = null;
-        	
-        	if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
-            	var searchIndexTokenParamName = 's4.searchchindex.token';
-            	searchIndexToken = spm.getSession().getParam(searchIndexTokenParamName);
-            	if (searchIndexToken === null || searchIndexToken === searchIndexTokenParamName){
-            	    searchIndexTokenParamName = 's4.searchindex.token';
-                    searchIndexToken = spm.getSession().getParam(searchIndexTokenParamName);
-                    if (searchIndexToken === searchIndexTokenParamName){
-                        //getParam returns paramName if param isn't defined
-                        searchIndexToken = null;
-                    }
-            	}
-        	}
-        	
         	var sessionId = cbKort.sessionId;
 
             //Set up search input box
@@ -550,8 +534,8 @@ function s4_init (params){
                 }
             }
             
-            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled && searchIndexToken !== null){
-            	var planSearchOptions = {onSelect: s4Hit, searchindexToken: searchIndexToken};
+            if (_s4Params.plansearcher && _s4Params.plansearcher.enabled){
+            	var planSearchOptions = {onSelect: s4Hit};
             	if (_s4Params.municipality != "*"){
             		planSearchOptions.kommunekode = _s4Params.municipality;
             	}
@@ -569,7 +553,7 @@ function s4_init (params){
 
             }
         	
-            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && searchIndexToken !== null){
+            if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled){
             	var cvrSearcherOptions = {
             	        onSelect: s4Hit,
             	        fetcher: new Septima.Search.DataApi.Fetcher(),

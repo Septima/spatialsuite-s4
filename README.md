@@ -100,16 +100,6 @@ S4 will now search themes, profiles, and workspaces. In order to search your loc
 ##### Restrict searches to your municipality  
 Set the __municipality__ parameter in the javascript part of [cbinfo.config.dir]/tools/custom/s4-plugin-[*your-municipality-code*]-all.xml  
 
-##### Update cbinfo.xml (In Denmark):  
-In order to search the danish Plansystem and cvr data, please include the following parameter in your relevant cbinfo.xml:    
-```xml
-<!-- =================================== -->
-<!-- S4 Index parameters                 -->
-<!-- =================================== -->  
-<param name="s4.searchchindex.token">aaaaAAAA-00000000</param>
-```  
-where aaaaAAAA-00000000 is a special token provided to you by Septima.  
-
 #### General options  
 * Set the __printconfig__ parameter. The default is *rotatet*  
 * Set the __blankbehavior__ parameter. Default is *search* which searches even when the user hasn't entered a query string  
@@ -211,7 +201,7 @@ geosearcher:{enabled: true, info: true, print: true, targets: ['matrikelnumre', 
 ```
 
 #### Indexsearcher  
-Another useful option is to select the datasources in which the tool will search (See [Search Spatial Suite data](#local)). This is controlled in the *datasources* key in the indexsearcher:
+Select the datasources in which the tool will search (See [Search Spatial Suite data](#local)). This is controlled in the *datasources* key in the indexsearcher:
 
 To search all local datasources:
 
