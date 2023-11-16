@@ -18,9 +18,31 @@ Include in profile
 - [s4-show-hide](../tools/#s4-show-hide)
 - [s4-details-themes-related-plugin](../tools/#s4-details-themes-related-plugin)
 
-#### These tools are specifically for use with s4-plugin-onedoor  
-- s4-onedoor-mapclick-plugin - create a cross hair icon in search box. Show results in s4  
-- s4-onedoor-mapclick - create a menu item i Spatial Map - Open result in OneDoor Web  
+#### These tools are specifically for use with s4-plugin-onedoor and emulate clicking on big map in OneDoor  
+- s4-onedoor-mapclick-plugin - create an $${\colororange}orange cross hair icon}$$ in search box. **Show results in s4**  
+- s4-onedoor-mapclick - create a **menu item** i Spatial Map - **Open result in OneDoor Web**  
+
+**__Requirement__**  
+A geometry Searcher __must__ be defined in OneDoor:  
+```yaml  
+  geometrysearcher:
+    _type: Septima.Search.ClientSearcher
+    _options:
+      singular: Geometry
+      plural: Geometries
+      isAsync: false
+      usesGeoFunctions: true
+      provider:
+        _type: Septima.Search.GeometrySearchProvider
+    detailhandlers:
+      - ...
+      - ...
+```  
+and registered with the controller:  
+```yaml  
+    - _ref: $.searchers.geometrysearcher # kun til geografiske opslag
+```  
+
 
 ## Profile example:
 ```javascript  
