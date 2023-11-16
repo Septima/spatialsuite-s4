@@ -19,8 +19,8 @@ Include in profile
 - [s4-details-themes-related-plugin](../tools/#s4-details-themes-related-plugin)
 
 #### These tools are specifically for use with s4-plugin-onedoor and emulate clicking on big map in OneDoor  
-- s4-onedoor-mapclick-plugin - create an $${\colororange}orange cross hair icon}$$ in search box. **Show results in s4**  
-- s4-onedoor-mapclick - create a **menu item** i Spatial Map - **Open result in OneDoor Web**  
+- s4-onedoor-mapclick-plugin - creates an ${\color{orange}orange}$  cross hair icon in search box. **Show results in s4**  
+- s4-onedoor-mapclick - creates a **menu item** i Spatial Map - **Open result in OneDoor Web**  
 
 **__Requirement__**  
 A geometry Searcher __must__ be defined in OneDoor:  
