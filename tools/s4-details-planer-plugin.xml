@@ -14,7 +14,7 @@
             var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer"];
 
             var sqDetailsHandler = new Septima.Search.SqDetailsHandler({
-                buttonText: "Planer dawa/mat",
+                buttonText: "Planer",
                 noResultsListItem: {
                     type: "labelvalue",
                     label: "Der er ikke fundet nogen planer"}

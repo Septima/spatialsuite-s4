@@ -907,9 +907,14 @@ function addPrintButtonToSearcher(searcher){
 }
 
 function s4_getGstAuthParams(){
-	var login = spm.getSession().getParam('s4.gst.login');
-	var password = spm.getSession().getParam('s4.gst.password');
-	return {login: login, password: password};
+    var token = spm.getSession().getParam('s4.gst.token');
+    if (token) {
+        return {token: token}
+    } else {
+        var login = spm.getSession().getParam('s4.gst.login');
+        var password = spm.getSession().getParam('s4.gst.password');
+        return {login: login, password: password};
+    }
 }
 
 function Searchlast2()

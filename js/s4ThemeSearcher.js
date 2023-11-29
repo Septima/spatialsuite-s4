@@ -638,12 +638,13 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var theme = group.themes[k];
             theme.score = 0;
             for (var i=0;i<queryTerms.length;i++){
-                var term = queryTerms[i].toLowerCase();
-                if (theme.displayname.toLowerCase().indexOf(term)==0){
+                var queryTerm = queryTerms[i].toLowerCase();
+                if (theme.displayname.toLowerCase().indexOf(queryTerm)==0)
+                    theme.score += 3;
+                if (this.longMatch(queryTerm, theme.termsToSearch))
                     theme.score += 2;
-                }else if (this.match(term, theme.termsToSearch)){
+                else if (this.shortMatch(queryTerm, theme.termsToSearch))
                     theme.score += 1;
-                }
             }
             if (theme.score > 0){
                 themes.push(theme);
@@ -661,15 +662,37 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }
     },
     
-    match: function(testTerm, terms){
-        for (var i=0;i<terms.length;i++){
-            if (terms[i].indexOf(testTerm)==0){
-                return true;
+    shortMatch: function(queryTerm, themeTerms){
+        if (queryTerm.length < 2) {
+            return false
+        } else {
+            if (queryTerm.length < 4) {
+                for (var i=0;i<themeTerms.length;i++){
+                    if (themeTerms[i].indexOf(queryTerm)==0){
+                        return true;
+                    }
+                }
             }
         }
         return false;
     },
-    
+
+    longMatch: function(queryTerm, themeTerms){
+        if (queryTerm.length < 4) {
+            return false
+        } else {
+            if (queryTerm.length > 3) {
+                for (var i=0;i<themeTerms.length;i++){
+                    if (themeTerms[i].indexOf(queryTerm) > -1){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    },
+
+
     getCopyRightLink: function(result){
         var link = null;
         var theme = result.data.theme;

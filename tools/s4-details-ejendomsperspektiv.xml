@@ -32,6 +32,9 @@
 				fetcher: fetcher,
 				onSelect: s4Hit
 			};
+            if (_s4Params.municipality != "*"){
+                searcherOptions.kommunekode = _s4Params.municipality
+            }
             var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(searcherOptions);
             var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(searcherOptions);
 
