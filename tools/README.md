@@ -440,7 +440,7 @@ Du kan nu
 For at se vurderinger skal du bruge din egen tjeneste-bruger hos Datafordeleren.    
 * Den får du her: https://datafordeler.dk/vejledning/brugeradgang/brugeroprettelse/  
 
-Og ansøge om at din bruger får adgang til VUR.  
+Og ansøge om at din bruger får adgang til "Ejendomsvurdering (REST)".  
 * Vejledning: https://datafordeler.dk/vejledning/brugeradgang/anmodning-om-adgang/ejendomsvurdering-vur/  
 
 Når du har en tjenestebruger med adgang skriver du sådan her i profilen:  
