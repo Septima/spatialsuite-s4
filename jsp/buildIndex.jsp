@@ -39,6 +39,9 @@
     <script type="text/javascript" src="<%=searchScript%>" charset="UTF-8"></script>
     
 	<style type="text/css">
+		body {
+			font-family: "Helvetica", "Arial", sans-serif;
+		}
 		#inputcontainer {
 		    width: 400px;
 		}
