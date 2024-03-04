@@ -380,6 +380,7 @@ Include in profile:
 Only relevant in Denmark.  
 
 Vis planer for hus- og matrikelnumre.  
+Vis link til kort.plandata.dk
 
 Inkludér in profil:  
 ```xml
@@ -390,12 +391,17 @@ Inkludér in profil:
 ```xml
 <tool module="s4" name="s4-details-planer-plugin">
   <jsonconfig>
-    {"targets": ["husnummer", "matrikelnummer"]}
+    {
+      "targets": ["husnummer", "matrikelnummer"],
+      "links": ["plankort"],
+    }
   </jsonconfig>
 </tool>
-```
+```  
+Hvis link ikke skal vises så skriv således `"links": []`  
 
-**_OBS_**: Der søges med INTERSECTS mod plansystemet. Planer som grænser op til matrikelnummeret, men ikke overlapper, (kanter mødes) bliver fundet
+**_OBS_**: Der søges med INTERSECTS mod plansystemet. Planer som grænser op til matrikelnummeret, men ikke overlapper, (kanter mødes) bliver fundet  
+
 ### <a name="s4-details-planinfo-plugin"></a>s4-details-planinfo-plugin    
 Only relevant in Denmark  
 
@@ -409,6 +415,7 @@ Viser info om planer fra plansystemet
 Only relevant in Denmark.  
   
 Vis DAGI-information d.v.s. kommune, opstillingskreds, politikreds, postdistrikt, region, retskreds og sogn for hus- og matrikelnumre  
+Inkluderer link til SDFI-kortet
 
 Inkludér in profil:  
 ```xml
@@ -420,11 +427,14 @@ _**Valgfrit**_: Man kan angive hvornår toolet skal være aktivt og hvilke resul
   <jsonconfig>
     {
       "targets": ["husnummer", "matrikelnummer"],
+      "links": ["sdfekort"],
       "fields":  ["kommuner_result", "opstillingskredse_result", "politikredse_result", "postdistrikter_result", "regioner_result", "retskredse_result", "sogne_result"]
     }
    </jsonconfig>
 </tool>
 ```  
+Hvis link ikke skal vises så skriv således `"links": []`  
+
   
 ### <a name="s4-details-ejendomsperspektiv"></a>s4-details-ejendomsperspektiv     
 Virker kun i Danmark  

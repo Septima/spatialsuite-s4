@@ -434,8 +434,15 @@ function s4_init (params){
 
             //Etablér skraaFotoProvider
             var skraaFotoProvider
-            if (_s4Params.skraafototoken)
-                skraaFotoProvider = new Septima.Search.SkraafotoProvider({token: _s4Params.skraafototoken})
+            if (_s4Params.skraafototoken) {
+                skraaFotoProvider = new Septima.Search.ComposedDetailsHandler({
+                    buttonText: "Skråfoto"
+                });
+                var linksHandler = new Septima.Search.OffentligeLinksProvider({more: false, links: ["skraafoto_dataforsyningen"]})
+                skraaFotoProvider.addDetailsHandler(linksHandler);
+                var skraaFotoProvider_real = new Septima.Search.SkraafotoProvider({token: _s4Params.skraafototoken})
+                skraaFotoProvider.addDetailsHandler(skraaFotoProvider_real);
+            }
     
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
             	var dawaSearcherOptions = {onSelect: s4DawaHit};
@@ -487,10 +494,10 @@ function s4_init (params){
             	var s4IndexSearcher = new Septima.Search.S4IndexSearcher(s4IndexSearcherOptions);
             	controller.addSearcher( s4IndexSearcher );
                 _s4Params.indexsearcher.searcher = s4IndexSearcher;
-                if (_s4Params.indexsearcher.offentligelinks)
-                    s4IndexSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
                 if (skraaFotoProvider && _s4Params.indexsearcher.skraafoto)
                     s4IndexSearcher.addDetailHandlerDef(skraaFotoProvider);
+                if (_s4Params.indexsearcher.offentligelinks)
+                    s4IndexSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
             }
         	
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
@@ -527,10 +534,10 @@ function s4_init (params){
                     controller.addSearcher( geoStednavnSearcher);
                     _s4Params.geostednavnesearcher.searcher = geoStednavnSearcher;
 
-                    if (_s4Params.geostednavnesearcher.offentligelinks)
-                        geoStednavnSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
                     if (skraaFotoProvider && _s4Params.geostednavnesearcher.skraafoto)
                         geoStednavnSearcher.addDetailHandlerDef(skraaFotoProvider); 
+                    if (_s4Params.geostednavnesearcher.offentligelinks)
+                        geoStednavnSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
                 }
             }
             
@@ -570,10 +577,10 @@ function s4_init (params){
             	var cvrsearcher = new Septima.Search.DataApi.CvrSearcher(cvrSearcherOptions);
             	controller.addSearcher(cvrsearcher);
                 _s4Params.cvrsearcher.searcher = cvrsearcher;
-                if (_s4Params.cvrsearcher.offentligelinks)
-                    cvrsearcher.addDetailHandlerDef(offentligeKortLinksProvider);
                 if (skraaFotoProvider && _s4Params.cvrsearcher.skraafoto)
                     cvrsearcher.addDetailHandlerDef(skraaFotoProvider); 
+                if (_s4Params.cvrsearcher.offentligelinks)
+                    cvrsearcher.addDetailHandlerDef(offentligeKortLinksProvider);
             }
 
             //Collect searchers that have been pushed until now

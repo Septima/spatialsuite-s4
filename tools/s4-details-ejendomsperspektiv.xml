@@ -37,6 +37,37 @@
             }
             var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(searcherOptions);
             var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(searcherOptions);
+            var enhedsSearcher = new Septima.Search.Datafordeler.EnhedsSearcher(searcherOptions);
+
+
+            //BBR-infohandler
+            var linksHandler1 =  new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
+            var linksHandler2 =  new Septima.Search.Datafordeler.OffentligeLinks({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
+            var bbrInfoProvider_real = new Septima.Search.Datafordeler.BbrInfo({
+                fetcher: fetcher,
+                enhedssearcher: enhedsSearcher,
+                bygningssearcher: bygningsSearcher,
+                ejendomssearcher: ejendomsSearcher
+                });
+
+            var detailHandlers = [linksHandler1, linksHandler2, bbrInfoProvider_real]
+
+            var bbrInfoProvider = new Septima.Search.ComposedDetailsHandler({
+                    buttonText: "BBR-information",
+                    detailshandlers: detailHandlers
+            });
+            ejendomsSearcher.addDetailHandlerDef(bbrInfoProvider);
+            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled) {
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(bbrInfoProvider);
+            }
+
+            var bbrInfoProvider_more = new Septima.Search.ComposedDetailsHandler({
+                    buttonText: "BBR-information",
+                    detailshandlers: detailHandlers,
+                    more: true
+            });
+            bygningsSearcher.addDetailHandlerDef(bbrInfoProvider_more);
+            enhedsSearcher.addDetailHandlerDef(bbrInfoProvider_more);
 
             //EjendomsInfoProvider
             var ejendomsInfoProviderOptions = {
@@ -100,24 +131,17 @@
             var bygningerForEjendomProvider = new Septima.Search.Datafordeler.BygningerForEjendom(bygningerForEjendomOptions);
             ejendomsSearcher.addDetailHandlerDef(bygningerForEjendomProvider);
 
-            //Septima.Search.Datafordeler.BygningsInfoProvider
-            var bygningsInfoProviderOptions = {
-				fetcher: fetcher,
-                ejendomsSearcher: ejendomsSearcher,
-                more: true
-            };
-            var bygningsInfoProvider = new Septima.Search.Datafordeler.BygningsInfoProvider(bygningsInfoProviderOptions);
-            bygningsSearcher.addDetailHandlerDef(bygningsInfoProvider);
-
-            //OffentligeLinks
-            var offentligeLinksOptions = {
-                links: ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "skraafoto_dataforsyningen", "plankort"]
-            };
-            var offentligeLinksProvider = new Septima.Search.Datafordeler.OffentligeLinks(offentligeLinksOptions);
-            ejendomsSearcher.addDetailHandlerDef(offentligeLinksProvider);
+            //Plan info
 
             //SqDetailsHandler (Planer)
             if (_s4Params.plansearcher && _s4Params.plansearcher.enabled) {
+
+                var planInfo = new Septima.Search.ComposedDetailsHandler({
+                    buttonText: "Planer"
+                });
+                var linksHandler = new Septima.Search.Datafordeler.OffentligeLinks({links : ["plankort"]});
+                planInfo.addDetailsHandler(linksHandler);
+
                 var sqDetailsHandlerOptions = {
                     buttonText: "Planer",
                     noResultsListItem: {
@@ -128,7 +152,9 @@
                     searchers: [_s4Params.plansearcher.searcher]
                 };
                 var sqDetailsHandler = new Septima.Search.SqDetailsHandler(sqDetailsHandlerOptions);
-                ejendomsSearcher.addDetailHandlerDef(sqDetailsHandler);
+                planInfo.addDetailsHandler(sqDetailsHandler);
+
+                ejendomsSearcher.addDetailHandlerDef(planInfo);
             }
 
             if (useVur) {
@@ -139,6 +165,13 @@
                 var vurderingsHandler = new Septima.Search.Datafordeler.VurderingsHandler(vurderingsHandlerOptions);
                 ejendomsSearcher.addDetailHandlerDef(vurderingsHandler);
             }
+
+            //OffentligeLinks
+            var offentligeLinksOptions = {
+                links: ["jfa","bbrmeddelelse","boligejer.dk","vurdering","bbkort","ois", "skraafoto_dataforsyningen", "plankort"]
+            };
+            var offentligeLinksProvider = new Septima.Search.Datafordeler.OffentligeLinks(offentligeLinksOptions);
+            ejendomsSearcher.addDetailHandlerDef(offentligeLinksProvider);
 
            	_s4Searchers.push({
            		searcher : ejendomsSearcher,
@@ -152,6 +185,11 @@
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
 
+           	_s4Searchers.push({
+           		searcher : enhedsSearcher,
+           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+           	});
 
 
 		[endif]

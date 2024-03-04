@@ -10,7 +10,7 @@
     [if: ModuleDefined("s4") ]
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
                 var links = this.jsonConfig.links ? this.jsonConfig.links : ["skraafoto_dataforsyningen", "jfa","bbrmeddelelse","ois", "sdfekort", "plankort"];
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: true, links: links}));
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links}));
             }
     [endif]
     ]]>

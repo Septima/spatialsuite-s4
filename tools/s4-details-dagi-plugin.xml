@@ -12,21 +12,32 @@
         if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
 
             var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer"];
+            var links = this.jsonConfig.links ? this.jsonConfig.links : ["sdfekort"];
             var fields = this.jsonConfig.fields ? this.jsonConfig.fields : ['kommuner_result', 'opstillingskredse_result', 'politikredse_result', 'postdistrikter_result', 'regioner_result', 'retskredse_result', 'sogne_result'];
+
+            var composedHandler = new Septima.Search.ComposedDetailsHandler({
+                buttonText: "Administrativ inddeling"
+            });
+
+            if (links.length > 0) {
+                var linksHandler = new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links})
+                composedHandler.addDetailsHandler(linksHandler);
+            }
 
             var s4DagiInfoProviderOptions = {
                 geoSearcher: _s4Params.geosearcher.searcher,
                 fields:  fields
             };
-            
             var s4DagiInfoProvider = new Septima.Search.DagiInfoProvider(s4DagiInfoProviderOptions);
 
+            composedHandler.addDetailsHandler(s4DagiInfoProvider);
+
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && targets.includes("husnummer")){
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(s4DagiInfoProvider);
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(composedHandler);
             }
 
             if (targets.includes("matrikelnummer")){
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(s4DagiInfoProvider, "matrikelnumre");
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(composedHandler, "matrikelnumre");
             }
 
         }
