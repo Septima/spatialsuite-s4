@@ -43,20 +43,17 @@
 	            },
                 
                 //Septima Search Server
-                /*
                 s3searcher: {
                     enabled: true,
                     info: true,
                     print: true,
-                    showLinkToWeb: false,  // optional default false
+                    showLinkToWeb: true,
                     host: "https://onedoor.test.septima.dk",
-                    //organisation/service
                     organisation: "septima",
-                    configuration: "demo",
-                    authorization: {Bearer: {token: "xxxxxxxxx"} } // Include if OneDoor server has been secured
+                    configuration: "kommune"
                 },
 
-                */
+                /*
                 s3searcher: {
                     enabled: true,
                     info: true,
@@ -67,6 +64,7 @@
                     organisation: "kbh",
                     configuration: "demo"
                 },
+                */
 
                 //Themes in profile
                 themesearcher: {enabled: true},

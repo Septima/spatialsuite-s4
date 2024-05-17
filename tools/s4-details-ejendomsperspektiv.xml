@@ -12,49 +12,47 @@
  			var _s4Searchers = window["_s4Searchers"];
             var username;
             var password;
-            var fetcherOptions;
+            var dafFetcherOptions;
             var useVur = false;
             if (this.jsonConfig.datafordeler) {
-                fetcherOptions = {
+                dafFetcherOptions = {
                     username: this.jsonConfig.datafordeler.username,
                     password: this.jsonConfig.datafordeler.password
                 };
                 useVur = this.jsonConfig.datafordeler.useVur;
             } else {
-                fetcherOptions = {
+                dafFetcherOptions = {
                     username: "NHDAOPLIVC",
                     password: "Septima4You!!!"
                 };
             }
-            var fetcher = new Septima.Search.Datafordeler.Fetcher(fetcherOptions);
+            var dafFetcher = new Septima.Search.Datafordeler.Fetcher(dafFetcherOptions);
 
-			var searcherOptions = {
-				fetcher: fetcher,
+			var dafSearcherOptions = {
+				fetcher: dafFetcher,
 				onSelect: s4Hit
 			};
             if (_s4Params.municipality != "*"){
-                searcherOptions.kommunekode = _s4Params.municipality
+                dafSearcherOptions.kommunekode = _s4Params.municipality
             }
-            var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(searcherOptions);
-            var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(searcherOptions);
-            var enhedsSearcher = new Septima.Search.Datafordeler.EnhedsSearcher(searcherOptions);
+            var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(dafSearcherOptions);
+            var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(dafSearcherOptions);
+            var enhedsSearcher = new Septima.Search.Datafordeler.EnhedsSearcher(dafSearcherOptions);
 
 
             //BBR-infohandler
             var linksHandler1 =  new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
             var linksHandler2 =  new Septima.Search.Datafordeler.OffentligeLinks({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
             var bbrInfoProvider_real = new Septima.Search.Datafordeler.BbrInfo({
-                fetcher: fetcher,
+                fetcher: dafFetcher,
                 enhedssearcher: enhedsSearcher,
                 bygningssearcher: bygningsSearcher,
                 ejendomssearcher: ejendomsSearcher
-                });
-
-            var detailHandlers = [linksHandler1, linksHandler2, bbrInfoProvider_real]
+            });
 
             var bbrInfoProvider = new Septima.Search.ComposedDetailsHandler({
                     buttonText: "BBR-information",
-                    detailshandlers: detailHandlers
+                    detailshandlers: [linksHandler1, linksHandler2, bbrInfoProvider_real]
             });
             ejendomsSearcher.addDetailHandlerDef(bbrInfoProvider);
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled) {
@@ -63,7 +61,7 @@
 
             var bbrInfoProvider_more = new Septima.Search.ComposedDetailsHandler({
                     buttonText: "BBR-information",
-                    detailshandlers: detailHandlers,
+                    detailshandlers: [linksHandler1, linksHandler2, bbrInfoProvider_real],
                     more: true
             });
             bygningsSearcher.addDetailHandlerDef(bbrInfoProvider_more);
@@ -121,7 +119,6 @@
                 var bygningerForHusnummerJordstykke = new Septima.Search.Datafordeler.BygningerForHusnummerJordstykke(bygningerForHusnummerJordstykkeOptions)
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(bygningerForHusnummerJordstykke);
                 _s4Params.geosearcher.searcher.addDetailHandlerDef(bygningerForHusnummerJordstykke);
-
             }
 
             //BygningerForEjendom
@@ -130,6 +127,19 @@
             };
             var bygningerForEjendomProvider = new Septima.Search.Datafordeler.BygningerForEjendom(bygningerForEjendomOptions);
             ejendomsSearcher.addDetailHandlerDef(bygningerForEjendomProvider);
+
+            //tingbog:
+            var tingbogsSearcher = new Septima.Search.Tingbog.Searcher({
+                fetcher: new Septima.Search.Tingbog.Fetcher(),
+                redataFetcher: new Septima.Search.Redata.Fetcher(),
+                ejendomsSearcher: ejendomsSearcher,
+				onSelect: s4Hit
+            });
+            tingbogsSearcher.addDetailHandlerDef(new Septima.Search.Tingbog.InfoHandler());
+            var oplysningerForBfe = new Septima.Search.Tingbog.OplysningerForBfe({
+                searcher: tingbogsSearcher
+            });
+            ejendomsSearcher.addDetailHandlerDef(oplysningerForBfe);
 
             //Plan info
 
@@ -173,6 +183,7 @@
             var offentligeLinksProvider = new Septima.Search.Datafordeler.OffentligeLinks(offentligeLinksOptions);
             ejendomsSearcher.addDetailHandlerDef(offentligeLinksProvider);
 
+            // Add searchers to s4
            	_s4Searchers.push({
            		searcher : ejendomsSearcher,
            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
@@ -191,6 +202,11 @@
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
 
+           	_s4Searchers.push({
+           		searcher : tingbogsSearcher,
+           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
+           	});
 
 		[endif]
     ]]>

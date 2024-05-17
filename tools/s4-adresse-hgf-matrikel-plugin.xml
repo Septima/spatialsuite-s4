@@ -24,7 +24,7 @@
                 url: result.data.properties.jordstykke.href,
                 data: {format: "geojson", srid: "25832"},
                 success: function(result, data){
-                    s4DoInfo({title: data.properties.matrikelnr + ", " + data.properties.ejerlavnavn, geometry: data.geometry, searcher: result.searcher});
+                    s4DoInfo({title: data.properties.matrikelnr + ", " + data.properties.ejerlavnavn + " (" + result.title + ")", geometry: data.geometry, searcher: result.searcher});
                 }.bind( this, result)
             });
         }
