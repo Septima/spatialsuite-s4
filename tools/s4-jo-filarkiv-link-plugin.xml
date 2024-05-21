@@ -11,7 +11,7 @@
     </jssrc>
     <src><![CDATA[
         [if: ModuleDefined("s4") ]
-           var handler = new Septima.Search.FilarkivLinkForAdresseMatrikelHandler({kommunenavn: "[s4.jo.filarkiv.kommunenavn]"});
+           var handler = new Septima.Search.FilarkivLinkForAdresseMatrikelHandler({kommunenavn: "[s4.jo.filarkiv.kommunenavn]", kommunekode: _s4Params.municipality});
            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
                _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
            }
