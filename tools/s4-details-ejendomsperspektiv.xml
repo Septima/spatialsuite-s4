@@ -36,24 +36,27 @@
                 dafSearcherOptions.kommunekode = _s4Params.municipality
             }
             var ejendomsSearcher = new Septima.Search.Datafordeler.EjendomsSearcher(dafSearcherOptions);
-            var bygningsSearcher = new Septima.Search.Datafordeler.BygningsSearcher(dafSearcherOptions);
-            var enhedsSearcher = new Septima.Search.Datafordeler.EnhedsSearcher(dafSearcherOptions);
-
+            var bbrSearcher = new Septima.Search.Datafordeler.BbrSearcher(dafSearcherOptions);
 
             //BBR-infohandler
-            var linksHandler1 =  new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
-            var linksHandler2 =  new Septima.Search.Datafordeler.OffentligeLinks({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
+            var bbrLinksHandler1 =  new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
+            var bbrLinksHandler2 =  new Septima.Search.Datafordeler.OffentligeLinks({more: false, links: ["bbrmeddelelse","bbrejendom", "bbkort"]})
             var bbrInfoProvider_real = new Septima.Search.Datafordeler.BbrInfo({
                 fetcher: dafFetcher,
-                enhedssearcher: enhedsSearcher,
-                bygningssearcher: bygningsSearcher,
-                ejendomssearcher: ejendomsSearcher
+                bbrSearcher: bbrSearcher,
+                ejendomsSearcher: ejendomsSearcher
             });
+
+            var bbrSagProvider = new Septima.Search.Datafordeler.BbrSagProvider({
+                fetcher: dafFetcher,
+                bbrSearcher: bbrSearcher
+            })
 
             var bbrInfoProvider = new Septima.Search.ComposedDetailsHandler({
                     buttonText: "BBR-information",
-                    detailshandlers: [linksHandler1, linksHandler2, bbrInfoProvider_real]
+                    detailshandlers: [bbrLinksHandler1, bbrLinksHandler2, bbrInfoProvider_real, bbrSagProvider]
             });
+
             ejendomsSearcher.addDetailHandlerDef(bbrInfoProvider);
             if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled) {
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(bbrInfoProvider);
@@ -61,16 +64,17 @@
 
             var bbrInfoProvider_more = new Septima.Search.ComposedDetailsHandler({
                     buttonText: "BBR-information",
-                    detailshandlers: [linksHandler1, linksHandler2, bbrInfoProvider_real],
+                    detailshandlers: [bbrLinksHandler1, bbrLinksHandler2, bbrInfoProvider_real],
                     more: true
             });
-            bygningsSearcher.addDetailHandlerDef(bbrInfoProvider_more);
-            enhedsSearcher.addDetailHandlerDef(bbrInfoProvider_more);
+            bbrSearcher.addDetailHandlerDef(bbrInfoProvider_more);
+
+            bbrSearcher.addDetailHandlerDef(bbrSagProvider);
 
             //EjendomsInfoProvider
             var ejendomsInfoProviderOptions = {
                 searcher: ejendomsSearcher,
-                bygningsSearcher: bygningsSearcher,
+                bygningsSearcher: bbrSearcher,
                 more: true
             };
 
@@ -111,22 +115,18 @@
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
                 _s4Params.geosearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
 
-                //BygningerForHusnummerJordstykke
-                var bygningerForHusnummerJordstykkeOptions = {
-                    searcher: bygningsSearcher,
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(bbrSagProvider);
+
+                //bygningerForX
+                var bygningerForXOptions = {
+                    searcher: bbrSearcher,
                     more: true
                 };
-                var bygningerForHusnummerJordstykke = new Septima.Search.Datafordeler.BygningerForHusnummerJordstykke(bygningerForHusnummerJordstykkeOptions)
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(bygningerForHusnummerJordstykke);
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(bygningerForHusnummerJordstykke);
+                var bygningerForX = new Septima.Search.Datafordeler.Bygninger(bygningerForXOptions)
+                _s4Params.dawasearcher.searcher.addDetailHandlerDef(bygningerForX);
+                _s4Params.geosearcher.searcher.addDetailHandlerDef(bygningerForX);
+                ejendomsSearcher.addDetailHandlerDef(bygningerForX);
             }
-
-            //BygningerForEjendom
-            var bygningerForEjendomOptions = {
-                bygningssearcher: bygningsSearcher
-            };
-            var bygningerForEjendomProvider = new Septima.Search.Datafordeler.BygningerForEjendom(bygningerForEjendomOptions);
-            ejendomsSearcher.addDetailHandlerDef(bygningerForEjendomProvider);
 
             //tingbog:
             var tingbogsSearcher = new Septima.Search.Tingbog.Searcher({
@@ -191,13 +191,7 @@
            	});
 
            	_s4Searchers.push({
-           		searcher : bygningsSearcher,
-           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
-           		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
-           	});
-
-           	_s4Searchers.push({
-           		searcher : enhedsSearcher,
+           		searcher : bbrSearcher,
            		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
