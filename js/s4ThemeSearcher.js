@@ -43,20 +43,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 //        this.registerType(this.source, this.themesPhrase);
 //        this.registerType(this.source, this.visibleThemesPhrase);
 
-        var themeType = new Septima.Search.ResultType({
-            id: this.themesPhrase,
-            singular: this.themePhrase,
-            plural: this.themesPhrase
-          });
-
-        this.registerType(this.source, themeType);
-
-        var visibleThemeType = new Septima.Search.ResultType({
-            id: this.visibleThemesPhrase,
-            singular: this.visibleThemesPhrase,
-            plural: this.visibleThemesPhrase
-          });
-        this.registerType(this.source, visibleThemeType);
         
 
         //Internal structures used to hold data
@@ -131,9 +117,41 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         
         //Sort groups
         this.groups.sort(function(g1, g2){
-            return (g1.displayname.localeCompare(g2.displayname));
+            if (g1.displayname === "Mine temaer")
+                return -1
+            else if (g2.displayname === "Mine temaer")
+                return 1
+            else
+                return (g1.displayname.localeCompare(g2.displayname));
         });
-        
+
+
+        //this.registerType(this.source, "Alle temaer")
+
+        var themeType = new Septima.Search.ResultType({
+            id: this.themesPhrase,
+            singular: this.themePhrase,
+            plural: this.themesPhrase
+          });
+
+        this.registerType(this.source, themeType);
+
+        //TODO: Kun hvis der er userthemes
+        this.registerType(this.source, "Mine temaer")
+
+        var visibleThemeType = new Septima.Search.ResultType({
+            id: this.visibleThemesPhrase,
+            singular: this.visibleThemesPhrase,
+            plural: this.visibleThemesPhrase
+          });
+        this.registerType(this.source, visibleThemeType);
+
+        for (let groupInfo of this.groups) {
+            if (groupInfo.displayname !== "Mine temaer")
+                this.registerType(this.source, groupInfo.displayname)
+        }
+
+
         this.indexDone = true;
         
         setTimeout(Septima.bind(function () {
@@ -258,17 +276,18 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     var theme = groupElement;
                     if (this.isSelectable(theme)){
                         groupHasThemes = true;
+                        var themeType = theme.constructor.name
                         var themeDisplayname = this.getThemeDisplayName(theme);
                         var themeDescription = this.getThemeDescription(theme);
                         var terms = (themeDisplayname + " " + themeDescription).toLowerCase().split(" ");
                         var termsToSearch = [];
                         for (var k=0;k<terms.length;k++){
-                            term = terms[k];
+                            var term = terms[k];
                             if (term.length > 1){
                                 termsToSearch.push(term);
                             }
                         }
-                        var indexedTheme = {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": themeDisplayname, "group": groupInfo};
+                        var indexedTheme = {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme), "displayname": themeDisplayname, "group": groupInfo, "themeType": themeType};
                         groupInfo.themes.push(indexedTheme);
                         var datasource = this.getPrimaryDatasource(theme);
                         if (datasource){
@@ -285,7 +304,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
             if (groupHasThemes){
                 this.groups.push(groupInfo);
-                this.registerType(this.source, groupInfo.displayname)
+                //To early - must be sortedthis.registerType(this.source, groupInfo.displayname)
             }
     },
     
@@ -526,16 +545,21 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     },
     
     fetchIndexedData: function (query, caller) {
-        var groupName = "*";
 
         var queryResult = this.createQueryResult();
         
+        var groupName = "*";
         if (query.hasTarget){
             if (query.target.type && this.hasType(query.target.type) && query.target.type !== this.themesPhrase){
                 groupName = query.target.type;
+                var result = queryResult.addNewQuery(this.source, this.themesPhrase, "Alle temaer", "",  query.queryString, null, null);
+                result.image = Septima.Search.icons.details.back_black;
+        } else {
+                if (query.queryString === ""){
+                    var result = queryResult.addNewQuery(this.source, this.visibleThemesPhrase, this.visibleThemesPhrase, "", "", null, null);
+                    result.image = Septima.Search.s4Icons.themeSearcher.themeOnUri;
+                    }
             }
-            var result = queryResult.addNewQuery(this.source, this.visibleThemesPhrase, this.visibleThemesPhrase, "", "", null, null);
-            result.image = Septima.Search.s4Icons.themeSearcher.themeOnUri;
         }
         
         if (groupName == this.visibleThemesPhrase){
@@ -556,6 +580,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 
                 if (query.type == "list" || (query.type === "no-cut" && totalThemeCount <= query.limit) || (query.type === "no-cut" && matchingGroups.length <= query.limit)){
                     if ((query.type === "list" && (groupName !=='*' || totalThemeCount <= query.limit)) || (query.type === "no-cut" && totalThemeCount <= query.limit)) {
+                        //OK Her beslutter vi os for at vise temaer
                         let indexedThemesToShow = []
                         for (var i=0;i<matchingGroups.length;i++) {
                             indexedThemesToShow = indexedThemesToShow.concat(matchingGroups[i].themes);
@@ -567,16 +592,34 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                                 return b.score - a.score;
                             }
                         });
-                        for (var j=0;j<indexedThemesToShow.length;j++){
+                        var userthemes_own = []
+                        for (var j=0;j<indexedThemesToShow.length;j++){ 
+
                             var indexedTheme = indexedThemesToShow[j];
-                            var result1;
-                            if (query.hasTarget){
-                                result1 = queryResult.addResult(this.source, this.source, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
-                            }else{
-                                result1 = queryResult.addResult(this.source, this.source, indexedTheme.displayname + " (" + this.themePhrase + ")", indexedTheme.description, null, indexedTheme);
+                            if (indexedTheme.group.displayname === "Mine temaer") {
+                                userthemes_own.push(indexedTheme)
+                            } else {
+                                var result1;
+                                result1 = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
+                                if (groupName === "*")
+                                    result1.description = indexedTheme.group.displayname + (result1.description ? " > " + result1.description : "")
+                                if (!query.hasTarget)
+                                    result1.title = result1.title + " (" + this.themePhrase + ")"
+                                result1.image = indexedTheme.image;
+                                result1.id = indexedTheme.theme.name;
                             }
-                            result1.image = indexedTheme.image;
-                            result1.id = indexedTheme.theme.name;
+                        }
+                        //Ok er der noget i userthemes_own?
+                        if (userthemes_own.length > 1 && groupName !== "Mine temaer"){
+                            queryResult.addNewQuery(this.source, "Mine temaer", "Mine temaer" + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
+                        } else {
+                            for (let usertheme of userthemes_own){
+                                result1 = queryResult.addResult(this.source, usertheme.group.displayname, usertheme.displayname, usertheme.description, null, usertheme);
+                                if (groupName === "*")
+                                    result1.description = usertheme.group.displayname + (result1.description ? " > " + result1.description : "")
+                                if (!query.hasTarget)
+                                    result1.title = result1.title + " (" + this.themePhrase + ")"
+                                }
                         }
                     }else{
                         for (var i=0;i<matchingGroups.length;i++){
