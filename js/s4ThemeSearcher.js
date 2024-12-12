@@ -13,14 +13,31 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     initialize: function (options) {
         Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
         //Strings
-        this.visibleThemesPhrase = cbKort.getSession().getString('s4.themesearcher.visiblethemes');
-        //this.toolsPhrase = cbKort.getSession().getString('s4.themesearcher.tools');
-        this.themePhrase = cbKort.getSession().getString('s4.themesearcher.theme');
-        this.themesPhrase = cbKort.getSession().getString('s4.themesearcher.themes');
-        this.showPhrase = cbKort.getSession().getString('s4.themesearcher.show');
-        this.hidePhrase = cbKort.getSession().getString('s4.themesearcher.hide');
-        this.showLockedPhrase = cbKort.getSession().getString('s4.themesearcher.show_locked');
-        this.hideLockedPhrase = cbKort.getSession().getString('s4.themesearcher.hide_locked');
+        this.visibleThemesPhrase = spm.getSession().getString('s4.themesearcher.visiblethemes')
+        this.themePhrase = spm.getSession().getString('s4.themesearcher.theme');
+        this.themesPhrase = spm.getSession().getString('s4.themesearcher.themes');
+        this.showPhrase = spm.getSession().getString('s4.themesearcher.show');
+        this.hidePhrase = spm.getSession().getString('s4.themesearcher.hide');
+        this.showLockedPhrase = spm.getSession().getString('s4.themesearcher.show_locked');
+        this.hideLockedPhrase = spm.getSession().getString('s4.themesearcher.hide_locked');
+
+        this.privateUserThemesGroupDisplayName =  spm.getSession().getString('standard.themegroups.privateuserthemes');
+        this.privateUserThemesGroupName =  "userthemes-private";
+        this.publicUserThemesGroupDisplayName =  spm.getSession().getString('standard.themegroups.publicuserthemes');
+        this.publicUserThemesGroupName =  "userthemes-public";
+
+        this.privateUserDrawingsGroupDisplayName =  spm.getSession().getString('standard.themegroups.privateuserdrawings');
+        this.privateUserDrawingsGroupName =  "userdrawings-private";
+        this.publicUserDrawingsGroupDisplayName =  spm.getSession().getString('standard.themegroups.publicuserdrawings');
+        this.publicUserDrawingsGroupName =  "userdrawings-public";
+
+        /*
+
+        standard.themegroups.privateuserdrawings             = Mine skitser //userdrawings-private
+        standard.themegroups.privateuserthemes               = Mine temaer //userthemes-private
+        standard.themegroups.publicuserdrawings              = Andre brugeres skitser //userdrawings-public
+        standard.themegroups.publicuserthemes                = Andre brugeres temaer //userthemes-public
+        */
         
         //Icons
         this.themeOffUri = Septima.Search.s4Icons.themeSearcher.themeOffUri;
@@ -114,19 +131,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var themeGroup = themeGroups[i];
             this.doIndexForGroup(themeGroup, null);
         }
-        
-        //Sort groups
-        this.groups.sort(function(g1, g2){
-            if (g1.displayname === "Mine temaer")
-                return -1
-            else if (g2.displayname === "Mine temaer")
-                return 1
-            else
-                return (g1.displayname.localeCompare(g2.displayname));
-        });
-
-
-        //this.registerType(this.source, "Alle temaer")
 
         var themeType = new Septima.Search.ResultType({
             id: this.themesPhrase,
@@ -136,19 +140,58 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
         this.registerType(this.source, themeType);
 
-        //TODO: Kun hvis der er userthemes
-        this.registerType(this.source, "Mine temaer")
+        this.registerType(
+            this.source,
+            new Septima.Search.ResultType({
+                id: this.privateUserThemesGroupName,
+                singular: this.privateUserThemesGroupDisplayName,
+                plural: this.privateUserThemesGroupDisplayName,
+                iconURI: spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+            })
+        )
+        this.registerType(
+            this.source,
+            new Septima.Search.ResultType({
+                id: this.privateUserDrawingsGroupName,
+                singular: this.privateUserDrawingsGroupDisplayName,
+                plural: this.privateUserDrawingsGroupDisplayName,
+                iconURI: spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+            })
+        )
 
-        var visibleThemeType = new Septima.Search.ResultType({
-            id: this.visibleThemesPhrase,
-            singular: this.visibleThemesPhrase,
-            plural: this.visibleThemesPhrase
-          });
-        this.registerType(this.source, visibleThemeType);
+        this.registerType(
+            this.source,
+            new Septima.Search.ResultType({
+                id: this.visibleThemesPhrase,
+                singular: this.visibleThemesPhrase,
+                plural: this.visibleThemesPhrase
+            })
+        );
+
+        //Sort groups
+        this.groups.sort(function(g1, g2){
+            if (g1.name === this.privateUserThemesGroupName)
+                return -2
+            else if (g2.name === this.privateUserThemesGroupName)
+                return 2
+            else if (g1.name === this.privateUserDrawingsGroupName)
+                return -1
+            else if (g2.name === this.privateUserDrawingsGroupName)
+                return 1
+            else
+                return (g1.displayname.localeCompare(g2.displayname));
+        });
 
         for (let groupInfo of this.groups) {
-            if (groupInfo.displayname !== "Mine temaer")
-                this.registerType(this.source, groupInfo.displayname)
+            if (groupInfo.name !== this.privateUserThemesGroupName  && groupInfo.name !== this.privateUserDrawingsGroupName)
+                this.registerType(
+                    this.source,
+                    new Septima.Search.ResultType({
+                        id: groupInfo.name,
+                        singular: groupInfo.displayname,
+                        plural: groupInfo.displayname
+                    })
+                )
         }
 
 
@@ -304,7 +347,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
             if (groupHasThemes){
                 this.groups.push(groupInfo);
-                //To early - must be sortedthis.registerType(this.source, groupInfo.displayname)
             }
     },
     
@@ -543,6 +585,19 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
         }
     },
+        /*
+
+        this.privateUserThemesGroupDisplayName =  spm.getSession().getString('standard.themegroups.privateuserthemes');
+        this.privateUserThemesGroupName =  "userthemes-private";
+        this.publicUserThemesGroupDisplayName =  spm.getSession().getString('standard.themegroups.publicuserthemes');
+        this.publicUserThemesGroupName =  "userthemes-public";
+
+        this.privateUserDrawingsGroupDisplayName =  spm.getSession().getString('standard.themegroups.privateuserdrawings');
+        this.privateUserDrawingsGroupName =  "userdrawings-private";
+        this.publicUserDrawingsGroupDisplayName =  spm.getSession().getString('standard.themegroups.publicuserdrawings');
+        this.publicUserDrawingsGroupName =  "userdrawings-public";
+
+        */
     
     fetchIndexedData: function (query, caller) {
 
@@ -585,33 +640,47 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                         for (let matchingGroup of matchingGroups) {
                             indexedThemesToShow = indexedThemesToShow.concat(matchingGroup.themes);
                         }
-                        /*
-                        indexedThemesToShow.sort(function(a, b){
-                            if (a.score == b.score){
-                                return a.displayname.localeCompare(b.displayname)
-                            }else{
-                                return b.score - a.score;
-                            }
-                        });
-                        */
                         var userthemes_own = []
+                        var userthemes_other = []
+                        var userdrawings_own = []
+                        var userdrawings_other = []
                         for (let indexedTheme of indexedThemesToShow){ 
-                            if (indexedTheme.group.displayname === "Mine temaer")
-                                userthemes_own.push(indexedTheme)
-                            else
-                                this.addIndexedThemeToQueryResult(queryResult, indexedTheme, groupName, query.hasTarget)
+                            try {
+                                if (indexedTheme.group.name === this.privateUserThemesGroupName)
+                                    userthemes_own.push(indexedTheme)
+                                else if (indexedTheme.group.name === this.publicUserThemesGroupName)
+                                    userthemes_other.push(indexedTheme)
+                                else if (indexedTheme.group.name === this.privateUserDrawingsGroupName)
+                                    userdrawings_own.push(indexedTheme)
+                                else if (indexedTheme.group.name === this.publicUserDrawingsGroupName)
+                                    userdrawings_other.push(indexedTheme)
+                                else
+                                    this.addIndexedThemeToQueryResult(queryResult, indexedTheme, groupName, query.hasTarget)
+                                } catch (e) {
+                                    var r = 2
+                            }
                         }
                         //Ok er der noget i userthemes_own?
-                        if (userthemes_own.length > 1 && groupName !== "Mine temaer"){
-                            queryResult.addNewQuery(this.source, "Mine temaer", "Mine temaer" + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
+                        if (userthemes_own.length > 1 && groupName !== this.privateUserThemesGroupName){
+                            let newQuery = queryResult.addNewQuery(this.source, this.privateUserThemesGroupName, this.privateUserThemesGroupDisplayName + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
+                            newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
                         } else {
                             for (let usertheme of userthemes_own){
                                 this.addIndexedThemeToQueryResult(queryResult, usertheme, groupName, query.hasTarget)
                             }
                         }
+                        //Ok er der noget i userdrawings_own?
+                        if (userdrawings_own.length > 1 && groupName !== this.privateUserDrawingsGroupName){
+                            let newQuery = queryResult.addNewQuery(this.source, this.privateUserDrawingsGroupName, this.privateUserDrawingsGroupDisplayName + " (" + userdrawings_own.length + ")", null, query.queryString, null, null, null)
+                            newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+                        } else {
+                            for (let usertheme of userdrawings_own){
+                                this.addIndexedThemeToQueryResult(queryResult, usertheme, groupName, query.hasTarget)
+                            }
+                        }
                     }else{
                         for (let matchingGroup of matchingGroups){
-                            var type = matchingGroup.displayname;
+                            var type = matchingGroup.name;
                             var result3 = queryResult.addNewQuery(this.source, type, matchingGroup.displayname, null, query.queryString, null, null, null)
                             result3.image = this.themeGroupIconURI;
                         }
@@ -621,7 +690,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     
                 } else if (query.type == "cut"){
                     for (var i=0;i<matchingGroups.length && i < query.limit;i++){
-                        var type = matchingGroups[i].displayname;
+                        var type = matchingGroups[i].name;
                         var result3 = queryResult.addNewQuery(this.source, type, matchingGroups[i].displayname, null, "", null, null, null)
                         result3.image = this.themeGroupIconURI;
                     }
@@ -634,8 +703,13 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
 
+    addMatchingGroupToQueryResult: function() {
+        let newQuery = queryResult.addNewQuery(this.source, this.privateUserThemesGroupName, this.privateUserThemesGroupDisplayName + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
+        newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+},
+
     addIndexedThemeToQueryResult: function (queryResult, indexedTheme, groupName, hasTarget) {
-        let result = queryResult.addResult(this.source, indexedTheme.group.displayname, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
+        let result = queryResult.addResult(this.source, indexedTheme.group.name, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
         if (groupName === "*")
             result.description = indexedTheme.group.displayname + (result.description ? " > " + result.description : "")
         if (!hasTarget)
@@ -647,7 +721,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (queryString === ""){
             for (var j=0;j<this.groups.length;j++){
                 var group = this.groups[j];
-                if (groupName === "*" || (group.displayname.toLowerCase() === groupName.toLowerCase())){
+                if (groupName === "*" || (group.name.toLowerCase() === groupName.toLowerCase())){
                     matchingGroups.push(group);
                 }
             }
@@ -655,7 +729,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             var queryTerms = queryString.split(" ");
             for (var j=0;j<this.groups.length;j++){
                 var group = this.groups[j];
-                if (groupName == "*" || group.displayname.toLowerCase() == groupName.toLowerCase()){
+                if (groupName == "*" || group.name.toLowerCase() == groupName.toLowerCase()){
                     var themes = this.getScoredGroupThemes(group, queryTerms);
                     if (themes.length>0){
                         matchingGroups.push({"group": group.group, "themes": themes, "displayname": group.displayname});
