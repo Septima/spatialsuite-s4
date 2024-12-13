@@ -824,7 +824,7 @@ function s4Hit(result, geometryBehavior){
 
 function themeHit(result){
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
-    if (!result.data.theme.visible){
+    if (!result.data.theme.isVisible()){
         result.searcher.toggleTheme(result);
     	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
     }
