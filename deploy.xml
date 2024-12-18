@@ -20,12 +20,12 @@
 
 <!--production
 -->
-  <param name="s4.search.version">//search.cdn.septima.dk/5.63.5</param>
+  <param name="s4.search.version">//search.cdn.septima.dk/5.63.6</param>
   <param name="s4.search.build">septimasearch.min.ie11.js</param>
 
 <!-- Dev
   <param name="s4.search.version">http://localhost:7001</param>
-  <param name="s4.search.build">septimasearch.debug.ie11.js</param>
+  <param name="s4.search.build">septimasearch.min.ie11.js</param>
  -->
   
   <param name="s4.gst.login" ignore="Not IsDefined(module.gst.login)">[module.gst.login]</param>
