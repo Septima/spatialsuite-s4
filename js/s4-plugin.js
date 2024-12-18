@@ -610,7 +610,12 @@ function s4_init (params){
             };
             
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
-	            var themeSearcher = new Septima.Search.ThemeSearcher({onSelect: themeHit});
+                var themeSearcherOptions = {
+                    onSelect: themeHit,
+                    userThemes : _s4Params.themesearcher.userThemes,
+                    userDrawings : _s4Params.themesearcher.userDrawings
+                }
+	            var themeSearcher = new Septima.Search.ThemeSearcher(themeSearcherOptions);
 	            controller.addSearcher(themeSearcher);
                 _s4Params.themesearcher.searcher = themeSearcher;
             }
@@ -824,7 +829,7 @@ function s4Hit(result, geometryBehavior){
 
 function themeHit(result){
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
-    if (!result.data.theme.visible){
+    if (!result.data.theme.isVisible()){
         result.searcher.toggleTheme(result);
     	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
     }

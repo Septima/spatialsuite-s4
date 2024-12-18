@@ -70,7 +70,7 @@
                 indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search", offentligelinks: true, skraafoto: true},
 	            
                 //Themes in profile
-                themesearcher: {enabled: true},
+                themesearcher: {enabled: true, userThemes: "all", userDrawings: "all"},
 	            
                 //Profiles
                 profilesearcher: {enabled: true},
