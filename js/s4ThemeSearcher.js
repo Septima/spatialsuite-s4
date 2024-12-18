@@ -58,11 +58,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.toggleCustomButtonDef= [{"buttonText": this.showPhrase + "/" + this.hidePhrase, "buttonImage": this.toggleIconUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 
         this.source = this.themesPhrase;
-        options.source = this.source;
-//        this.registerType(this.source, this.themesPhrase);
-//        this.registerType(this.source, this.visibleThemesPhrase);
 
-        
+        //Variables
+        this.userThemesIncluded = "all" // "none", "private", "all"
+        this.userDrawingsIncluded = "all" // "none", "private", "all"
+
+        if (options.userThemes)
+            this.userThemesIncluded = options.userThemes
+
+        if (options.userDrawings)
+            this.userDrawingsIncluded = options.userDrawings
 
         //Internal structures used to hold data
         
@@ -71,6 +76,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.groups //array of groups
             [{group: {group}, themes: [indexedTheme, ...], displayname: "groupNameUsedAsType"}], where
                 group = cbKort.themeContainer.elements[i]
+
+        , hvor indexedTheme er
+        {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme, groupInfo), "displayname": themeDisplayname, "group": groupInfo, "themeType": themeType}        
          */
         this.datasources = {};
         /*
@@ -89,6 +97,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
             spm.getEvents().addListener("THEMESELECTOR_THEMESTORE_INITIALIZED", Septima.bind(function(){
                 this.doIndex();
+            }, this));
+            // Listen for Minimap events to update the theme list
+            spm.getEvents().addListener("THEMES_ADDED", Septima.bind(function(themes, monkeys){
+                let y = 2;
             }, this));
         }else{
             cbKort.events.addListener ('THEMESELECTOR_THEMESTORE_INITIALIZED', Septima.bind(function(){
@@ -129,9 +141,24 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         }else{
             themeGroups = cbKort.themeContainer.elements;
         }
+        
         for (var i=0;i<themeGroups.length;i++){
             var themeGroup = themeGroups[i];
-            this.doIndexForGroup(themeGroup, null);
+            if (themeGroup.name === this.privateUserThemesGroupName){
+                if (this.userThemesIncluded !== "none")
+                    this.doIndexForGroup(themeGroup, null);
+            } else if (themeGroup.name === this.publicUserThemesGroupName){
+                if (this.userThemesIncluded === "all")
+                    this.doIndexForGroup(themeGroup, null);
+            } else if (themeGroup.name === this.privateUserDrawingsGroupName){
+                if (this.userDrawingsIncluded !== "none")
+                    this.doIndexForGroup(themeGroup, null);
+            } else if (themeGroup.name === this.publicUserDrawingsGroupName){
+                if (this.userDrawingsIncluded === "all")
+                    this.doIndexForGroup(themeGroup, null);
+            } else {
+                this.doIndexForGroup(themeGroup, null);
+            }
         }
 
         var themeType = new Septima.Search.ResultType({
