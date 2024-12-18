@@ -198,7 +198,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         );
 
         //Sort groups
-        this.groups.sort(function(g1, g2){
+        this.groups.sort((g1, g2)=>{
             if (g1.name === this.privateUserThemesGroupName)
                 return -2
             else if (g2.name === this.privateUserThemesGroupName)
