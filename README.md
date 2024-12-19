@@ -21,7 +21,7 @@ Septima Search for Spatial Suite (s4) is a search tool.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: v 2.16.6
+- Latest: v 2.16.7
 - Previous:
   - [v 2.16.5](https://mailchi.mp/3b2a18bdeb28/version-2164-af-septima-search-til-spatial-suite-s4-20284774)
   - [v 2.16.4](https://mailchi.mp/3b2a18bdeb28/version-2164-af-septima-search-til-spatial-suite-s4-20284774)
@@ -61,7 +61,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.16.6: https://github.com/Septima/spatialsuite-s4/archive/2.16.6.zip   
+      2.16.7: https://github.com/Septima/spatialsuite-s4/archive/2.16.7.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
@@ -168,7 +168,7 @@ plansearcher: {enabled: true, info: true, print: true, targets: ['vedtagetlokalp
 indexsearcher: {enabled: false, info: true, print: true, datasources: "*", blankbehavior: "search"},
 
 //Themes in profile
-themesearcher: {enabled: true, userThemes: "all", userDrawings: "own"},
+themesearcher: {enabled: true, userThemes: "all", userDrawings: "own", searchDescription: true},
 
 //Profiles
 profilesearcher: {enabled: true},
