@@ -612,8 +612,9 @@ function s4_init (params){
             if ((_s4Params.themesearcher && _s4Params.themesearcher.enabled) || (_s4Params.clientsearcher && _s4Params.clientsearcher.enabled)){
                 var themeSearcherOptions = {
                     onSelect: themeHit,
-                    userThemes : _s4Params.themesearcher.userThemes,
-                    userDrawings : _s4Params.themesearcher.userDrawings
+                    userThemes: _s4Params.themesearcher.userThemes,
+                    userDrawings: _s4Params.themesearcher.userDrawings,
+                    searchDescription: _s4Params.themesearcher.searchDescription
                 }
 	            var themeSearcher = new Septima.Search.ThemeSearcher(themeSearcherOptions);
 	            controller.addSearcher(themeSearcher);

@@ -63,6 +63,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         if (options.userDrawings)
             this.userDrawingsIncluded = options.userDrawings
 
+        this.searchDescription = true
+        if (typeof options.searchDescription !== 'undefined')
+            this.searchDescription = options.searchDescription
+
         //Internal structures used to hold data
         
         this.groups = [];
@@ -373,16 +377,20 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                     var theme = groupElement;
                     if (this.isSelectable(theme)){
                         groupHasThemes = true;
+                        //TODO: Check if removable
                         var themeType = theme.constructor.name
                         var themeDisplayname = this.getThemeDisplayName(theme);
                         var themeDescription = this.getThemeDescription(theme);
-                        var terms = (themeDisplayname + " " + themeDescription).toLowerCase().split(" ");
+
+                        //TODO: Terms to respect what needs to be searched
+                        var stringToBeSearched = themeDisplayname;
+                        if (this.searchDescription)
+                            stringToBeSearched += themeDescription;
+                        var terms = stringToBeSearched.toLowerCase().split(" ");
                         var termsToSearch = [];
-                        for (var k=0;k<terms.length;k++){
-                            var term = terms[k];
-                            if (term.length > 1){
+                        for (let term of terms){
+                            if (term.length > 1)
                                 termsToSearch.push(term);
-                            }
                         }
                         var indexedTheme = {"theme": theme, "termsToSearch": termsToSearch, "description": themeDescription, "image": this.getThemeImage(theme, groupInfo), "displayname": themeDisplayname, "group": groupInfo, "themeType": themeType};
                         groupInfo.themes.push(indexedTheme);
