@@ -192,17 +192,34 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         );
 
         //Sort groups
+        /*
+        Mine temaer
+        Andre brugeres temaer,
+        Mine skitser,
+        Andres brugeres skitser
+        */
+        let getSortWeight = (themeGroup) => {
+            switch (themeGroup.name) {
+                case this.privateUserThemesGroupName:
+                    return -4;
+                case this.publicUserThemesGroupName:
+                    return -3;
+                case this.privateUserDrawingsGroupName:
+                    return -2;
+                case this.publicUserDrawingsGroupName:
+                    return -1;
+                default:
+                    return 0
+            }
+        }
+
         this.groups.sort((g1, g2)=>{
-            if (g1.name === this.privateUserThemesGroupName)
-                return -2
-            else if (g2.name === this.privateUserThemesGroupName)
-                return 2
-            else if (g1.name === this.privateUserDrawingsGroupName)
-                return -1
-            else if (g2.name === this.privateUserDrawingsGroupName)
-                return 1
-            else
+            let g1Weight = getSortWeight(g1);
+            let g2Weight = getSortWeight(g2);
+            if (g1Weight === g2Weight)
                 return (g1.displayname.localeCompare(g2.displayname));
+            else
+                return (g1Weight - g2Weight)
         });
 
         for (let groupInfo of this.groups) {
