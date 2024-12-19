@@ -12,6 +12,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     
     initialize: function (options) {
         Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
+
         //Strings
         this.visibleThemesPhrase = spm.getSession().getString('s4.themesearcher.visiblethemes')
         this.themePhrase = spm.getSession().getString('s4.themesearcher.theme');
@@ -30,14 +31,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.privateUserDrawingsGroupName =  "userdrawings-private";
         this.publicUserDrawingsGroupDisplayName =  spm.getSession().getString('standard.themegroups.publicuserdrawings');
         this.publicUserDrawingsGroupName =  "userdrawings-public";
-
-        /*
-
-        standard.themegroups.privateuserdrawings             = Mine skitser //userdrawings-private
-        standard.themegroups.privateuserthemes               = Mine temaer //userthemes-private
-        standard.themegroups.publicuserdrawings              = Andre brugeres skitser //userdrawings-public
-        standard.themegroups.publicuserthemes                = Andre brugeres temaer //userthemes-public
-        */
         
         //Icons
         this.themeOffUri = Septima.Search.s4Icons.themeSearcher.themeOffUri;
@@ -45,11 +38,12 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.themeOnUri = Septima.Search.s4Icons.themeSearcher.themeOnUri;
         this.themeOnLockUri = Septima.Search.s4Icons.themeSearcher.themeOnLockUri;
         this.toggleIconUri = Septima.Search.s4Icons.themeSearcher.toggleIconUri;
-        //this.toolsIconURI = Septima.Search.s4Icons.themeSearcher.toolsIconURI;
         this.defaultThemeIconURI = Septima.Search.s4Icons.themeSearcher.defaultThemeIconURI;
         this.iconURI = Septima.Search.s4Icons.themeSearcher.iconURI;
         this.themeGroupIconURI = Septima.Search.s4Icons.themeSearcher.themeGroupIconURI;
-        
+        this.userThemesGroupIconURI = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png";
+        this.userDrawingsGroupIconURI = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png";
+
         //ButtonDefs
         this.onCustomButtonDef= [{"buttonText": this.hidePhrase, "buttonImage": this.themeOnUri, "callBack": Septima.bind( this.toggleTheme, this)}];
         this.offCustomButtonDef= [{"buttonText": this.showPhrase, "buttonImage": this.themeOffUri, "callBack": Septima.bind( this.toggleTheme, this)}];
@@ -57,15 +51,15 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         this.offLockCustomButtonDef= [{"buttonText": this.showLockedPhrase, "buttonImage": this.themeOffLockUri, "callBack": Septima.bind( this.toggleTheme, this)}];
         this.toggleCustomButtonDef= [{"buttonText": this.showPhrase + "/" + this.hidePhrase, "buttonImage": this.toggleIconUri, "callBack": Septima.bind( this.toggleTheme, this)}];
 
-        this.source = this.themesPhrase;
 
         //Variables
-        this.userThemesIncluded = "all" // "none", "private", "all"
-        this.userDrawingsIncluded = "all" // "none", "private", "all"
+        this.source = this.themesPhrase;
 
+        this.userThemesIncluded = "all" // "none", "private", "all"
         if (options.userThemes)
             this.userThemesIncluded = options.userThemes
 
+        this.userDrawingsIncluded = "all" // "none", "private", "all"
         if (options.userDrawings)
             this.userDrawingsIncluded = options.userDrawings
 
@@ -175,7 +169,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 id: this.privateUserThemesGroupName,
                 singular: this.privateUserThemesGroupDisplayName,
                 plural: this.privateUserThemesGroupDisplayName,
-                iconURI: spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+                iconURI: this.userThemesGroupIconURI
             })
         )
         this.registerType(
@@ -184,7 +178,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 id: this.privateUserDrawingsGroupName,
                 singular: this.privateUserDrawingsGroupDisplayName,
                 plural: this.privateUserDrawingsGroupDisplayName,
-                iconURI: spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+                iconURI: this.userDrawingsGroupIconURI
             })
         )
 
@@ -214,8 +208,10 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         for (let groupInfo of this.groups) {
             if (groupInfo.name !== this.privateUserThemesGroupName && groupInfo.name !== this.privateUserDrawingsGroupName){
                 let iconUri = this.themeGroupIconURI
-                if (groupInfo.name === this.publicUserThemesGroupName || groupInfo.name === this.publicUserDrawingsGroupName)
-                    iconUri = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+                if (groupInfo.name === this.publicUserThemesGroupName)
+                    iconUri = this.userThemesGroupIconURI
+                else if (groupInfo.name === this.publicUserDrawingsGroupName)
+                    iconUri = this.userDrawingsGroupIconURI
                 this.registerType(
                     this.source,
                     new Septima.Search.ResultType({
@@ -321,9 +317,9 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             }
         }
         if (groupInfo.name === this.privateUserThemesGroupName || groupInfo.name === this.publicUserThemesGroupName)
-            return spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+            return this.userThemesGroupIconURI
         else if (groupInfo.name === this.privateUserDrawingsGroupName || groupInfo.name === this.publicUserDrawingsGroupName)
-            return spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+            return this.userDrawingsGroupIconURI
         else
             return this.defaultThemeIconURI;
     },
@@ -686,16 +682,16 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                             //Specielle grupper; hvis der er mere end et tema i dem så vis newQuery (så en millard skitser ikke forurener listen over alm temaer f.eks.)
                             if (matchingGroup.group.name === this.privateUserThemesGroupName && matchingGroup.themes.length > 1 && groupName !== this.privateUserThemesGroupName){
                                 let newQuery = queryResult.addNewQuery(this.source, this.privateUserThemesGroupName, this.privateUserThemesGroupDisplayName + " (" + matchingGroup.themes.length + ")", null, query.queryString, null, null, null)
-                                newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+                                newQuery.image = this.userThemesGroupIconURI
                             } else if (matchingGroup.group.name === this.publicUserThemesGroupName && matchingGroup.themes.length > 1 && groupName !== this.publicUserThemesGroupName) {
                                 let newQuery = queryResult.addNewQuery(this.source, this.publicUserThemesGroupName, this.publicUserThemesGroupDisplayName + " (" + matchingGroup.themes.length + ")", null, query.queryString, null, null, null)
-                                newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
+                                newQuery.image = this.userThemesGroupIconURI
                             } else if (matchingGroup.group.name === this.privateUserDrawingsGroupName && matchingGroup.themes.length > 1 && groupName !== this.privateUserDrawingsGroupName) {
                                 let newQuery = queryResult.addNewQuery(this.source, this.privateUserDrawingsGroupName, this.privateUserDrawingsGroupDisplayName + " (" + matchingGroup.themes.length + ")", null, query.queryString, null, null, null)
-                                newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+                                newQuery.image = this.userDrawingsGroupIconURI
                             } else if (matchingGroup.group.name === this.publicUserDrawingsGroupName && matchingGroup.themes.length > 1 && groupName !== this.publicUserDrawingsGroupName) {
                                 let newQuery = queryResult.addNewQuery(this.source, this.publicUserDrawingsGroupName, this.publicUserDrawingsGroupDisplayName + " (" + matchingGroup.themes.length + ")", null, query.queryString, null, null, null)
-                                newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
+                                newQuery.image = this.userDrawingsGroupIconURI
                             } else {
                                 for (let indexedTheme of matchingGroup.themes) {
                                     this.addIndexedThemeToQueryResult(queryResult, indexedTheme, groupName, query.hasTarget)
@@ -703,54 +699,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                             }
 
                         }
-
-                        //Gamle måde
-                        /*
-                        let indexedThemesToShow = []
-                        for (let matchingGroup of matchingGroups) {
-                            indexedThemesToShow = indexedThemesToShow.concat(matchingGroup.themes);
-                        }
-                        var userthemes_own = []
-                        var userthemes_other = []
-                        var userdrawings_own = []
-                        var userdrawings_other = []
-                        for (let indexedTheme of indexedThemesToShow){ 
-                            try {
-                                if (indexedTheme.group.name === this.privateUserThemesGroupName)
-                                    userthemes_own.push(indexedTheme)
-                                else if (indexedTheme.group.name === this.publicUserThemesGroupName)
-                                    userthemes_other.push(indexedTheme)
-                                else if (indexedTheme.group.name === this.privateUserDrawingsGroupName)
-                                    userdrawings_own.push(indexedTheme)
-                                else if (indexedTheme.group.name === this.publicUserDrawingsGroupName)
-                                    userdrawings_other.push(indexedTheme)
-                                else
-                                    this.addIndexedThemeToQueryResult(queryResult, indexedTheme, groupName, query.hasTarget)
-                                } catch (e) {
-                                    var r = 2
-                            }
-                        }
-                        //Ok er der noget i userthemes_own?
-                        if (userthemes_own.length > 1 && groupName !== this.privateUserThemesGroupName){
-                            let newQuery = queryResult.addNewQuery(this.source, this.privateUserThemesGroupName, this.privateUserThemesGroupDisplayName + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
-                            newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
-                        } else {
-                            for (let usertheme of userthemes_own){
-                                this.addIndexedThemeToQueryResult(queryResult, usertheme, groupName, query.hasTarget)
-                            }
-                        }
-                        //Ok er der noget i userdrawings_own?
-                        if (userdrawings_own.length > 1 && groupName !== this.privateUserDrawingsGroupName){
-                            let newQuery = queryResult.addNewQuery(this.source, this.privateUserDrawingsGroupName, this.privateUserDrawingsGroupDisplayName + " (" + userdrawings_own.length + ")", null, query.queryString, null, null, null)
-                            newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/drawings/editdrawing_themeaction16x16.png"
-                        } else {
-                            for (let usertheme of userdrawings_own){
-                                this.addIndexedThemeToQueryResult(queryResult, usertheme, groupName, query.hasTarget)
-                            }
-                        }
-                            */
-
-
 
                     }else{
                         for (let matchingGroup of matchingGroups){
@@ -780,11 +728,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
     
         setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
     },
-
-    addMatchingGroupToQueryResult: function() {
-        let newQuery = queryResult.addNewQuery(this.source, this.privateUserThemesGroupName, this.privateUserThemesGroupDisplayName + " (" + userthemes_own.length + ")", null, query.queryString, null, null, null)
-        newQuery.image = spatialmap.gui.SKIN_PATH_AND_NAME + "/images/modules/userthemes/doc_plus_icon16x16.png"
-},
 
     addIndexedThemeToQueryResult: function (queryResult, indexedTheme, groupName, hasTarget) {
         let result = queryResult.addResult(this.source, indexedTheme.group.name, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
