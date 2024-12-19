@@ -163,6 +163,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
 
         this.registerType(this.source, themeType);
 
+        /*
         this.registerType(
             this.source,
             new Septima.Search.ResultType({
@@ -172,6 +173,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 iconURI: this.userThemesGroupIconURI
             })
         )
+
         this.registerType(
             this.source,
             new Septima.Search.ResultType({
@@ -181,6 +183,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 iconURI: this.userDrawingsGroupIconURI
             })
         )
+        */
 
         this.registerType(
             this.source,
@@ -192,12 +195,6 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
         );
 
         //Sort groups
-        /*
-        Mine temaer
-        Andre brugeres temaer,
-        Mine skitser,
-        Andres brugeres skitser
-        */
         let getSortWeight = (themeGroup) => {
             switch (themeGroup.name) {
                 case this.privateUserThemesGroupName:
@@ -222,25 +219,30 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                 return (g1Weight - g2Weight)
         });
 
-        for (let groupInfo of this.groups) {
-            if (groupInfo.name !== this.privateUserThemesGroupName && groupInfo.name !== this.privateUserDrawingsGroupName){
-                let iconUri = this.themeGroupIconURI
-                if (groupInfo.name === this.publicUserThemesGroupName)
-                    iconUri = this.userThemesGroupIconURI
-                else if (groupInfo.name === this.publicUserDrawingsGroupName)
-                    iconUri = this.userDrawingsGroupIconURI
-                this.registerType(
-                    this.source,
-                    new Septima.Search.ResultType({
-                        id: groupInfo.name,
-                        singular: groupInfo.displayname,
-                        plural: groupInfo.displayname,
-                        iconURI: iconUri
-                    })
-                )
+        let getThemeGroupIcon = (themeGroup) => {
+            switch (themeGroup.name) {
+                case this.privateUserThemesGroupName:
+                case this.publicUserThemesGroupName:
+                    return this.userThemesGroupIconURI;
+                case this.privateUserDrawingsGroupName:
+                case this.publicUserDrawingsGroupName:
+                    return this.userDrawingsGroupIconURI;
+                default:
+                    return this.themeGroupIconURI;
             }
         }
 
+        for (let groupInfo of this.groups) {
+            this.registerType(
+                this.source,
+                new Septima.Search.ResultType({
+                    id: groupInfo.name,
+                    singular: groupInfo.displayname,
+                    plural: groupInfo.displayname,
+                    iconURI: getThemeGroupIcon(groupInfo)
+                })
+            )
+        }
 
         this.indexDone = true;
         
