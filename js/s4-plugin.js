@@ -959,8 +959,13 @@ Searchlast2.prototype.createDialog = function()
                 '</table>';
         this.dialog.addContentHTML(h);
     }
+    try {
     //getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
+    //areasearch_options?
     jQuery('#Searchlast2_options').html(spatialqueryoptions.getOptionDialogContent());
+    } catch () {
+
+    }
 }
 Searchlast2.prototype.showDialog = function(searchtext)
 {
