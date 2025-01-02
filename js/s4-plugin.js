@@ -963,9 +963,7 @@ Searchlast2.prototype.createDialog = function()
     //getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
     //areasearch_options?
     jQuery('#Searchlast2_options').html(spatialqueryoptions.getOptionDialogContent());
-    } catch () {
-
-    }
+    } catch (e) {}
 }
 Searchlast2.prototype.showDialog = function(searchtext)
 {
