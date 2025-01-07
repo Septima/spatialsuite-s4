@@ -26,6 +26,11 @@
                     password: "Septima4You!!!"
                 };
             }
+
+            var showInfo = true;
+            if (typeof this.jsonConfig.info != 'undefined') {
+                showInfo = this.jsonConfig.info;
+            }
             var dafFetcher = new Septima.Search.Datafordeler.Fetcher(dafFetcherOptions);
 
 			var dafSearcherOptions = {
@@ -125,7 +130,15 @@
                 var bygningerForX = new Septima.Search.Datafordeler.Bygninger(bygningerForXOptions)
                 _s4Params.dawasearcher.searcher.addDetailHandlerDef(bygningerForX);
                 _s4Params.geosearcher.searcher.addDetailHandlerDef(bygningerForX);
-                ejendomsSearcher.addDetailHandlerDef(bygningerForX);
+
+                //bygningerForY
+                var bygningerForYOptions = {
+                    searcher: bbrSearcher,
+                    more: false
+                };
+                var bygningerForY = new Septima.Search.Datafordeler.Bygninger(bygningerForYOptions)
+                ejendomsSearcher.addDetailHandlerDef(bygningerForY);
+
             }
 
             //tingbog:
@@ -186,19 +199,19 @@
             // Add searchers to s4
            	_s4Searchers.push({
            		searcher : ejendomsSearcher,
-           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		info: showInfo,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
 
            	_s4Searchers.push({
            		searcher : bbrSearcher,
-           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		info: showInfo,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
 
            	_s4Searchers.push({
            		searcher : tingbogsSearcher,
-           		info: true,                          //Valgfri. Angiver om der skal kunne søges info på objektet
+           		info: showInfo,                          //Valgfri. Angiver om der skal kunne søges info på objektet
            		print: true                          //Valgfri. Angiver om objektet skal kunne printes 
            	});
 
