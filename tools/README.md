@@ -434,7 +434,7 @@ _**Valgfrit**_: Man kan angive hvornår toolet skal være aktivt og hvilke resul
 </tool>
 ```  
 Hvis link ikke skal vises så skriv således `"links": []`  
-
+ 
   
 ### <a name="s4-details-ejendomsperspektiv"></a>s4-details-ejendomsperspektiv     
 Virker kun i Danmark  
@@ -463,7 +463,7 @@ Når du har en tjenestebruger med adgang skriver du sådan her i profilen:
 </tool>
 ```  
 
-Hvis du ønsker at slå Hvad glder for fra (SpS 4.6.1) skal du sætte info til false
+Hvis du ønsker at slå Hvad gælder for fra (SpS 4.6.1) skal du sætte info til false
 ```xml
         <tool module="s4" name="s4-details-ejendomsperspektiv">
             <jsonconfig>
