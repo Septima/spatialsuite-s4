@@ -733,7 +733,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
                                 this.addIndexedThemeToQueryResult(queryResult, matchingGroup.themes[0], groupName, query.hasTarget)
                             } else {
                                 var type = matchingGroup.name;
-                                var result3 = queryResult.addNewQuery(this.source, type, matchingGroup.displayname, null, query.queryString, null, null, null)
+                                var result3 = queryResult.addNewQuery(this.source, matchingGroup.group.name, matchingGroup.displayname, null, query.queryString, null, null, null)
                                 //result3.image = this.themeGroupIconURI;
                             }
                         }
