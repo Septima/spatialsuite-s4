@@ -676,7 +676,7 @@ Septima.Search.ThemeSearcher = Septima.Class (Septima.Search.Searcher, {
             if (query.target.type && this.hasType(query.target.type) && query.target.type !== this.themesPhrase){
                 groupName = query.target.type;
                 var result = queryResult.addNewQuery(this.source, this.themesPhrase, "Alle temaer", "",  query.queryString, null, null);
-                result.image = Septima.Search.icons.details.back_black;
+                result.image = Septima.Search.s4Icons.details.back_black;
         } else {
                 if (query.queryString === ""){
                     var result = queryResult.addNewQuery(this.source, this.visibleThemesPhrase, this.visibleThemesPhrase, "", "", null, null);

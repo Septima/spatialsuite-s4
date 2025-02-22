@@ -105,7 +105,7 @@ function s4_processDetailItem(orgDetailItem) {
         value: orgDetailItem.label,
         onHover: s4_onDetailItemHover,
         onFocus: s4_onDetailItemFocus,
-        focusIcon: Septima.Search.icons.globe
+        focusIcon: Septima.Search.s4Icons.globe
       }
     } else {
       return orgDetailItem
@@ -304,27 +304,6 @@ function s4_init (params){
     			
        		_s4Params = params;
        		
-       		//Locale
-       		var s4Locale = {
-       		      "search": spm.getSession().getString('s4.search.placeholder'),
-       		      "matches": spm.getSession().getString('s4.search.matches'),
-       		      "close": spm.getSession().getString('s4.search.close'),
-       		      "doDetails": spm.getSession().getString('s4.search.dodetails'),
-                  "at_site": spm.getSession().getString('s4.search.at_site'),
-                  "noResults": spm.getSession().getString('s4.search.noresults')
-       		};
-       		
-            if (typeof _s4Params.view.placeholder !== 'undefined'){
-                s4Locale.search = _s4Params.view.placeholder;
-            }else{
-                var placeHolder = spm.getSession().getParam("s4.search.placeholder");
-                if (placeHolder !== null && placeHolder !== "s4.search.placeholder"){
-                    s4Locale.search = placeHolder;
-                }
-            }
-            
-       		Septima.Search.setLocale(s4Locale);
-       		
        		//Projection
        		if (typeof _s4Params.projection_epsg !== 'undefined') {
                 Septima.Search.reproject.registerCrs(_s4Params.projection_epsg.code, _s4Params.projection_epsg.def);
@@ -430,7 +409,7 @@ function s4_init (params){
             var offentlige_kortlinks = ["skraafoto_dataforsyningen", "sdfekort", "plankort"]
             if (_s4Params.offentlige_kortlinks)
                 offentlige_kortlinks = _s4Params.offentlige_kortlinks
-            var offentligeKortLinksProvider = new Septima.Search.OffentligeLinksProvider({more: false, links: offentlige_kortlinks, buttonText: "Offentlige kort", buttonImage: Septima.Search.icons.exlink});
+            var offentligeKortLinksProvider = new Septima.Search.OffentligeLinksProvider({more: false, links: offentlige_kortlinks, buttonText: "Offentlige kort", buttonImage: Septima.Search.s4Icons.exlink});
 
             //Etablér skraaFotoProvider
             var skraaFotoProvider
@@ -717,7 +696,26 @@ function s4_init (params){
 						}
 					}
 			};
-        	
+
+            //Locale
+       		var s4Locale = {
+                "search": spm.getSession().getString('s4.search.placeholder'),
+                "matches": spm.getSession().getString('s4.search.matches'),
+                "close": spm.getSession().getString('s4.search.close'),
+                "doDetails": spm.getSession().getString('s4.search.dodetails'),
+                "at_site": spm.getSession().getString('s4.search.at_site'),
+                "noResults": spm.getSession().getString('s4.search.noresults')
+            };
+            
+            if (typeof _s4Params.view.placeholder !== 'undefined'){
+                s4Locale.search = _s4Params.view.placeholder;
+            }else{
+                var placeHolder = spm.getSession().getParam("s4.search.placeholder");
+                if (placeHolder !== null && placeHolder !== "s4.search.placeholder"){
+                    s4Locale.search = placeHolder;
+                }
+            }
+       
             //Create view
         	_s4View = new Septima.Search.DefaultView({
         		input: _s4InputContainer[0],
@@ -725,9 +723,10 @@ function s4_init (params){
         		controller: controller,
         		onHover: s4_onResultHover,
         		onFocus: s4_onResultFocus,
-        		focusIcon: Septima.Search.icons.globe,
+        		focusIcon: Septima.Search.s4Icons.globe,
         	    onDetailItem: s4_processDetailItem,
-                onDetailHeader: s4_getZoomToDetailsButton
+                onDetailHeader: s4_getZoomToDetailsButton,
+                locale: s4Locale
         		});
         	
         	s4SetMaxHeight();
