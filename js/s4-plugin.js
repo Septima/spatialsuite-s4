@@ -958,12 +958,22 @@ Searchlast2.prototype.createDialog = function()
                 '</table>';
         this.dialog.addContentHTML(h);
     }
-    try {
-    //getElement('Searchlast2_options').innerHTML = spatialqueryoptions.getOptionDialogContent();
-    //areasearch_options?
-    jQuery('#Searchlast2_options').html(spatialqueryoptions.getOptionDialogContent());
-    } catch (e) {}
+
+    // Inkorporeret Lejla Imer (leime@viborg.dk)'s tilpasning - https://github.com/Septima/spatialsuite-s4/issues/450#issuecomment-2673761687
+    (async function() {
+        try {
+            let dialogContent;
+            if (spatialqueryoptions) { // Test for SpS < v4.6
+                dialogContent = spatialqueryoptions.getOptionDialogContent()
+            } else {
+                const options = await window.spatialQueryHandler._getOptions();
+                dialogContent = options.getOptionDialogContent()
+            }
+            jQuery('#Searchlast2_options').html(dialogContent);
+            } catch (e) {}
+	})();
 }
+
 Searchlast2.prototype.showDialog = function(searchtext)
 {
     this.createDialog();
@@ -998,8 +1008,10 @@ Searchlast2.prototype.search = function()
 	    currentscale:cbKort.getCurrentScale(),
 	    layers: cbKort.getLayers()
     };
-    params = spatialqueryoptions.getOptionParams(params);
-    
+
+    if (spatialqueryoptions) // Test for SpS < v4.6
+        params = spatialqueryoptions.getOptionParams(params);
+
     for(var i=0;i < spatialquery_paramHandlers.length;i++)
     {
         var p = spatialquery_paramHandlers[i]();
@@ -1008,8 +1020,15 @@ Searchlast2.prototype.search = function()
     var url = cbKort.getUrl (params);
     
     var searchtext = (this.searchText || spm.getSession().getString('spatialquery.lastdisplayed.searchtext'));
-    spatialquery_doQuery("userdatasource", url, searchtext, null);
-    
+
+	// Inkorporeret Lejla Imer (leime@viborg.dk)'s tilpasning - https://github.com/Septima/spatialsuite-s4/issues/450#issuecomment-2673761687
+    try{
+        if (spatialqueryoptions) // Test for SpS < v4.6
+            spatialquery_doQuery("userdatasource", url, searchtext, null);
+        else
+            window.spatialQueryHandler.doQuery("userdatasource", url, searchtext, null);
+    }catch (error){}
+
     try{
         hideWaitingBox();
     }catch (error){}
