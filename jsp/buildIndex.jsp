@@ -81,7 +81,7 @@
 		}
 		
 		function s4IndexHit(result){
-			log(result.type + ": " + result.title + ". Geometry: " + JSON.stringify(result.geometry));
+			log(result.typeId + ": " + result.title + ".<br/>Geometry: " + JSON.stringify(result.geometry));
 		}
 
 		function log(message){
