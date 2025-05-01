@@ -17,7 +17,7 @@
 
             var procesFirstCall = function () {
                 toggleS4HadFirstCall = true;
-                toggleS4Name = Septima.Search.getString("search");
+                toggleS4Name = spm.getSession().getString('s4.search.placeholder');
                 if (tool.jsonConfig && tool.jsonConfig.hideFromStart)
                     setVisible(false);
                 else
