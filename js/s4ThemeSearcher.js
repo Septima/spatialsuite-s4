@@ -58,46 +58,30 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
         if (typeof options.searchDescription !== 'undefined')
             this.searchDescription = options.searchDescription
 
+        this.loadThemesAndDoIndexPromise = null
+
         if (typeof spm !== 'undefined' && typeof spm.getEvents !== 'undefined'){
             spm.getEvents().addListener("THEMESELECTOR_THEMESTORE_INITIALIZED", Septima.bind(function(){
-                this.doIndex();
-            }, this));
-            // Listen for Minimap events to update the theme list
-            spm.getEvents().addListener("THEMES_ADDED", Septima.bind(function(themes, monkeys){
-                let y = 2;
+                this.loadThemesAndDoIndexPromise = this.loadThemesAndDoIndex();
             }, this));
         }else{
             cbKort.events.addListener ('THEMESELECTOR_THEMESTORE_INITIALIZED', Septima.bind(function(){
-                this.doIndex();
+                this.loadThemesAndDoIndexPromise = this.loadThemesAndDoIndex();
             }, this));
         }
-        
-        //Internal house keeping
-        this.getLocalThemesDeferred = jQuery.Deferred();
-        this.indexDone = false;
-        this.loadStarted = false;
     }
 
-    cmpVersions(cmpVersion, refVersion) {
-        var i, diff;
-        var regExStrip0 = /(\.0+)+$/;
-        var segmentsCmpVersion = cmpVersion.replace(regExStrip0, '').split('.');
-        var segmentsRrefVersion = refVersion.replace(regExStrip0, '').split('.');
-        var l = Math.min(segmentsCmpVersion.length, segmentsRrefVersion.length);
-
-        for (i = 0; i < l; i++) {
-            diff = parseInt(segmentsCmpVersion[i], 10) - parseInt(segmentsRrefVersion[i], 10);
-            if (diff) {
-                return diff;
-            }
-        }
-        return segmentsCmpVersion.length - segmentsRrefVersion.length;
+    async loadThemesAndDoIndex(){
+        let promise = new Promise((resolve, reject) => {
+            spm._loadThemes("active", [], async ()=>{
+                await this.doIndex()
+                resolve()
+            })
+        })
+        return promise
     }
 
-    doIndex(){
-        if (this.indexDone){
-            return;
-        }
+    async doIndex(){
         var themeGroups = [];
         //Testing if SpS4
         if (typeof cbKort.themeContainer._elements !== 'undefined'){
@@ -125,7 +109,7 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
             }
         }
 
-    var themeType = new Septima.Search.ResultType({
+        var themeType = new Septima.Search.ResultType({
             id: this.themesPhrase,
             singular: this.themePhrase,
             plural: this.themesPhrase
@@ -191,25 +175,19 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
             )
         }
 
-        this.indexDone = true;
-        
-        setTimeout(Septima.bind(function () {
-            this.getLocalDatasources().done(Septima.bind(function(localDatasources){
-                localThemesArray = [];
-                localThemesString = "";
-                for (var i=0;i<localDatasources.length;i++){
-                    var localDatasource = localDatasources[i];
-                    if (typeof this.datasources[localDatasource] !== "undefined"){
-                        var indexedThemes = this.datasources[localDatasource];
-                        for (var j=0;j<indexedThemes.length;j++){
-                            localThemesArray.push(indexedThemes[j].theme.name);
-                        }
-                    }
+        var localDatasources = await this.getLocalDatasources()
+        let localThemesArray = [];
+        let localThemesString = "";
+        for (var i=0;i<localDatasources.length;i++){
+            var localDatasource = localDatasources[i];
+            if (typeof this.datasources[localDatasource] !== "undefined"){
+                var indexedThemes = this.datasources[localDatasource];
+                for (var j=0;j<indexedThemes.length;j++){
+                    localThemesArray.push(indexedThemes[j].theme.name);
                 }
-                localThemesString = localThemesArray.join(" ");
-                this.getLocalThemesDeferred.resolve(localThemesString);
-            }, this));
-         }, this), 500);
+            }
+        }
+        localThemesString = localThemesArray.join(" ");
     }
 
     getThemeGroupElements(group){
@@ -505,81 +483,28 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
         }
     }
     
-    fetchData (query, caller) {
-        if (this.indexDone){
-            this.fetchIndexedData(query, caller);
-        }else{
-            //Return newquery right away and then call doIndex()
+    async asyncFetchData(query) {
+        if (this.loadThemesAndDoIndexPromise){
+            await this.loadThemesAndDoIndexPromise
+            return this.fetchIndexedData(query)
+        } else {
+            this.loadThemesAndDoIndexPromise = this.loadThemesAndDoIndex()
+
             var queryResult = this.createQueryResult();
             queryResult.addNewQuery(this.source, this.themesPhrase, this.themesPhrase, null, query.queryString, null, null, null);
-            caller.fetchSuccess(queryResult);
-            this.loadThemesAndDoIndex();
+            return queryResult
         }
     }
 
 
-    ready(){
-        if (typeof Promise == 'undefined'){
-            return true
-        } else {
-            if (this.indexDone){
-                return Promise.resolve();
-            } else {
-                return this.loadThemesAndDoIndex();
-            }
+    async ready(){
+        if (!this.loadThemesAndDoIndexPromise){
+            this.loadThemesAndDoIndexPromise = this.loadThemesAndDoIndex()
         }
+        await this.loadThemesAndDoIndexPromise
     }
 
-    loadThemesAndDoIndex(){
-        if (typeof Promise == 'undefined'){
-            if (!this.loadStarted){
-                this.loadStarted = true;
-                var afterLoadFunction = this.doIndex.bind(this)
-                if (cbKort.themeSelector && typeof cbKort.themeSelector.loadThemes !== 'undefined'){
-                    cbKort.themeSelector.loadThemes(afterLoadFunction);
-                }else if (cbKort.themeSelector && typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
-                    cbKort.themeSelector.createThemeStore(afterLoadFunction);
-                }else if (cbKort.themeSelector && typeof cbKort.themeSelector._createThemeStore !== 'undefined'){
-                    cbKort.themeSelector._createThemeStore(afterLoadFunction);
-                }else if (spm._loadThemes !== 'undefined'){
-                    spm._loadThemes("active", [], afterLoadFunction)
-                }else{
-                    //Assume themes are already loaded
-                    afterLoadFunction();
-                }
-        }
-        } else {
-            if (!this.loadStarted){
-                this.loadStarted = true;
-                this.loadThemesAndDoIndexPromise = new Promise(function(resolve, reject) {
-                    var afterLoadFunction = this.doIndex.bind(this)
-                    try {
-                        if (cbKort.themeSelector && typeof cbKort.themeSelector.loadThemes !== 'undefined'){
-                            cbKort.themeSelector.loadThemes(afterLoadFunction);
-                        }else if (cbKort.themeSelector && typeof cbKort.themeSelector.createThemeStore !== 'undefined'){
-                            cbKort.themeSelector.createThemeStore(afterLoadFunction);
-                        }else if (cbKort.themeSelector && typeof cbKort.themeSelector._createThemeStore !== 'undefined'){
-                            cbKort.themeSelector._createThemeStore(afterLoadFunction);
-                        }else if (spm._loadThemes !== 'undefined'){
-                            spm._loadThemes("active", [], afterLoadFunction)
-                        }else{
-                            //Assume themes are already loaded
-                            afterLoadFunction();
-                        }
-                        resolve();
-                        } catch {
-                            afterLoadFunction();
-                        }
-                    }.bind(this))
-                return this.loadThemesAndDoIndexPromise;
-    
-            } else {
-                return this.loadThemesAndDoIndexPromise
-            }
-        }
-    }
-
-    fetchIndexedData (query, caller) {
+    fetchIndexedData (query) {
 
         var queryResult = this.createQueryResult();
         
@@ -665,10 +590,10 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
                 }
         }
     
-        setTimeout(Septima.bind(function (caller, queryResult){caller.fetchSuccess(queryResult);}, this, caller, queryResult), 100);
+        return queryResult
     }
 
-    QueryResult (queryResult, indexedTheme, groupName, hasTarget) {
+    addIndexedThemeToQueryResult (queryResult, indexedTheme, groupName, hasTarget) {
         let result = queryResult.addResult(this.source, indexedTheme.group.name, indexedTheme.displayname, indexedTheme.description, null, indexedTheme);
         if (groupName === "*")
             result.description = indexedTheme.group.displayname + (result.description ? " > " + result.description : "")
@@ -791,9 +716,9 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
         return link;
     }
     
-    getLocalDatasources(){
+    async getLocalDatasources(){
         var deferred = jQuery.Deferred();
-        jQuery.ajax({
+        var data = await jQuery.ajax({
             url: '/spatialmap?page=s4GetLocalDatasources&outputformat=json',
             jsonp: 'json.callback',
             data:{sessionId: this.sessionId},
@@ -801,20 +726,17 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
             crossDomain : true,
             async:true,
             cache : false,
-            timeout : 4000,
-            success:  Septima.bind(function(deferred, data, textStatus,  jqXHR){
-                var localDatasources = [];
-                if (data && data.row && data.row[0].row){
-                    for (var i=0;i<data.row[0].row.length;i++){
-                        localDatasources.push(data.row[0].row[i]._name);
-                    }
-                    localDatasources.sort(function(t1, t2){
-                        return (t1.localeCompare(t2));
-                    });
-                }
-                deferred.resolve(localDatasources);
-          }, this, deferred)
-          });
-        return deferred.promise();
+            timeout : 4000})
+
+        var localDatasources = [];
+        if (data && data.row && data.row[0].row){
+            for (var i=0;i<data.row[0].row.length;i++){
+                localDatasources.push(data.row[0].row[i]._name);
+            }
+            localDatasources.sort(function(t1, t2){
+                return (t1.localeCompare(t2));
+            });
+        }
+        return localDatasources
     }
 }  
