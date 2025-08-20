@@ -174,20 +174,6 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
                 })
             )
         }
-
-        var localDatasources = await this.getLocalDatasources()
-        let localThemesArray = [];
-        let localThemesString = "";
-        for (var i=0;i<localDatasources.length;i++){
-            var localDatasource = localDatasources[i];
-            if (typeof this.datasources[localDatasource] !== "undefined"){
-                var indexedThemes = this.datasources[localDatasource];
-                for (var j=0;j<indexedThemes.length;j++){
-                    localThemesArray.push(indexedThemes[j].theme.name);
-                }
-            }
-        }
-        localThemesString = localThemesArray.join(" ");
     }
 
     getThemeGroupElements(group){
@@ -370,8 +356,7 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
     }
     
     getThemeGroupsForTheme(themeResult){
-        return [themeResult.data.group];
-        //Todo: get themeId and traverse all indexedThemes to see if in more than one group
+        return [themeResult.data.group]
     }
     
     getThemesForThemeGroup (themeGroup){
@@ -389,10 +374,6 @@ Septima.Search.ThemeSearcher = class ThemeSearcher extends Septima.Search.Search
         return queryResult;
     }
 
-    getLocalthemes(){
-        return this.getLocalThemesDeferred.promise();
-    }
-    
     getVisibleIndexedThemes(){
         var visibleThemes = [];
         for (var i=0;i<this.groups.length;i++){

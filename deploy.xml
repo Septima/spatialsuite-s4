@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
-   <version>2.18.1</version>
-   <param name="s4.version">2.18.1</param>
+   <version>2.18.2</version>
+   <param name="s4.version">2.18.2</param>
 
    <stoponerror>true</stoponerror>
   
@@ -20,7 +20,7 @@
 
 <!--production
 -->
-  <param name="s4.search.version">//search.cdn.septima.dk/6.0.1</param>
+  <param name="s4.search.version">//search.cdn.septima.dk/6.1.2</param>
   <param name="s4.search.build">septimasearch.min.js</param>
 
 <!-- Dev
