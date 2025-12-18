@@ -142,16 +142,21 @@
             }
 
             //tingbog:
-            var tingbogsSearcher = new Septima.Search.Tingbog.Searcher({
-                fetcher: new Septima.Search.Tingbog.Fetcher(),
+            var tingbogsSearcher = new Septima.Search.Tingbog.Searcher(
+            {
+                fetcher: new Septima.Search.Tingbog.Fetcher({
+                    token: "IaU368Q1sf9F92NllZBRgA",
+                    endpoint: "https://tinglysning-api.septima.dk"}),
                 redataFetcher: new Septima.Search.Redata.Fetcher(),
                 ejendomsSearcher: ejendomsSearcher,
 				onSelect: s4Hit
             });
+
             tingbogsSearcher.addDetailHandlerDef(new Septima.Search.Tingbog.InfoHandler());
             var oplysningerForBfe = new Septima.Search.Tingbog.OplysningerForBfe({
                 searcher: tingbogsSearcher
             });
+
             ejendomsSearcher.addDetailHandlerDef(oplysningerForBfe);
 
             //Plan info
