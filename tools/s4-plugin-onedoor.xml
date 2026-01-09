@@ -45,26 +45,14 @@
                 //Septima Search Server
                 s3searcher: {
                     enabled: true,
-                    info: true,
+                    info: false,
                     print: true,
                     showLinkToWeb: true,
                     host: "https://onedoor.test.septima.dk",
                     organisation: "septima",
-                    configuration: "kommune"
+                    configuration: "kommune",
+                    includeCredentials: false
                 },
-
-                /*
-                s3searcher: {
-                    enabled: true,
-                    info: true,
-                    print: true,
-                    showLinkToWeb: false,  // optional default false
-                    host: "http://localhost:3000",
-                    //organisation/service
-                    organisation: "kbh",
-                    configuration: "demo"
-                },
-                */
 
                 //Themes in profile
                 themesearcher: {enabled: true},

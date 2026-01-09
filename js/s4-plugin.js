@@ -452,9 +452,12 @@ function s4_init (params){
                         service: _s4Params.s3searcher.service,
                         showLinkToWeb: _s4Params.s3searcher.showLinkToWeb
                     };
+                    
                 if (_s4Params.s3searcher.token) {
                     s3SearcherOptions.authorization = {Bearer: {token: _s4Params.s3searcher.token} };
                 }
+                if (_s4Params.s3searcher.includeCredentials)
+                    s3SearcherOptions.includeCredentials = true;
                 
                 var s3searcher = new Septima.Search.S3Searcher(s3SearcherOptions);
                 controller.addSearcher(s3searcher);
