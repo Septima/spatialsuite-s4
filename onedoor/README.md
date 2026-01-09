@@ -120,11 +120,12 @@ s3searcher: {
   enabled: true,
   info: true,
   print: true,
-  showLinkToWeb: false,  // optional default false
+  showLinkToWeb: false,  // optional. Default false
   host: "https://onedoor.test.septima.dk",
   organisation: "septima",
   configuration: "demo",
-  authorization: {Bearer: {token: "xxxxxxxxx"} } // optional
+  includeCredentials: false, //optional. Default false. Only include if Single Sign On is set up
+  authorization: {Bearer: {token: "xxxxxxxxx"} } //optional. Only include if necessary
 },
 
 //Themes in profile
