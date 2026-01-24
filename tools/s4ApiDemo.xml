@@ -11,9 +11,9 @@
 			window["_s4Searchers"] = window["_s4Searchers"] || [];
  			var _s4Searchers = window["_s4Searchers"];   // Brug eksisterende array eller skab en 
 			var options = {
-				datasource: "ds_park_monumenter",    // Obligatorisk
-				source: "Monumenter",    // Obligatorisk
-				type: "Monumenter",    // Obligatorisk
+				datasource: "ds_boligselskaber",    // Obligatorisk
+				source: "Boligselskaber",    // Obligatorisk
+				type: "Boligselskabe",    // Obligatorisk
 				//onSelect: s4Hit,                     // valgfri. Angiv egen funktion. Default er s4Hit
 				matchesPhrase: "matcher",            // Valgfri. Angiv et ord.
 				hyperLinkLabel: "Læs om monumentet", // Valgfri. Angiv en henvisningstekst. Default er s4.DatasourceSearcher.hyperLinkLabel
@@ -27,7 +27,7 @@
 	    	window["_s4OnSelect"] = window["_s4OnSelect"] || [];
            	var _s4OnSelect = window["_s4OnSelect"];    // Brug eksisterende array eller skab en ny
             	_s4OnSelect.push(function(result){ 
-            		if (result.searcher.source == "Monumenter"){ 
+            		if (result.searcher.source == "Boligselskaber"){ 
             			alert("Monument " + result.title + " valgt"); 
             		} 
         			return true; 

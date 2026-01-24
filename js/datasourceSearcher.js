@@ -1,6 +1,7 @@
-Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
+Septima.Search.DatasourceSearcher = class DatasourceSearcher extends Septima.Search.Searcher
+{
 
-    initialize: function (options) {
+    constructor (options) {
 		if (options == undefined){
 			throw "New Septima.Search.DatasourceSearcher(options): Options missing.";
 		}
@@ -11,8 +12,7 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
             options.onSelect = s4Hit;
         }
         
-        //Septima.Search.Searcher.prototype.constructor.apply(this, [options]);
-		this.constructor.prototype.constructor.apply(this, [options]);
+		super(options);
 		
         this.datasource = options.datasource;
         
@@ -36,10 +36,10 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
         this.hyperLinkLabel = options.hyperLinkLabel;
 		
 	    this.iconURI = options.iconURI || null;
-    },
+    }
     
     
-    fetchData: function (query, caller) {
+    fetchData (query, caller) {
     	var limit = query.limit + 1;
     	var queryString = jQuery.trim(query.queryString);
     	if (queryString == ''){
@@ -64,21 +64,21 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	        	}
 	        },this, caller)     
         });
-    },
+    }
     
-	success: function(caller, data, textStatus, jqXHR){
+	success(caller, data, textStatus, jqXHR){
 		if (jqXHR.status == 200){
 			caller.fetchSuccess(this.getDataFromDatasource(data));
 		}else{
 			caller.fetchError(this, jqXHR.statusText);
 		}
-	},
+	}
 
-	error: function(caller, jqXHR, textStatus, errorThrown){
+	error(caller, jqXHR, textStatus, errorThrown){
 		caller.fetchError(this, errorThrown);
-	},
+	}
 
-	getDataFromDatasource: function (data){
+	getDataFromDatasource(data){
 		var queryResult = this.createQueryResult();
 		if (data.row[0]._class == 'rowlist'){
 			var query = data.query;
@@ -108,8 +108,5 @@ Septima.Search.DatasourceSearcher = Septima.Class (Septima.Search.Searcher, {
 	        }
 		}
 	    return queryResult;
-	},
-
-    CLASS_NAME: 'Septima.Search.DatasourceSearcher'
-    
-});
+	}
+}
