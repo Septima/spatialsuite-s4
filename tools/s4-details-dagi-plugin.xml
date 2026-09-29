@@ -32,8 +32,8 @@
 
             composedHandler.addDetailsHandler(s4DagiInfoProvider);
 
-            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && targets.includes("husnummer")){
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(composedHandler);
+            if (_s4Params.adressSearcher && targets.includes("husnummer")){
+                _s4Params.adressSearcher.addDetailHandlerDef(composedHandler);
             }
 
             if (targets.includes("matrikelnummer")){

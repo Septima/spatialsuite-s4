@@ -21,10 +21,12 @@
             var _s4eKnapUri = Septima.Search.s4Icons.eKnapPlugin.iconURI;
             
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "dawasearcher", "target": "adresse"});
+            _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "darsearcher", "target": "husnummer"});
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "cvrsearcher"});
 
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "s3searcher", "target": "adresse"});
+            _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "s3searcher", "target": "husnummer"});
             _s4CustomButtons.push({"buttonText": "Vis ejendomsoplysninger", "buttonImage": _s4eKnapUri, "callBack": s4DoEKnap, "searcher": "s3searcher", "target": "matrikelnumre"});
 
         }

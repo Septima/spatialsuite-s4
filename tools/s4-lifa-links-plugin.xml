@@ -11,7 +11,7 @@
     </jssrc>
     <src><![CDATA[
         [if: ModuleDefined("s4") ]
-	        if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled || _s4Params.geosearcher && _s4Params.geosearcher.enabled){
+	        if (_s4Params.adressSearcher || _s4Params.geosearcher && _s4Params.geosearcher.enabled){
 	        
 	           var s4LifaLinkOptions = {brugernavn: "[s4.lifaois.uid]", passord: "[s4.lifaois.pwd]"}
 	           if (this.jsonConfig && this.jsonConfig.links) {
@@ -19,7 +19,7 @@
 	           }
 	            
 	           var handler = new Septima.Search.LifaLinkForAdresseMatrikelHandler(s4LifaLinkOptions);
-	           if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+	           if (_s4Params.adressSearcher){
 	               _s4Params.dawasearcher.searcher.addDetailHandlerDef(handler);
 	           }
 	           if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){

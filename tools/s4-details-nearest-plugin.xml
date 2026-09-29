@@ -45,8 +45,8 @@
         	//Hvornår skal der søges?
 			var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer", "virksomhed"];
 
-			if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && targets.includes("husnummer")){
-				_s4Params.dawasearcher.searcher.addDetailHandlerDef(nearestHandler);
+			if (_s4Params.adressSearcher && targets.includes("husnummer")){
+				_s4Params.adressSearcher.addDetailHandlerDef(nearestHandler);
 			}
 			
 			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){

@@ -33,8 +33,8 @@
 
             composedHandler.addDetailsHandler(sqDetailsHandler);
 
-            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled && targets.includes("husnummer")){
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(composedHandler, "adresse");
+            if (_s4Params.adressSearcher && targets.includes("husnummer")){
+                _s4Params.adressSearcher.addDetailHandlerDef(composedHandler, "adresse");
             }
 
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){

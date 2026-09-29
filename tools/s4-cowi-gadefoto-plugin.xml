@@ -16,6 +16,7 @@
 	            var buttonImage = Septima.Search.icons.exlink;
 	            
 	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "dawasearcher", "target": "adresse"});
+	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "darsearcher", "target": "husnummer"});
 	            _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4MatrikelDoDdgKnap, "searcher": "geosearcher", "target": "matrikelnumre"});
 
                 _s4CustomButtons.push({"buttonText": buttonText, "buttonImage": buttonImage, "callBack": s4DawaDoDdgKnap, "searcher": "s3searcher", "target": "adresse"});
@@ -34,7 +35,7 @@
         
         function s4MatrikelDoDdgKnap(result){
             _s4View.blur();
-            var geometry = {type: "Point", coordinates: [parseInt(result.data.centroid_x), parseInt(result.data.centroid_y)]};
+            var geometry = {type: "Point", coordinates: [parseInt(result.koordinater.x), parseInt(result.koordinater.y)]};
             var wktParser = Septima.Search.getWKTParser();
             var wkt = wktParser.convert(geometry);
             cowiGadefoto.clickHandler(wkt);

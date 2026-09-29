@@ -12,8 +12,7 @@
                 var options = {
                 fields_produktionsenhed : ["navn", "adresse_result", "email", "tlf", "branchekode", "cvrlink", "virksomhed_result", "virksomhed_cvrlink", "virksomhed_enhedsliste","hovedafdelingkode", "hovedgruppekode", "gruppekode", "undergruppekode", "antalansatte"],
                 fields_virksomhed : ["cvrnummer", "navn", "virksomhedstype", "formaal", "virkningsdato", "adresse_result", "email", "tlf", "hovedbranche", "hovedafdelingkode", "hovedgruppekode", "gruppekode", "undergruppekode", "branchekode", "antalansatte","virksomhed_cvrlink", "enhedsliste"],
-                more: true,
-                dawaSearcher: _s4Params.dawasearcher.searcher
+                more: true
                 };
                 _s4Params.cvrsearcher.searcher.addDetailHandlerDef(new Septima.Search.DataApi.CvrInfoProvider(options));
             }

@@ -303,6 +303,9 @@ function s4_init (params){
     if (_s4View == null) {
     			
        		_s4Params = params;
+
+            if (params.api_token)
+                Septima.Search.Api.configure({token: params.api_token})
        		
        		//Projection
        		if (typeof _s4Params.projection_epsg !== 'undefined') {
@@ -423,24 +426,28 @@ function s4_init (params){
                 skraaFotoProvider.addDetailsHandler(skraaFotoProvider_real);
             }
     
-            if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
-            	var dawaSearcherOptions = {onSelect: s4DawaHit};
+            let adresseSearcher = _s4Params.dawasearcher
+            if (_s4Params.darsearcher)
+                adresseSearcher = _s4Params.darsearcher
+
+            if (adresseSearcher && adresseSearcher.enabled){
+            	var darSearcherOptions = {onSelect: s4DawaHit};
             	if (_s4Params.municipality != "*"){
             		var municipalities = _s4Params.municipality.split(' ');
-            		dawaSearcherOptions.kommunekode = municipalities.join('|');
+            		darSearcherOptions.kommunekode = municipalities.join(',');
             	}
-                if (typeof _s4Params.dawasearcher.minimumShowCount != 'undefined'){
-                    dawaSearcherOptions.minimumShowCount = _s4Params.dawasearcher.minimumShowCount;
+                if (typeof adresseSearcher.minimumShowCount != 'undefined'){
+                    darSearcherOptions.minimumShowCount = adresseSearcher.minimumShowCount;
                 }
-                if (typeof _s4Params.dawasearcher.showMinimumOnBlank != 'undefined'){
-                    dawaSearcherOptions.showMinimumOnBlank = _s4Params.dawasearcher.showMinimumOnBlank;
+                if (typeof adresseSearcher.showMinimumOnBlank != 'undefined'){
+                    darSearcherOptions.showMinimumOnBlank = adresseSearcher.showMinimumOnBlank;
                 }
-            	var dawaSearcher = new Septima.Search.DawaSearcher(dawaSearcherOptions);
-            	controller.addSearcher(dawaSearcher);
-                _s4Params.dawasearcher.searcher = dawaSearcher;
-                _s4Params.adressSearcher = dawaSearcher;
-                if (skraaFotoProvider && _s4Params.dawasearcher.skraafoto)
-                    dawaSearcher.addDetailHandlerDef(skraaFotoProvider);
+            	var darSearcher = new Septima.Search.DarSearcher(darSearcherOptions);
+            	controller.addSearcher(darSearcher);
+                adresseSearcher.searcher = darSearcher;
+                _s4Params.adressSearcher = darSearcher;
+                if (skraaFotoProvider && adresseSearcher.skraafoto)
+                    darSearcher.addDetailHandlerDef(skraaFotoProvider);
             }
 			
             if (_s4Params.s3searcher && _s4Params.s3searcher.enabled){
@@ -795,7 +802,7 @@ function s4_init (params){
             	_s4View.focus();
                 }, this, _s4View),500);
         	}
-            addS4SpatialMapTools(_s4Params.dawasearcher);
+            addS4SpatialMapTools(adresseSearcher);
             addS4SpatialMapTools(_s4Params.geosearcher);
             addS4SpatialMapTools(_s4Params.geostednavnesearcher);
             addS4SpatialMapTools(_s4Params.cvrsearcher);
@@ -812,8 +819,8 @@ function s4SetMaxHeight(){
 }
 
 function s4DawaHit(result){
-    if (result.data && result.data.type){
-        if (result.data.type != 'vej' || (result.data.type == 'vej' && _s4Params.streetNameHit)){
+    if (result){
+        if (result.typeId != 'navngivenvejpostnummer' || (result.typeId == 'navngivenvejpostnummer' && _s4Params.streetNameHit)){
             s4Hit(result);
         }
     }
@@ -834,7 +841,7 @@ function themeHit(result){
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
     if (!result.data.theme.isVisible()){
         result.searcher.toggleTheme(result);
-    	cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
+    	//cbKort.events.fireEvent('S4', {type: 'themeHit', theme: result.data});
     }
 }
 
@@ -843,7 +850,7 @@ function favoriteHit(hit){
 	if (Favorites){
 		Favorites.load(hit.data);
 	}
-	cbKort.events.fireEvent('S4', {type: 'favoriteHit', favorite: hit.data});
+	//cbKort.events.fireEvent('S4', {type: 'favoriteHit', favorite: hit.data});
 }
 
 function profileHit(hit){
@@ -851,20 +858,20 @@ function profileHit(hit){
 	if (ProfileSelector){
 		ProfileSelector.setProfile(hit.data);
 	}
-	cbKort.events.fireEvent('S4', {type: 'profileHit', profile: hit.data});
+	//cbKort.events.fireEvent('S4', {type: 'profileHit', profile: hit.data});
 }
 
 function workspaceHit(result){
     _s4View.blur(_s4Params.view.forcedblurOnSelect);
 	result.searcher.showWorkSpace(result);
-	cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: result.data});
+	//cbKort.events.fireEvent('S4', {type: 'workspaceHit', workspace: result.data});
 }
 
 
 function s4DoInfo(result){
     showResultInMap(result);
     searchlast2.showDialog(result.title);
-	cbKort.events.fireEvent('S4', {type: 's4DoInfo', result: result});
+	////cbKort.events.fireEvent('S4', {type: 's4DoInfo', result: result});
 }
 
 function s4DoPrint(result){

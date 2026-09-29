@@ -8,12 +8,13 @@
    </requires>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
-        if (_s4Params.dawasearcher && _s4Params.dawasearcher.enabled){
+        if (_s4Params.adressSearcher){
                 var links = this.jsonConfig.links ? this.jsonConfig.links : ["skraafoto_dataforsyningen", "jfa","bbrmeddelelse","ois", "sdfekort", "plankort"];
-                _s4Params.dawasearcher.searcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links}));
+                _s4Params.adressSearcher.addDetailHandlerDef(new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links}));
         }
         var _s4HgfMatrikelKnapUri = Septima.Search.s4Icons.infoIconUri;
         _s4CustomButtons.push({"buttonText": "Hvad gælder for matrikelnummeret", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "dawasearcher", "target": "adresse"});
+        _s4CustomButtons.push({"buttonText": "Hvad gælder for matrikelnummeret", "buttonImage": _s4HgfMatrikelKnapUri, "callBack": s4DawaHgfMatrikelKnap, "searcher": "darsearcher", "target": "husnummer"});
     [endif]
     ]]>
     </src>
@@ -21,10 +22,11 @@
     [if: ModuleDefined("s4") ]
         function s4DawaHgfMatrikelKnap(result){
             jQuery.ajax({
-                url: result.data.properties.jordstykke.href,
+                url_gammel: result.data.properties.jordstykke.href,
+                url: "https://api.dataforsyningen.dk/jordstykker/" + result.data.ejerlav.kode + "/" + result.data.matrikelnummer,
                 data: {format: "geojson", srid: "25832"},
                 success: function(result, data){
-                    s4DoInfo({title: data.properties.matrikelnr + ", " + data.properties.ejerlavnavn + " (" + result.title + ")", geometry: data.geometry, searcher: result.searcher});
+                    s4DoInfo({title: data.properties.matrikelnr + ", " + data.properties.ejerlavnavn + " (" + result.title + ")", geometry: data.geometry});
                 }.bind( this, result)
             });
         }
