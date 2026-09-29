@@ -28,6 +28,11 @@
  	if (datasources != null && !datasources.trim().equals("")){
  		datasourcesToUse = datasources;
  	}
+ 	//Whitelist datasource identifiers to prevent injection into the backend query layer
+ 	if (!datasourcesToUse.matches("[\\w\\*\\s]*")){
+ 		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid datasources parameter");
+ 		return;
+ 	}
  	
 	query = request.getParameter("query");
  	queryWkt = request.getParameter("querywkt");
