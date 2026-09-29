@@ -21,7 +21,7 @@ Septima Search for Spatial Suite (s4) is a search tool.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: [2.19.1]()
+- Latest: [2.19.1](https://mailchi.mp/6baa879a7a17/s42170-21138265)
 - Previous:
   - [v 2.18.7](https://mailchi.mp/455a6d124675/s42170-21136896)
   - [v 2.18.5](https://mailchi.mp/7351da109753/s42170-21128973)
