@@ -34,7 +34,7 @@
             composedHandler.addDetailsHandler(sqDetailsHandler);
 
             if (_s4Params.adressSearcher && targets.includes("husnummer")){
-                _s4Params.adressSearcher.addDetailHandlerDef(composedHandler, "adresse");
+                _s4Params.adressSearcher.addDetailHandlerDef(composedHandler, "husnummer");
             }
 
             if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){
