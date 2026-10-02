@@ -21,8 +21,9 @@ Septima Search for Spatial Suite (s4) is a search tool.
 https://github.com/Septima/spatialsuite-s4/issues  
 
 ### News letters:  
-- Latest: [2.19.1](https://mailchi.mp/6baa879a7a17/s42170-21138265)
+- Latest: [2.19.2]()
 - Previous:
+  - [2.19.1](https://mailchi.mp/6baa879a7a17/s42170-21138265) (Omlægning fra Dawa til ny adresse-service)
   - [v 2.18.7](https://mailchi.mp/455a6d124675/s42170-21136896)
   - [v 2.18.5](https://mailchi.mp/7351da109753/s42170-21128973)
   - [v 2.18.2]  
@@ -65,7 +66,7 @@ https://github.com/Septima/spatialsuite-s4/issues
 ### Download s4 module:
       
 Current version:  
-      2.19.1: https://github.com/Septima/spatialsuite-s4/archive/2.19.1.zip   
+      2.19.2: https://github.com/Septima/spatialsuite-s4/archive/2.19.2.zip   
       
 #### Unzip and copy the module to [cbinfo.config.dir]/modules/thirdparty/septima/s4
 
