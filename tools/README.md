@@ -415,7 +415,7 @@ Viser info om planer fra plansystemet
 Only relevant in Denmark.  
   
 Vis DAGI-information d.v.s. kommune, opstillingskreds, politikreds, postdistrikt, region, retskreds og sogn for hus- og matrikelnumre  
-Inkluderer link til SDFI-kortet
+Inkluderer offentlige links
 
 Inkludér in profil:  
 ```xml
@@ -427,13 +427,13 @@ _**Valgfrit**_: Man kan angive hvornår toolet skal være aktivt og hvilke resul
   <jsonconfig>
     {
       "targets": ["husnummer", "matrikelnummer"],
-      "links": ["sdfekort"],
-      "fields":  ["kommuner_result", "opstillingskredse_result", "politikredse_result", "postdistrikter_result", "regioner_result", "retskredse_result", "sogne_result"]
+      "links": ["jfa","bbrmeddelelse","bbrejendom","boligejer.dk","vurdering","bbkort","ois", "skraafoto_dataforsyningen"],
+      "fields":  ['kommuneinddeling_result', 'opstillingskreds_result', 'politikreds_result', 'postnummerinddeling_result', 'regionsinddeling_result', 'retskreds_result', 'sogneinddeling_result']
     }
    </jsonconfig>
 </tool>
 ```  
-Hvis link ikke skal vises så skriv således `"links": []`  
+Hvis link ikke skal vises så skriv således `"links": false`  
  
   
 ### <a name="s4-details-ejendomsperspektiv"></a>s4-details-ejendomsperspektiv     

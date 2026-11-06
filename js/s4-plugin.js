@@ -304,8 +304,14 @@ function s4_init (params){
     			
        		_s4Params = params;
 
-            if (params.api_token)
-                Septima.Search.Api.configure({token: params.api_token})
+                if (params.api_token) {
+                    var api_token = params.api_token;
+                    if (api_token.endsWith("-test")) {
+                        Septima.Search.Api.configure({token: api_token.slice(0, -5), test: true});
+                    } else {
+                        Septima.Search.Api.configure({token: api_token});
+                    }
+                }
        		
        		//Projection
        		if (typeof _s4Params.projection_epsg !== 'undefined') {
@@ -405,7 +411,7 @@ function s4_init (params){
 			window["_s4OnSelect"] = window["_s4OnSelect"] || [];
 			window["_s4Searchers"] = window["_s4Searchers"] || [];
 			//Example:
-			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["geosearcher"|"cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
+			//window["_s4CustomButtons"].push({"buttonText":"xxxxx", "buttonImage": "url","callBack": function, "searcher": ["cvrsearcher"|"plansearcher"|"indexsearcher"|"themesearcher"|"profilesearcher"|"favoritesearcher"|"workspacesearcher"][, "target": ""]});
 			window["_s4CustomButtons"] = window["_s4CustomButtons"] || [];
 
             //Etablér offentligeKortLinksProvider
@@ -426,15 +432,15 @@ function s4_init (params){
                 skraaFotoProvider.addDetailsHandler(skraaFotoProvider_real);
             }
     
-            let adresseSearcher = _s4Params.dawasearcher
-            if (_s4Params.darsearcher)
-                adresseSearcher = _s4Params.darsearcher
+
+            //Searchere
+            //Addresser
+            let adresseSearcher = _s4Params.darsearcher ||_s4Params.dawasearcher
 
             if (adresseSearcher && adresseSearcher.enabled){
-            	var darSearcherOptions = {onSelect: s4DawaHit};
+            	var darSearcherOptions = {onSelect: s4DarHit};
             	if (_s4Params.municipality != "*"){
-            		var municipalities = _s4Params.municipality.split(' ');
-            		darSearcherOptions.kommunekode = municipalities.join(',');
+            		darSearcherOptions.kommunekode = _s4Params.municipality;
             	}
                 if (typeof adresseSearcher.minimumShowCount != 'undefined'){
                     darSearcherOptions.minimumShowCount = adresseSearcher.minimumShowCount;
@@ -450,6 +456,7 @@ function s4_init (params){
                     darSearcher.addDetailHandlerDef(skraaFotoProvider);
             }
 			
+            //S3-searcher
             if (_s4Params.s3searcher && _s4Params.s3searcher.enabled){
                 var s3SearcherOptions = {
                         onSelect: s4Hit,
@@ -471,6 +478,7 @@ function s4_init (params){
                 _s4Params.s3searcher.searcher = s3searcher;
             }
             
+            //Index-searcher
             if (_s4Params.indexsearcher && _s4Params.indexsearcher.enabled){
             	var s4IndexSearcherOptions = {
             	        onSelect: s4Hit,
@@ -489,23 +497,51 @@ function s4_init (params){
                     s4IndexSearcher.addDetailHandlerDef(offentligeKortLinksProvider);
             }
         	
-            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-            	var gstAuthParams= s4_getGstAuthParams();
-            	if (gstAuthParams != null){
-                	var geoSearchOptions = {
-                			targets: _s4Params.geosearcher.targets,
-                			authParams: gstAuthParams,
-                		    onSelect: s4Hit
-                	};
-                	if (_s4Params.municipality != "*"){
-                	    geoSearchOptions.kommunekode = _s4Params.municipality;
-                	}
-                	var geoSearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-                	controller.addSearcher(geoSearcher);
-                    _s4Params.geosearcher.searcher = geoSearcher;
-                    if (skraaFotoProvider && _s4Params.geosearcher.skraafoto)
-                        geoSearcher.addDetailHandlerDef(skraaFotoProvider);
+
+            //Code for handling migration from geosearch to jordstykkesearcher
+            let hasGeoSearchMatrikelNumre = (_s4Params.geosearcher && _s4Params.geosearcher.enabled && _s4Params.geosearcher.targets && _s4Params.geosearcher.targets.includes("matrikelnumre"))
+            let hasJordstykkeSearcher = (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled);
+
+            if (hasGeoSearchMatrikelNumre || hasJordstykkeSearcher){
+                if (!hasJordstykkeSearcher) {
+                    _s4Params.jordstykkesearcher = {enabled: true, info: _s4Params.geosearcher.info, print: _s4Params.geosearcher.print, skraafoto: _s4Params.geosearcher.skraafoto};
                 }
+                //Now we know we have a _s4Params.jordstykkesearcher
+                let jordstykkeSearchOptions = {
+           	        onSelect: s4Hit
+                };
+                if (_s4Params.municipality != "*"){
+                    jordstykkeSearchOptions.kommunekode = _s4Params.municipality;
+                }
+                var jordstykkeSearcher = new Septima.Search.JordstykkeSearcher(jordstykkeSearchOptions);
+                controller.addSearcher(jordstykkeSearcher);
+                _s4Params.jordstykkesearcher.searcher = jordstykkeSearcher;
+                if (skraaFotoProvider &&_s4Params.jordstykkesearcher.skraafoto)
+                    jordstykkeSearcher.addDetailHandlerDef(skraaFotoProvider);
+            }
+
+            //Code for handling migration from geosearch to dagisearcher
+            let hasGeoSearchDagi = (_s4Params.geosearcher && _s4Params.geosearcher.enabled && _s4Params.geosearcher.targets && _s4Params.geosearcher.targets.length > 1)
+            let hasDagiSearcher = (_s4Params.dagisearcher && _s4Params.dagisearcher.enabled);
+
+            //DagiSearcher
+            if (hasDagiSearcher || hasGeoSearchDagi){
+                let dagiSearchOptions = {
+                    targets: _s4Params.dagisearcher ? _s4Params.dagisearcher.targets : ['*'],
+                    onSelect: s4Hit
+                };
+                if (!hasDagiSearcher) {
+                    _s4Params.dagisearcher = {enabled: true, info: _s4Params.geosearcher.info, print: _s4Params.geosearcher.print, targets: ['opstillingskreds', 'postnummerinddeling', 'sogneinddeling'] };//_s4Params.geosearcher;
+                }
+                //Now we know we have a _s4Params.dagisearcher
+                if (_s4Params.municipality != "*"){
+                    dagiSearchOptions.kommunekode = _s4Params.municipality;
+                }
+                var dagiSearcher = new Septima.Search.DagiSearcher(dagiSearchOptions);
+                controller.addSearcher(dagiSearcher);
+                _s4Params.dagisearcher.searcher = dagiSearcher;
+                if (skraaFotoProvider &&_s4Params.dagisearcher.skraafoto)
+                    dagiSearcher.addDetailHandlerDef(skraaFotoProvider);
             }
 
             if (_s4Params.geostednavnesearcher && _s4Params.geostednavnesearcher.enabled){
@@ -818,7 +854,7 @@ function s4SetMaxHeight(){
 	}
 }
 
-function s4DawaHit(result){
+function s4DarHit(result){
     if (result){
         if (result.typeId != 'navngivenvejpostnummer' || (result.typeId == 'navngivenvejpostnummer' && _s4Params.streetNameHit)){
             s4Hit(result);

@@ -49,8 +49,8 @@
 				_s4Params.adressSearcher.addDetailHandlerDef(nearestHandler);
 			}
 			
-			if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){
-				_s4Params.geosearcher.searcher.addDetailHandlerDef(nearestHandler);
+			if (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled && targets.includes("matrikelnummer")){
+				_s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(nearestHandler);
 			}
 
 			if (_s4Params.cvrsearcher && _s4Params.cvrsearcher.enabled && targets.includes("virksomhed")){

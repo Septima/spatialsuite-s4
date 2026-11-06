@@ -34,19 +34,8 @@
         var proxySearcher = null;
         //Skal der bruges en proxy?
         //comment or Customize HERE
-        if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
-            var gstAuthParams= s4_getGstAuthParams();
-            if (gstAuthParams != null){
-                var geoSearchOptions = {
-                        targets: ['matrikelnumre'],
-                        authParams: gstAuthParams,
-                        onSelect: s4Hit
-                };
-                if (_s4Params.municipality != "*"){
-                    geoSearchOptions.kommunekode = _s4Params.municipality;
-                }
-                proxySearcher = new Septima.Search.GeoSearch(geoSearchOptions);
-            }
+        if (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled){
+            proxySearcher = _s4Params.jordstykkesearcher.searcher;
         }
         
 
@@ -68,8 +57,8 @@
         }
 
         //Hvad skal der søges i
-            if (typeof _s4Params.geosearcher.searcher !== 'undefined'){
-                sqDetailsHandler.addSearcher(_s4Params.geosearcher.searcher)
+            if (typeof _s4Params.dagisearcher.searcher !== 'undefined'){
+                sqDetailsHandler.addSearcher(_s4Params.dagisearcher.searcher)
             }
             if (typeof _s4Params.indexsearcher.searcher !== 'undefined'){
                 sqDetailsHandler.addSearcher(_s4Params.indexsearcher.searcher)

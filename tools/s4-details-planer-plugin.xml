@@ -37,8 +37,8 @@
                 _s4Params.adressSearcher.addDetailHandlerDef(composedHandler, "husnummer");
             }
 
-            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled && targets.includes("matrikelnummer")){
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(composedHandler, "matrikelnumre");
+            if (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled && targets.includes("matrikelnummer")){
+                _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(composedHandler, "matrikelnumre");
             }
 
         }

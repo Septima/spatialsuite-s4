@@ -9,38 +9,38 @@
     <jssrc/>
     <src><![CDATA[
     [if: ModuleDefined("s4") ]
-        if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
 
-            var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer"];
-            var links = this.jsonConfig.links ? this.jsonConfig.links : ["sdfekort"];
-            var fields = this.jsonConfig.fields ? this.jsonConfig.fields : ['kommuner_result', 'opstillingskredse_result', 'politikredse_result', 'postdistrikter_result', 'regioner_result', 'retskredse_result', 'sogne_result'];
+        var targets = this.jsonConfig.targets ? this.jsonConfig.targets : ["husnummer", "matrikelnummer"];
+        var links = this.jsonConfig.links ? this.jsonConfig.links : ["jfa","bbrmeddelelse","bbrejendom","boligejer.dk","vurdering","bbkort","ois", "skraafoto_dataforsyningen"];
+        var fields = this.jsonConfig.fields ? this.jsonConfig.fields : ['kommuneinddeling_result', 'opstillingskreds_result', 'politikreds_result', 'postnummerinddeling_result', 'regionsinddeling_result', 'retskreds_result', 'sogneinddeling_result'];
 
-            var composedHandler = new Septima.Search.ComposedDetailsHandler({
-                buttonText: "Administrativ inddeling"
-            });
+        var composedHandler = new Septima.Search.ComposedDetailsHandler({
+            buttonText: "Administrativ inddeling"
+        });
 
-            if (links.length > 0) {
-                var linksHandler = new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links})
-                composedHandler.addDetailsHandler(linksHandler);
-            }
+        if (links.length > 0) {
+            var linksHandler = new Septima.Search.OffentligeLinksForAdresseMatrikel({more: false, links: links})
+            composedHandler.addDetailsHandler(linksHandler);
+        }
 
+        if (_s4Params.dagisearcher && _s4Params.dagisearcher.enabled) {
             var s4DagiInfoProviderOptions = {
-                geoSearcher: _s4Params.geosearcher.searcher,
-                fields:  fields
+                dagiSearcher: _s4Params.dagisearcher.searcher,
+                fields: fields
             };
             var s4DagiInfoProvider = new Septima.Search.DagiInfoProvider(s4DagiInfoProviderOptions);
 
             composedHandler.addDetailsHandler(s4DagiInfoProvider);
-
-            if (_s4Params.adressSearcher && targets.includes("husnummer")){
-                _s4Params.adressSearcher.addDetailHandlerDef(composedHandler);
-            }
-
-            if (targets.includes("matrikelnummer")){
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(composedHandler, "matrikelnumre");
-            }
-
         }
+
+        if (_s4Params.adressSearcher && targets.includes("husnummer")){
+            _s4Params.adressSearcher.addDetailHandlerDef(composedHandler);
+        }
+
+        if (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled && targets.includes("matrikelnummer")){
+            _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(composedHandler);
+        }
+
     [endif]
     ]]>
     </src>

@@ -91,10 +91,14 @@
             var ejendomsInfoProvider = new Septima.Search.Datafordeler.EjendomsInfoProvider(ejendomsInfoProviderOptions);
             ejendomsSearcher.addDetailHandlerDef(ejendomsInfoProvider);
 
-            if (_s4Params.geosearcher && _s4Params.geosearcher.enabled){
+            if (_s4Params.jordstykkesearcher && _s4Params.jordstykkesearcher.enabled){
+                _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(new Septima.Search.JordStykkeInfoProvider({
+                    ejdSearcher: ejendomsSearcher
+                }));
+                
                 //JordstykkerForEjendom
                 var jordstykkerForEjendomOptions = {
-                    geosearcher: _s4Params.geosearcher.searcher
+                    jordstykkeSearcher: _s4Params.jordstykkesearcher.searcher
                 };
                 var jordstykkerForEjendomProvider = new Septima.Search.Datafordeler.JordstykkerForEjendom(jordstykkerForEjendomOptions)
                 ejendomsSearcher.addDetailHandlerDef(jordstykkerForEjendomProvider);
@@ -102,8 +106,8 @@
                 //JordstykkeForAdresse
                 if (_s4Params.adressSearcher) {
                     var husnummerInfoProviderOptions = {
-                        geosearcher: _s4Params.geosearcher.searcher,
                         fields: ["matrikelnr"],
+                        jordstykkeSearcher: _s4Params.jordstykkesearcher.searcher,
                         more: true
                     }
                     var husnummerInfoProvider = new Septima.Search.HusnummerInfoProvider(husnummerInfoProviderOptions);
@@ -118,9 +122,9 @@
                 };
                 var ejendomForJordstykkeDawaProvider = new Septima.Search.Datafordeler.EjendomForJordstykkeDawa(ejendomForJordstykkeDawaOptions);
                 _s4Params.adressSearcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
+                _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(ejendomForJordstykkeDawaProvider);
 
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(bbrSagProvider);
+                _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(bbrSagProvider);
 
                 //bygningerForX
                 var bygningerForXOptions = {
@@ -129,7 +133,7 @@
                 };
                 var bygningerForX = new Septima.Search.Datafordeler.Bygninger(bygningerForXOptions)
                 _s4Params.adressSearcher.addDetailHandlerDef(bygningerForX);
-                _s4Params.geosearcher.searcher.addDetailHandlerDef(bygningerForX);
+                _s4Params.jordstykkesearcher.searcher.addDetailHandlerDef(bygningerForX);
 
                 //bygningerForY
                 var bygningerForYOptions = {
