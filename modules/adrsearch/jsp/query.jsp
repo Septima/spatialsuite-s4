@@ -8,6 +8,10 @@
  	//query.jsp?query=ad 2 234 75&limit=10&callback=fuc
  	String query = request.getParameter("query");
  
+ 	if (query == null || !query.matches("[\\p{L}\\p{N} ,.\\-/]{1,100}")){
+ 		response.sendError(javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST, "Invalid or missing query parameter");
+ 		return;
+ 	}
  	query = new String(query.getBytes("ISO8859_1"), "UTF-8");
 
  	String limit = request.getParameter("limit");
